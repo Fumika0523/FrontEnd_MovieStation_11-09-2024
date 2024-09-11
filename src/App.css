@@ -1,0 +1,108 @@
+.bg-header-image{
+width:100vw;
+height:700px;
+object-fit: cover;
+margin-top:-150px
+}
+
+.navbar-scrolled{
+background-color: black;
+box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.navbar{
+transition: all 0.5s
+}
+
+
+.text1{
+  font-size: 15px;
+  margin: 0;
+  /* border: 1px solid green; */
+}
+
+.text2{
+  font-size: 15px;
+  margin: 0;
+  /* border: 1px solid green; */
+}
+
+.summaryDesign{
+ margin:0 5px 0 5px;
+ /* border: 1px solid red; */
+}
+.summaryDesign,.castDesign{
+  /* width:180px; */
+  font-size: 13.5px;
+}
+
+.posterImage{
+  /* border: 1px solid blue; */
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+  /* border-top-left-radius: 5%;
+  border-top-right-radius: 5%; */
+  /* border-radius: 5%; */
+  /* margin-bottom:5%; */
+  width: 280px;
+  position:relative
+  /* padding-bottom: 4%; */
+}
+
+.cardDesign {
+  background-color: black; 
+  /* height: 255px; */
+  margin-bottom: 1%;
+  cursor: pointer;
+  /* border:1px solid yellow;  */
+  width:280px ;
+
+} 
+
+.cardDesign:hover .movieContent{ 
+  display: block;
+  z-index: 1000;
+   /* border:1px solid green;  */
+}   
+
+.cardDesign:hover{
+  box-shadow: 20px 20px 20px rgb(79,79,103);
+  transform: scale(1.1,1.1);
+  /* border:1px solid blue;  */
+}
+
+.movieContent{
+  display:none;  
+}
+
+.movieContent:hover{
+  display:block;
+}
+
+body{
+overflow-x:hidden;
+}
+
+.nav-link:hover{
+  color: pink;
+  cursor: pointer;
+}
+
+.input-icons, .icon {
+  position: absolute;
+}
+
+.icon{
+  color:grey;
+  
+}
+
+ .input-field{
+  /* padding:3px 60px 0px 30px; */
+  text-align:left;
+} 
+
+/* input:hover {
+  cursor: pointer;
+  transform: scale(1.1,1.1);
+  color:grey;
+} */
