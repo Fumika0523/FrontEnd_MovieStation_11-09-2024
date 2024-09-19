@@ -19,7 +19,7 @@ const topDesignData=[
         imgUrl:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWElMjBzdHJlYW1pbmd8ZW58MHx8MHx8fDA%3D",
         textSummary:"JustWatch Media helps Entertainment brands around the world get to grips with new challenges and opportunities. From blockbuster movies, award winning shows, major sporting events and console games, we buy media for our clients across the major digital platforms. We offer our clients something no one else can, media buying based on audience content tastes.",
         btnComment:"Learn more about our marketing campaigns",
-        design:"fs-2",
+        design:"fs-2 ",
     }
 ]
 
@@ -62,7 +62,7 @@ const bottomDesignData=[
                     bottomDesignData.map((element)=><AboutUs_BottomDesign {...element}/>)
                 }
     <div  className="d-flex justify-content-center">        
-        <button type="button" className="btn btn-secondary fs-5 mx-2" style={{height:"5%"}} onClick={()=>{navigate('/contact')}} >Contact to MovieStation</button>
+        <button type="button" className="btn btn-secondary fs-5 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</button>
     </div>
     </div>
         </>

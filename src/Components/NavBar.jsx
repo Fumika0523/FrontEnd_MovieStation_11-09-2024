@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import cartContext from "../utils/cartContext";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
@@ -6,11 +6,16 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-function NavBar({ mode, setMode }) {
+function NavBar({ mode, setMode,isAuthenticated,setIsAuthenticated }) {
+  const token = sessionStorage.getItem('token')
+  console.log("token",token)
+
+  const navigate = useNavigate()
+  
   const location = useLocation();
   console.log(location)
 
-  // const excludedPaths = [`/movie/in/The%20Godfather`]; //paths where header should be excpluded
+   // const excludedPaths = [`/movie/in/The%20Godfather`]; //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
   //Check if current path is in the excludedPaths array
   const shouldRenderHeader = includedPaths.includes(location.pathname)
@@ -27,13 +32,18 @@ function NavBar({ mode, setMode }) {
   //navbar-scrolled
   const navEl = document.querySelector('.navbar');
 
-  window.addEventListener('scroll',() => {
+    window.addEventListener('scroll',() => {
     if (window.scrollY > 100 ) {
       navEl.classList.add('navbar-scrolled');
     }else if(window.scrollY < 50 ){
       navEl.classList.remove('navbar-scrolled');
     }
   })
+
+  const handleSignOut=()=>{
+    sessionStorage.removeItem('token')
+    navigate('/')
+  }
 
   return (
     <>
@@ -65,17 +75,33 @@ function NavBar({ mode, setMode }) {
             {/* Search*/}
             <form>
               <div className="iput-icons d-flex flex-row">
-                <i className="fas fa-search icon fs-4 pt-2 ps-3 "></i>
-                <input className="form-control px-5 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+                <i className="fas fa-search icon fs-5 pt-2 px-3 "></i>
+                <input className="form-control me-2 ps-4 bg-dark text-secondary" type="search" aria-label="Search" name="" id="" placeholder="  Search movie"
                   onChange={() => {
                     this.setState({
                       query: this.search.value
                     }, this.filterArray)
                   }} />
-                <a className="nav-link"><button className="btn text-white text-nowrap mx-2" type="submit"><Link to='/signin' className="text-secondary text-decoration-none">Sign in</Link></button></a>
-                <a className="nav-link"><button type="submit" className="btn btn-secondary me-3 text-nowrap "><Link to='/signup' className=" text-decoration-none mx-1 text-white">Sign up</Link></button> </a>
+                 <button className="btn px-3 mx-1 btn-outline-secondary" type="submit">Search</button>
+                
               </div>
             </form>
+            <div>
+
+            {/* Sign Out */}
+            { token == true ?
+            <button className="btn text-white text-nowrap mx-2" type="submit" onClick={()=>handleSignOut()}>Sign out</button>
+            :
+            <>
+            {/* Sign in */}
+            <button className="btn text-white text-nowrap mx-2" type="submit" onClick={()=>{navigate('/signin')}}>Sign in</button>
+
+            {/* Sign up */}
+            <button type="submit" className="btn btn-outline-secondary me-3 py-1 text-nowrap" onClick={()=>{navigate('/signup')}}>Sign up</button>
+            </>
+                }
+            </div>
+            
             <div className="me-3"><span
               onClick={() => {
                 //setMode("light")

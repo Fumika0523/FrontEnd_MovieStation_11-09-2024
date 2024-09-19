@@ -23,6 +23,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import SignUp from './Components/SignIn_Up_Out/SignUp';
 import SignOut from './Components/SignIn_Up_Out/SignOut';
 import SignIn from './Components/SignIn_Up_Out/SignIn';
+import {url} from './utils/constant'
+
+
 function App() {
   const AboutUs_LastSection = [
     {    
@@ -43,9 +46,19 @@ function App() {
   const [cartUCtxt,setCartUtxt] = useState(0)  
   const [textUseContext,setTextUseContext] = useState("Text messaging, or texting, is the act of composing and sending electronic messages, typically consisting of alphabetic and numeric characters, between two or more users of mobile devices, desktops/laptops, or another type of compatible computer.")
 
+// signin part
+
+const [isAuthenticated,setIsAuthenticated]=useState(false)
+
+useEffect(()=>{
+  const token = sessionStorage.getItem('token')
+  console.log(token)
+  setIsAuthenticated(true)
+},[])
+
   const getMovieData = async()=>{
     console.log("Movie data is called...")
-    let res = await fetch ('https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie')
+    let res = await fetch (`${url}/movie`)
     let data = await res.json()
     console.log(data)
     setMovieData(data)
@@ -71,7 +84,7 @@ const [mode, setMode]=useState("dark")
     <cartContext.Provider value={[cartUCtxt,setCartUtxt]}>
     <textContext.Provider value={[textUseContext,setTextUseContext]}>
     <div>
-    <NavBar mode={mode} setMode={setMode}/>
+    <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
     <Routes>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
       <Route path='/allmovies' element={<MovieDisplay movieData={movieData} setMovieData={setMovieData}/>}/>
@@ -82,7 +95,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/movie/in/:id" element={<MovieInfo_ReactBoostrap movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
       <Route path="/cartpage" element={<Cartpage/>}></Route>
-      <Route path="/signin" element={<SignIn/>}></Route>
+      <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
       <Route path="/signout" element={<SignOut/>}></Route>
     </Routes>
