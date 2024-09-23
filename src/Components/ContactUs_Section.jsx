@@ -1,9 +1,9 @@
 function ContactUs_Section (){
     return(
 <>
-    <form>
-        <h1 className="text-center pt-5 ">Submit a request</h1>
-        <h5 className="my-5" style={{padding:"0 350px",}}>In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.</h5>
+    <form className="py-5 container  w-80">
+        <h1 className="mt-2 text-center">Submit a request</h1>
+        <h5 className="my-5 text-start px-5 mx-5" >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.</h5>
         <div className="row justify-content-center mb-3">
         <div className="col-4">
         <label for="inputmobileNum4" className="form-label">First Name</label>
@@ -33,8 +33,8 @@ function ContactUs_Section (){
     
     <p className="text-secondary mt-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</p>
   </div>
-  <div className="col-8 d-flex justify-content-start" style={{marginBottom:"80px"}}>
-    <button type="submit" className="btn btn-primary">Submit</button>
+  <div className="col-8 d-flex justify-content-start">
+    <button type="submit" className="btn btn-warning">Submit</button>
   </div>
 </form>
     </form>

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { url } from '../../utils/constant';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Margin, Padding } from '@mui/icons-material';
+
 
 function SignUp() {
 
@@ -12,6 +12,7 @@ const navigate = useNavigate()
   const inputDesign={
   backgroundColor:"#1B1C23",
    borderColor:"black",
+   color:"white",
   //  Padding:"0",
   //  Margin:"0"
   }
@@ -44,19 +45,17 @@ const formik=useFormik({
 // posting the usersignup details to the server dv
 const postSignUpUser=async(newUser)=>{
   // console.log(newUser)
-  // http://localhost:8000/signup
+  // http://localhost:8001/signup
   const res=await axios.post(`${url}/signup`,newUser)
   console.log(res)  
   if(res.status ==200){
     //navigate to signin page >> siginin
     navigate('/signin')
-  }
-  
-}
+  }}
 
   return (
     <>
-    <div className='container sign_up_in_container my-3' style={{width:"50%"}}>
+    <div className='container sign_up_in_container my-3 text-white' style={{width:"50%"}}>
      <form onSubmit={formik.handleSubmit} style={{width:"80%"}}>
     <div className='text-white text-center mb-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
@@ -135,7 +134,7 @@ const postSignUpUser=async(newUser)=>{
         <button className="btn btn-warning" type="submit">Sign Up</button>
       </form>
     </div>
-     
+    
     </>
   )
 }

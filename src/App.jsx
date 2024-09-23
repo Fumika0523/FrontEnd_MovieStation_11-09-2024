@@ -9,9 +9,8 @@ import {Route,Routes} from 'react-router-dom';
 import Footer from './Components/Footer';
 import MovieInfo_ReactBoostrap from './Components/Movie/MovieInfo_ReactBoostrap'
 import React, {useEffect,useState} from 'react'
-import AddMovie_UI from './Components/Material_UI/AddMovie_UI'
+import AddMovie from './Components/Movie/AddMovie'
 import EditMovie from './Components/Movie/EditMovie';
-// https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie
 import cartContext from "./utils/cartContext";
 import textContext from './utils/textContext';
 import store from './utils/store';
@@ -24,6 +23,7 @@ import SignUp from './Components/SignIn_Up_Out/SignUp';
 import SignOut from './Components/SignIn_Up_Out/SignOut';
 import SignIn from './Components/SignIn_Up_Out/SignIn';
 import {url} from './utils/constant'
+import axios from 'axios';
 
 
 function App() {
@@ -51,18 +51,23 @@ function App() {
 const [isAuthenticated,setIsAuthenticated]=useState(false)
 
 useEffect(()=>{
-  const token = sessionStorage.getItem('token')
+   const token = sessionStorage.getItem('token')
   console.log(token)
   setIsAuthenticated(true)
 },[])
 
-  const getMovieData = async()=>{
-    console.log("Movie data is called...")
-    let res = await fetch (`${url}/movie`)
-    let data = await res.json()
-    console.log(data)
-    setMovieData(data)
+const getMovieData = async () => {
+  const token=sessionStorage.getItem('token')
+  let config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
   }
+  console.log("Movie data is called....");
+  let res = await axios.get(`${url}/movie`,config)//response in res.data >> moviedata
+  console.log(res.data.movieData);
+  setMovieData(res.data.movieData);
+};
 
   useEffect(()=>{
     getMovieData()
@@ -88,7 +93,7 @@ const [mode, setMode]=useState("dark")
     <Routes>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
       <Route path='/allmovies' element={<MovieDisplay movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path='/addmovie' element={<AddMovie_UI setMovieData={setMovieData}/>}/>
+      <Route path='/addmovie' element={<AddMovie setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section/>}/>
       <Route path='/services' element={<Service_Section/>}/>
       <Route path='/contact' element={<ContactUs_Section/>}/>
@@ -111,7 +116,6 @@ const [mode, setMode]=useState("dark")
   </>
   )
 }
-
 
 export default App
 

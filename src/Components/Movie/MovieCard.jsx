@@ -17,8 +17,8 @@ function MovieCard ({movieposter,moviename,rating,summary,cast,id,setMovieData,e
 
     const getMovieData = async()=>{
         console.log("Movie data is called......")
-        let res = await fetch('https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie')
-        // let res = await fetch( `/${url}/movie`)
+        //let res = await fetch('https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie')
+         let res = await fetch( `/${url}/movie`)
         let data = await res.json()
         console.log(data)
         setMovieData(data)//movies

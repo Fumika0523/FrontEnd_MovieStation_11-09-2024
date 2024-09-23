@@ -12,13 +12,12 @@ import Row from 'react-bootstrap/Row';
 
 
 function SignIn({isAuthenticated,setIsAuthenticated}) {
+  const navigate = useNavigate()
   const formSchema=Yup.object().shape({
     password:Yup.string().required(),
     email:Yup.string().required(),
     phone_number:Yup.number().required()
 })
-
-const navigate = useNavigate()
 
   const formik=useFormik({
     initialValues:{
@@ -28,7 +27,7 @@ const navigate = useNavigate()
     },
     validationSchema:formSchema,
     onSubmit:(values)=>{
-      //console.log(value) >> req.body
+      console.log(values) // req.body
       //update the value >> signin data
      postSignInUser(values)
     }
@@ -39,6 +38,7 @@ const navigate = useNavigate()
     const res=await axios.post(`${url}/signin`,loginuser)
     console.log(res.data)
     sessionStorage.setItem('token',res.data.token)
+    sessionStorage.setItem('username',res.data.user.name)
     if(res.data.token){
       setIsAuthenticated(true)
     }  
