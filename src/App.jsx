@@ -3,7 +3,7 @@ import AboutUs_Section from './Components/AboutUs_page/AboutUs_Section';
 import MovieDisplay from './Components/Movie/MovieDisplay';
 import NavBar from './Components/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
-import ContactUs_Section from './Components/ContactUs_Section';
+import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
 import Homepage from './Components/Homepage';
 import {Route,Routes} from 'react-router-dom';
 import Footer from './Components/Footer';
@@ -24,6 +24,7 @@ import SignOut from './Components/SignIn_Up_Out/SignOut';
 import SignIn from './Components/SignIn_Up_Out/SignIn';
 import {url} from './utils/constant'
 import axios from 'axios';
+import AllEnquiries from './Components/Enquiries/AllEnquiries';
 
 
 function App() {
@@ -103,6 +104,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
       <Route path="/signout" element={<SignOut/>}></Route>
+      <Route path="allenquiries" element={<AllEnquiries/>}></Route>
     </Routes>
     <div style={{position:"relative"}}>
     <Footer />

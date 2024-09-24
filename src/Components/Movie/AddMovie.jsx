@@ -76,8 +76,8 @@ const getMovieData=async()=>{
 }
 
   return (
-    <div className='container my-5'>
-    <div className='fs-1 text-center my-3'>Add Movie</div>
+    <div className='container py-5'>
+    <div className='fs-1 text-center pb-4'>Add Movie</div>
    <Box
       component="form"
       sx={{
@@ -182,7 +182,6 @@ const getMovieData=async()=>{
 
     {/* Back */}
     <Button style={{backgroundColor:"grey",marginRight:"2%"}} type="submit" variant="contained" onClick={()=>{navigate('/allmovies')}} >BACK</Button>
-
 
   {/* ADD MOVIE */}
   <Button color="warning" type="submit" variant="contained">ADD MOVIE</Button>

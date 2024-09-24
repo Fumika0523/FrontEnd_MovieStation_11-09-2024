@@ -110,7 +110,20 @@ overflow-x:hidden;
   }
 
 .inputDesign{
-  backgroundColor:#26292b,
-  borderColor:black,
+  background-color:#26292b;
+  border-color: black;
   color:white,
 }
+
+ table {
+  border: 2px solid rgb(109, 104, 104);
+  border-radius: 15%;
+  padding:"1%";
+  text-align: start;
+
+}
+
+th{
+  font-size: 130%;
+}
+

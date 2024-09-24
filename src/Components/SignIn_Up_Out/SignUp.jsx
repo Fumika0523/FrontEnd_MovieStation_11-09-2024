@@ -23,7 +23,6 @@ const navigate = useNavigate()
     phone_number:Yup.number().required(),
     password:Yup.string().required(),
     email:Yup.string().required(),
-
 })
 
 const formik=useFormik({
