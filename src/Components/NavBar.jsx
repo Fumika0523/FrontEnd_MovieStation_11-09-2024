@@ -40,7 +40,6 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
       navEl.classList.remove('navbar-scrolled');
     }
   })
-
   const handleSignOut = () => {
     sessionStorage.removeItem('token')
     navigate('/')
@@ -49,7 +48,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   let username = sessionStorage.getItem('username')
   return (
     <>
-      <nav className="navbar navbar-scrolled  sticky-top navbar-expand-lg" >
+      <nav className="navbar sticky-top navbar-expand-lg" >
         <div className="container-fluid" >
           {/* Brand */}
           <span className="ms-3 fs-4 text-warning navbar-brand"><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand text-white fs-5 ms-1" href="#">MovieStation</a></span>
@@ -60,7 +59,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {/* <!-- Home --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>
               {/* <!-- About Us --> */}

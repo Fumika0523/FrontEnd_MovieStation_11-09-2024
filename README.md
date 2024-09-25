@@ -18,3 +18,9 @@ New URL :https://github.com/Fumika0523/FrontEnd_MovieStation_11-09-2024
 
 Poonam 
 URL:https://github.com/PoonamChauhan229/FrontEnd_MovieStation_11-09-2024
+
+<!-- Add Movie -->
+Uncomment the shchema
+contact us , make with material ui --> Text field
+
+All buttons are same color

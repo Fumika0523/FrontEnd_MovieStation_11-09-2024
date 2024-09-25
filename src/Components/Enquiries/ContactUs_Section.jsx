@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { url } from "../../utils/constant";
 import { Button } from "@mui/material";
 
+
 function ContactUs_Section (){
 
 const navigate = useNavigate()
@@ -47,7 +48,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
   const res = await axios.post(`${url}/contact`,newEnquiry,config) 
   console.log(res)
   if(res.status == 200){
-    navigate('/') 
+    navigate('/allenquiries') 
   }
 }
 const inputDesign={
@@ -57,9 +58,10 @@ const inputDesign={
 }
     return(
 <>
-
-      <Button variant="outlined"  color="inherit" style={{ marginTop:"2%", left:"85%"}} className="px-4" onClick={()=>navigate('/allenquiries')} >All Enquiries <i class="fa-solid fa-circle-question ms-1 text-white"></i></Button> 
-
+      {/* ALL ENQUIRIES BUTTON */}
+      <button style={{ marginTop:"2%", marginLeft:"85%"}} className="px-4 btn btn-warning" onClick={()=>navigate('/allenquiries')} >All Enquiries <i class="fa-solid fa-circle-question ms-1"></i></button> 
+      
+      {/*FORM  */}
     <form  onSubmit={formik.handleSubmit} className="container pb-5" style={{width:"80%"}}>
         <h1 className="text-center">Submit a request</h1>
         <div className="text-start mx-auto fs-5 my-5" style={{width:"66%"}}>In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.</div>
@@ -130,7 +132,7 @@ const inputDesign={
     <p className="text-secondary mt-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</p>
   </div>
   <div className="col-8 d-flex justify-content-start">
-    <Button type="submit" variant="contained" color="warning" className="px-4 my-2">Submit</Button>
+    <button className="btn btn-warning px-4 my-2">Submit</button>
   </div>
   </div>
 </form>

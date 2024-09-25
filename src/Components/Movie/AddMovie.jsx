@@ -76,27 +76,29 @@ const getMovieData=async()=>{
 }
 
   return (
-    <div className='container py-5'>
-    <div className='fs-1 text-center pb-4'>Add Movie</div>
-   <Box
+    <>
+
+     {/* <div className='container py-5'> */}
+        <Box border={1} borderColor="grey.600" borderRadius={6}
       component="form"
       sx={{
-        '& .MuiTextField-root': { width: '45ch' },
+        '& .MuiTextField-root': { width: '35ch' ,height:'5ch' },boxShadow: 3,
       }}
       noValidate
       autoComplete="off" 
-      onSubmit = {formik.handleSubmit}
+      onSubmit = {formik.handleSubmit} className='container my-3 py-3' style={{width:"68%"}}
     >
-       <Stack direction="row"  useFlexGap flexWrap="wrap" spacing={{ xs: 2, sm: 4 }}>
+        <div className='fs-3 text-center pb-3'>Add Movie</div>
+        <Stack direction="row"  useFlexGap flexWrap="wrap" spacing={{ xs: 2, sm: 4 }}>
   
         {/* MOVIE NAME */}
-        <TextField
+        <TextField 
           required
           label="Movie Name"
           name="moviename"
           id="moviename"
           onChange={formik.handleChange}
-          defaultValue={formik.values.moviename}
+          defaultValue={formik.values.moviename} 
             />
         {formik.errors.moviename && formik.touched.moviename? (
           <div>{formik.errors.moviename}</div>
@@ -175,17 +177,18 @@ const getMovieData=async()=>{
        
   {/* Summary */}
     <TextField required id="summary" 
-    label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
+    label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary}  minRows={3}/> 
 
   </Stack>
-  <div style={{marginTop:"2%"}} >
+  <div style={{marginTop:"5%", display:"flex",gap:"2%"}} >
 
     {/* Back */}
-    <Button style={{backgroundColor:"grey",marginRight:"2%"}} type="submit" variant="contained" onClick={()=>{navigate('/allmovies')}} >BACK</Button>
+    <button  className='btn btn-secondary' onClick={()=>{navigate('/allmovies')}} >BACK</button>
 
   {/* ADD MOVIE */}
-  <Button color="warning" type="submit" variant="contained">ADD MOVIE</Button>
+  <button className='btn btn-warning px-3'>ADD MOVIE</button>
 </div>
  </Box>
-</div>
+{/* </div> */}
+</>
   );}

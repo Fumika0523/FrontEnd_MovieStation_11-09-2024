@@ -25,7 +25,7 @@ import SignIn from './Components/SignIn_Up_Out/SignIn';
 import {url} from './utils/constant'
 import axios from 'axios';
 import AllEnquiries from './Components/Enquiries/AllEnquiries';
-
+import Table from './Components/Enquiries/CustomizedTables'
 
 function App() {
   const AboutUs_LastSection = [
@@ -105,6 +105,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/signup" element={<SignUp/>}></Route>
       <Route path="/signout" element={<SignOut/>}></Route>
       <Route path="allenquiries" element={<AllEnquiries/>}></Route>
+      <Route path="/table" element={<Table/>}></Route>
     </Routes>
     <div style={{position:"relative"}}>
     <Footer />

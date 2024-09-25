@@ -1,12 +1,9 @@
-.bg-header-image{
-width:100vw;
-height:700px;
-object-fit: cover;
-  /* Center and scale the image nicely */
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* position: absolute; */
-}
+  .bg-header-image{
+    width:100vw;
+    height:700px;
+    object-fit: cover;
+    margin-top:-140px;
+    }
 
 .navbar-scrolled{
 background-color: black;
@@ -117,13 +114,11 @@ overflow-x:hidden;
 
  table {
   border: 2px solid rgb(109, 104, 104);
-  border-radius: 15%;
-  padding:"1%";
   text-align: start;
-
 }
 
 th{
   font-size: 130%;
+  background-color: rgb(55, 55, 56);
 }
 
