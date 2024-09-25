@@ -28,7 +28,7 @@ function MovieCard ({movieposter,moviename,rating,summary,cast,id,setMovieData,e
     const deleteMovie=async()=>{
         console.log(id)
         //console.log(`https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie/s${id}`)
-        let res=await fetch(`https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie/${id}`,{
+        let res=await fetch(`${url}/movie`,{
         method:"DELETE"
     })
     let data = await res.json()

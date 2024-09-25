@@ -18,6 +18,7 @@ import LikeCard from '../LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 
+
 export default function MovieCard_UI({movieposter,moviename,rating,summary,cast,id,setMovieData,element}) {
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
@@ -51,6 +52,41 @@ const ExpandMore = styled((props) => {
     setCastShow(false)
   };
 
+  const token = sessionStorage.getItem('token')
+  console.log(token)
+  
+  let config = {
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+
+  const deleteMovies=async(deletedMovie)=>{
+    console.log("Movie Posted to the DB..")
+   console.log("NEW MOVIE:",deletedMovie)
+ 
+
+  let res = await axios.delete(`${url}/allmovies`,deletedMovie,config)
+console.log(res)
+getMovieData();
+}
+
+  const deleteMovie=async()=>{
+    console.log(id)
+    let res=await fetch(`${url}/movie`,config,{
+      method:"DELETE"
+  })
+  let data = await res.json()
+  console.log(data)//output
+
+  if(data){//if data exists
+      console.log("deleted successfully")
+      //update UI
+      getMovieData()
+  }
+
+  }
+
   return (
     <Card sx={{ maxWidth:440, mb:4 }}  >
       <CardHeader
@@ -82,7 +118,7 @@ const ExpandMore = styled((props) => {
     <button className="btn px-1" onClick={()=>navigate(`/editmovie/${id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
 
     {/* Delete Icon */}
-    <button className="btn px-2" onClick={()=>deleteMovie()}><i className="fa-solid fa-trash text-white"></i></button>
+    <button className="btn px-2" onClick={(values)=>deleteMovie(values)}><i className="fa-solid fa-trash text-white"></i></button>
     
     {/* ADD to CART */}
     <button className="btn px-1" onClick={()=>{setCartUtxt(cartUCtxt+1)}}><i class="fa-solid fa-cart-shopping text-white"></i></button>
