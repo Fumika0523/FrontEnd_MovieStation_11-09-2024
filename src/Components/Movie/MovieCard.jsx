@@ -1,145 +1,145 @@
-import { useContext, useState } from "react"
-import LikeCard from '../LikeCard'
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import LikeCard from '../LikeCard';
 import { useNavigate } from "react-router-dom";
-import cartContext from "../../utils/cartContext";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../utils/cartSlice";
-import { url } from "../../utils/constant";
+import {url} from '../../utils/constant'
 
 
-function MovieCard ({movieposter,moviename,rating,summary,cast,id,setMovieData,element}){
-    const [cartUCtxt,setCartUtxt]=useContext(cartContext)
-    const [summaryShow,setSummaryShow] = useState(false)
-    const [castShow,setCastShow] = useState(false)
+export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element}) {
+  const [expanded, setExpanded] = React.useState(false);
+  //useNavigate()
+  const navigate=useNavigate()
 
-    //useNavigate()
-    const navigate=useNavigate()
+  const getMovieData = async()=>{
+      console.log("Movie data is called......")
+      let res = await fetch(`${url}/movie`)
+      let data = await res.json()
+      console.log(data)
+      setMovieData(data)//movies
+  }
 
-    const getMovieData = async()=>{
-        console.log("Movie data is called......")
-        //let res = await fetch('https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie')
-         let res = await fetch( `/${url}/movie`)
-        let data = await res.json()
-        console.log(data)
-        setMovieData(data)//movies
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+// const [summaryShow,setSummaryShow] = useState(false)
+// const [castShow,setCastShow] = useState(false)
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+    setSummaryShow(!summaryShow)
+    setCastShow(false)
+  };
+
+  const token = sessionStorage.getItem('token')
+  console.log(token)
+  
+  let config = {
+    headers:{
+      Authorization:`Bearer ${token}`
     }
+  }
 
-    //DELETE
-    const deleteMovie=async()=>{
-        console.log(id)
-        //console.log(`https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie/s${id}`)
-        let res=await fetch(`${url}/movie`,{
-        method:"DELETE"
-    })
-    let data = await res.json()
-    console.log(data)//output
+  const deleteMovies=async(deletedMovie)=>{
+    console.log("Movie Posted to the DB..")
+   console.log("NEW MOVIE:",deletedMovie)
+ 
 
-    if(data){//if data exists
-        console.log("deleted successfully")
-        //update UI
-        getMovieData()
-    }
+  let res = await axios.delete(`${url}/allmovies`,deletedMovie,config)
+console.log(res)
+getMovieData();
 }
 
-    let ratingDesign={
-        color:rating>=8?"green":"red"
-    }
-    let visibleDesign={
-        display:summaryShow==true?"block":"none"
-    }
-    let visibleCastDesign={
-        display:castShow==true?"block":"none"
-    }
+  const deleteMovie=async()=>{
+    console.log(id)
+    let res=await fetch(`${url}/movie`,config,{
+      method:"DELETE"
+  })
+  let data = await res.json()
+  console.log(data)//output
 
-    let movieIcons={
-        // marginRight:"2%",
-        padding:"0 10px",
-    }
+  if(data){//if data exists
+      console.log("deleted successfully")
+      //update UI
+      getMovieData()
+  }
 
-    //btn is pressed > dispatch the action > reducer function
-    const dispatch = useDispatch()
-    const handleAdditem=(item)=>{
-        console.log(item)
-        dispatch(addItem(item))
-    }
+  }
 
-    // console.log(movieposter)
-    return(
-        <>    
-    <div className="cardDesign">
-        
-    <div className="posterImage">
-        <img src={movieposter} alt="" style={{height:"135px",width:"300px"}} /> 
-    </div>
-
-    <div className="movieContent">
-        <div style={{display:"flex",justifyContent:"space-between",margin:"0px 7px 0px 5px "}}>
-        <h6 className="text1">{moviename}</h6>
-        <h6 style={ratingDesign} className="text2">{rating}</h6>
-        </div>
-        <div  style={{display:"flex",justifyContent:"center"}}>
-     
-    {/* PLUS ICON */}
-    <button className="btn" style={movieIcons} onClick={()=>{
-        setSummaryShow(!summaryShow)
-        setCastShow(false)
-    }}>
-    {summaryShow?<i style={movieIcons} className="fa-solid fa-caret-down mt-1"></i>: <i style={movieIcons} className="fa-solid fa-caret-up mt-1"></i>}</button>
-
-     {/* play icon */}
-     <button className="btn m-0 p-0" onClick={()=>{
-                    setCastShow(!castShow)
-                    setSummaryShow(false)
-        }}>
-    {castShow? <i style={movieIcons} className="fa-solid fa-angle-downmt-1"></i>:
-  <i style={movieIcons} className="fa-solid fa-angle-up mt-1"></i>}
-     </button>
- 
-    {/* Information Icon : TRAILER */}
-     <button className="bg-black border-0 btn m-0 p-0" onClick={()=>{
+  return (
+    <Card sx={{ maxWidth:440, mb:4 }}  >
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: red[600] }} aria-label="movietitle">
+            {moviename.substring(0,1)}
+          </Avatar>
+        }
+        action={
+          <IconButton aria-label="settings" onClick={()=>{
             navigate(`/movie/in/${id}`)
-        }}><i style={movieIcons} className="bi bi-plus-circle"></i></button>
-        {/* use icon from Boostrap Icon */}
+        }}>
+        <MoreVertIcon />
+        </IconButton>
+        }
+        title={moviename}
+        subheader={rating}
+      />
+      <CardMedia
+    component="img" height="185" image={movieposter}alt="movieposter"/>
+     
+    <CardActions>
+    {/* <IconButton aria-label="add to favorites"> */}
+    {/* <FavoriteIcon /> */}
+    
+    <LikeCard/>
 
     {/* Edit Icon */}
-    <button className="btn m-0 p-0" onClick={()=>navigate(`/editmovie/${id}`)}><i className="fa-solid fa-pencil text-info"></i></button>
+    <button className="btn px-1" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
 
     {/* Delete Icon */}
-    <button className="btn m-0 p-0" onClick={()=>deleteMovie()}><i className="fa-solid fa-trash text-danger  me-2"></i></button>
-
+    <button className="btn px-2" onClick={(values)=>deleteMovie(values)}><i className="fa-solid fa-trash text-white"></i></button>
+    
     {/* ADD to CART */}
-    <button className="btn m-0 p-0" onClick={()=>{setCartUtxt(cartUCtxt+1)}}><i class="fa-solid fa-cart-shopping text-warning me-2"></i></button>
-
+    <button className="btn px-1" onClick={()=>{setCartUtxt(cartUCtxt+1)}}><i class="fa-solid fa-cart-shopping text-white"></i></button>
+    
     {/* REDUX */}
-    <button className="btn p-0 m-0" onClick={()=>{handleAdditem(element)}}>Redux</button>
+    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}>Redux</button>
 
-        {/* <i className="fa-solid fa-caret-down"></i>
-        <i className="fa-solid fa-caret-up"></i> */}
-        {/* <button className="mx-2" onClick={()=>{
-        setSummaryShow(!summaryShow)
-        setCastShow(false)
-        }}>{summaryShow?<i className="fa-solid fa-caret-down p-1 mt-1"></i>: <i className="fa-solid fa-caret-up p-1 mt-1"></i> }</button> */}
+    {/* </IconButton> */}
+    {/* <IconButton aria-label="share"> */}
+    {/* <ShareIcon /> */}
+    {/* </IconButton> */}
 
-        <LikeCard/>
-        </div>
-        {/* Conditional Styling */}
-        {/* < p className="summaryDesign" style={visibleDesign}>{summary.substring(0,170)+"..."}</p>
-        <p className="castDesign" style={visibleCastDesign}>{cast}</p> */}
-        
-        {/* Conditional Rendering */}
-        {summaryShow && <p className="summaryDesign">{summary.substring(0,170)+"..."}</p>}
-        {/* {summaryShow ? <p className="summaryDesign">{summary.substring(0,170)+"..."}</p>:null} */}
-
-        {/* Conditional Rendering */}
-        {/* {castShow &&   <p className="castDesign">{cast}</p>} */}
-        { castShow ?   <p className="castDesign" style={visibleCastDesign}>{cast}</p>:null}
-    </div>
-    </div>
-  
-        </>
-    )
-}
-export default MovieCard
-
-
-//when
+    <ExpandMore
+    expand={expanded} onClick={handleExpandClick}aria-expanded={expanded} aria-label="show more">
+    <ExpandMoreIcon />
+    </ExpandMore>
+    </CardActions>
+    <Collapse in={expanded}>
+    <CardContent>
+    <Typography paragraph>{summary}</Typography>      
+    </CardContent>
+    </Collapse>
+    </Card>
+  )}

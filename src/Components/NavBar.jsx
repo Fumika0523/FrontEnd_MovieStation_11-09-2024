@@ -59,7 +59,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-warning">
               {/* <!-- Home --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>
               {/* <!-- About Us --> */}

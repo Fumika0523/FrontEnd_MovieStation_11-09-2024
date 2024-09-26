@@ -7,7 +7,6 @@ function EditMovie(){
 const [singleMovie, setSingleMovies]=useState()
 const {id}=useParams()
 
-
 const getMovieData=async()=>{
     console.log("Movie data is called.........")
     let res = await fetch (`https://66760c9da8d2b4d072f24534.mockapi.io/movie/movie/${id}`)//API call

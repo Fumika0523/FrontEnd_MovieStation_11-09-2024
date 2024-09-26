@@ -51,11 +51,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
     navigate('/allenquiries') 
   }
 }
-const inputDesign={
-  backgroundColor:"#1B1C23",
-   borderColor:"black",
-   color:"white",
-}
+
     return(
 <>
       {/* ALL ENQUIRIES BUTTON */}
@@ -69,6 +65,7 @@ const inputDesign={
             {/* First Name */}
         <div className="col-4 mb-1">
         <label for="inputmobileNum4" className="form-label m-0">First Name</label>
+      
         <input 
         type="text"
          className="form-control"
@@ -77,7 +74,7 @@ const inputDesign={
          value={formik.values.firstname}
          onChange={formik.handleChange}
          aria-label="First name"
-         style={inputDesign}
+         
          />
         </div>
 
@@ -89,7 +86,7 @@ const inputDesign={
          name="lastname"
          value={formik.values.lastname}
          onChange={formik.handleChange}
-         style={inputDesign}/>
+         />
         </div>
         </div>
           {/* Email */}
@@ -100,7 +97,7 @@ const inputDesign={
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
-          style={inputDesign}/>
+          />
         </div>
         <div className="col-md-4 mb-1">
         <label for="inputmobileNum4" className="form-label m-0">Mobile Phone No.</label>
@@ -108,7 +105,7 @@ const inputDesign={
           name="mobilePhoneNum"
           value={formik.values.mobilePhoneNum}
           onChange={formik.handleChange}
-          style={inputDesign}/>
+          />
         </div>
         </div>
         <div className="row text-secondary justify-content-center">
@@ -118,7 +115,7 @@ const inputDesign={
      name="subject"
      value={formik.values.subject}
      onChange={formik.handleChange}
-     style={inputDesign}/>
+     />
   </div>
   <div className="col-8">
     <label for="inputAddress2" className="form-label m-0">Description</label>
@@ -126,7 +123,7 @@ const inputDesign={
      name="description"
      value={formik.values.description}
      onChange={formik.handleChange}
-     style={inputDesign}  
+       
      ></textarea>
     
     <p className="text-secondary mt-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</p>
@@ -141,3 +138,5 @@ const inputDesign={
     )
 }
 export default ContactUs_Section
+
+// 

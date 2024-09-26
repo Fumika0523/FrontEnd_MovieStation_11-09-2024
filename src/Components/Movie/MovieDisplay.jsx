@@ -1,5 +1,4 @@
-// import MovieCard from "./MovieCard"
-import MovieCard_UI from "../Material_UI/MovieCard_UI"
+import MovieCard from "./MovieCard"
 
 function MovieDisplay({ movieData, setMovieData }) {
     console.log(movieData)
@@ -37,9 +36,7 @@ function MovieDisplay({ movieData, setMovieData }) {
 
                     {
                         movieData?.map((element, index) => (
-                            // <MovieCard movieposter={element.movieposter} moviename={element.moviename} rating={element.rating} summary={element.summary} cast={element.cast} key={index} id={index} genres={element.genres} category={element.category} /> //key for the backend , not going to use anymore
-                            // <MovieCard {...element} key={index} setMovieData={setMovieData} element={element}/>  
-                            <MovieCard_UI {...element} key={index} setMovieData={setMovieData} element={element} />   //spread operator
+                            <MovieCard {...element} key={index} setMovieData={setMovieData} element={element} />   //spread operator
                         ))
                     }
                 </div>
