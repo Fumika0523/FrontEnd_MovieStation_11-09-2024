@@ -78,8 +78,7 @@ function EditUpdateMovieForm({singleMovie,id}){
     
                  return (
                     <>
-                        
-                     {/* <div className='container py-5'> */}
+                       {/* <div className='container py-5'> */}
                         <Box border={1} borderColor="grey.600" borderRadius={6}
                       component="form"
                       sx={{

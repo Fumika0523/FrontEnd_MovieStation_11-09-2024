@@ -58,7 +58,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-warning">
               {/* <!-- Home --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>
@@ -106,8 +106,8 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
                 console.log(mode)
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-            </span></div>
-        
+            </span>
+            </div>
             </ul>
           </div>
         </div>

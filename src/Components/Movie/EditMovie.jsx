@@ -50,8 +50,3 @@ useEffect(()=>{
     )}
 export default EditMovie
 
-
-//if you need it, you can create a number of functional components inside another component but, it should be after "export default". and you can re-use it. you cannot write "export default" after the functional components.
-
-
-    

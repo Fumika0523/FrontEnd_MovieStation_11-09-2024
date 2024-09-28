@@ -186,10 +186,8 @@ const getMovieData=async()=>{
   {/* Summary */}
     <TextField required id="summary" 
     label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} style={{width:"60ch"}}  /> 
-
   </Stack>
-  
- </Box>
+   </Box>
 {/* </div> */}
 </>
   );}
