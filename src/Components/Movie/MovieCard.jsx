@@ -14,23 +14,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import LikeCard from '../LikeCard';
+import LikeCard from '../Movie/LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
+import axios from 'axios';
 
-
-export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element}) {
+export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum}) {
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
   const navigate=useNavigate()
-
-  const getMovieData = async()=>{
-      console.log("Movie data is called......")
-      let res = await fetch(`${url}/movie`)
-      let data = await res.json()
-      console.log(data)
-      setMovieData(data)//movies
-  }
+console.log(disLikeNum,likeNum)
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -61,30 +54,10 @@ const ExpandMore = styled((props) => {
     }
   }
 
-  const deleteMovies=async(deletedMovie)=>{
-    console.log("Movie Posted to the DB..")
-   console.log("NEW MOVIE:",deletedMovie)
- 
-
-  let res = await axios.delete(`${url}/allmovies`,deletedMovie,config)
-console.log(res)
-getMovieData();
-}
-
   const deleteMovie=async()=>{
-    console.log(id)
-    let res=await fetch(`${url}/movie`,config,{
-      method:"DELETE"
-  })
-  let data = await res.json()
-  console.log(data)//output
-
-  if(data){//if data exists
-      console.log("deleted successfully")
-      //update UI
-      getMovieData()
-  }
-
+    console.log("Movie Deleted from the DB..")
+    let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
+   console.log(res)
   }
 
   return (
@@ -97,7 +70,7 @@ getMovieData();
         }
         action={
           <IconButton aria-label="settings" onClick={()=>{
-            navigate(`/movie/in/${id}`)
+            navigate(`/movietrailer/${_id}`)
         }}>
         <MoreVertIcon />
         </IconButton>
@@ -112,19 +85,16 @@ getMovieData();
     {/* <IconButton aria-label="add to favorites"> */}
     {/* <FavoriteIcon /> */}
     
-    <LikeCard/>
+    <LikeCard likeNum={likeNum} disLikeNum={disLikeNum}/>
 
     {/* Edit Icon */}
     <button className="btn px-1" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
 
     {/* Delete Icon */}
-    <button className="btn px-2" onClick={(values)=>deleteMovie(values)}><i className="fa-solid fa-trash text-white"></i></button>
-    
-    {/* ADD to CART */}
-    <button className="btn px-1" onClick={()=>{setCartUtxt(cartUCtxt+1)}}><i class="fa-solid fa-cart-shopping text-white"></i></button>
+    <button className="btn px-2" onClick={(values)=>deleteMovie()}><i className="fa-solid fa-trash text-white"></i></button>
     
     {/* REDUX */}
-    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}>Redux</button>
+    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}><i class="fa-solid fa-cart-shopping text-white"></i></button>
 
     {/* </IconButton> */}
     {/* <IconButton aria-label="share"> */}

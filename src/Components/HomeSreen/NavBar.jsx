@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import cartContext from "../utils/cartContext";
+import cartContext from "../../utils/cartContext";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -16,7 +16,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   const location = useLocation();
   console.log(location)
 
-  // const excludedPaths = [`/movie/in/The%20Godfather`]; //paths where header should be excpluded
+  //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
   //Check if current path is in the excludedPaths array
   const shouldRenderHeader = includedPaths.includes(location.pathname)

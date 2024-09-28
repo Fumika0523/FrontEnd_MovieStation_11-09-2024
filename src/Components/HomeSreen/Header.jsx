@@ -1,15 +1,8 @@
 import { Button,  } from '@mui/material'
-import coverPage from '../assets/coverPage.png'
+import coverPage from '../../assets/coverPage.png'
 
 function Header (){
-    // Use location hook, ex
 
-    // const bgImage = {
-    //     background:" linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 50%)",
-    //     height:"700px",
-    //     width: "100%",
-     
-    // }
     
     return(
         <>

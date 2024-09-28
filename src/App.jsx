@@ -1,13 +1,13 @@
 import './App.css'
 import AboutUs_Section from './Components/AboutUs_page/AboutUs_Section';
 import MovieDisplay from './Components/Movie/MovieDisplay';
-import NavBar from './Components/NavBar';
+import NavBar from './Components/HomeSreen/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
 import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
-import Homepage from './Components/Homepage';
+import Homepage from './Components/HomeSreen/Homepage';
 import {Route,Routes} from 'react-router-dom';
-import Footer from './Components/Footer';
-import MovieInfo_ReactBoostrap from './Components/Movie/MovieInfo_ReactBoostrap'
+import Footer from './Components/HomeSreen/Footer';
+import MovieTrailer from './Components/Movie/MovieTrailer';
 import React, {useEffect,useState} from 'react'
 import AddMovie from './Components/Movie/AddMovie'
 import EditMovie from './Components/Movie/EditMovie';
@@ -98,7 +98,7 @@ const [mode, setMode]=useState("dark")
       <Route path='/about' element={<AboutUs_Section/>}/>
       <Route path='/services' element={<Service_Section/>}/>
       <Route path='/contact' element={<ContactUs_Section/>}/>
-      <Route path="/movie/in/:id" element={<MovieInfo_ReactBoostrap movieData={movieData} setMovieData={setMovieData}/>}/>
+      <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
       <Route path="/cartpage" element={<Cartpage/>}></Route>
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
