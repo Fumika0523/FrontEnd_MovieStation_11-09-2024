@@ -7,6 +7,7 @@ function Cartpage(){
     const cartItems=useSelector(store=>store.cart.items)
     console.log(cartItems)
 
+    
     //
     const dispatch = useDispatch()
     const handleClearitem=()=>{
@@ -23,15 +24,18 @@ function Cartpage(){
 
     return(
         <>
+        <div style={{border:"2px solid grey"}}>
+        {/* My Cart */}
+        <h2>My Cart</h2>
         {/* Clear Cart */}
         <button onClick={()=>{
             handleClearitem()
-        }}>Clear Cart</button>
+        }}>Clear Cart1</button>
 
         {/*Remove 1 item from last  */}
         <button onClick={()=>{
             handleRemoveLastItem()
-        }} >Remove 1 item from last</button>
+        }} className="btn btn-warning">Remove 1 item from last</button>
 
 
         {/* Remove 1 item from beginning */}
@@ -46,6 +50,7 @@ function Cartpage(){
             cartItems.map((element,index)=><CartCard {...element}/>
         )
          }
+        </div>
         </div>
          </>
     )

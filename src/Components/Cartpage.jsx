@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
 import CartCard from "./CartCard"
 import { removeItem, removeLastItem,removeFirstItem } from "../utils/cartSlice"
+import { useNavigate } from "react-router-dom"
 
 
 function Cartpage(){
     const cartItems=useSelector(store=>store.cart.items)
     console.log(cartItems)
 
-    //
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const handleClearitem=()=>{
         dispatch(removeItem())
@@ -23,19 +25,24 @@ function Cartpage(){
 
     return(
         <>
+        <div style={{border:"2px solid grey",padding:"1%",textAlign:"center",width:"80%",margin:"5% 10%"}}>
+        <h2><i class="fa-solid fa-bag-shopping me-1 text-warning fs-1"></i>Your Shopping Cart</h2>
+
+        {/* Back */}
+           <button onClick={() => navigate('/allmovies')} className="btn btn-secondary">Back to All Movies</button>
         {/* Clear Cart */}
         <button onClick={()=>{
             handleClearitem()
-        }}>Clear Cart</button>
+        }} className="btn btn-primary">Clear Cart</button>
 
         {/*Remove 1 item from last  */}
-        <button onClick={()=>{
+        <button className="btn btn-secondary" onClick={()=>{
             handleRemoveLastItem()
         }} >Remove 1 item from last</button>
 
 
         {/* Remove 1 item from beginning */}
-        <button onClick={()=>{
+        <button className="btn btn-secondary" onClick={()=>{
             handleRemoveFirstItem()
         }}>Remove 1 item from beginning</button>
 
@@ -46,6 +53,7 @@ function Cartpage(){
             cartItems.map((element,index)=><CartCard {...element}/>
         )
          }
+         </div>
         </div>
          </>
     )
