@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
-
 function SignUp() {
 
 const navigate = useNavigate()
@@ -82,28 +81,18 @@ const postSignUpUser=async(newUser)=>{
              style={inputDesign}
             />
           </Form.Group>
+          </div>
 
           {/* Gender */}
-        </div>
-        <div className="row mb-1 ">
-          <Form.Group className="col">
-          <Form.Label htmlFor="gender" className="form-label">Gender:</Form.Label><br />
-            <Form.Control type="radio" 
-             id="male"
-             name="gender"
-             value={formik.values.gender}
-             onChange={formik.handleChange}  
-            />Male
-             <Form.Control className='ms-4' type="radio" 
-             id="female"
-             name="gender"
-             value={formik.values.gender}
-             onChange={formik.handleChange}  
-            />Female
-          </Form.Group>
+         <div className="row mb-1">
+        <Form.Check type="radio" name="gender" label={`Male`} 
+          value={formik.values.gender}
+          onChange={formik.handleChange}/> 
 
+          <Form.Check type="radio" name="gender" label={`Female`}/>
+          
             {/* Phone */}
-          <Form.Group className="col">
+          <Form.Group className="col w-50">
             <Form.Label htmlFor="phone_number" className="form-label">Phone Number</Form.Label>
             <Form.Control type="text" className="form-control" 
              id="phone_number"
@@ -114,6 +103,7 @@ const postSignUpUser=async(newUser)=>{
             />
           </Form.Group>
         </div>
+       
 
         <div className="row mb-3">
           {/* Email */}
@@ -143,7 +133,7 @@ const postSignUpUser=async(newUser)=>{
         <button className="btn btn-warning" type="submit">Sign Up</button>
       </Form>
     </div>
-    
+
     </>
   )
 }
