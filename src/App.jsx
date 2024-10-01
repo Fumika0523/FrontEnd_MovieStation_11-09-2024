@@ -13,7 +13,7 @@ import AddMovie from './Components/Movie/AddMovie'
 import EditMovie from './Components/Movie/EditMovie';
 import store from './utils/store';
 import {Provider} from 'react-redux'; 
-import Cartpage from './Components/Cartpage';
+import Cartpage from './Components/Cart/Cartpage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import SignUp from './Components/SignIn_Up_Out/SignUp';

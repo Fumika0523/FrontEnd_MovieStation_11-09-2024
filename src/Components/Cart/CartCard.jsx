@@ -6,7 +6,7 @@ function CartCard({movieposter,moviename,rating,summary}){
        
         {/* POSRTER IMAGE */}
         <div>
-            <img src={movieposter} alt="" style={{height:"135px",width:"299px"}} /> 
+        <img src={movieposter} alt="" style={{height:"135px",width:"299px"}} /> 
         </div>
         {/* MOVIENAME */}
         <div className="movieContent">
@@ -17,7 +17,7 @@ function CartCard({movieposter,moviename,rating,summary}){
             </div>
             <div  style={{display:"flex",justifyContent:"center"}}>{summary}</div>
             </div>
-       
+        
         </>
     )
 }
