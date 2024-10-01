@@ -86,13 +86,13 @@ const postSignUpUser=async(newUser)=>{
           <label htmlFor="gender" className="form-label">Gender:</label><br />
             <input type="radio" 
              id="male"
-             name="male"
+             name="gender"
              value={formik.values.gender}
              onChange={formik.handleChange}  
             />Male
              <input className='ms-4' type="radio" 
              id="female"
-             name="female"
+             name="gender"
              value={formik.values.gender}
              onChange={formik.handleChange}  
             />Female
