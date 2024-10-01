@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { url } from '../../utils/constant';
 import axios from 'axios';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
 
