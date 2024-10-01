@@ -6,9 +6,6 @@ import * as Yup from "yup";
 import {url} from '../../utils/constant'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
 
 
 function SignIn({isAuthenticated,setIsAuthenticated}) {

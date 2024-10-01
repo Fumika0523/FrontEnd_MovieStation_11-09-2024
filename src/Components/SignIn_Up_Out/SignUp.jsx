@@ -2,7 +2,8 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { url } from '../../utils/constant';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
+
 
 
 function SignUp() {
@@ -55,83 +56,92 @@ const postSignUpUser=async(newUser)=>{
   return (
     <>
     <div className='container sign_up_in_container my-3 text-white' style={{width:"50%"}}>
-     <form onSubmit={formik.handleSubmit} style={{width:"80%"}}>
+     <Form onSubmit={formik.handleSubmit} style={{width:"80%"}}>
     <div className='text-white text-center mb-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
-          <div className="col ">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input 
+          <Form.Group className="col ">
+            <Form.Label htmlFor="name" className="form-label">Name</Form.Label>
+            <Form.Control 
             type="text" 
             className="form-control "
             id="name"
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}  
-            style={inputDesign}
-                          />
-          </div>
-          <div className="col">
-            <label htmlFor="age" className="form-label">Age</label>
-            <input type="text" className="sign_up_input form-control" 
+            style={inputDesign}/>
+          </Form.Group>
+
+          {/* AGE */}
+          <Form.Group className="col">
+            <Form.Label htmlFor="age" className="form-label">Age</Form.Label>
+            <Form.Control type="text" className="sign_up_input form-control" 
              id="age"
              name="age"
              value={formik.values.age}
              onChange={formik.handleChange}  
              style={inputDesign}
             />
-          </div>
+          </Form.Group>
+
+          {/* Gender */}
         </div>
         <div className="row mb-1 ">
-          <div className="col">
-          <label htmlFor="gender" className="form-label">Gender:</label><br />
-            <input type="radio" 
+          <Form.Group className="col">
+          <Form.Label htmlFor="gender" className="form-label">Gender:</Form.Label><br />
+            <Form.Control type="radio" 
              id="male"
              name="gender"
              value={formik.values.gender}
              onChange={formik.handleChange}  
             />Male
-             <input className='ms-4' type="radio" 
+             <Form.Control className='ms-4' type="radio" 
              id="female"
              name="gender"
              value={formik.values.gender}
              onChange={formik.handleChange}  
             />Female
-          </div>
-          <div className="col">
-            <label htmlFor="phone_number" className="form-label">Phone Number</label>
-            <input type="text" className="form-control" 
+          </Form.Group>
+
+            {/* Phone */}
+          <Form.Group className="col">
+            <Form.Label htmlFor="phone_number" className="form-label">Phone Number</Form.Label>
+            <Form.Control type="text" className="form-control" 
              id="phone_number"
              name="phone_number"
              value={formik.values.phone_number}
              onChange={formik.handleChange} 
              style={inputDesign} 
             />
-          </div>
+          </Form.Group>
         </div>
+
         <div className="row mb-3">
-          <div className="col">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input type="email" className="form-control" 
+          {/* Email */}
+          <Form.Group className="col">
+            <Form.Label htmlFor="email" className="form-label">Email</Form.Label>
+            <Form.Control type="email" className="form-control" 
              id="email"
              name="email"
              value={formik.values.email}
              onChange={formik.handleChange} 
              style={inputDesign} 
             />
-          </div>
-          <div className="col">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" className="form-control" 
+          </Form.Group>
+
+         {/* Password */}
+          <Form.Group className="col">
+            <Form.Label htmlFor="password" className="form-label">Password</Form.Label>
+            <Form.Control type="password" className="form-control" 
              id="password"
              name="password"
              value={formik.values.password}
              onChange={formik.handleChange} 
              style={inputDesign} 
             />
-          </div>
+          </Form.Group>
         </div>
         <button className="btn btn-warning" type="submit">Sign Up</button>
-      </form>
+      </Form>
     </div>
     
     </>
