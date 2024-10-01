@@ -36,7 +36,7 @@ const formik=useFormik({
   },
   validationSchema:formSchema,
   onSubmit:(values)=>{
-      // console.log(values) 
+      console.log(values) 
       postSignUpUser(values)
   }   
 })
@@ -86,10 +86,12 @@ const postSignUpUser=async(newUser)=>{
           {/* Gender */}
          <div className="row mb-1">
         <Form.Check type="radio" name="gender" label={`Male`} 
-          value={formik.values.gender}
+          value="male"
           onChange={formik.handleChange}/> 
 
-          <Form.Check type="radio" name="gender" label={`Female`}/>
+          <Form.Check type="radio" name="gender" label={`Female`}
+          value="female"
+          onChange={formik.handleChange}/>
           
             {/* Phone */}
           <Form.Group className="col w-50">
