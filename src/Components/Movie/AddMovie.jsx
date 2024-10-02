@@ -77,24 +77,22 @@ const getMovieData=async()=>{
 
   return (
     <>
-        
-     {/* <div className='container py-5'> */}
-        <Box border={1} borderColor="grey.600" borderRadius={6}
+        <Box border={2} borderColor="grey.600" borderRadius={6}
       component="form"
       sx={{
-        '& .MuiTextField-root': { width: '39ch' ,height:'8ch' },boxShadow:13,
+        '& .MuiTextField-root': { width: '36.1ch' ,height:'8ch' },boxShadow:13,
       }}
       noValidate
       autoComplete="off" 
-      onSubmit = {formik.handleSubmit}  style={{margin:"10%", padding:"4% 3%"}}
+      onSubmit = {formik.handleSubmit}  style={{margin:"5% 13%",width:"74%", padding:"4% 2.4%"}}
     >
-          <div style={{display:"flex",gap:"59.5%",marginBottom:"5%"}} >
+          <div style={{display:"flex",justifyContent:"space-between", marginBottom:"5%", width:"99%"}} >
 
 {/* Back */}
-<button  className='btn btn-secondary py-3 px-5 fs-4' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
+<button  className='btn btn-secondary py-2 px-4 fs-5' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
 
 {/* ADD MOVIE */}
-<button className='btn btn-warning  py-3 px-5 fs-4'><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</button>
+<button className='btn btn-warning  py-2 px-4 fs-5'><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</button>
 </div>
   
         <Stack direction="row"  useFlexGap flexWrap="wrap" spacing={{ xs: 2, sm: 4 }}>
@@ -181,11 +179,11 @@ const getMovieData=async()=>{
            <TextField
           required
           label="Movie Trailer"
-          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer} style={{width:"60ch"}} /> 
+          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer} style={{width:"56ch"}} /> 
 
   {/* Summary */}
     <TextField required id="summary" 
-    label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} style={{width:"60ch"}}  /> 
+    label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} style={{width:"56ch"}}  /> 
   </Stack>
    </Box>
 {/* </div> */}

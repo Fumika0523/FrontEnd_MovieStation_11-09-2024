@@ -1,10 +1,9 @@
 
-
-function OrderPage(){
+function CartPage(){
     return(
         <>
     <div className="mx-4">
-     <h1 className=" py-1">Order Page</h1>
+     <h1 className=" py-1">Cart Page</h1>
      <div className="text-start py-1 fs-3">Order ID: 334902461</div>
      <div className="text-start py-1 text-secondary">Order date: <span className="text-white">Feb 16,2022</span></div>
      <div className="border-top border-bottom border-secondary">
@@ -67,12 +66,6 @@ function OrderPage(){
     </>
     )
 }
-export default OrderPage
+export default CartPage
 
-//Total
-//Order ID: Static
-//Order date: Static
-//order items x 3 : Static
-//design remain the same
-//material UI
 

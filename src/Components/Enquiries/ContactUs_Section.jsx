@@ -36,7 +36,7 @@ const formik = useFormik({
 })
 
 const token = sessionStorage.getItem('token')
-console.log(token)
+//console.log(token)
 
 let config = {
 headers:{
@@ -138,5 +138,3 @@ const postEnquiryDetail=async(newEnquiry)=>{
     )
 }
 export default ContactUs_Section
-
-// 

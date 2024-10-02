@@ -28,13 +28,11 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   },
   });
  
-
   //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
   //Check if current path is in the excludedPaths array
   const shouldRenderHeader = includedPaths.includes(location.pathname)
   console.log(shouldRenderHeader)
-
 
   //subscribing to the store
   const cartItems = useSelector(store => store.cart.items)
@@ -64,7 +62,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
           <span className="ms-3 fs-4 text-warning navbar-brand"><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand text-warning fs-4 ms-1" href="#">MovieStation</a></span>
 
         {/* Toggler Icon */}
-          <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
 

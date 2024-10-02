@@ -18,8 +18,13 @@ import LikeCard from '../Movie/LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../utils/cartSlice';
 
 export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum}) {
+// Store:
+const dispatch=useDispatch()
+
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
   const navigate=useNavigate()
@@ -45,19 +50,28 @@ const ExpandMore = styled((props) => {
     setCastShow(false)
   };
 
-  const token = sessionStorage.getItem('token')
-  console.log(token)
-  
-  let config = {
-    headers:{
-      Authorization:`Bearer ${token}`
+  const token=sessionStorage.getItem('token')
+    let config={
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
     }
+    
+  const handleAdditem=async(movieItem)=>{
+    console.log(movieItem)
+    // >> api call for updating the backend >> saving to the DB
+    let res=await axios.post(`${url}/addcart`, movieItem,config)
+    console.log(res)
+    if(res.data){
+      // Add the data to the store and from the store we can use it everywhere
+      dispatch(addItem(res.data.orderData))
+     }
   }
 
   const deleteMovie=async()=>{
     console.log("Movie Deleted from the DB..")
     let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
-   console.log(res)
+   console.log(res)   
   }
 
   return (
@@ -94,7 +108,7 @@ const ExpandMore = styled((props) => {
     <button className="btn px-2" onClick={(values)=>deleteMovie()}><i className="fa-solid fa-trash text-white"></i></button>
     
     {/* REDUX */}
-    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}><i class="fa-solid fa-cart-shopping text-white"></i></button>
+    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping text-white"></i></button>
 
     {/* </IconButton> */}
     {/* <IconButton aria-label="share"> */}

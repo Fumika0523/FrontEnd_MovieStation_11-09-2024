@@ -46,6 +46,7 @@ const getMovieData = async () => {
   console.log("Movie data is called....");
   let res = await axios.get(`${url}/movie`,config)//response in res.data >> moviedata
   console.log(res.data.movieData);
+  console.log("movieData")
   setMovieData(res.data.movieData);
 };
 
@@ -95,3 +96,5 @@ const [mode, setMode]=useState("dark")
 }
 
 export default App
+
+//BackEnd : orderModel & cartModel

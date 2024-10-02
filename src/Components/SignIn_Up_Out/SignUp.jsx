@@ -6,9 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 
 function SignUp() {
-
 const navigate = useNavigate()
-
   const inputDesign={
   backgroundColor:"#1B1C23",
    borderColor:"black",
