@@ -9,7 +9,6 @@ import { useFormik } from 'formik'
 import {url} from '../../utils/constant'
 import axios from 'axios';
 
-
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
 

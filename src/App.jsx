@@ -23,6 +23,8 @@ import {url} from './utils/constant'
 import axios from 'axios';
 import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
+import OrderSummary from './Components/Cart/OrderSummary'
+
 
 function App() {
   const [movieData,setMovieData] = useState([])
@@ -84,6 +86,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/signout" element={<SignOut/>}></Route>
       <Route path="allenquiries" element={<AllEnquiries/>}></Route>
       <Route path="/table" element={<Table/>}></Route>
+      <Route path="/ordersummary" element={<OrderSummary/>}></Route>
     </Routes>
     <div style={{position:"relative"}}>
     <Footer />

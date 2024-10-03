@@ -10,8 +10,6 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LikeCard from '../Movie/LikeCard';
@@ -51,6 +49,7 @@ const ExpandMore = styled((props) => {
   };
 
   const token=sessionStorage.getItem('token')
+  
     let config={
       headers:{
         Authorization:`Bearer ${token}`
@@ -62,10 +61,6 @@ const ExpandMore = styled((props) => {
     // >> api call for updating the backend >> saving to the DB
     let res=await axios.post(`${url}/addcart`, movieItem,config)
     console.log(res)
-    if(res.data){
-      // Add the data to the store and from the store we can use it everywhere
-      dispatch(addItem(res.data.orderData))
-     }
   }
 
   const deleteMovie=async()=>{
