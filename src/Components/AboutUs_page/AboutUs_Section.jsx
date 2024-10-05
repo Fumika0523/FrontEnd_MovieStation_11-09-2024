@@ -41,7 +41,7 @@ const bottomDesignData=[
     return(
         <>
   
-        <AboutUs_ImageBanner appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide"/>
+        <AboutUs_ImageBanner banner ={"https://i.redd.it/d1vjsn34bht01.jpg"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide"/>
 
     <div className="row align-items-center p-5">
         <h1 className="text-center pb-4"> What we do</h1>

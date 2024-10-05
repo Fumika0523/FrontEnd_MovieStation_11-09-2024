@@ -7,6 +7,8 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner";
 
+
+
 function Cartpage() {
     const cartItems = useSelector(store => store.cart.items)
     console.log(cartItems)
@@ -83,7 +85,7 @@ function Cartpage() {
 
                 {
                     cartItems.length === 0 ?
-                        <AboutUs_ImageBanner banner={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5CLzHcSxxp5z1vDJuk9rx6HOsJHNe-vtjg&s"} cardText={"The Cart is Empty"} /> :
+                        <AboutUs_ImageBanner banner={"https://img.buzzfeed.com/buzzfeed-static/static/2021-10/23/0/asset/50c4363d5d1a/sub-buzz-943-1634947235-19.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto"} cardText={"The Cart is Empty🛒...!!!!" } /> :
                         <>
                             <OrderPage />
                         </>
