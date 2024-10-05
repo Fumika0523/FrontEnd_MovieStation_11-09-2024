@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import { grey } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   const token = sessionStorage.getItem('token')
   console.log("token", token)

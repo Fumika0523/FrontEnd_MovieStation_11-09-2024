@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "@mui/material"
 import CustomizedTables from "./CustomizedTables"
 
-
 function AllEnquiries() {
  
     const navigate = useNavigate()
@@ -40,7 +39,7 @@ function AllEnquiries() {
                 <div className="">Back</div></button> 
         </div>
         { 
-             enquiryData.length ===0? <AboutUs_ImageBanner cardText={"No Enquires Generated So Far!!"}/>:
+             enquiryData.length ===0? <AboutUs_ImageBanner cardText={"No Enquires Generated So Far!!"} banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}/>:
             <>
             <CustomizedTables enquiryData = {enquiryData}/>
             </>

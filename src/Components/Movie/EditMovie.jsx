@@ -4,7 +4,6 @@ import { url } from "../../utils/constant";
 import axios from "axios";
 import EditUpdateMovieForm from "./EditUpdateMovieForm";
 
-
 function EditMovie(){
 const [singleMovie, setSingleMovies]=useState()
 const {id}=useParams()

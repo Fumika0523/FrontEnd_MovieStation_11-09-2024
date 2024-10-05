@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { addItem } from '../../utils/cartSlice';
 
 export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum}) {
 // Store:

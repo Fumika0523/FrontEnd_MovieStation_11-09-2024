@@ -24,3 +24,11 @@ Uncomment the shchema
 contact us , make with material ui --> Text field
 
 All buttons are same color
+
+<!-- Search Bar -->
+Filter method, whatever the text is typing, its exist in that page?
+Variable search = useState() 
+Movie Array >> map
+if its match >> give you a value in array >> map method
+
+filter.map

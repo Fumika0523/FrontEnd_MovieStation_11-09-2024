@@ -92,7 +92,9 @@ function EditUpdateMovieForm({singleMovie,id}){
                 <button  className='btn btn-secondary py-3 px-5 fs-4' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
                 
                 {/* ADD MOVIE */}
-                <button className='btn btn-warning  py-3 px-5 fs-4'><i class="fa-solid fa-circle-plus me-2" onClick={()=>{navigate('/allmovies')}}></i>UPDATE MOVIE</button>
+                <button className='btn btn-warning  py-3 px-5 fs-4'><i class="fa-solid fa-circle-plus me-2" onClick={()=>{
+                  navigate('/allmovies')
+                  }}></i>UPDATE MOVIE</button>
                 </div>
                   
                         <Stack direction="row"  useFlexGap flexWrap="wrap" spacing={{ xs: 2, sm: 4 }}>

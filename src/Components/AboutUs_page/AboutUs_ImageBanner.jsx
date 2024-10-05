@@ -1,9 +1,9 @@
-function AboutUs_ImageBanner ({appName,cardText}){
+function AboutUs_ImageBanner ({appName,cardText,banner}){
     return(
         <>
   <div className="d-flex justify-content-center mt-2">
         <div className="card bg-transparent text-center text-white"  style={{width:"85%",height:"400px"}}>
-        <img src="https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"
+        <img src={banner}
         s="card-img" alt="..."  style={{height:"400px"}}/>
         <div className="card-img-overlay mt-2">
 
