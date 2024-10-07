@@ -25,7 +25,7 @@ const dispatch=useDispatch()
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
   const navigate=useNavigate()
-console.log(disLikeNum,likeNum)
+//console.log(disLikeNum,likeNum)
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

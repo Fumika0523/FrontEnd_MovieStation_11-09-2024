@@ -91,8 +91,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
    {/* Sign Out */}
    <ThemeProvider theme={theme}>
 
-  
-                <div>
+                  <div>
                 {token ?
                   <>
                     <span className="mx-2">Hi, {username}</span>
