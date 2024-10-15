@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function ShoppingCard({ movieposter, moviename, amount }) {
+function CartCard({ movieposter, moviename, amount }) {
 
 
     return (
@@ -23,4 +23,4 @@ function ShoppingCard({ movieposter, moviename, amount }) {
         </>
     )
 }
-export default ShoppingCard
+export default CartCard

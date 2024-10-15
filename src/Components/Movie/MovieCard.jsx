@@ -18,7 +18,7 @@ import {url} from '../../utils/constant'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
-export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum}) {
+export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn}) {
 // Store:
 const dispatch=useDispatch()
 
@@ -55,20 +55,9 @@ const ExpandMore = styled((props) => {
       }
     }
     
-  const handleAdditem=async(movieItem)=>{
-    console.log(movieItem)
-    // >> api call for updating the backend >> saving to the DB
-    let res=await axios.post(`${url}/addcart`, movieItem,config)
-    console.log(res)
-  }
+ 
 
-  const deleteMovie=async()=>{
-    console.log("Movie Deleted from the DB..")
-    let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
-   console.log(res)   
-  }
-
-  return (
+   return (
     <Card sx={{ maxWidth:440, mb:4 }}  >
       <CardHeader
         avatar={
@@ -99,10 +88,10 @@ const ExpandMore = styled((props) => {
     <button className="btn px-1" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
 
     {/* Delete Icon */}
-    <button className="btn px-2" onClick={(values)=>deleteMovie()}><i className="fa-solid fa-trash text-white"></i></button>
+    {deleteBtn}
     
     {/* REDUX */}
-    <button className="btn px-w text-white" onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping text-white"></i></button>
+    {reduxAddcartBtn}
 
     {/* </IconButton> */}
     {/* <IconButton aria-label="share"> */}

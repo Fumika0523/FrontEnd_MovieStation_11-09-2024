@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import  ShoppingCard from './ShoppingCard'
+import CartCard from "./CartCard";
 import { useEffect, useState } from "react"
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { url } from "../../utils/constant";
 import { removeItem } from "../../utils/cartSlice";
-import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner";
 
-function OrderPage() {
+function CartSummaryPage() {
     const navigate=useNavigate()
 
     const dispatch = useDispatch()
@@ -63,11 +62,8 @@ console.log(cartItems)
                 <h1 className=" py-1">Cart Page</h1>
                 <div className="text-start py-1 text-secondary">Date: <span className="text-white">Feb 16,2022</span></div>
                 <div className="border-top border-secondary">
-
-                
-
                     {
-                        cartItems?.map((element) => <ShoppingCard {...element} />)
+                        cartItems?.map((element) => <CartCard {...element} />)
                     }
                     <div style={{width:"40%"}} className="ms-auto ">
                     <div className="text-start py-3 fs-4" >Cart Summary</div>
@@ -88,7 +84,7 @@ console.log(cartItems)
             </>
             )
 }
-            export default OrderPage
+            export default CartSummaryPage
 
 
 // OrderSumary

@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { removeItem, removeLastItem, removeFirstItem } from "../../utils/cartSlice"
 import { useNavigate } from "react-router-dom"
-import OrderPage from "./OrderPage"
+import CartSummaryPage from "./CartSummaryPage";
 import { Button } from '@mui/base/Button';
 import axios from "axios";
 import { url } from "../../utils/constant";
 import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner";
-
-
 
 function Cartpage() {
     const cartItems = useSelector(store => store.cart.items)
@@ -87,7 +85,7 @@ function Cartpage() {
                     cartItems.length === 0 ?
                         <AboutUs_ImageBanner banner={"https://img.buzzfeed.com/buzzfeed-static/static/2021-10/23/0/asset/50c4363d5d1a/sub-buzz-943-1634947235-19.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto"} cardText={"The Cart is Empty🛒...!!!!" } /> :
                         <>
-                            <OrderPage />
+                            <CartSummaryPage/>
                         </>
                 }
 
