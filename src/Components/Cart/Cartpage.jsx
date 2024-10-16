@@ -63,23 +63,23 @@ function Cartpage() {
 
                 {/*Remove 1 item from last  */}
 
-                {
+                {/* {
                     cartItems.length === 0 ?
                         <></> :
                         <Button className="btn btn-secondary" onClick={() => {
                             handleRemoveLastItem()
                         }} >Remove 1 item from last</Button>
-                }
+                } */}
 
                 {/* Remove 1 item from beginning */}
 
-                {
+                {/* {
                     cartItems.length === 0 ?
                         <></> :
                         <Button className="btn btn-secondary" onClick={() => {
                             handleRemoveFirstItem()
                         }}>Remove 1 item from beginning</Button>
-                }
+                } */}
 
                 {
                     cartItems.length === 0 ?
