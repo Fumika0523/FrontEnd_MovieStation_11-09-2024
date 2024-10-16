@@ -9,9 +9,7 @@ function OrderSummaryCard({movieposter,moviename,amount}){
              <div>{moviename}</div>
             <div>Price : {amount}</div>
             </div>
-           
             </div>
- 
             </div>
         </>
     )

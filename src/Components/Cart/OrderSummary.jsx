@@ -19,7 +19,7 @@ function OrderSummary(){
     const handleGetOrder=async()=>{
         let res = await axios.get(`${url}/order`,config)
         console.log(res.data.orderData)
-       setOrderData(res.data.orderData[0])
+       setOrderData(res.data.orderData)
         }
 // Calling API call for handlegetorder
     useEffect(()=>{
@@ -31,22 +31,20 @@ function OrderSummary(){
         <>
         <div className="container border my-5 p-5" style={{width:"70%"}}>
             <h1 className="pb-3 fs-2">Order Summary</h1>
-            <div className="mb-3 fs-5">Order ID: {orderData._id}</div>
-            {/* <div className="d-flex">
-            <img src={cartItems?.movieposter} alt="" style={{width:"18%"}}/>
-            <div className="fs-5 ms-3 my-5">
-            <div className="pb-1">Delivered on Jul14</div>
-            <div>{cartItems?.moviename}</div>
+            {orderData.map((element)=>(
+            <div key = {element._id} className="mb-4">
+             <div className="mb-3 fs-5">Order ID: {element._id}</div>
+             {element.movies.map((movie)=>(
+             <OrderSummaryCard key={movie._id} {...movie}/>
+             ))}
+             <hr />
             </div>
-            </div> */}
-            {
-                orderData.movies?.map((element,)=>
-                    <OrderSummaryCard {...element}/>
-                )
+            ))
             }
-           
        </div>
         </>
     )
 }
 export default OrderSummary
+
+//Order image round small image

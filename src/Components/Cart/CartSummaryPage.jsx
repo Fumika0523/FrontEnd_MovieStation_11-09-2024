@@ -32,25 +32,20 @@ console.log(cartItems)
         }
       }
 
-      const deleteCart=async()=>{
-        console.log("Cart Items Deleted")
-        let res = await axios.delete(`${url}/deletecart`,config)
-        console.log(res)
-        if(res.data){
-          dispatch(removeItem())
-        }
-      }
-
       const handleAddOder=async()=>{
+        console.log("OrderPage")
+        console.log(cartItems)
         //console.log(movieItem) //the data you going to send to the add order
         // api call for updating the backend >> saving to the DB
         // Buy now >> Order Page || Sumary page
         let res = await axios.post(`${url}/addorder`,{movies:cartItems},config)
         console.log(res)
-        if(res.status == 200){
-          deleteCart()
-          navigate(`/ordersummary`) 
 
+        if(res.status == 200){//success responses
+          await axios.delete(`${url}/clearcart`,config); // delete api call
+          // clear the redux store
+          dispatch(removeItem())
+          navigate(`/ordersummary`) 
         }
     
       }
@@ -76,7 +71,7 @@ console.log(cartItems)
                         <div> {sum}</div>
                         </div>  
                         <div className="text-end">
-                        <button className="btn btn-warning mt-5 mb-3" style={{width:"45%", fontSize:"2.25vh"}} onClick={() => {handleAddOder({cartItems})}} ><BsFillCartCheckFill className="pe-1 fs-2"/>Order Now </button>
+                        <button className="btn btn-warning mt-5 mb-3" style={{width:"45%", fontSize:"2.25vh"}} onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className="pe-1 fs-2"/>Order Now </button>
                         </div>
                     </div>     
                 </div>
