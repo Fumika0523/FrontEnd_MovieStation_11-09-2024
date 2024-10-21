@@ -100,4 +100,3 @@ const [mode, setMode]=useState("dark")
 
 export default App
 
-//BackEnd : orderModel & cartModel

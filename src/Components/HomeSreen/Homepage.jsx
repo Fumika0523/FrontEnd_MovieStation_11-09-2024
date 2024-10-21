@@ -17,8 +17,6 @@ function Homepage({movie}){
       }
     }
 
-
-
     return(
         <>
         <Header/>

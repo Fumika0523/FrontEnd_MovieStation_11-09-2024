@@ -63,12 +63,13 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
           <span className="ms-3 fs-4 text-warning navbar-brand"><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand text-warning fs-4 ms-1" href="#">MovieStation</a></span>
 
         {/* Toggler Icon */}
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-warning">
+
               {/* <!-- Home --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>
               {/* <!-- About Us --> */}
@@ -79,8 +80,7 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
 
               {/* AddMovie */}
               <Button variant="text" color="inherit" onClick={() => navigate('/addmovie')}>Add movie</Button>
-              {/* Cart */}
-              {/* <div><Link to='/addtocart' className="text-secondary text-decoration-none">Add to Cart{cartNavbar}</Link></div> */}
+     
               {/* Redux */}
               <Button variant="text" color="inherit" onClick={() => navigate('/cartpage')}><ShoppingCartIcon />{cartItems.length}</Button>
 
@@ -88,10 +88,10 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
               <Button variant="text" color="inherit" onClick={() => navigate('/services')}>Service</Button>
               {/* <!-- Contact Us --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/contact')}>Contact</Button>
-   {/* Sign Out */}
-   <ThemeProvider theme={theme}>
-
-                  <div>
+            
+          {/* Sign Out */}
+             <ThemeProvider theme={theme}>
+              <div>
                 {token ?
                   <>
                     <span className="mx-2">Hi, {username}</span>
@@ -111,8 +111,10 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
                 
               </div>
               </ThemeProvider>
-        
-            <div className="me-3"><span
+              </ul>   
+          
+              </div>
+          <div ><span
               onClick={() => {
                 //setMode("light")
                 //true?"truedata":"falsedata"
@@ -121,9 +123,8 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </span>
+       
             </div>
-            </ul>
-          </div>
         </div>
       </nav>
       {/* {shouldRenderHeader && <Header/>} */}

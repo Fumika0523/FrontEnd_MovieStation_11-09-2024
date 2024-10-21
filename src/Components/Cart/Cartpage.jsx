@@ -96,3 +96,4 @@ function Cartpage() {
 export default Cartpage
 
 // EMpty image
+//when its 0 in cart, only cart icon should be there
