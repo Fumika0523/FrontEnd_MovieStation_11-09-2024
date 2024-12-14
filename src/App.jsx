@@ -25,7 +25,6 @@ import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Cart/OrderSummary'
 
-
 function App() {
   const [movieData,setMovieData] = useState([])
 

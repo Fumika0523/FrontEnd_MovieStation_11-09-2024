@@ -28,7 +28,7 @@ function AllEnquiries() {
 
     useEffect(() => {
         getEnquiryData()
-    }, []) // APIC call has to be made inside UseEffect () only
+    }, []) // API call has to be made inside UseEffect () only
     console.log(enquiryData)
     return (
         <>

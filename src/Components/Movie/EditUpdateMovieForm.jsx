@@ -74,12 +74,12 @@ function EditUpdateMovieForm({singleMovie,id}){
         getMovieData(data)
     }
     
-                 return (
+            return (
                     <>
-                       {/* <div className='container py-5'> */}
-                        <Box border={1} borderColor="grey.600" borderRadius={6}
-                      component="form"
-                      sx={{
+            {/* <div className='container py-5'> */}
+            <Box border={1} borderColor="grey.600" borderRadius={6}
+                component="form"
+                sx={{
                         '& .MuiTextField-root': { width: '39ch' ,height:'8ch' },boxShadow:13,
                       }}
                       noValidate

@@ -63,12 +63,12 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
           <span className="ms-3 fs-4 text-warning navbar-brand"><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand text-warning fs-4 ms-1" href="#">MovieStation</a></span>
 
         {/* Toggler Icon */}
-          <button className="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-            <span className="navbar-toggler-icon"></span>
+          <button className="navbar-toggler  border" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+            <div className="navbar-toggler-icon"></div>
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 text-warning">
+            <ul className="navbar-nav ms-auto  mb-lg-0 text-warning">
 
               {/* <!-- Home --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>

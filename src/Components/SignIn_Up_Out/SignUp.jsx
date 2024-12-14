@@ -82,7 +82,7 @@ const postSignUpUser=async(newUser)=>{
           </div>
 
           {/* Gender */}
-         <div className="row mb-1">
+         <div className="mb-1">
         <Form.Check type="radio" name="gender" label={`Male`} 
           value="male"
           onChange={formik.handleChange}/> 
