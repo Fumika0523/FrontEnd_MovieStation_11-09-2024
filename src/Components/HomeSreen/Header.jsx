@@ -3,9 +3,9 @@ import coverPage from '../../assets/coverPage.png'
 
 function Header (){
 
-    
-    return(
+      return(
         <>
+        <div style={{position:"relative", width:"100%",overflow:"hidden"}}>
          <img src={coverPage} alt="" className=" bg-header-image" />
          <div className='bgFade '></div>
         <div className="card-img-overlay text-center py-3" style={{margin:"8% 20%",width:"60%",}}>
@@ -16,7 +16,7 @@ function Header (){
         <button className="btn btn-outline-secondary border border-secondary rounded rounded-4 px-5 py-3 fw-bold fs-5" >Features</button>
         </div>
         </div>
-    
+        </div>
         </>
     )
 }

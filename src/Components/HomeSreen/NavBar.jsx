@@ -88,33 +88,9 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
               <Button variant="text" color="inherit" onClick={() => navigate('/services')}>Service</Button>
               {/* <!-- Contact Us --> */}
               <Button variant="text" color="inherit" onClick={() => navigate('/contact')}>Contact</Button>
-            
-          {/* Sign Out */}
-             <ThemeProvider theme={theme}>
-              <div>
-                {token ?
-                  <>
-                    <span className="mx-2">Hi, {username}</span>
-                    <Button variant="contained" color="primary"
-                    className=" text-nowrap mx-2 text-white" type="submit" onClick={() => handleSignOut()}>Sign out</Button>
-                  </>
-                  :
-                  <>
-                    {/* Sign in */}
-                    <Button variant="contained" color="primary" className="mx-2" type="submit" onClick={() => { navigate('/signin') }}>Sign in</Button>
 
-                    {/* Sign up */}
-                    <Button variant="contained" color="secondary"  type="submit" className=" me-3 py-1 " onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i>Sign up</Button>
-                  </>
-
-                }
-                
-              </div>
-              </ThemeProvider>
-              </ul>   
-          
-              </div>
-          <div ><span
+            {/* Light Dar Mode */}
+            <Button variant="text" color="inherit"
               onClick={() => {
                 //setMode("light")
                 //true?"truedata":"falsedata"
@@ -122,9 +98,30 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
                 console.log(mode)
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-            </span>
-       
-            </div>
+            </Button>
+               
+          {/* Sign Out */}
+             <ThemeProvider theme={theme}>
+              
+                {token ?
+                  <>
+                    <Button className="mx-2 fs-5" color="inherit">Hi, {username}</Button>
+                    <Button variant="text" color="primary"
+                    className=" text-nowrap mx-2 text-white" type="submit" onClick={() => handleSignOut()}>Sign out</Button>
+                  </>
+                  :
+                  <>
+                    {/* Sign in */}
+                    <Button variant="text" color="primary" className="mx-2" type="submit" onClick={() => { navigate('/signin') }}>Sign in</Button>
+
+                    {/* Sign up */}
+                    <Button variant="text" color="secondary"  type="submit" className=" me-3 py-1 " onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i>Sign up</Button>
+                  </>
+                }
+
+              </ThemeProvider>
+              </ul>   
+           </div>
         </div>
       </nav>
       {/* {shouldRenderHeader && <Header/>} */}
