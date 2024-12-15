@@ -5,11 +5,17 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from "@mui/material";
-import { grey } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { grey,amber,red,pink} from '@mui/material/colors';
 
 function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
+const greyColor = grey[900]; // #212121
+const amberColor = amber[500];
+const redColor = red[900];
+const pinkColor = pink[900]
+const darkGreyColor = grey[700]
+console.log(greyColor)
+
   const token = sessionStorage.getItem('token')
   console.log("token", token)
 
@@ -40,15 +46,15 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   console.log(cartItems.length)
 
   //navbar-scrolled
-  const navEl = document.querySelector('.navbar');
+  // const navEl = document.querySelector('.navbar');
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      navEl.classList.add('navbar-scrolled');
-    } else if (window.scrollY < 50) {
-      navEl.classList.remove('navbar-scrolled');
-    }
-  })
+  // window.addEventListener('scroll', () => {
+  //   if (window.scrollY > 100) {
+  //     navEl.classList.add('navbar-scrolled');
+  //   } else if (window.scrollY < 50) {
+  //     navEl.classList.remove('navbar-scrolled');
+  //   }
+  // })
   const handleSignOut = () => {
     sessionStorage.removeItem('token')
     navigate('/')
@@ -57,10 +63,13 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
   let username = sessionStorage.getItem('username')
   return (
     <>
-      <nav className="navbar sticky-top navbar-expand-lg" >
+      <nav className="navbar sticky-top navbar-expand-lg"
+      style={{backgroundColor:mode=="light"? "white":"black"}}
+       >
         <div className="container-fluid" >
           {/* Brand */}
-          <span className="ms-3 fs-4 text-warning navbar-brand"><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand text-warning fs-4 ms-1" href="#">MovieStation</a></span>
+          <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? greyColor:amberColor}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
+          style={{color:mode=="light"? greyColor: amberColor}}>MovieStation</a></span>
 
         {/* Toggler Icon */}
           <button className="navbar-toggler  border" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
@@ -71,26 +80,70 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
             <ul className="navbar-nav ms-auto  mb-lg-0 text-warning">
 
               {/* <!-- Home --> */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/')}>Home</Button>
+              <Button variant="text" 
+              // color={mode == "light" ? greyColor : "inherit"}
+              style={{color:mode=="light" ? greyColor: amberColor}}
+               onClick={() => navigate('/')}>Home</Button>
               {/* <!-- About Us --> */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/about')}>ABOUT US</Button>
+              <Button variant="text" 
+              style={{color:mode=="light"? greyColor:amberColor}}
+               onClick={() => navigate('/about')}>ABOUT US</Button>
 
               {/* Movie */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/allmovies')}>All movies</Button>
+              <Button variant="text" 
+              style={{color:mode=="light" ? greyColor:amberColor}}
+              onClick={() => navigate('/allmovies')}>All movies</Button>
 
               {/* AddMovie */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/addmovie')}>Add movie</Button>
+              {/* conditional rendering where you dont want else value / false value */}
+              {
+                token &&
+                <Button variant="text" 
+                style={{color:mode=="light" ? greyColor:amberColor}} onClick={() => navigate('/addmovie')}>Add movie</Button>
+              }
+           
      
-              {/* Redux */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/cartpage')}><ShoppingCartIcon />{cartItems.length}</Button>
-
               {/* <!-- Service --> */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/services')}>Service</Button>
+              <Button variant="text" 
+              style={{color:mode=="light"? greyColor:amberColor}} onClick={() => navigate('/services')}>Service</Button>
               {/* <!-- Contact Us --> */}
-              <Button variant="text" color="inherit" onClick={() => navigate('/contact')}>Contact</Button>
+              <Button variant="text" 
+              style={{color:mode=="light"? greyColor:amberColor}} onClick={() => navigate('/contact')}>Contact</Button>
+               
+              {/* Redux  -->> Badge*/}
+              <Button variant="text" 
+              style={{color:mode=="light"? greyColor:amberColor}} onClick={() => navigate('/cartpage')}><ShoppingCartIcon />{cartItems.length}</Button>
+            
+            
+             {/* Sign Out */}
+             <ThemeProvider theme={theme}>
+              
+                {token ?
+                  <>
+                    <Button className="mx-2"
+                    style={{color:mode=="light"? pinkColor:"white"}}>Hi, {username}</Button>
+                    <Button variant="text" color="primary"
+                    className=" text-nowrap mx-2 " type="submit" 
+                    style={{color:mode=="light"? darkGreyColor:"grey"}} 
+                    onClick={() => handleSignOut()}>Sign out</Button>
+                  </>
+                  // otherwise
+                  :
+                  <>
+                    {/* Sign in */}
+                    <Button variant="text" color="primary"
+                    className="mx-2" type="submit" onClick={() => { navigate('/signin') }}>Sign in</Button>
 
-            {/* Light Dar Mode */}
-            <Button variant="text" color="inherit"
+                    {/* Sign up */}
+                    <Button variant="text" color="secondary"  type="submit" className=" me-3 py-1 " onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i>Sign up</Button>
+                  </>
+                }
+
+              </ThemeProvider>
+
+              {/* Light Dark Mode */}
+            <Button variant="text" 
+              style={{color:mode=="light"? greyColor:amberColor}}
               onClick={() => {
                 //setMode("light")
                 //true?"truedata":"falsedata"
@@ -99,27 +152,6 @@ function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </Button>
-               
-          {/* Sign Out */}
-             <ThemeProvider theme={theme}>
-              
-                {token ?
-                  <>
-                    <Button className="mx-2 fs-5" color="inherit">Hi, {username}</Button>
-                    <Button variant="text" color="primary"
-                    className=" text-nowrap mx-2 text-white" type="submit" onClick={() => handleSignOut()}>Sign out</Button>
-                  </>
-                  :
-                  <>
-                    {/* Sign in */}
-                    <Button variant="text" color="primary" className="mx-2" type="submit" onClick={() => { navigate('/signin') }}>Sign in</Button>
-
-                    {/* Sign up */}
-                    <Button variant="text" color="secondary"  type="submit" className=" me-3 py-1 " onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i>Sign up</Button>
-                  </>
-                }
-
-              </ThemeProvider>
               </ul>   
            </div>
         </div>
