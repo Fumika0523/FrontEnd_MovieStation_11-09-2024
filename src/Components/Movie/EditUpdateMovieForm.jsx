@@ -86,13 +86,13 @@ function EditUpdateMovieForm({singleMovie,id}){
                       autoComplete="off" 
                       onSubmit = {formik.handleSubmit}  style={{margin:"10%", padding:"4% 3%"}}
                     >
-                          <div style={{display:"flex",gap:"59.5%",marginBottom:"5%"}} >
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:"5%"}} >
                 
                 {/* Back */}
-                <button  className='btn btn-secondary py-3 px-5 fs-4' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
+                <button  className='btn btn-secondary py-2 px-3 fs-5' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
                 
                 {/* ADD MOVIE */}
-                <button className='btn btn-warning  py-3 px-5 fs-4'><i class="fa-solid fa-circle-plus me-2" onClick={()=>{
+                <button className='btn btn-warning  py-2 px-3 fs-5'><i class="fa-solid fa-circle-plus me-2" onClick={()=>{
                   navigate('/allmovies')
                   }}></i>UPDATE MOVIE</button>
                 </div>

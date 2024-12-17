@@ -32,3 +32,7 @@ Movie Array >> map
 if its match >> give you a value in array >> map method
 
 filter.map
+
+Username:user100@gmail.com
+pw: user100@gmail.com
+phone no: 100100

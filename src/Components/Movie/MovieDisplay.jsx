@@ -103,7 +103,7 @@ function MovieDisplay() {
                             <MovieCard {...element} key={index} setMovieData={setMovieData} element={element}
                                 deleteBtn={
                                     // Delete Button
-                                    <button className="btn px-w text-white" onClick={()=> deleteMovie(element._id)}>
+                                    <button className="btn" onClick={()=> deleteMovie(element._id)}>
                                         <i className="fa-solid fa-trash text-white"></i>
                                     </button>
                                 }

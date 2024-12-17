@@ -73,17 +73,17 @@ const ExpandMore = styled((props) => {
         title={moviename}
         subheader={rating}
       />
-      <CardMedia
-    component="img" height="185" image={movieposter}alt="movieposter"/>
+    <CardMedia
+    component="img" height="185" image={movieposter} alt="movieposter"/>
      
     <CardActions>
     {/* <IconButton aria-label="add to favorites"> */}
     {/* <FavoriteIcon /> */}
     
-    <LikeCard likeNum={likeNum} disLikeNum={disLikeNum}/>
+    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum}/>
 
     {/* Edit Icon */}
-    <button className="btn px-1" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
+    <button className="btn" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
 
     {/* Delete Icon */}
     {deleteBtn}
@@ -91,13 +91,7 @@ const ExpandMore = styled((props) => {
     {/* REDUX */}
     {reduxAddcartBtn}
 
-    {/* </IconButton> */}
-    {/* <IconButton aria-label="share"> */}
-    {/* <ShareIcon /> */}
-    {/* </IconButton> */}
-
-    <ExpandMore
-    expand={expanded} onClick={handleExpandClick}aria-expanded={expanded} aria-label="show more">
+    <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
     <ExpandMoreIcon />
     </ExpandMore>
     </CardActions>

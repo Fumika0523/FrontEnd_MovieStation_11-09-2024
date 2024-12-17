@@ -85,7 +85,7 @@ const getMovieData=async()=>{
       autoComplete="off" 
       onSubmit = {formik.handleSubmit}  style={{margin:"5% 13%",width:"74%", padding:"4% 2.4%"}}
     >
-          <div style={{display:"flex",justifyContent:"space-between", marginBottom:"5%", width:"99%"}} >
+<div style={{display:"flex",justifyContent:"space-between", marginBottom:"5%", width:"99%"}} >
 
 {/* Back */}
 <button  className='btn btn-secondary py-2 px-4 fs-5' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
