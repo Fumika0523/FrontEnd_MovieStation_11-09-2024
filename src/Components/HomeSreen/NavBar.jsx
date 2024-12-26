@@ -126,7 +126,7 @@ console.log(greyColor)
               {/* Redux  -->> Badge*/}
               <Button
                sx={{padding: 0,minWidth: 0}}
-                className=" pe-2 "><Badge variant="text"
+                className="pe-2 "><Badge variant="text"
                 sx={{
                   "& .MuiBadge-badge": {
                     fontSize: "0.6rem", // Reduce font size
@@ -157,8 +157,8 @@ console.log(greyColor)
                     <Button variant="text" 
                     className="text-nowrap " type="submit" 
                     sx={{padding: 0,minWidth:"0"}}
-                    startIcon={<FaPowerOff className="fs-5 p-0 ms-2 mb-2" style={{color:"red"}}/>}
-                    style={{color:mode=="light"? darkGreyColor:"white",marginLeft:"1.5%"}} 
+                    startIcon={<FaPowerOff className="fs-5 p-0 mb-2 ms-2" style={{color:"red"}}/>}
+                    style={{color:mode=="light"? darkGreyColor:"white"}} 
                     onClick={() => handleSignOut()} >
 
                      {/* <FaPowerOff className="fs-5 bg-dark p-0 m-0"/> */}
@@ -196,9 +196,6 @@ console.log(greyColor)
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </Button>
-
-     
-
           </ul>   
           </div>
         </div>

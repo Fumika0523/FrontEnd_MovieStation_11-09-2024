@@ -34,9 +34,10 @@ function AllEnquiries() {
         <>
         <div className=" d-flex justify-content-end"
         onClick={()=>navigate('/contact')}>
-            <button className="d-flex btn btn-warning justify-content-center align-items-center px-4" style={{marginTop:"2%",marginRight:"10%",width:"7%"}}>
-                <i className="fa-solid fa-angles-left"></i>
-                <div className="">Back</div></button> 
+        <button className="d-flex btn btn-warning justify-content-center align-items-center px-4" style={{marginTop:"2%",marginRight:"10%",width:"7%"}}>
+        <i className="fa-solid fa-angles-left"></i>
+        
+        <div className="">Back</div></button> 
         </div>
         { 
              enquiryData.length ===0? <AboutUs_ImageBanner cardText={"No Enquires Generated So Far!!"} banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}/>:

@@ -1,14 +1,16 @@
 import { useState } from "react";
 
-function LikeCard({likeNum,disLikeNum}){
+function LikeCard({likeNum,disLikeNum,mode,setMode}){
     const [like,setLike] = useState(likeNum)
     const [disLike,setDisLike] = useState(disLikeNum)
 
     return(
         <>
         {/* more than 1,000 -> in "K" */}
-          <i style={{color:"white"}} className="fa-regular fa-thumbs-up position-relative fs-5 mx-2 pt-2" onClick={()=>{
+          <i style={{color:mode=="light" ? "black":"white"}}
+           className="fa-regular fa-thumbs-up position-relative fs-5 mx-2 pt-2" onClick={()=>{
             setLike(parseInt(like)+1) //converting to number
+            
         }}>
         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill"style={{fontSize:"65%"}}>
             {like}

@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import { Button } from "@mui/material";
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,7 +11,6 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LikeCard from '../Movie/LikeCard';
@@ -17,10 +18,23 @@ import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
+import { useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-export default function MovieCard({movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn}) {
+
+export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn}) {
 // Store:
 const dispatch=useDispatch()
+const greyColor = grey[900]; // #212121
+const amberColor = amber[500];
+// const [mode, setMode]=useState("dark")
+
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
 
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
@@ -31,20 +45,20 @@ const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  transform: !expand ? 'rotate(00deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
 }));
 
-// const [summaryShow,setSummaryShow] = useState(false)
-// const [castShow,setCastShow] = useState(false)
+const [summaryShow,setSummaryShow] = useState(false)
+const [castShow,setCastShow] = useState(true)
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
     setSummaryShow(!summaryShow)
-    setCastShow(false)
+    setCastShow(castShow)
   };
 
   const token=sessionStorage.getItem('token')
@@ -76,14 +90,18 @@ const ExpandMore = styled((props) => {
     <CardMedia
     component="img" height="185" image={movieposter} alt="movieposter"/>
      
-    <CardActions>
-    {/* <IconButton aria-label="add to favorites"> */}
-    {/* <FavoriteIcon /> */}
+    <CardActions className='d-flex justify-content-between'>
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum}/>
 
     {/* Edit Icon */}
-    <button className="btn" onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil text-white"></i></button>
+    <Button 
+    className='fs-6 bg-primary'
+    // sx={{padding: 0,minWidth: "50px"}}
+   style={{color:mode=="light" ? greyColor:amberColor}}
+       onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil"
+       style={{color:mode=="light" ? greyColor:"white"}}
+       ></i></Button>
 
     {/* Delete Icon */}
     {deleteBtn}
@@ -93,11 +111,23 @@ const ExpandMore = styled((props) => {
 
     <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
     <ExpandMoreIcon />
+    
     </ExpandMore>
+    
     </CardActions>
+    <Collapse in={!expanded}>
+    <CardContent>
+
+    <Typography setCastShow={setCastShow} paragraph>{cast}</Typography>  
+    
+    </CardContent>
+    </Collapse>
+
     <Collapse in={expanded}>
     <CardContent>
-    <Typography paragraph>{summary}</Typography>      
+
+    <Typography setSummaryShow={setSummaryShow} paragraph>{summary}</Typography>
+    
     </CardContent>
     </Collapse>
     </Card>
