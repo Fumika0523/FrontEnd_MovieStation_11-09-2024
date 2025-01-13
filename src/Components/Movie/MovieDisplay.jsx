@@ -8,25 +8,19 @@ import { Button } from "@mui/material"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function MovieDisplay({ mode, setMode, }) {
+function MovieDisplay({mode}) 
+{
+console.log(mode)
+// console.log(mode.mode)
 const greyColor = grey[900]; // #212121
-const amberColor = amber[500];
+const amberColor = amber[700];
 const redColor = red[900];
+const redColor1 = red[600];
 const pinkColor = pink[900]
 const darkGreyColor = grey[700];
 const blueGreyColor = blueGrey[500]
 
-const theme = createTheme({
-    palette: {
-      primary : {
-        main:'#424242',
-    },
-    secondary:{
-        main:'#ffc107',
-    },
-  },
-});
-  
+
 const dispatch= useDispatch()
 const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//hold search value
@@ -101,7 +95,10 @@ return (
     <div className="d-flex justify-content-end me-5 pe-3">
     <div className="iput-icons d-flex flex-row">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
-    <input className="form-control me-2 ps-4 bg-dark text-white" type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
+    <input
+    style={{color:mode=="light" ? "white":"white"}}
+
+     className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
     onChange={(e) => {
     //console.log(e.target.value)
     setSearchTearm(e.target.value)}} />
@@ -119,37 +116,41 @@ return (
     <div style={displayStyle} >
 
     {!searchTerm ? movieData?.map((element, index) => (
-    <MovieCard mode={mode} setMode={setMode} {...element} key={index} setMovieData={setMovieData} element={element}
+    <MovieCard {...element} key={index} setMovieData={setMovieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
     <Button
-    className='fs-6 bg-primary'
+    className='fs-5'
     onClick={()=> deleteMovie(element._id)}
-
+    style={{color:mode=="light" ? redColor1:redColor}}
     >
-    <i className="fa-solid fa-trash"
-    style={{color:mode=="light" ? "white":"red"}}></i>
+    <i className="fa-solid fa-trash"></i>
     </Button>}
     
     // Redux
     reduxAddcartBtn={
     <Button
-    className='fs-6 bg-primary'
-    style={{color:mode=="light" ? greyColor:"white"}}
-    onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping text-white"></i></Button>}
+    className='fs-5'
+    style={{color:mode=="light" ? "black":"white"}}
+    onClick={()=>{handleAdditem(element)}}>
+    <i className="fa-solid fa-cart-shopping "></i></Button>}
         
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData} element={element}
+    <MovieCard {...element} key={index} setMovieData={setMovieData} element={element} mode={mode} 
                             
     // Delete Button
     deleteBtn={
-    <Button className="btn px-w " onClick={()=> deleteMovie(element._id)}><i className="fa-solid fa-trash" style={{color:mode=="light" ? greyColor:"white"}}></i></Button>}
+    <Button className="btn px-w " onClick={()=> deleteMovie(element._id)}><i className="fa-solid fa-trash" 
+    // style={{color:mode=="light" ? greyColor:"white"}}
+    ></i></Button>}
 
     // Redux
     reduxAddcartBtn={
-    <Button className="btn px-w " onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping" style={{color:mode=="light" ? greyColor:"white"}}></i></Button>}/>
+    <Button className="btn px-w " onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping" 
+    // style={{color:mode=="light" ? greyColor:"white"}}
+    ></i></Button>}/>
     ))}
     </div>
    </div>

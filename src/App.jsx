@@ -72,7 +72,7 @@ const [mode, setMode]=useState("dark")
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
     <Routes>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
-      <Route path='/allmovies' mode={mode} setMode={setMode} element={<MovieDisplay movieData={movieData} setMovieData={setMovieData}/>}/>
+      <Route path='/allmovies'   element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path='/addmovie' element={<AddMovie setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section/>}/>
       <Route path='/services' element={<Service_Section/>}/>

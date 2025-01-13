@@ -17,6 +17,7 @@ import MailIcon from '@mui/icons-material/Mail';
 function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
 const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
+const amberColor1 = amber[700];
 const redColor = red[900];
 const pinkColor = pink[900]
 const darkGreyColor = grey[700];
@@ -75,8 +76,8 @@ console.log(greyColor)
        >
         <div className="container-fluid" >
           {/* Brand */}
-          <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? greyColor:amberColor}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
-          style={{color:mode=="light"? greyColor: amberColor}}>MovieStation</a></span>
+          <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? amberColor1:amberColor, fontWeight:"bold"}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
+          style={{color:mode=="light"? "black": amberColor}}>MovieStation</a></span>
 
           {/* Toggler Icon */}
           <button className="navbar-toggler  border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
@@ -149,10 +150,10 @@ console.log(greyColor)
                 {token ?
                   <>
                     <Button
-                    style={{color:mode=="light"? pinkColor:"#90caf9"}}
-                    sx={{padding: 0,minWidth:"130px", }}
+                    style={{color:mode=="light"? amberColor1:"lightgrey"}}
+                    sx={{padding: 0,minWidth:"130px",fontWeight:"bold",fontSize:"16px" }}
                     className=" ps-1"
-                    >Hi, {username}
+                    ><span className="pe-1">{username}</span> 
                     
                     <Button variant="text" 
                     className="text-nowrap " type="submit" 

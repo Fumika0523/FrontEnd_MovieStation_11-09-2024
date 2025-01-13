@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Button } from "@mui/material";
-
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -24,11 +23,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn}) {
-// Store:
+  console.log(mode)
+  // Store:
 const dispatch=useDispatch()
 const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
-// const [mode, setMode]=useState("dark")
+const blueGreyColor = blueGrey[100]
+
 
   const theme = createTheme({
     palette: {
@@ -92,16 +93,14 @@ const [castShow,setCastShow] = useState(true)
      
     <CardActions className='d-flex justify-content-between'>
     
-    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum}/>
+    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
 
     {/* Edit Icon */}
     <Button 
-    className='fs-6 bg-primary'
-    // sx={{padding: 0,minWidth: "50px"}}
-   style={{color:mode=="light" ? greyColor:amberColor}}
-       onClick={()=>navigate(`/editmovie/${_id}`)}><i className="fa-solid fa-pencil"
-       style={{color:mode=="light" ? greyColor:"white"}}
-       ></i></Button>
+    className='fs-6'
+    style={{color:mode=="light" ? greyColor:blueGreyColor}}
+    onClick={()=>navigate(`/editmovie/${_id}`)}>
+    <i className="fa-solid fa-pencil" ></i></Button>
 
     {/* Delete Icon */}
     {deleteBtn}
