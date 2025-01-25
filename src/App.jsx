@@ -19,11 +19,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import SignUp from './Components/SignIn_Up_Out/SignUp';
 import SignOut from './Components/SignIn_Up_Out/SignOut';
 import SignIn from './Components/SignIn_Up_Out/SignIn';
-import {url} from './utils/constant'
 import axios from 'axios';
 import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Cart/OrderSummary'
+import {url} from './utils/constant'
 
 function App() {
   const [movieData,setMovieData] = useState([])
