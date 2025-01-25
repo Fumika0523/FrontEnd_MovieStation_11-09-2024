@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
 import axios from "axios"
-import { url } from "../../utils/constant"
+import { url } from "../HomeSreen/constant"
 import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
 import { Button } from "@mui/material"

@@ -14,7 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import LikeCard from '../Movie/LikeCard';
 import { useNavigate } from "react-router-dom";
-import {url} from '../../utils/constant'
+import {url} from '../HomeSreen/constant'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
