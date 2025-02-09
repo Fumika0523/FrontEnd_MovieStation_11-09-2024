@@ -1,22 +1,32 @@
-import { Button,  } from '@mui/material'
+import { Button, Container } from '@mui/material'
 import coverPage from '../../assets/coverPage.png'
 
 function Header (){
 
       return(
         <>
-        <div style={{position:"relative", width:"100%",overflow:"hidden"}}>
-         <img src={coverPage} alt="" className=" bg-header-image" />
-         <div className='bgFade '></div>
-        <div className="card-img-overlay text-center py-3" style={{margin:"8% 20%",width:"60%",}}>
-        <div className="text-white fw-bold" style={{fontSize:"390%"}}>Your Streaming guide for movies, TV shows & sport</div>
-        <div className='text-secondary fs-5 py-2'>Find where to stream new, popular & upcoming entertainment with JustWatch.</div>   
-        <div className='d-flex justify-content-center mt-3 gap-5' >
-        <button className="btn btn-warning  px-5 py-3 fw-bold border border-warning rounded rounded-4 fs-5" >Discover Movies & TV shows</button>
-        <button className="btn btn-outline-secondary border border-secondary rounded rounded-4 px-5 py-3 fw-bold fs-5" >Features</button>
+        <div className="mainBackground ">
+         <img  src={coverPage} alt="" className=" bg-header-image" />
+         <div className='bgFade d-flex flex-column  align-items-center'>
+        <div 
+        className="col-6">
+        <div
+         className="text-white fw-bold my-1" 
+         style={{fontSize:"390%"}}
+         >Your Streaming guide for movies, TV shows & sport</div>
+        <div
+         className='text-secondary fs-3 '
+         >Find where to stream new, popular & upcoming entertainment with JustWatch.</div>   
+
+        <div className='d-flex justify-content-center my-3 ' >
+        <Button variant="contained"   className="fw-bold fs-5 rounded rounded-4 py-3 px-5"
+        style={{backgroundColor:"#f0ad4e"}} >Discover Movies & TV shows</Button>
+        <Button variant="outlined" className="rounded rounded-4 pfw-bold fs-5 py-3 px-5 " style={{borderColor:"#adb5bd", color:"#adb5bd"}}  >Features</Button>
         </div>
         </div>
         </div>
+        </div>
+        {/* </Container> */}
         </>
     )
 }

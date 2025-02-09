@@ -25,14 +25,12 @@ const getMovieData=async()=>{
     let data =await res.json()//responsing in string so we cant use string so, converting to json format
     console.log(data[0])
     setSingleMovies(data[0])
-
     //axios
     // let res = await axios.get(`${url}/movie/${id}`,config)
     // console.log(res.data[0])
     // setSingleMovies(res.data[0])
 }
 console.log(singleMovie)// Movie data is stored in singleMovie
-
 useEffect(()=>{
     getMovieData()
 },[])//when your page is loaded

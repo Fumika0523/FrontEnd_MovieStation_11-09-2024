@@ -1,24 +1,16 @@
-import { useDispatch } from "react-redux"
+import { Container } from "@mui/material"
 import AboutUs_Section from "../AboutUs_page/AboutUs_Section"
 import ContactUs_Section from "../Enquiries/ContactUs_Section"
 import Service_Section from "../Service_page/Service_Section"
 import Header from "./Header"
-import { useEffect } from "react"
-import axios from "axios"
-import { url } from "../../utils/constant"
-import { addItem } from "../../utils/cartSlice"
+import NavBar from "./NavBar"
 
-function Homepage({movie}){
 
-    const token=sessionStorage.getItem('token')
-    let config={
-      headers:{
-        Authorization:`Bearer ${token}`
-      }
-    }
+function Homepage(){
 
     return(
         <>
+        {/* <NavBar/> */}
         <Header/>
         <AboutUs_Section/>
         <Service_Section/>

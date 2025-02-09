@@ -30,7 +30,6 @@ const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
 const blueGreyColor = blueGrey[100]
 
-
   const theme = createTheme({
     palette: {
       mode: mode,
@@ -63,13 +62,13 @@ const [castShow,setCastShow] = useState(true)
   };
 
   const token=sessionStorage.getItem('token')
-  
+  console.log(token)
     let config={
       headers:{
         Authorization:`Bearer ${token}`
       }
-    }
-    
+    }   
+  
    return (
     <Card sx={{ maxWidth:440, mb:4 }}  >
       <CardHeader
@@ -94,7 +93,8 @@ const [castShow,setCastShow] = useState(true)
     <CardActions className='d-flex justify-content-between'>
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
-
+    {token && _id ?  (
+      <>
     {/* Edit Icon */}
     <Button 
     className='fs-6'
@@ -104,16 +104,31 @@ const [castShow,setCastShow] = useState(true)
 
     {/* Delete Icon */}
     {deleteBtn}
-    
+      </>)
+      :
+      (<>
+      {/* <h1>Dont display</h1> */}
+      </>
+    )}
+
+    {/* Edit Icon */}
+    {/* <Button 
+    className='fs-6'
+    style={{color:mode=="light" ? greyColor:blueGreyColor}}
+    onClick={()=>navigate(`/editmovie/${_id}`)}>
+    <i className="fa-solid fa-pencil" ></i></Button> */}
+
+    {/* Delete Icon */}
+    {/* {deleteBtn}
+     */}
     {/* REDUX */}
     {reduxAddcartBtn}
 
     <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
     <ExpandMoreIcon />
-    
     </ExpandMore>
-    
     </CardActions>
+    
     <Collapse in={!expanded}>
     <CardContent>
 

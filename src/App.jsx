@@ -5,7 +5,7 @@ import NavBar from './Components/HomeSreen/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
 import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
 import Homepage from './Components/HomeSreen/Homepage';
-import {Route,Routes} from 'react-router-dom';
+import {Navigate, Route,Routes} from 'react-router-dom';
 import Footer from './Components/HomeSreen/Footer';
 import MovieTrailer from './Components/Movie/MovieTrailer';
 import React, {useEffect,useState} from 'react'
@@ -24,19 +24,26 @@ import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Cart/OrderSummary'
 import {url} from './utils/constant'
+import { Box, Container } from "@mui/material"
+
 
 function App() {
   const [movieData,setMovieData] = useState([])
 
 // signin part
 const [isAuthenticated,setIsAuthenticated]=useState(false)
+// const [accessAddMovie,setAccessAddMovie] = useState("")
+
 
 useEffect(()=>{
    const token = sessionStorage.getItem('token')
   console.log(token)
   setIsAuthenticated(true)
+  // setAccessAddMovie(token) // if you have token
 },[])
 
+// console.log(accessAddMovie)
+  
 const getMovieData = async () => {
   const token=sessionStorage.getItem('token')
   let config={
@@ -63,39 +70,54 @@ const [mode, setMode]=useState("dark")
     },
   });
 
+  // If there is a token, you should access to AddMovie.
+  //check if the token is stored in sessionstorage after login.
+  //if no token >> signup/signin page
+
   return (
+   
     <>
   <ThemeProvider theme={theme}>
   <CssBaseline /> 
   <Provider store={store}>
-    <div>
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+
+    <Box sx={{ my: 2 }}> 
     <Routes>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
-      <Route path='/allmovies'   element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path='/addmovie' element={<AddMovie setMovieData={setMovieData}/>}/>
+      <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section/>}/>
       <Route path='/services' element={<Service_Section/>}/>
       <Route path='/contact' element={<ContactUs_Section/>}/>
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
-      <Route path="/cartpage" element={<Cartpage/>}></Route>
-      <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>}></Route>
+      <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+    }></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
-      <Route path="/signout" element={<SignOut/>}></Route>
-      <Route path="allenquiries" element={<AllEnquiries/>}></Route>
-      <Route path="/table" element={<Table/>}></Route>
-      <Route path="/ordersummary" element={<OrderSummary/>}></Route>
+      {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
+      <Route path="allenquiries" element={<AllEnquiries/>}/>
+      <Route path="/cartpage" element={<Cartpage/>}/>
+      <Route path="/table" element={<Table/>}/> 
+
+      {/* {!isAuthenticated? (
+        <> */}
+           <Route path='/addmovie'  element={<AddMovie setMovieData={setMovieData}/>}/>
+           <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
+           <Route path="/ordersummary" element={<OrderSummary/>}/>
+           {/* </>
+           ):(
+            <Route path="*" element={<Navigate to ="/" />}/>
+           )
+      }   */}
     </Routes>
     <div style={{position:"relative"}}>
     <Footer />
     </div>
-    </div>
+    </Box>
     </Provider>
   </ThemeProvider>
   </>
-  )
-}
+  )}
+
 
 export default App
 

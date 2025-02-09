@@ -27,6 +27,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
       console.log(values) // req.body
       //update the value >> signin data
      postSignInUser(values)
+
     }
   })
 
@@ -36,10 +37,11 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
     console.log(res.data)
     sessionStorage.setItem('token',res.data.token)
     sessionStorage.setItem('username',res.data.user.name)
+    // setAccessAddMovie(res.data.token)
     if(res.data.token){
       setIsAuthenticated(true)
     }  
-    navigate('/allmovies')  
+    navigate('/')  
   }
 
   const inputDesign={

@@ -5,13 +5,20 @@ import Service_BottomDesign from './Service_BottomDesign'
 function Service_Section (){
     return(
         <>
-        <div>
+        <div className="container-fluid d-flex flex-column" >
              {/* {shouldRenderHeader && <Header/>} */}
-            <div className='fs-2 text-center mt-4'>MovieStation Apps for Smartphone&TV</div>
+             <div className='row'>
+             <div className='fs-2 border text-center'>MovieStation Apps for Smartphone&TV</div>
+             </div>
             <Service_TopDesign/>
-            <h3 className='text-white text-center mt-5'>Introducing: features & functions</h3>
+            <div className='row'>
+            <h3 className='text-white text-center border my-3'>Introducing: features & functions</h3>
+            </div>
             <hr />
+            {/* <div className='row'> */}
             <Service_MiddleDesign/>
+            {/* </div> */}
+
             <hr className="text-secondary"/>
             <Service_BottomDesign/>
         </div>

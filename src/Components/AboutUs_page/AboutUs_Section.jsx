@@ -41,30 +41,37 @@ const bottomDesignData=[
     return(
         <>
   
-        <AboutUs_ImageBanner banner ={"https://i.redd.it/d1vjsn34bht01.jpg"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide"/>
+    <AboutUs_ImageBanner banner ={"https://i.redd.it/d1vjsn34bht01.jpg"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide"/>
 
-    <div className="row align-items-center p-5">
-        <h1 className="text-center pb-4"> What we do</h1>
-        <div className="d-flex justify-content-center gap-4">
+    <div className="container-fluid "
+    // style={{border:"4px solid red"}}
+    >
+        {/* 1st */}
+        <div className=" row">
+        <h1 className="d-flex justify-content-center align-items-center my-3 "> What we do</h1>
+        </div>
+        <div className="row">
+            <div className="d-flex justify-content-center align-items-center gap-4">
         {
-            // topDesignData.map((element)=><AboutUs_TopDesign imgUrl={element.imgUrl} heading1={element.heading1} heading2={element.heading2} design={element.design} textSummary={element.textSummary} btnComment={element.btnComment}/>)
-
             //Spread Operator
             topDesignData.map((element)=><AboutUs_TopDesign {...element}/>)
-}
+        }
 
-            {/* <AboutUs_TopDesign design={"text-end fs-2"} />
-            <AboutUs_TopDesign design={"fs-2"}/> */}
+            </div>
         </div>
-        <h3 className= "text-center my-5">WE WANT HEAR FROM YOU</h3>
+        <div className="row">
+             <h3 className= "text-center my-5">WE WANT HEAR FROM YOU</h3>
+        </div>
          {/* Last Section */}
+         {/* <div className="container-fluid"> */}
                 {
                     bottomDesignData.map((element)=><AboutUs_BottomDesign {...element}/>)
                 }
-    <div  className="d-flex justify-content-center">        
+        <div  className="d-flex justify-content-center">        
         <button type="button" className="btn btn-secondary fs-5 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</button>
-    </div>
-    </div>
+        </div>
+        </div>
+    {/* </div> */}
         </>
     )
 }

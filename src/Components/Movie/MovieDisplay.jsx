@@ -26,6 +26,8 @@ const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//hold search value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
 
+
+
 // Check if the typed word is included to the all movie data
 const filterData = (searchText, allmovies) => {
 //console.log(searchText,allmovies)
@@ -53,14 +55,19 @@ let config = {
 
 const getMovieData = async () => {
     console.log("Movie Data is called.");
-    let res = await axios.get(`${url}/movie`, config)//response in res.data >> moviedata
-    console.log(res.data.movieData);
+    let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
+    // res.data. {object} 
+    console.log(res.data)
+    console.log(res.data.movieData)
+    console.log(res.data.movieData._id);
+
     console.log("movieData")
     setMovieData(res.data.movieData);
     setFilterMovieData(res.data.movieData)
     };
     useEffect(() => {
-        getMovieData()
+    getMovieData()
+    console.log("MovieDisplay")
 }, [])
 //console.log(searchTerm)
 

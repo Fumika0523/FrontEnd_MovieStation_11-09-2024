@@ -1,16 +1,25 @@
+import Button from 'react-bootstrap/Button';
+
+
 function Service_BottomDesign(){
     return(
         <>
-        <div>
+        <div className="row  border-4 gap-3 d-flex column-flex flex-column">
+        {/* 1st ROW */}
+        <div >
         <h2 className="fs-1 text-white text-center">Download MovieStation for free:</h2>
-        <div className="fs-2">
-            <div className="mb-3 mt-5 d-flex ms-5 justify-content-center">
-            <button className="btn col-2 me-5 d-flex btn-warning align-items-center justify-content-center" style={{width:"280px"}}><i className="fa-brands fa-google-play fs-3"></i><div className="fs-4 mx-2">GooglePlay</div></button>
-            <button className="btn col-2 me-5 d-flex btn-warning align-items-center justify-content-center " style={{width:"280px"}}><i className="fa-brands fa-apple fs-2"></i><div className="fs-4 mx-2">App Store</div></button>
+        </div>
+        {/* 2nd ROW */}
+        <div className="d-flex gap-5 flex-column  ">
+            <div className=" gap-5 d-flex flex-row justify-content-center align-items-center">
+            <Button variant="warning" className="col-4 col-md-3 col-sm-4 d-flex flex-row gap-1 justify-content-center align-items-center" ><i className="fa-brands fa-google-play fs-3"></i><div className="fs-4 text-nowrap">GooglePlay</div></Button>
+
+            <Button variant="warning" className="col-4 col-md-3 col-md-3 col-sm-4 d-flex flex-row gap-1 justify-content-center align-items-center" ><i className="fa-brands fa-apple fs-2"></i><div className="fs-4 text-nowrap">App Store</div></Button>
             </div>
-            <div className="btn d-flex mt-5 ms-5 justify-content-center">
-            <button className="btn col-2 me-5 d-flex btn-warning align-items-center justify-content-center" style={{width:"280px"}}><i className="fa-brands fa-xbox fs-3"></i><div className="fs-4  mx-2">XBOX</div></button>
-            <button className="btn col-2 me-5 d-flex btn-warning align-items-center justify-content-center" style={{width:"280px"}}><i className="fa-brands fa-amazon fs-3"></i><div className="fs-4 mx-2">AMAZON TV</div></button>
+            {/* 3rd ROW */}
+            <div className=" gap-5 d-flex flex-row justify-content-center align-items-center">
+            <Button variant="warning" className="col-4 col-md-3 col-sm-4 d-flex flex-row gap-1 justify-content-center align-items-center" ><i className="fa-brands fa-xbox fs-3"></i><div className="fs-4 text-nowrap">XBOX</div></Button>
+            <Button variant="warning" className="col-4  col-md-3 col-sm-4 d-flex flex-row gap-1 justify-content-center align-items-center" ><i className="fa-brands fa-amazon fs-3"></i><div className="fs-4 text-nowrap">AMAZON TV</div></Button>
             </div>
         </div>
         </div>

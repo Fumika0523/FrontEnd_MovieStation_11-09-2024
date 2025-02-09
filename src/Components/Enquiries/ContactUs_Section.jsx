@@ -54,6 +54,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
 
     return(
 <>
+<div className="">
       {/* ALL ENQUIRIES BUTTON */}
       <button style={{ marginTop:"2%", marginLeft:"85%"}} className="px-4 btn btn-warning" onClick={()=>navigate('/allenquiries')} >All Enquiries <i class="fa-solid fa-circle-question ms-1"></i></button> 
       
@@ -133,7 +134,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
   </div>
   </div>
 </form>
-    
+</div>
 </>
     )
 }

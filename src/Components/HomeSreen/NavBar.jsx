@@ -1,20 +1,21 @@
-import { Link, useLocation, useNavigate } from "react-router-dom"
-import { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Button } from "@mui/material";
+import { AppBar, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import Badge from '@mui/material/Badge';
 import { PiSignInFill } from "react-icons/pi";
 import { FaPowerOff } from "react-icons/fa";
-import IconButton from "@mui/material/IconButton";
-import MailIcon from '@mui/icons-material/Mail';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
-function NavBar({ mode, setMode, isAuthenticated, setIsAuthenticated }) {
+function NavBar({ mode, setMode }) {
 const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
 const amberColor1 = amber[700];
@@ -27,11 +28,20 @@ console.log(greyColor)
   const token = sessionStorage.getItem('token')
   console.log("token", token)
 
-  const navigate = useNavigate()
 
+  
+  const handleSignOut = () => {
+    sessionStorage.removeItem('token')
+    navigate('/')
+  }
+
+
+  const navigate = useNavigate()
   const location = useLocation();
   console.log(location)
   
+
+
   const theme = createTheme({
     palette: {
       primary : {
@@ -53,42 +63,39 @@ console.log(greyColor)
   const cartItems = useSelector(store => store.cart.items)
   console.log(cartItems.length)
 
-  //navbar-scrolled
-  // const navEl = document.querySelector('.navbar');
 
-  // window.addEventListener('scroll', () => {
-  //   if (window.scrollY > 100) {
-  //     navEl.classList.add('navbar-scrolled');
-  //   } else if (window.scrollY < 50) {
-  //     navEl.classList.remove('navbar-scrolled');
-  //   }
-  // })
-  const handleSignOut = () => {
-    sessionStorage.removeItem('token')
-    navigate('/')
-  }
 
   let username = sessionStorage.getItem('username')
   return (
     <>
-      <nav className="navbar sticky-top navbar-expand-lg"
-      style={{backgroundColor:mode=="light"? "white":"black"}}
-       >
-        <div className="container-fluid" >
+       <Navbar expand="lg" className=" sticky-top " 
+       style={{backgroundColor:mode=="light"? "white":"black",position:"sticky"}}  >
+      {/* <div className="navbar border sticky-top navbar-expand-lg"
+      style={{backgroundColor:mode=="light"? "white":"black"}} */}
+       
+        <Container fluid>
           {/* Brand */}
+          <Navbar.Brand href="#">
           <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? amberColor1:amberColor, fontWeight:"bold"}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
           style={{color:mode=="light"? "black": amberColor}}>MovieStation</a></span>
-
+          </Navbar.Brand>
+     
           {/* Toggler Icon */}
-          <button className="navbar-toggler  border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+          {/* <button className="navbar-toggler  border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
           <div className="navbar-toggler-icon"></div>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ms-auto me-3 mb-lg-0 text-warning"
-          // style={{width:"80%"}}
+          </button> */}
+            <Navbar.Toggle  
+            aria-controls="basic-navbar-nav" className="
+            navToggle text-secondary border" 
+          
+          />
+            <Navbar.Collapse >
+          {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
+          <Nav className="ms-auto ">
+          {/* <ul className="navbar-nav ms-auto me-3 mb-lg-0 text-warning"
           >
 
+              
               {/* <!-- Home --> */}
               <Button variant="text " 
               // color={mode == "light" ? greyColor : "inherit"}
@@ -197,11 +204,16 @@ console.log(greyColor)
               }}>
               {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
             </Button>
-          </ul>   
-          </div>
-        </div>
-      </nav>
+          {/* </ul>    */} 
+          </Nav>
+          </Navbar.Collapse>
+          {/* </div> */}
+        {/* </div> */}
+      {/* </div> */}
       {/* {shouldRenderHeader && <Header/>} */}
+      </Container>
+      </Navbar>
+
     </>
   )
 }
