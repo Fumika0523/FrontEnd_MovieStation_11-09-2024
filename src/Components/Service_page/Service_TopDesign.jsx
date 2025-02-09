@@ -4,9 +4,9 @@ function Service_TopDesign(){
     return(
         <>
         <div className="row "
-        style={{border:"2px solid blue", height:"500px"}}>
+        style={{ height:"500px"}}>
         {/* LEFT　SIDE */}
-        <div className="border col-6 col-sm-6 d-flex flex-column gap-5  justify-content-center align-items-center" >
+        <div className="col-6 col-sm-6 d-flex flex-column gap-5  justify-content-center align-items-center" >
             {/* 1st ROW */}
             <div className="col-12 col-sm-12 d-flex  justify-content-center gap-2 gap-md-4 gap-lg-5 gap-sm-2">
                 <Button variant="warning" className="d-flex flex-row col-6 col-md-5 col-sm-6 col-xs-6 align-items-center justify-content-center text-nowrap"><i className="fa-brands fa-google-play fs-3 "></i><div className="fs-4">GooglePlay</div></Button> 
