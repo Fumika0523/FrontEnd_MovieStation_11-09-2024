@@ -109,9 +109,9 @@ const [mode, setMode]=useState("dark")
            )
       }   */}
     </Routes>
-    <div style={{position:"relative"}}>
-    <Footer />
-    </div>
+    {/* <div className="border border-warning container-fluid" style={{position:"relative"}}> */}
+    <Footer  />
+    {/* </div> */}
     </Box>
     </Provider>
   </ThemeProvider>

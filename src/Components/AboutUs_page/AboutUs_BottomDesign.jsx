@@ -2,7 +2,7 @@
 function AboutUs_BottomDesign({info}){
     return(
         <>
-    <div className="col mb-5">
+    <div className="tex-center d-flex justify-content-center align-items-center mx-3 mb-5">
         {info}
     </div>
         </>

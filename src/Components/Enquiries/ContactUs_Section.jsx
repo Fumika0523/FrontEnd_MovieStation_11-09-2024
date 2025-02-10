@@ -54,19 +54,25 @@ const postEnquiryDetail=async(newEnquiry)=>{
 
     return(
 <>
-<div className=" d-flex justify-content-center border-4 ">   
-    {/*FORM  */}
-    <form  onSubmit={formik.handleSubmit} className="container-fluid  my-5" style={{width:"80%"}}>
-      <div className="d-flex flex-row align-items-center justify-content-between">
-      <h1 className=" col-8 col-sm-8 col-md-9 ps-5 text-center ">Submit a request</h1>
+<div style={{width:"90%"}} className="justify-content-center flex-column d-flex container-fluid align-items-center">
+<div className="row justify-content-center flex-column align-items-center w-100 gap-4">
+ {/*FORM  */}
+ <div className=" boder-4 mt-5 gap-5 flex-row d-flex justify-content-evenly align-items-center ">
+          <h1 className="text-nowrap">Submit a request</h1>
       {/* ALL ENQUIRIES BUTTON */}
-      <Button  variant="warning" className="col-sm-4 d-flex col-4 col-md-3 text-nowrap flex-row align-items-center justify-content-center fs-5 px-4 gap-1" onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
-      </div>
-        
-        <div className="text-start mx-auto fs-5 my-5 col-8 col-sm-10 " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.</div>
+      <Button  variant="warning" className="d-flex flex-row align-items-center gap-1  justify-content-center text-nowrap" onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
+</div>
+
+{/* <div className=" border border-4 ">    */}
+    <form  onSubmit={formik.handleSubmit} className="col-12 col-sm-12 col-md-8 col-lg-6" >
+    
+        {/* message */}
+        <div className="row   fs-5 my-5" >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
+        </div>
+
         <div className="row text-secondary justify-content-center">
-            {/* First Name */}
-        <div className="col-5 col-sm-5 mb-1">
+        {/* First Name */}
+        <div className="col-6 col-sm-6 col-lg-6  mb-1">
         <label for="inputmobileNum4" className="form-label m-0">First Name</label>
       
         <input 
@@ -81,7 +87,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
         </div>
 
       {/* Last Name */}
-        <div className="col-sm-5 col-5 mb-1">
+        <div className="col-sm-6 col-6 col-lg-6 mb-1">
         <label for="inputmobileNum4" className="form-label m-0">Last Name</label>
         <input type="text" className="form-control" aria-label="Last name"
          id="lastname"
@@ -91,9 +97,10 @@ const postEnquiryDetail=async(newEnquiry)=>{
          />
         </div>
         </div>
-          {/* Email */}
+
+        {/* Email */}
         <div className="row text-secondary justify-content-center">
-         <div className="col-md-5 col-sm-5 col-5 mb-1">
+         <div className="col-6 col-sm-6 col-lg-6 mb-1">
          <label for="inputEmail4" className="form-label m-0">Email</label>
         <input type="email" className="form-control" id="email"
           name="email"
@@ -101,7 +108,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
           onChange={formik.handleChange}
           />
         </div>
-        <div className="col-md-5 col-sm-5 col-5 mb-1">
+        <div className="col-6 col-sm-6 col-lg-6 mb-1">
         <label for="inputmobileNum4" className="form-label m-0">Mobile Phone No.</label>
         <input type="mobileNum" className="form-control" id="mobilePhoneNum"
           name="mobilePhoneNum"
@@ -111,7 +118,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
         </div>
         </div>
         <div className="row text-secondary justify-content-center">
-  <div className="col-8 col-sm-10 col-10 mb-1">
+  <div className="col-8 col-sm-12 col-12 mb-1">
     <label for="inputSub" className="form-label m-0">Subject</label>
     <input type="text" className="form-control" id="subject"
      name="subject"
@@ -119,7 +126,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
      onChange={formik.handleChange}
      />
   </div>
-  <div className="col-md-10 col-sm-10 col-10">
+  <div className="col-8 col-sm-12 col-12">
     <label for="inputAddress2" className="form-label m-0">Description</label>
     <textarea className="form-control" id="description" rows="3"
      name="description"
@@ -128,13 +135,14 @@ const postEnquiryDetail=async(newEnquiry)=>{
        
      ></textarea>
     
-    <p className="text-secondary mt-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</p>
+    <div className="text-secondary col-12 text-start my-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</div>
   </div>
-  <div className="col-8 d-flex justify-content-start">
-    <button className="btn btn-warning px-4 my-2">Submit</button>
+  <div className="col-12 d-flex justify-content-start">
+    <Button variant="warning" className="px-4 my-2">Submit</Button>
   </div>
   </div>
 </form>
+</div>
 </div>
 </>
     )

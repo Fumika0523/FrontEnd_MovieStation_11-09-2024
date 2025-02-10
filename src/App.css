@@ -4,8 +4,9 @@
 
 .footerListStyle{
   color:#78a6b8;
-  margin-bottom:7%;
   list-style: none;
+  font-size: 12px;
+  
 }
 
 .bg-header-image{

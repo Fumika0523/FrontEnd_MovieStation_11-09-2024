@@ -5,7 +5,7 @@ import Service_BottomDesign from './Service_BottomDesign'
 function Service_Section (){
     return(
         <>
-        <div className="container-fluid d-flex flex-column" >
+        <div className="container-fluid my-5 d-flex flex-column" >
              {/* {shouldRenderHeader && <Header/>} */}
              <div className='row'>
              <div className='fs-2  text-center'>MovieStation Apps for Smartphone&TV</div>

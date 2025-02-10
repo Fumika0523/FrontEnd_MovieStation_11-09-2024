@@ -2,6 +2,7 @@ import AboutUs_TopDesign from "./AboutUs_TopDesign"
 import AboutUs_BottomDesign from "./AboutUs_BottomDesign"
 import AboutUs_ImageBanner from "./AboutUs_ImageBanner"
 import { useNavigate } from 'react-router-dom'
+import { Button } from "react-bootstrap"
 
 const topDesignData=[
     
@@ -68,7 +69,7 @@ const bottomDesignData=[
                     bottomDesignData.map((element)=><AboutUs_BottomDesign {...element}/>)
                 }
         <div  className="d-flex justify-content-center">        
-        <button type="button" className="btn btn-secondary fs-5 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</button>
+        <Button variant="secondary" className="fs-5 py-2 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</Button>
         </div>
         </div>
     {/* </div> */}
