@@ -20,10 +20,13 @@ import { useDispatch } from 'react-redux';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useEffect } from 'react';
 
 
-export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn}) {
+export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
+  const [specificMovieData,setSpecificMovieData] = useState([])
   console.log(mode)
+
   // Store:
 const dispatch=useDispatch()
 const greyColor = grey[900]; // #212121
@@ -68,7 +71,25 @@ const [castShow,setCastShow] = useState(true)
         Authorization:`Bearer ${token}`
       }
     }   
-  
+
+// SPECIFIC
+const getSpecificMovieData = async () =>{
+  console.log("Specific Movie Data is called....")
+  let res = await axios.get(`${url}/specificmovie`,config)
+  console.log(res.data.movieData)
+  setSpecificMovieData(res.data.movieData)
+}
+useEffect(() => {
+ getSpecificMovieData()
+}, [])
+console.log("Specific Movie Data",specificMovieData)
+
+const searchUserAddedMovie = specificMovieData.map((element)=>element._id)
+const findUserAddedMovie = movieData.filter((element)=>searchUserAddedMovie.includes(element._id))
+console.log(searchUserAddedMovie)
+console.log(findUserAddedMovie) //find a value
+// find , sum
+
    return (
     <Card sx={{ maxWidth:440, mb:4 }}  >
       <CardHeader
@@ -93,7 +114,17 @@ const [castShow,setCastShow] = useState(true)
     <CardActions className='d-flex justify-content-between'>
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
-    {token && _id ?  (
+    
+    {/* You need to click a movie to know if singleMovie is "null" so we should take another option,
+    find who added this movie using  a populate  and both Token & ?? are matched, the edit & Delete buttons should show
+
+// in MovieData, there is a specificmoviedata or not << array of object, find a data
+// const findSpecificMovieData = setMovieData.find(specificMovieData._id)
+// console.log(findSpecificMovieData)
+//if you get the value ==> show edit & delete buttton.
+// if not ==> dont show the buttons.*/}``
+
+    {token && findUserAddedMovie ? (
       <>
     {/* Edit Icon */}
     <Button 
@@ -121,6 +152,7 @@ const [castShow,setCastShow] = useState(true)
     {/* Delete Icon */}
     {/* {deleteBtn}
      */}
+
     {/* REDUX */}
     {reduxAddcartBtn}
 

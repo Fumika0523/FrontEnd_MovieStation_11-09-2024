@@ -22,11 +22,11 @@ const blueGreyColor = blueGrey[500]
 
 
 const dispatch= useDispatch()
+// STate valiable
 const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//hold search value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
-
-
+const [specificMovieData,setSpecificMovieData] = useState([])
 
 // Check if the typed word is included to the all movie data
 const filterData = (searchText, allmovies) => {
@@ -52,24 +52,36 @@ let config = {
     headers: {
     Authorization: `Bearer ${token}`
 }}
-
+// ALL
 const getMovieData = async () => {
     console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
     // res.data. {object} 
     console.log(res.data)
     console.log(res.data.movieData)
-    console.log(res.data.movieData._id);
-
+    // console.log(res.data.movieData._id);
     console.log("movieData")
     setMovieData(res.data.movieData);
     setFilterMovieData(res.data.movieData)
     };
     useEffect(() => {
     getMovieData()
+    getSpecificMovieData()
     console.log("MovieDisplay")
 }, [])
 //console.log(searchTerm)
+
+// SPECIFIC
+const getSpecificMovieData = async () =>{
+    console.log("Specific Movie Data is called....")
+    let res = await axios.get(`${url}/specificmovie`,config)
+    console.log(res.data.movieData)
+    setSpecificMovieData(res.data.movieData)
+}
+console.log("Specific Movie Data",specificMovieData)
+console.log("Specific ID",specificMovieData._id)
+console.log("movieData",movieData)
+
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB..")
@@ -96,7 +108,6 @@ const handleAdditem=async(movieItem)=>{
 
 return (
 <>
-
 <div className="mt-1 mb-1" >
     {/* Search*/}
     <div className="d-flex justify-content-end me-5 pe-3">
@@ -104,8 +115,7 @@ return (
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
     <input
     style={{color:mode=="light" ? "white":"white"}}
-
-     className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
+    className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
     onChange={(e) => {
     //console.log(e.target.value)
     setSearchTearm(e.target.value)}} />
@@ -123,7 +133,7 @@ return (
     <div style={displayStyle} >
 
     {!searchTerm ? movieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData} element={element} mode={mode} 
+    <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
@@ -145,7 +155,7 @@ return (
         
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData} element={element} mode={mode} 
+    <MovieCard {...element} key={index} setMovieData={setMovieData}  element={element} mode={mode} 
                             
     // Delete Button
     deleteBtn={

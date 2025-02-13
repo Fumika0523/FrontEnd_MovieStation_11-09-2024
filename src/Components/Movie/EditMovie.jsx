@@ -23,7 +23,7 @@ const getMovieData=async()=>{
     console.log("Movie data is called.........")
     let res = await fetch (`${url}/movie/${id}`,config)//API call
     let data =await res.json()//responsing in string so we cant use string so, converting to json format
-    console.log(data[0])
+    console.log("not found",data[0])
     setSingleMovies(data[0])
     //axios
     // let res = await axios.get(`${url}/movie/${id}`,config)
