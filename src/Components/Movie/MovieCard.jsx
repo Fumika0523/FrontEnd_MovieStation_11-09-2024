@@ -41,7 +41,7 @@ const blueGreyColor = blueGrey[100]
 
   const [expanded, setExpanded] = React.useState(false);
   //useNavigate()
-  const navigate=useNavigate()
+const navigate=useNavigate()
 //console.log(disLikeNum,likeNum)
 
 const ExpandMore = styled((props) => {
@@ -72,6 +72,18 @@ const [castShow,setCastShow] = useState(true)
       }
     }   
 
+const userId=sessionStorage.getItem('userId')
+
+//id
+// 16 movies >> userID
+//loginUser Id === movie owner(userId)  >> Edit || Delete
+//Comparison operator
+//movieData is all movie datas that were added in the website
+const isMovieOwner = userId === element?.owner; // true || false
+console.log("element",element)
+console.log("userId",userId,element?.owner)
+console.log("isMovieOwner",isMovieOwner)
+
 // SPECIFIC
 const getSpecificMovieData = async () =>{
   console.log("Specific Movie Data is called....")
@@ -84,11 +96,12 @@ useEffect(() => {
 }, [])
 console.log("Specific Movie Data",specificMovieData)
 
-const searchUserAddedMovie = specificMovieData.map((element)=>element._id)
-const findUserAddedMovie = movieData.filter((element)=>searchUserAddedMovie.includes(element._id))
-console.log(searchUserAddedMovie)
-console.log(findUserAddedMovie) //find a value
-// find , sum
+// const searchUserAddedMovie = specificMovieData.map((element)=>element._id)
+// const findUserAddedMovie = movieData.filter((element)=>searchUserAddedMovie.includes(element._id))
+
+// console.log(searchUserAddedMovie)
+// console.log(findUserAddedMovie) //find a value
+// find , some, filter,includes,map,every
 
    return (
     <Card sx={{ maxWidth:440, mb:4 }}  >
@@ -115,17 +128,12 @@ console.log(findUserAddedMovie) //find a value
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
     
-    {/* You need to click a movie to know if singleMovie is "null" so we should take another option,
-    find who added this movie using  a populate  and both Token & ?? are matched, the edit & Delete buttons should show
-
-// in MovieData, there is a specificmoviedata or not << array of object, find a data
-// const findSpecificMovieData = setMovieData.find(specificMovieData._id)
-// console.log(findSpecificMovieData)
-//if you get the value ==> show edit & delete buttton.
-// if not ==> dont show the buttons.*/}``
-
-    {token && findUserAddedMovie ? (
-      <>
+    {/* movieData is 1 data that includes all movieData,
+    element is single movie data showing each data (map method) */}
+    {/* isMovieOwner : compare if it's matched both element(each movie data' movieOwner id) and userId(logged in userId) >> true or false  */}
+    {/* IF token and isMovieOwner are noth "true" >> show the edit & delete buttton, otherwise hide these buttons */}
+    {token && isMovieOwner ? (
+    <>
     {/* Edit Icon */}
     <Button 
     className='fs-6'

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
 import { Button } from "@mui/material"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Navigate, useNavigate } from "react-router-dom"
 
 function MovieDisplay({mode}) 
 {
@@ -20,7 +20,7 @@ const pinkColor = pink[900]
 const darkGreyColor = grey[700];
 const blueGreyColor = blueGrey[500]
 
-
+const navigate = useNavigate()
 const dispatch= useDispatch()
 // STate valiable
 const [movieData, setMovieData] = useState([])
@@ -109,10 +109,15 @@ const handleAdditem=async(movieItem)=>{
 return (
 <>
 <div className="mt-1 mb-1" >
+
     {/* Search*/}
     <div className="d-flex justify-content-end me-5 pe-3">
     <div className="iput-icons d-flex flex-row">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
+    <Button variant="contained"
+    onClick={()=>navigate('/usermovies')} 
+    
+    >My Movies</Button>
     <input
     style={{color:mode=="light" ? "white":"white"}}
     className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"

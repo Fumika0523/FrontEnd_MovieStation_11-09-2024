@@ -51,23 +51,25 @@ const postEnquiryDetail=async(newEnquiry)=>{
     navigate('/allenquiries') 
   }
 }
-
     return(
 <>
 <div style={{width:"90%"}} className="justify-content-center flex-column d-flex container-fluid align-items-center">
-<div className="row justify-content-center flex-column align-items-center w-100 gap-4">
+<div className="row justify-content-center flex-column align-items-center w-100 gap-1">
  {/*FORM  */}
- <div className=" boder-4 mt-5 gap-5 flex-row d-flex justify-content-evenly align-items-center ">
-          <h1 className="text-nowrap">Submit a request</h1>
-      {/* ALL ENQUIRIES BUTTON */}
-      <Button  variant="warning" className="d-flex flex-row align-items-center gap-1  justify-content-center text-nowrap" onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
+ <div className=" boder-4 mt-1 flex-row d-flex justify-content-center align-items-center ">
+  <h1 className="text-nowrap">Submit a request</h1>
+</div>
+  {/* ALL ENQUIRIES BUTTON */}
+<div className="" >
+  <Button  variant="warning" className="d-flex flex-row align-items-center gap-1  justify-content-center text-nowrap" 
+      style={{position:"absolute",right:"6%"}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
 
 {/* <div className=" border border-4 ">    */}
-    <form  onSubmit={formik.handleSubmit} className="col-12 col-sm-12 col-md-8 col-lg-6" >
+    <form  onSubmit={formik.handleSubmit} className="col-12 col-sm-12 col-md-10 col-lg-6" >
     
         {/* message */}
-        <div className="row   fs-5 my-5" >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
+        <div className="row  fs-5 my-5" >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
         </div>
 
         <div className="row text-secondary justify-content-center">

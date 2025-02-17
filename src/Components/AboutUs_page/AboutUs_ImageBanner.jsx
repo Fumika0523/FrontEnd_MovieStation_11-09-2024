@@ -1,9 +1,11 @@
 function AboutUs_ImageBanner ({appName,cardText,banner}){
     return(
         <>
-  <div className="d-flex justify-content-center container-fluid " >
+  <div className="d-flex justify-content-center container-fluid "
+  style={{border:"2px solid red"}}
+   >
         <div className="card bg-transparent text-center text-white col-10 " 
-        //  style={{width:"85%",height:"400px"}}
+         style={{border:"2px solid red"}}
          >
         <img src={banner} 
         s="card-img" alt="..."  style={{height:"400px"}}/>

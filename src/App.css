@@ -10,23 +10,29 @@
 }
 
 .bg-header-image{
-  height:650px;
+  /* height:550px; */
+  height: auto;
   background-size:cover;
   background-position-y:top ;
   background-repeat: no-repeat;
-  width: 100%;
   display: block;
+  position: relative;
   width: 100%;
 }
 
 .mainBackground{
   position: relative;
+  height: auto;
+;  
 }
 
 .bgFade{
   background-image: linear-gradient(180deg, transparent 0, #000000);
-  bottom: 0;
-  width: 100%;
+  /* bottom: 100px; */
+  top:0;
+  border:5px solid red;
+  height: 100%; 
+   width: 100%;
  /* Black see-through
   color: #f1f1f1;
   width: 100%;
@@ -36,9 +42,10 @@
   font-size: 20px;
   padding: 20px;
   text-align: center;  */
-  height:650px;
+ 
   /* margin-top: -700px; */
   position: absolute;
+  border:"4px solid red";
   display: flex;
   justify-content: center;
   text-align: center;

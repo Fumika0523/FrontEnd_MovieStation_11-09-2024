@@ -37,6 +37,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
     console.log(res.data)
     sessionStorage.setItem('token',res.data.token)
     sessionStorage.setItem('username',res.data.user.name)
+    sessionStorage.setItem('userId',res.data.user._id)
     // setAccessAddMovie(res.data.token)
     if(res.data.token){
       setIsAuthenticated(true)

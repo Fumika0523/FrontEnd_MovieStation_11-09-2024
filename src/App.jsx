@@ -25,6 +25,7 @@ import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Cart/OrderSummary'
 import {url} from './utils/constant'
 import { Box, Container } from "@mui/material"
+import UserMovies from './Components/Movie/UserMovies';
 
 
 function App() {
@@ -97,6 +98,7 @@ const [mode, setMode]=useState("dark")
       <Route path="allenquiries" element={<AllEnquiries/>}/>
       <Route path="/cartpage" element={<Cartpage/>}/>
       <Route path="/table" element={<Table/>}/> 
+      <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
 
       {/* {!isAuthenticated? (
         <> */}
