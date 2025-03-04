@@ -4,13 +4,13 @@ import Card from 'react-bootstrap/Card';
 function AboutUs_ImageBanner ({appName,cardText,banner}){
     return(
         <>
-  <div className="d-flex justify-content-center border-warning border-4 align-items-center mb-3"
+  <div className="d-flex  justify-content-center border-warning border-4 align-items-center mb-3"
 //   style={{position:"relative",opacity:"1"}}
    >
 
-<Card  style={{width:"100%"}}>
+<Card className="outline-none bg-transparent" style={{width:"100%"}}>
 <Image
-        className="overlayImgBanner"
+        className="overlayImgBanner outline-none"
         src={banner}
         s="card-img" alt="..." 
          />

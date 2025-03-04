@@ -29,7 +29,7 @@
   /* /* overflow: hidden;
   margin: -40px 0px 0px -120px;   */
   object-fit: cover; 
-  box-shadow: 0 0 15px fade(var(--color-black),10%)
+  /* box-shadow: 0 0 15px fade(var(--color-black),10%) */
 }
 
 .container:after, .container:before {
@@ -46,7 +46,7 @@
   z-index: 2;
   width: 100%;
   height: 100%;
-  background-color: #4c5a67;
+  background-color: #334352;
   opacity: .7;
 }
 
@@ -82,7 +82,7 @@
  
   /* margin-top: -700px; */
   position: absolute;
-  border:"4px solid red";
+  /* border:"4px solid red"; */
   display: flex;
   justify-content: center;
   text-align: center;
