@@ -4,7 +4,7 @@ import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
-import { Button } from "@mui/material"
+import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
 
@@ -79,9 +79,8 @@ const getSpecificMovieData = async () =>{
     setSpecificMovieData(res.data.movieData)
 }
 console.log("Specific Movie Data",specificMovieData)
-console.log("Specific ID",specificMovieData._id)
+// console.log("Specific ID",specificMovieData._id)
 console.log("movieData",movieData)
-
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB..")
@@ -111,26 +110,27 @@ return (
 <div className="mt-1 mb-1" >
 
     {/* Search*/}
-    <div className="d-flex justify-content-end me-5 pe-3">
-    <div className="iput-icons d-flex flex-row">
+    <div className="d-flex justify-content-end ">
+    <div className="iput-icons d-flex flex-row  border-danger me-5">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
-    <Button variant="contained"
-    onClick={()=>navigate('/usermovies')} 
-    
-    >My Movies</Button>
+
+    {
+    token &&<Button variant="warning" onClick={()=>navigate('/usermovies')} className="text-nowrap me-3">My Movies</Button>
+    }
+
     <input
     style={{color:mode=="light" ? "white":"white"}}
     className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
     onChange={(e) => {
     //console.log(e.target.value)
     setSearchTearm(e.target.value)}} />
-    <button className="btn px-3 mx-1 btn-outline-secondary" type="submit"
+    <Button variant="outline-secondary" className="" type="submit"
     onClick={() => {
     console.log("Button is cliecked,searchTerm")
     const data = filterData(searchTerm, movieData)//passing the data
     console.log(data)
     setFilterMovieData(data)
-    }}>Search</button>
+    }}>Search</Button>
     </div>
     </div>
     
@@ -152,11 +152,11 @@ return (
     
     // Redux
     reduxAddcartBtn={
-    <Button
-    className='fs-5'
-    style={{color:mode=="light" ? "black":"white"}}
-    onClick={()=>{handleAdditem(element)}}>
-    <i className="fa-solid fa-cart-shopping "></i></Button>}
+        <Button
+        className='fs-5'
+        style={{color:mode=="light" ? "black":"white"}}
+        onClick={()=>{handleAdditem(element)}}>
+        <i className="fa-solid fa-cart-shopping "></i></Button>}
         
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (

@@ -28,20 +28,15 @@ console.log(greyColor)
   const token = sessionStorage.getItem('token')
   console.log("token", token)
 
-
-  
   const handleSignOut = () => {
     sessionStorage.removeItem('token')
     navigate('/')
   }
 
-
   const navigate = useNavigate()
   const location = useLocation();
   console.log(location)
   
-
-
   const theme = createTheme({
     palette: {
       primary : {
@@ -63,13 +58,11 @@ console.log(greyColor)
   const cartItems = useSelector(store => store.cart.items)
   console.log(cartItems.length)
 
-
-
   let username = sessionStorage.getItem('username')
   return (
     <>
        <Navbar expand="lg" className=" sticky-top " 
-       style={{backgroundColor:mode=="light"? "white":"black",position:"sticky"}}  >
+       style={{backgroundColor:mode=="light"? "white":"black"}}  >
       {/* <div className="navbar border sticky-top navbar-expand-lg"
       style={{backgroundColor:mode=="light"? "white":"black"}} */}
        
@@ -85,17 +78,12 @@ console.log(greyColor)
           <div className="navbar-toggler-icon"></div>
           </button> */}
             <Navbar.Toggle  
-            aria-controls="basic-navbar-nav" className="
-            navToggle text-secondary border" 
-          
-          />
+            aria-controls="basic-navbar-nav" className="navToggle "
+            style={{color:mode=="light"? darkGreyColor: "null",backgroundColor:mode=="light"? null:amberColor}} />
             <Navbar.Collapse >
           {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
           <Nav className="ms-auto ">
-          {/* <ul className="navbar-nav ms-auto me-3 mb-lg-0 text-warning"
-          >
 
-              
               {/* <!-- Home --> */}
               <Button variant="text " 
               // color={mode == "light" ? greyColor : "inherit"}

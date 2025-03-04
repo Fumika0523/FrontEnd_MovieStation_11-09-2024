@@ -26,15 +26,22 @@ import OrderSummary from './Components/Cart/OrderSummary'
 import {url} from './utils/constant'
 import { Box, Container } from "@mui/material"
 import UserMovies from './Components/Movie/UserMovies';
+import { RiH1 } from 'react-icons/ri';
+import { DiJavascript1 } from 'react-icons/di';
 
 
 function App() {
   const [movieData,setMovieData] = useState([])
+  const token =sessionStorage.getItem('token')
+  let config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
 
 // signin part
 const [isAuthenticated,setIsAuthenticated]=useState(false)
 // const [accessAddMovie,setAccessAddMovie] = useState("")
-
 
 useEffect(()=>{
    const token = sessionStorage.getItem('token')
@@ -46,12 +53,7 @@ useEffect(()=>{
 // console.log(accessAddMovie)
   
 const getMovieData = async () => {
-  const token=sessionStorage.getItem('token')
-  let config={
-    headers:{
-      Authorization:`Bearer ${token}`
-    }
-  }
+
   console.log("Movie data is called....");
   let res = await axios.get(`${url}/movie`,config)//response in res.data >> moviedata
   console.log(res.data.movieData);
@@ -76,18 +78,26 @@ const [mode, setMode]=useState("dark")
   //if no token >> signup/signin page
 
   return (
-   
     <>
   <ThemeProvider theme={theme}>
   <CssBaseline /> 
   <Provider store={store}>
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
 
-    <Box sx={{ my: 2 }}> 
+    <Box > 
     <Routes>
+    { token ?
+       <>
+       <Route path='/addmovie'  element={<AddMovie setMovieData={setMovieData}/>}/>
+       <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
+       <Route path="/ordersummary" element={<OrderSummary/>}/>
+       <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
+       </>
+       :
+     <>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
       <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path='/about' element={<AboutUs_Section/>}/>
+      <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' element={<Service_Section/>}/>
       <Route path='/contact' element={<ContactUs_Section/>}/>
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
@@ -98,19 +108,28 @@ const [mode, setMode]=useState("dark")
       <Route path="allenquiries" element={<AllEnquiries/>}/>
       <Route path="/cartpage" element={<Cartpage/>}/>
       <Route path="/table" element={<Table/>}/> 
-      <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
+      </>
+      }
+  </Routes>
+  
 
-      {/* {!isAuthenticated? (
-        <> */}
-           <Route path='/addmovie'  element={<AddMovie setMovieData={setMovieData}/>}/>
-           <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
-           <Route path="/ordersummary" element={<OrderSummary/>}/>
-           {/* </>
-           ):(
-            <Route path="*" element={<Navigate to ="/" />}/>
-           )
-      }   */}
-    </Routes>
+{/* Ternary operator */}
+    {/* {token ? 
+    <>   
+        <h1>Show</h1> 
+        <h1>Show</h1>
+        <h1>Show</h1> 
+        <h1>Show</h1>
+        <h1>Show</h1> 
+        <h1>Show</h1>
+    </>
+    :
+    <>
+        <h1>Dont show</h1> 
+        <h1>Dont show</h1> 
+    </>
+   } */}
+
     {/* <div className="border border-warning container-fluid" style={{position:"relative"}}> */}
     <Footer  />
     {/* </div> */}

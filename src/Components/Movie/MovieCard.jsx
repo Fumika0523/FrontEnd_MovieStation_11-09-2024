@@ -104,7 +104,9 @@ console.log("Specific Movie Data",specificMovieData)
 // find , some, filter,includes,map,every
 
    return (
-    <Card sx={{ maxWidth:440, mb:4 }}  >
+    <Card style={{width:"440px",marginBottom:"2%"}}
+    // sx={{ minWidth:10, mb:4 }}
+      >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[600] }} aria-label="movietitle">

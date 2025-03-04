@@ -10,13 +10,12 @@ function Homepage(){
 
     return(
         <>
-        <div className="container-fluid">
         {/* <NavBar/> */}
         <Header/>
         <AboutUs_Section/>
         <Service_Section/>
         <ContactUs_Section/>
-        </div>
+   
         </>
     )
 }
