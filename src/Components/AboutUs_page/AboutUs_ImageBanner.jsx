@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 function AboutUs_ImageBanner ({appName,cardText,banner}){
     return(
         <>
-  <div className="d-flex justify-content-center border border-warning border-4 align-items-center mb-3"
+  <div className="d-flex justify-content-center border-warning border-4 align-items-center mb-3"
 //   style={{position:"relative",opacity:"1"}}
    >
 

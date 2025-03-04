@@ -20,7 +20,7 @@ const topDesignData=[
         imgUrl:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWElMjBzdHJlYW1pbmd8ZW58MHx8MHx8fDA%3D",
         textSummary:"JustWatch Media helps Entertainment brands around the world get to grips with new challenges and opportunities. From blockbuster movies, award winning shows, major sporting events and console games, we buy media for our clients across the major digital platforms. We offer our clients something no one else can, media buying based on audience content tastes.",
         btnComment:"Learn more about our marketing campaigns",
-        design:"text-start fs-3 border-4 border-warning col-lg-5 col-md-11 col-sm-10 col-11 border d-flex flex-column gap-2",
+        design:"text-start fs-3 border-4 border-warning col-lg-5 col-md-11 col-sm-10 col-11 d-flex flex-column gap-2",
     }
 ]
 
