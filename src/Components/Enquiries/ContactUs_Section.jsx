@@ -59,8 +59,8 @@ const postEnquiryDetail=async(newEnquiry)=>{
   <h1 className="text-nowrap">Submit a request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
-<div className=" -4 " >
-  <Button  variant="warning" className="d-flex  -4 ms-auto me-3 flex-row align-items-center gap-1 justify-content-center text-nowrap" 
+<div className=" col-11" >
+  <Button  variant="warning" className="d-flex me-2 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       style={{}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
    {/* message */}
