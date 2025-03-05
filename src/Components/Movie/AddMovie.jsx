@@ -1,16 +1,24 @@
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
 import { useFormik } from 'formik'
 import {url} from '../../utils/constant'
 import axios from 'axios';
+import { Button, Grid, Typography } from '@mui/material';
+import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
+const greyColor = grey[900]; // #212121
+const amberColor = amber[500];
+const amberColor1 = amber[700];
+const redColor = red[900];
+const pinkColor = pink[900]
+const darkGreyColor = grey[700];
+const blueGreyColor = blueGrey[500]
 
 const formSchema=Yup.object().shape({
   moviename:Yup.string().min(5,"Too Short"),
@@ -76,28 +84,46 @@ const getMovieData=async()=>{
 
   return (
     <>
-        <Box border={2} borderColor="grey.600" borderRadius={6}
+    <Box border={2}
+    display="flex"
+    flexDirection={"column"}
+     borderColor="grey.600" 
+     borderRadius={6}
+     boxShadow={"5px 5px 10px #ccc"}
+     padding={3}
       component="form"
-      sx={{
-        '& .MuiTextField-root': { width: '36.1ch' ,height:'8ch' },boxShadow:13,
-      }}
+      maxWidth={1000}
+      alignItems="center"
+      justifyContent={"center"}
+      margin="auto"
+      marginTop={5}
+      marginBlock={5}
+      // sx={{
+      //   '& .MuiTextField-root': { width: '30%' ,height:'8ch' },boxShadow:13,
+      // }}
       noValidate
       autoComplete="off" 
-      onSubmit = {formik.handleSubmit}  style={{margin:"5% 13%",width:"74%", padding:"4% 2.4%"}}
+      onSubmit = {formik.handleSubmit}  
+      // style={{margin:"5% auto",width:"75%", padding:"0% 5%"}}
     >
-<div style={{display:"flex",justifyContent:"space-between", marginBottom:"5%", width:"99%"}} >
-
+<Grid container  marginBottom={3} >
+<Grid  xs={6} item textAlign={"start"}>
 {/* Back */}
-<button  className='btn btn-secondary py-2 px-4 fs-5' onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</button>
-
+<Button variant="contained" className=' fs-5'
+style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</Button>
+</Grid>
+<Grid xs={6} item textAlign={"end"}>
 {/* ADD MOVIE */}
-<button className='btn btn-warning  py-2 px-4 fs-5'><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</button>
-</div>
-  
-        <Stack direction="row"  useFlexGap flexWrap="wrap" spacing={{ xs: 2, sm: 4 }}>
-  
+<Button variant="contained"  className='fs-5' style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</Button>
+</Grid>
+</Grid>
+  <Grid container spacing={2}
+  // direction="row"  useFlexGap flexWrap="wrap"
+  >
         {/* MOVIE NAME */}
+        <Grid xs={12} sm={4} item >
         <TextField 
+          fullWidth
           required
           label="Movie Name"
           name="moviename"
@@ -108,9 +134,12 @@ const getMovieData=async()=>{
         {formik.errors.moviename && formik.touched.moviename? (
           <div>{formik.errors.moviename}</div>
         ) : null }
+        </Grid>
 
         {/* MOVIE POSTER */}
+        <Grid xs={12} sm={4} item >
          <TextField
+         fullWidth
           required
           label="Movie Poster"
           name="movieposter"
@@ -122,10 +151,12 @@ const getMovieData=async()=>{
         {formik.errors.movieposter && formik.touched.movieposter? (
           <div>{formik.errors.moviename}</div>
         ) : null }
-        
+        </Grid>
 
         {/* MOVIE Rating */}
-            <TextField
+        <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Rating"
           name="rating"
@@ -136,54 +167,77 @@ const getMovieData=async()=>{
         {formik.errors.rating && formik.touched.rating? (
           <div>{formik.errors.rating}</div>
         ) : null }
+        </Grid>
 
         {/* Category */}
-            <TextField
+        <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Category"
-    name="category" id="category"  onChange={formik.handleChange} value={formik.values.category} /> 
-          
+          name="category" id="category"  onChange={formik.handleChange} value={formik.values.category} /> 
+          </Grid>
+
            {/* MOVIE Cast */}
+           <Grid xs={12} sm={4} item >
            <TextField
-          required
-          label="Cast"
-          name="cast" id="cast"  onChange={formik.handleChange} value={formik.values.cast} /> 
-    
-        {/* Publish Year */}
-            <TextField
+            required
+            fullWidth
+            label="Cast"
+            name="cast" id="cast"  onChange={formik.handleChange} value={formik.values.cast} /> 
+            </Grid>
+
+          {/* Publish Year */}
+          <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Publish Year"
           name="publishYear" id="publishYear"  onChange={formik.handleChange} value={formik.values.publishYear}/>
+          </Grid>
 
         {/* Like Num */}
-            <TextField
+        <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Like Number"
           name="likeNum" id="likeNum" onChange={formik.handleChange} value={formik.values.likeNum} />
-          
+          </Grid>
 
         {/* DISLIKE NUM */}
-            <TextField
+        <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Dislike Number"
           name="disLikeNum" id="disLikeNum"  onChange={formik.handleChange} value={formik.values.disLikeNum} />
-       
+        </Grid>
+
         {/* MOVIE GEnres */}
-            <TextField
+        <Grid xs={12} sm={4} item >
+          <TextField
+          fullWidth
           required
           label="Movie Genres"
           name='genres' id="genres"  onChange={formik.handleChange} value={formik.values.genres} /> 
-       
+          </Grid>
+
            {/* MOVIE TRAILER */}
+           <Grid xs={12} sm={6} item >
            <TextField
+           fullWidth
           required
           label="Movie Trailer"
-          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer} style={{width:"56ch"}} /> 
+          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer}  /> 
+           </Grid>
 
-  {/* Summary */}
-    <TextField required id="summary" 
-    label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} style={{width:"56ch"}}  /> 
-  </Stack>
+         {/* Summary */}
+         <Grid xs={12} sm={6} item >
+        <TextField fullWidth required id="summary" 
+          label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
+           </Grid>
+           </Grid>
    </Box>
 {/* </div> */}
 </>

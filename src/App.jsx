@@ -41,13 +41,13 @@ function App() {
 
 // signin part
 const [isAuthenticated,setIsAuthenticated]=useState(false)
-// const [accessAddMovie,setAccessAddMovie] = useState("")
+const [accessAddMovie,setAccessAddMovie] = useState("")
 
 useEffect(()=>{
    const token = sessionStorage.getItem('token')
   console.log(token)
   setIsAuthenticated(true)
-  // setAccessAddMovie(token) // if you have token
+  setAccessAddMovie(token) // if you have token
 },[])
 
 // console.log(accessAddMovie)
