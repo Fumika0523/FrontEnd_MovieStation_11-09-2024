@@ -53,26 +53,23 @@ const postEnquiryDetail=async(newEnquiry)=>{
 }
     return(
 <>
-<div style={{width:"90%"}} className="justify-content-center flex-column d-flex container-fluid align-items-center">
-<div className="row justify-content-center flex-column align-items-center w-100 gap-1">
+<div className="justify-content-center flex-column mb-4 align-items-center">
  {/*FORM  */}
- <div className=" boder-4 mt-1 flex-row d-flex justify-content-center align-items-center ">
+ <div className="flex-row  -4 -primary d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
-<div className="" >
-  <Button  variant="warning" className="d-flex flex-row align-items-center gap-1  justify-content-center text-nowrap" 
-      style={{position:"absolute",right:"6%"}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
+<div className=" -4 " >
+  <Button  variant="warning" className="d-flex  -4 ms-auto me-3 flex-row align-items-center gap-1 justify-content-center text-nowrap" 
+      style={{}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
+   {/* message */}
+   <div className="fs-5 my-5 col-10 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
+    </div>
+{/* <div className="  -4 ">    */}
+    <form  onSubmit={formik.handleSubmit} className="col-11 col-sm-11 col-md-10 col-lg-8 mt-2 mx-auto" >
 
-{/* <div className=" border border-4 ">    */}
-    <form  onSubmit={formik.handleSubmit} className="col-12 col-sm-12 col-md-10 col-lg-6" >
-    
-        {/* message */}
-        <div className="row  fs-5 my-5" >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
-        </div>
-
-        <div className="row text-secondary justify-content-center">
+        <div className="row  text-secondary justify-content-center">
         {/* First Name */}
         <div className="col-6 col-sm-6 col-lg-6  mb-1">
         <label for="inputmobileNum4" className="form-label m-0">First Name</label>
@@ -140,12 +137,12 @@ const postEnquiryDetail=async(newEnquiry)=>{
     <div className="text-secondary col-12 text-start my-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</div>
   </div>
   <div className="col-12 d-flex justify-content-start">
-    <Button variant="warning" className="px-4 my-2">Submit</Button>
+    <Button variant="warning" className="px-4 mt-4">Submit</Button>
   </div>
   </div>
 </form>
 </div>
-</div>
+
 </>
     )
 }

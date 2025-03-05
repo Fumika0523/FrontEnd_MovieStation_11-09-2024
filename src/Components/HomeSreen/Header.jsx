@@ -6,16 +6,16 @@ import Image from 'react-bootstrap/Image';
 function Header (){
       return(
         <>        
-        <div className="mainBackground   mx-0" style={{margin:"0"}}>
-         <Image  src={coverPage} alt="" className=" bg-header-image"  />
+        <div className="mainBackground  " style={{margin:"0"}}>
+         <Image  src={coverPage} alt="" className=" bg-header-image "  />
 
-         <div className='bgFade  w-100' >
+         <div className='bgFade ' >
         <div 
         className="d-flex justify-content-center align-items-center flex-column"
         >
 
         <div
-         className="text-white fw-bold my-1 col-md-10 col-lg-8 col-sm-10  col-10" style={{fontSize:"4vw"}}
+         className="text-white fw-bold my-1  col-md-10 col-lg-8 col-sm-10  col-10" style={{fontSize:"4vw"}}
          >Your streaming guide for movies, TV shows & sport</div>
         <div
          className='text-secondary col-md-10 col-lg-9 col-9' style={{fontSize:"2vw"}}

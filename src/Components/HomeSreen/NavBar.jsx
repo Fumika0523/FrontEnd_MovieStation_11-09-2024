@@ -61,12 +61,10 @@ console.log(greyColor)
   let username = sessionStorage.getItem('username')
   return (
     <>
-       <Navbar expand="lg" className=" sticky-top " 
+       <Navbar expand="lg" className="sticky-top" 
        style={{backgroundColor:mode=="light"? "white":"black"}}  >
-      {/* <div className="navbar border sticky-top navbar-expand-lg"
-      style={{backgroundColor:mode=="light"? "white":"black"}} */}
-       
-        <Container fluid>
+          
+        <Container fluid className="mx-2">
           {/* Brand */}
           <Navbar.Brand href="#">
           <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? amberColor1:amberColor, fontWeight:"bold"}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
@@ -74,14 +72,10 @@ console.log(greyColor)
           </Navbar.Brand>
      
           {/* Toggler Icon */}
-          {/* <button className="navbar-toggler  border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-          <div className="navbar-toggler-icon"></div>
-          </button> */}
             <Navbar.Toggle  
             aria-controls="basic-navbar-nav" className="navToggle "
             style={{color:mode=="light"? darkGreyColor: "null",backgroundColor:mode=="light"? null:amberColor}} />
             <Navbar.Collapse >
-          {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
           <Nav className="ms-auto ">
 
               {/* <!-- Home --> */}
