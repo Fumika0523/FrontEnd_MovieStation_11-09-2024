@@ -41,7 +41,7 @@ const bottomDesignData=[
 
     return(
         <>
-  <div className="mb-5  border-2">
+  <div className="mb-5 border-2">
     <AboutUs_ImageBanner banner ={"https://static.justwatch.com/backdrop/137681/s1920/Marvels-The-Avengers"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide" className=""/>
     <div className="border-2 border-danger">
         {/* 1st */}
