@@ -13,7 +13,7 @@ function Service_Section (){
             <div className=''>
             <h3 className='text-white text-center'>Introducing: features & functions</h3>
             </div>
-            <hr />
+            {/* <hr /> */}
             <Service_MiddleDesign/>
             <hr className="text-secondary"/>
             <Service_BottomDesign/>
