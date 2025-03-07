@@ -103,7 +103,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }></Route>
-      <Route path="/signup" element={<SignUp/>}></Route>
+      <Route path="/signup" element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
       <Route path="allenquiries" element={<AllEnquiries/>}/>
       <Route path="/cartpage" element={<Cartpage/>}/>

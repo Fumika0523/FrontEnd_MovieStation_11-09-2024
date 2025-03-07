@@ -20,8 +20,7 @@ function AboutUs_ImageBanner ({appName,cardText,banner}){
       >
          {appName && <div className="text-warning fw-bold -warning -4 text-nowrap text-center mx-auto fs-md-1 fs-2  ">
             <i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass text-warning mx-auto"></i> MovieStation</div>}
-        <Card.Text className="fs-2 text-white  mx-auto d-none d-sm-block" style={{fontStyle:"italic"}}> {cardText}
-        </Card.Text>
+        <Card.Text className="fs-2 text-white  mx-auto d-none d-sm-block" style={{fontStyle:"italic"}}> {cardText}</Card.Text>
         </Card.ImgOverlay>
     </Card>
 

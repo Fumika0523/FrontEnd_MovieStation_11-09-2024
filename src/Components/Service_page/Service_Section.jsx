@@ -5,7 +5,7 @@ import Service_BottomDesign from './Service_BottomDesign'
 function Service_Section (){
     return(
         <>
-        <div className=" gap-2 my-5 d-flex flex-column" >
+        <div className=" gap-2 mt-5 d-flex flex-column" >
              {/* {shouldRenderHeader && <Header/>} */}
       
              <div className='fs-2 mb-sm-5 text-center'>MovieStation Apps for Smartphone&TV</div>

@@ -53,19 +53,19 @@ const postEnquiryDetail=async(newEnquiry)=>{
 }
     return(
 <>
-<div className="justify-content-center flex-column my-5 align-items-center">
+<div className="d-flex justify-content-center flex-column my-3">
  {/*FORM  */}
- <div className="flex-row  -4 -primary d-flex justify-content-center align-items-center ">
-  <h1 className="text-nowrap">Submit a request</h1>
+ <div className=" d-flex justify-content-center align-items-center ">
+  <h1 className="text-nowrap ">Submit a request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
-<div className=" col-10" >
-  <Button  variant="warning" className="d-flex me-2 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
+<div className=" my-3 col-sm-10 " >
+  <Button  variant="warning" className="d-flex me-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       style={{}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
    {/* message */}
-   <div className="fs-5 my-5 col-8 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
-    </div>
+   {/* <p className="fs-sm-5 my-sm-5 my-4 col-sm-8 col-10 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
+    </p> */}
 {/* <div className="  -4 ">    */}
     <form  onSubmit={formik.handleSubmit} className="col-11 col-sm-11 col-md-10 col-lg-8 mt-2 mx-auto" >
 
@@ -134,7 +134,8 @@ const postEnquiryDetail=async(newEnquiry)=>{
        
      ></textarea>
     
-    <div className="text-secondary col-12 text-start my-2" >Please enter the details of your request. A member of our support staff will respond as soon as possible.</div>
+    <p className="text-secondary col-12 text-start my-2" >Please enter the details of your request. <br />
+    A member of our support staff will respond as soon as possible.</p>
   </div>
   <div className="col-12 d-flex justify-content-start">
     <Button variant="warning" className="px-4 mt-4">Submit</Button>
@@ -142,7 +143,6 @@ const postEnquiryDetail=async(newEnquiry)=>{
   </div>
 </form>
 </div>
-
 </>
     )
 }

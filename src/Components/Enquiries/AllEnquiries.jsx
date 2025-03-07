@@ -3,8 +3,10 @@ import { url } from "../../utils/constant"
 import { useEffect, useState } from "react"
 import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
 import { useNavigate } from "react-router-dom"
-import { Button } from "@mui/material"
+import { Button } from "react-bootstrap";
 import CustomizedTables from "./CustomizedTables"
+import { Image } from "react-bootstrap"
+import Card from 'react-bootstrap/Card';
 
 function AllEnquiries() {
  
@@ -34,13 +36,36 @@ function AllEnquiries() {
         <>
         <div className=" d-flex justify-content-end"
         onClick={()=>navigate('/contact')}>
-        <button className="d-flex btn btn-warning justify-content-center align-items-center px-4" style={{marginTop:"2%",marginRight:"10%",width:"7%"}}>
-        <i className="fa-solid fa-angles-left"></i>
-        
-        <div className="">Back</div></button> 
+        <Button variant="secondary d-flex flex-row gap-1 my-2 me-2 justify-content-center align-items-center">
+        <i className="fa-solid fa-angles-left fs-6"></i>
+        <div className="fs-6">Back</div></Button>
+
         </div>
         { 
-             enquiryData.length ===0? <AboutUs_ImageBanner cardText={"No Enquires Generated So Far!!"} banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}/>:
+             enquiryData == null ? 
+
+<Card className="outline-none bg-transparent" >
+<Image
+        className="overlayImgBanner outline-none"
+        src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}            
+          
+         />
+         <div className="imageOverLay "></div>
+         
+      <Card.ImgOverlay className="d-flex flex-column border-4 align-items-center justify-content-center  text-center"
+       style={{zIndex:"3"}}
+      >
+        <Card.Text className="fs-1 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
+        </Card.ImgOverlay>
+    </Card>
+
+            //  <AboutUs_ImageBanner
+            //  cardText={"No Enquires Generated So Far!!"} 
+            //  banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
+            //  />
+             
+             
+             :
             <>
             <CustomizedTables enquiryData = {enquiryData}/>
             </>
