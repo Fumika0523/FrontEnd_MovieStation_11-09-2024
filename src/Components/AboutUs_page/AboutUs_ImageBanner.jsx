@@ -12,15 +12,15 @@ function AboutUs_ImageBanner ({appName,cardText,banner}){
 <Image
         className="overlayImgBanner outline-none"
         src={banner}
-        s="card-img" alt="..." 
+        s="card-img" 
          />
-         <div className="imageOverLay "></div>
+         <div className="imageOverLay"></div>
          
       <Card.ImgOverlay className="my-md-5 d-flex flex-column border-4 mt-sm-4 mt-3 mx-auto col-sm-10 col-lg-6 text-center" style={{position:"absolute",zIndex:"3"}}
       >
          {appName && <div className="text-warning fw-bold -warning -4 text-nowrap text-center mx-auto fs-md-1 fs-2  ">
             <i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass text-warning mx-auto"></i> MovieStation</div>}
-        <Card.Text className="fs-2 text-white  mx-auto d-display d-sm-block d-none d-sm-block" style={{fontStyle:"italic"}}> {cardText}</Card.Text>
+        <Card.Text className="fs-2 text-white mx-auto d-display d-sm-block d-none d-sm-block" style={{fontStyle:"italic"}}> {cardText}</Card.Text>
         </Card.ImgOverlay>
     </Card>
 
