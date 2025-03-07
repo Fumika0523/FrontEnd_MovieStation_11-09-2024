@@ -7,7 +7,6 @@ import {url} from '../../utils/constant'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
-
 function SignIn({isAuthenticated,setIsAuthenticated}) {
   const navigate = useNavigate()
   const formSchema=Yup.object().shape({
@@ -48,14 +47,13 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
     backgroundColor:"#1B1C23",
     borderColor:"black",
     color:"white",
-   //  Padding:"0",
-   //  Margin:"0"
    }
 
   return (
-    <div className="sign_up_in_container container w-50 my-3">
+    <div className="row d-flex justify-content-center align-items-center  border border-primary border-4 " style={{height:"100vh"}} >
+      {/* <div className="border d-flex justify-content-center align-items-center border-warning"> */}
     <Form 
-    onSubmit={formik.handleSubmit}  style={{width:"80%",color:"darkgrey"}}>
+    onSubmit={formik.handleSubmit} className="sign_up_in_container col-10 col-md-8" >
        <h1 className="mb-3 text-center text-white">Sign in</h1>
      <Form.Group className="mb-3 p-0 " controlId="formBasicEmail">
        <Form.Label className="m-0">Email address</Form.Label>
@@ -82,6 +80,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
         Submit
       </Button> 
     </Form>
+    {/* </div> */}
     </div>
   );
 }
