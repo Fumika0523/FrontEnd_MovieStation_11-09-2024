@@ -3,7 +3,7 @@ function Footer (){
     return(
         <>
         <footer className="mt-5 border-top border-secondary pb-3 w-100" >
-            <div className="d-none  d-sm-block d-md-flex -3 my-4 flex-row justify-content-evenly">
+            <div className="d-none d-sm-block d-md-flex -3 my-4 flex-row justify-content-evenly">
             {/* 1st */}
             <div className=" p-0 col-2">
                 <h6>Top 5 movies</h6>

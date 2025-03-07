@@ -36,7 +36,7 @@ function AllEnquiries() {
         <>
         <div className="  border-warning d-flex align-items-center gap-3 justify-content-center flex-column" style={{height:"80vh"}} >
         {/* Back */}
-        <div className=" d-flex justify-content-end  col-10 mx-auto"
+        <div className=" d-flex justify-content-end  col-10 col-lg-6 mx-auto"
         onClick={()=>navigate('/contact')}>
         <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center">
         <i className="fa-solid fa-angles-left fs-6"></i>
@@ -46,7 +46,7 @@ function AllEnquiries() {
         { 
              enquiryData == null ? 
         <div className="d-flex justify-content-center">
-<Card className="col-10 outline-none bg-transparent" >
+<Card className="col-10 col-lg-11 outline-none bg-transparent" >
 <Image
         className="overlayImgBanner outline-none"
         src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}            
