@@ -3,7 +3,7 @@ import phoneImage from '../../assets/phoneImage.webp'
 function Service_MiddleDesign(){
     return(
         <>
-   <div className=" -4 d-flex mb-3 row mx-auto col-12">
+   <div className="d-flex mb-3 row mx-auto col-12">
         {/* Left Side */}
         <div className=" px-4  -primary d-flex justify-content-center mb-4 mb-sm-4 align-items-center flex-column gap-sm-5 gap-4  text-center col-lg-4 col-md-12">
             <div className="d-flex flex-column  justify-content-center mx-4 ">
