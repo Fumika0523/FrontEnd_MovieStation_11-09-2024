@@ -7,13 +7,13 @@ function Service_BottomDesign(){
         <div className=" gap-4 d-flex column-flex flex-column">
         {/* 1st ROW */}
         <div >
-        <div className="text-white text-center fs-md-1 fs-5 ">Download MovieStation for free:</div>
+        <div className="text-white text-center fs-md-1 fs-4 ">Download MovieStation for free:</div>
         </div>
 
         {/* 2nd ROW */}
         {/* <div className="d-flex gap-4 flex-column"> */}
-            <div  className="mb-4 col-md-8 mx-auto d-flex col-10 gap-3 flex-wrap justify-content-between gap-md-4 align-items-center">
-            <Button variant="warning" className="col-lg-4 col-md-4 col-sm-5 col-5 d-flex flex-row gap-1 justify-content-center align-items-center" ><i  className="fa-brands fa-google-play fs-sm-3 fs-4"></i><div className="text-nowrap fs-sm-5"  >GooglePlay</div></Button>
+            <div  className="mt-4 col-md-6 col-lg-8 mx-auto d-flex col-10 flex-wrap justify-content-evenly gap-4  align-items-center">
+            <Button variant="warning" className="col-lg-4 col-md-4 col-sm-5 col-5 d-flex flex-row gap-1 justify-content-center align-items-center" ><i  className="fa-brands fa-google-play fs-sm-3  fs-4"></i><div className="text-nowrap fs-sm-5"  >GooglePlay</div></Button>
 
             <Button variant="warning"  className="col-lg-4 col-md-4 col-sm-5 col-5 d-flex flex-row gap-1 justify-content-center align-items-center" ><i className="fa-brands fa-apple fs-sm-2 fs-3" ></i><div className="text-nowrap fs-sm-5" >App Store</div></Button>
             {/* </div> */}
