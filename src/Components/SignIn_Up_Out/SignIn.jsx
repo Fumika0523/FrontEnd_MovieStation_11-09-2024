@@ -50,7 +50,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
    }
 
   return (
-    <div className="row d-flex justify-content-center align-items-center  border border-primary border-4 " style={{height:"100vh"}} >
+    <div className="row d-flex justify-content-center align-items-center   " style={{height:"100vh"}} >
       {/* <div className="border d-flex justify-content-center align-items-center border-warning"> */}
     <Form 
     onSubmit={formik.handleSubmit} className="sign_up_in_container col-10 col-md-8" >
