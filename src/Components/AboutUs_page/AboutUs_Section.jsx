@@ -12,7 +12,7 @@ const topDesignData=[
         imgUrl:"https://images.unsplash.com/photo-1615986200762-a1ed9610d3b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHR2JTIwc2NyZWVufGVufDB8fDB8fHww",
         textSummary:"We show you where you can legally watch movies and TV shows that you love. You are kept up to date with what is new on Netflix, Amazon Prime, Apple TV and many other streaming platforms. Our simple filter system allows you to see only what is important to you. We also allow users to track their favorite shows and movies, and can notify you when a title is available on one of your services..",
         btnComment:"Learn more about our apps",
-        design:" fs-3  col-lg-5 col-md-11 col-sm-10 d-flex col-11 flex-column gap-2 pb-sm-5 text-lg-end text-center"
+        design:" fs-3 col-lg-5 col-md-11 col-sm-10 d-flex col-11 flex-column gap-2 pb-sm-5 text-lg-end"
     },
     {
         heading1:"For our clients",
@@ -20,7 +20,7 @@ const topDesignData=[
         imgUrl:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWElMjBzdHJlYW1pbmd8ZW58MHx8MHx8fDA%3D",
         textSummary:"JustWatch Media helps Entertainment brands around the world get to grips with new challenges and opportunities. From blockbuster movies, award winning shows, major sporting events and console games, we buy media for our clients across the major digital platforms. We offer our clients something no one else can, media buying based on audience content tastes.",
         btnComment:"Learn more about our marketing campaigns",
-        design:"text-lg-start text-center fs-3 -4 -warning col-lg-5 col-md-11 col-sm-10 col-11 d-flex flex-column gap-2",
+        design:"text-start  fs-3 -4 -warning col-lg-5 col-md-11 col-sm-10 col-11 d-flex flex-column gap-2",
     }
 ]
 
@@ -60,7 +60,7 @@ const bottomDesignData=[
         <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-3%"}}>
         <div >
              <h2 className= "text-center mb-5 text-nowrap"
-             >WE WANT HEAR FROM YOU</h2>
+             >WE WANT TO HEAR FROM YOU</h2>
         </div>
          {/* Last Section */}
          <div className="row d-flex flex-row justify-content-between">
@@ -68,7 +68,7 @@ const bottomDesignData=[
                     bottomDesignData.map((element)=><AboutUs_BottomDesign {...element}/>)
                 }
         <div  className="d-flex  justify-content-center">        
-        <Button variant="secondary" className="fs-5 py-2 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</Button>
+        <Button variant="secondary" className="fs-5 py-2 px-5" onClick={()=>{navigate('/contact')}} >Contact to info@moviestation.com</Button>
         </div>
         </div>
     </div>

@@ -130,7 +130,6 @@ const [mode, setMode]=useState("dark")
    } */}
 
     {/* <div className="border border-warning container-fluid" style={{position:"relative"}}> */}
-    {/* <Footer  /> */}
     {/* </div> */}
     {/* </Container> */}
     </Provider>

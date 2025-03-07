@@ -34,17 +34,19 @@ function AllEnquiries() {
     console.log(enquiryData)
     return (
         <>
-        <div className=" d-flex justify-content-end"
+        <div className="  border-warning d-flex align-items-center gap-3 justify-content-center flex-column" style={{height:"80vh"}} >
+        {/* Back */}
+        <div className=" d-flex justify-content-end  col-10 mx-auto"
         onClick={()=>navigate('/contact')}>
-        <Button variant="secondary d-flex flex-row gap-1 my-2 me-2 justify-content-center align-items-center">
+        <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center">
         <i className="fa-solid fa-angles-left fs-6"></i>
         <div className="fs-6">Back</div></Button>
-
         </div>
+        
         { 
              enquiryData == null ? 
-
-<Card className="outline-none bg-transparent" >
+        <div className="d-flex justify-content-center">
+<Card className="col-10 outline-none bg-transparent" >
 <Image
         className="overlayImgBanner outline-none"
         src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}            
@@ -55,10 +57,10 @@ function AllEnquiries() {
       <Card.ImgOverlay className="d-flex flex-column border-4 align-items-center justify-content-center  text-center"
        style={{zIndex:"3"}}
       >
-        <Card.Text className="fs-1 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
+        <Card.Text className="fs-md-1 fs-5 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
         </Card.ImgOverlay>
-    </Card>
-
+</Card>
+        </div>
             //  <AboutUs_ImageBanner
             //  cardText={"No Enquires Generated So Far!!"} 
             //  banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
@@ -70,6 +72,7 @@ function AllEnquiries() {
             <CustomizedTables enquiryData = {enquiryData}/>
             </>
         }
+            </div>
      </>
     )
 }
