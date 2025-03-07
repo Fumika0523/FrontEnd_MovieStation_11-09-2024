@@ -6,16 +6,17 @@
   color:#78a6b8;
   list-style: none;
   font-size: 12px;
-  
 }
 
 .bg-header-image{
-  /* height:550px; */
-  height: auto;
+  max-height:400px;
+  /* height: auto; */
   background-size:cover;
   background-position-y:top ;
   background-repeat: no-repeat;
   display: block;
+  object-fit: cover;
+  /* object-position: 10%; */
   position: relative;
   width: 100%;
 }
@@ -25,11 +26,14 @@
   background-size: cover;
   /* height: 40vh; */
   width: 100%; 
-  height: 380px; 
+  max-height: 360px;
   /* /* overflow: hidden;
   margin: -40px 0px 0px -120px;   */
   object-fit: cover; 
-  object-position: -20% 0
+  object-position: -20% 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* box-shadow: 0 0 15px fade(var(--color-black),10%) */
 }
 
@@ -41,10 +45,7 @@
   object-position: 50% -10% !important
 }
 
-.container:after, .container:before {
-  display: table;
-  content: " ";
-}
+
 
  :after, :before {
   box-sizing: border-box;
@@ -66,19 +67,20 @@
   z-index: 3;
 }
 
-.mainBackground{
+/* .mainBackground{
   position: relative;
-  height: 650px;
-;  
-}
+  height: auto;
+  border:4px solid pink;
+} */
 
 .bgFade{
   background-image: linear-gradient(180deg, transparent 0, #000000);
-  /* bottom: 100px; */
-  top:0;
+  /* bottom:0; */
+  top:40px;
+  object-fit: cover;
   /* border:5px solid red; */
-  height: 100%; 
-   width: 100%;
+  width: 100%; 
+  height: 400px;
  /* Black see-through
   color: #f1f1f1;
   width: 100%;
@@ -88,7 +90,6 @@
   font-size: 20px;
   padding: 20px;
   text-align: center;  */
- 
   /* margin-top: -700px; */
   position: absolute;
   /* border:"4px solid red"; */

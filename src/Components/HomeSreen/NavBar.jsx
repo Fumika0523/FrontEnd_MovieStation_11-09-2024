@@ -61,7 +61,7 @@ console.log(greyColor)
   let username = sessionStorage.getItem('username')
   return (
     <>
-       <Navbar expand="lg" className="sticky-top" 
+       <Navbar expand="lg" className="sticky-top  border-warning border-2" 
        style={{backgroundColor:mode=="light"? "white":"black"}}  >
           
         <Container fluid className="mx-2">

@@ -4,11 +4,11 @@ import Card from 'react-bootstrap/Card';
 function AboutUs_ImageBanner ({appName,cardText,banner}){
     return(
     <>
-  <div className="d-flex justify-content-center -warning -4 align-items-center mb-3"
-    // style={{position:"relative",opacity:"1"}}
-   >
+  {/* <div className="d-flex justify-content-center align-items-center  border border-danger border-4  align-items-center mb-3" */}
+    {/* // style={{position:"relative",opacity:"1"}} */}
+   {/* > */}
 
-<Card className="outline-none bg-transparent" style={{width:"100%"}}>
+<Card className="outline-none bg-transparent" >
 <Image
         className="overlayImgBanner outline-none"
         src={banner}
@@ -16,11 +16,11 @@ function AboutUs_ImageBanner ({appName,cardText,banner}){
          />
          <div className="imageOverLay "></div>
          
-      <Card.ImgOverlay className="my-5 mx-auto col-ms-10 col-lg-6 text-center" style={{position:"absolute",zIndex:"3"}}
+      <Card.ImgOverlay className="my-md-5 d-flex flex-column border-4 mt-sm-4 mx-auto col-sm-10 col-lg-6 text-center" style={{position:"absolute",zIndex:"3"}}
       >
-         {appName && <div className="text-warning fw-bold -warning -4 text-nowrap text-center mx-auto fs-1 ">
+         {appName && <div className="text-warning fw-bold -warning -4 text-nowrap text-center mx-auto fs-md-1 fs-2  ">
             <i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass text-warning mx-auto"></i> MovieStation</div>}
-        <Card.Text className="fs-2 text-white" style={{fontStyle:"italic"}}> {cardText}
+        <Card.Text className="fs-2 text-white  mx-auto d-none d-sm-block" style={{fontStyle:"italic"}}> {cardText}
         </Card.Text>
         </Card.ImgOverlay>
     </Card>
@@ -39,7 +39,7 @@ function AboutUs_ImageBanner ({appName,cardText,banner}){
         {/* </div> */}
         {/* </div> */}
         {/* </div> */}
-    </div>
+    {/* </div> */}
         </>
     )
 }

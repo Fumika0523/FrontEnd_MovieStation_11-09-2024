@@ -8,7 +8,7 @@ function Service_Section (){
         <div className=" gap-2 my-5 d-flex flex-column" >
              {/* {shouldRenderHeader && <Header/>} */}
       
-             <div className='fs-2 mb-5 text-center'>MovieStation Apps for Smartphone&TV</div>
+             <div className='fs-2 mb-sm-5 text-center'>MovieStation Apps for Smartphone&TV</div>
              {/*  <Service_TopDesign/> */}
             <div className=' mt-5'>
             <h3 className='text-white text-center'>Introducing: features & functions</h3>
