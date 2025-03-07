@@ -2,7 +2,7 @@
 function AboutUs_BottomDesign({info}){
     return(
         <>
-    <div className="tex-center col-lg-4 col-md-12 mb-5">
+    <div className="ps-lg-4 col-lg-4 col-md-12 mb-5" style={{textAlign:"justify"}}>
         {info}
     </div>
         </>

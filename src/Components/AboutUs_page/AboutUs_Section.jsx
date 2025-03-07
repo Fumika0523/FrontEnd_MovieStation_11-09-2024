@@ -41,31 +41,29 @@ const bottomDesignData=[
 
     return(
         <>
-  <div className="mb-5">
+  <div className="mb-5  border-2">
     <AboutUs_ImageBanner banner ={"https://static.justwatch.com/backdrop/137681/s1920/Marvels-The-Avengers"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide" className=""/>
-    <div className=" -4 -danger">
+    <div className="border-2 border-danger">
         {/* 1st */}
-        <div className="whatwedo bg-light text-black mx-lg-5 mx-sm-0 py-5">
+        <div className="whatwedo bg-light text-black mx-lg-5  mx-sm-0 py-5">
         <h1 className="d-flex justify-content-center align-items-center mb-3" 
         > WHAT WE DO</h1>
-        
-        {/* <div className="d-flex  -4 -danger  justify-content-center"> */}
-            <div className="d-flex  justify-content-center gap-3  row ">
+         <div className="d-flex row mx-auto justify-content-center gap-3   ">
         {
             //Spread Operator
             topDesignData.map((element)=><AboutUs_TopDesign {...element}/>)
         }
             </div>
-        {/* </div> */}
         </div>
     </div>
-        <div className="px-5" style={{marginTop:"-3%"}}>
+    {/* 2nd */}
+        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-3%"}}>
         <div >
-             <h2 className= "text-center mb-5 "
+             <h2 className= "text-center mb-5 text-nowrap"
              >WE WANT HEAR FROM YOU</h2>
         </div>
          {/* Last Section */}
-         <div className="row d-flex  flex-row justify-content-between">
+         <div className="row d-flex flex-row justify-content-between">
                 {
                     bottomDesignData.map((element)=><AboutUs_BottomDesign {...element}/>)
                 }

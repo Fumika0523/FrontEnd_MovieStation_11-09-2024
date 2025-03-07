@@ -9,11 +9,11 @@ function AboutUs_TopDesign ({design,imgUrl,heading1,heading2,textSummary,btnComm
         {heading2}
         </div>
     <img src={imgUrl} alt="" className="col-12 my-2"  style={{objectFit:"cover",height:"350px"}}/>
-    <p className="fs-6  my-3">
+    <p className="fs-6 my-3" style={{textAlign:"justify"}}>
         {textSummary}
     </p>
-    <Button variant="secondary" className=" fs-5">{btnComment}</Button>
-        </div>
+    <Button variant="secondary" className="mt-3 fs-md-1 mx-auto">{btnComment}</Button>
+    </div>
     </>
     )
 }

@@ -95,7 +95,7 @@ console.log(greyColor)
               <Button variant="text" 
               style={{color:mode=="light" ? greyColor:amberColor}}
               className="px-2 "
-              onClick={() => navigate('/allmovies')}>All movies</Button>
+            >All movies</Button>
 
               {/* AddMovie */}
               {/* conditional rendering where you dont want else value / false value */}

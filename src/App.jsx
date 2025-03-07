@@ -17,7 +17,6 @@ import Cartpage from './Components/Cart/Cartpage';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import SignUp from './Components/SignIn_Up_Out/SignUp';
-import SignOut from './Components/SignIn_Up_Out/SignOut';
 import SignIn from './Components/SignIn_Up_Out/SignIn';
 import axios from 'axios';
 import AllEnquiries from './Components/Enquiries/AllEnquiries';
@@ -83,8 +82,7 @@ const [mode, setMode]=useState("dark")
   <CssBaseline /> 
   <Provider store={store}>
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
-
-    <Box > 
+    {/* <Container fluid >  */}
     <Routes>
     { token ?
        <>
@@ -96,6 +94,8 @@ const [mode, setMode]=useState("dark")
        :
      <>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
+     {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
+
       <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' element={<Service_Section/>}/>
@@ -130,9 +130,9 @@ const [mode, setMode]=useState("dark")
    } */}
 
     {/* <div className="border border-warning container-fluid" style={{position:"relative"}}> */}
-    <Footer  />
+    {/* <Footer  /> */}
     {/* </div> */}
-    </Box>
+    {/* </Container> */}
     </Provider>
   </ThemeProvider>
   </>

@@ -7,6 +7,7 @@ import {url} from '../../utils/constant'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
+
 function SignIn({isAuthenticated,setIsAuthenticated}) {
   const navigate = useNavigate()
   const formSchema=Yup.object().shape({
@@ -50,12 +51,12 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
    }
 
   return (
-    <div className="row d-flex justify-content-center align-items-center   " style={{height:"100vh"}} >
-      {/* <div className="border d-flex justify-content-center align-items-center border-warning"> */}
+    <>
+    <div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center">
     <Form 
-    onSubmit={formik.handleSubmit} className="sign_up_in_container col-10 col-md-8" >
+    onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-6 col-10 px-4 py-5 px-sm-5 " style={{marginTop:"10%"}} >
        <h1 className="mb-3 text-center text-white">Sign in</h1>
-     <Form.Group className="mb-3 p-0 " controlId="formBasicEmail">
+     <Form.Group className="mb-3  " controlId="formBasicEmail">
        <Form.Label className="m-0">Email address</Form.Label>
         <Form.Control  type="email" placeholder=""
          name="email"
@@ -76,12 +77,18 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
          value={formik.values.password}
          onChange={formik.handleChange} style={inputDesign} /> 
       </Form.Group>
-      <Button variant="warning" type="submit">
+      
+      <div className="row px-3 py-3 d-flex flex-row justify-content-between">
+      <Button className="my-2 col-sm-3 col-4 d-flex justify-content-center" variant="secondary" type="submit" onClick={() => navigate('/')}>
+        Cancel
+      </Button> 
+      <Button className="my-2 col-sm-3 col-4 d-flex justify-content-center" variant="warning" type="submit">
         Submit
       </Button> 
+      </div>
     </Form>
-    {/* </div> */}
     </div>
+    </>
   );
 }
 

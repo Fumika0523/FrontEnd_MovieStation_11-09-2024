@@ -2,8 +2,7 @@ function Footer (){
     
     return(
         <>
-        <footer className=" fixed-bottom mb-1 " >
-            <hr/>
+        <footer className="mt-5 border-top border-secondary pb-3 w-100" >
             <div className="d-none  d-sm-block d-md-flex -3 my-4 flex-row justify-content-evenly">
             {/* 1st */}
             <div className=" p-0 col-2">
@@ -47,8 +46,9 @@ function Footer (){
                 <li  className="footerListStyle">A Family Affair</li>
             </div>
         </div>
-            <div className="footer-copyright  text-center  my-md-4">© 2024 Copyright:
-            <a href=""> MovieStation.com</a>
+            <div className="mt-3 d-flex align-items-center justify-content-center flex-row ">
+            <div> © 2024 Copyright : </div>    
+            <a className="ms-1" href="">MovieStation.com</a>
             </div>
         </footer>
         </>

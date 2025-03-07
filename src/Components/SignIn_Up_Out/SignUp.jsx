@@ -4,6 +4,8 @@ import { url } from '../../utils/constant';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 
 function SignUp() {
 const navigate = useNavigate()
@@ -52,12 +54,12 @@ const postSignUpUser=async(newUser)=>{
 
   return (
     <>
-    <div className='container sign_up_in_container my-3 text-white' style={{width:"50%"}}>
-     <Form onSubmit={formik.handleSubmit} style={{width:"80%"}}>
-    <div className='text-white text-center mb-3 fs-1'>Sign Up</div>
+    <div className='container-fluid border-4 border-primary d-flex justify-content-center align-items-center' >
+     <Form onSubmit={formik.handleSubmit}className="sign_up_in_container col-md-8 col-lg-5 col-10 px-4 py-1 px-sm-5 " style={{marginTop:"8%"}} >
+    <div className='text-white text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
-          <Form.Group className="col ">
-            <Form.Label htmlFor="name" className="form-label">Name</Form.Label>
+          <Form.Group className="col-md-6 mb-1">
+            <Form.Label htmlFor="name" className="form-label m-0">Name</Form.Label>
             <Form.Control 
             type="text" 
             className="form-control "
@@ -69,8 +71,8 @@ const postSignUpUser=async(newUser)=>{
           </Form.Group>
 
           {/* AGE */}
-          <Form.Group className="col">
-            <Form.Label htmlFor="age" className="form-label">Age</Form.Label>
+          <Form.Group className="col-md-6 mb-1">
+            <Form.Label htmlFor="age" className="form-label m-1">Age</Form.Label>
             <Form.Control type="text" className="sign_up_input form-control" 
              id="age"
              name="age"
@@ -80,36 +82,37 @@ const postSignUpUser=async(newUser)=>{
             />
           </Form.Group>
           </div>
-
+          <div className="mb-1 row ">
           {/* Gender */}
-         <div className="mb-1">
+         <div className="col-md-6 d-flex flex-column justify-content-start align-items-start">
+        <div className='ps-1'>Gender :</div>
+        <div className='d-flex flex-row justify-content-start ps-2 align-items-center gap-3'>
         <Form.Check type="radio" name="gender" label={`Male`} 
           value="male"
           onChange={formik.handleChange}/> 
-
-          <Form.Check type="radio" name="gender" label={`Female`}
+        <Form.Check type="radio" name="gender" label={`Female`}
           value="female"
           onChange={formik.handleChange}/>
-          
-            {/* Phone */}
-          <Form.Group className="col w-50">
-            <Form.Label htmlFor="phone_number" className="form-label">Phone Number</Form.Label>
-            <Form.Control type="text" className="form-control" 
-             id="phone_number"
-             name="phone_number"
-             value={formik.values.phone_number}
-             onChange={formik.handleChange} 
-             style={inputDesign} 
-            />
+        </div>
+        </div>
+
+        {/* Phone */}
+        <Form.Group className="col-md-6 mb-1">
+        <Form.Label htmlFor="phone_number" className="form-label m-0">Phone Number</Form.Label>
+        <Form.Control type="text" className="form-control" 
+         id="phone_number"
+         name="phone_number"
+         value={formik.values.phone_number}
+         onChange={formik.handleChange} 
+         style={inputDesign} />
           </Form.Group>
         </div>
-       
 
         <div className="row mb-3">
           {/* Email */}
-          <Form.Group className="col">
-            <Form.Label htmlFor="email" className="form-label">Email</Form.Label>
-            <Form.Control type="email" className="form-control" 
+          <Form.Group className="col-md-6">
+            <Form.Label htmlFor="email" className="form-label m-0">Email</Form.Label>
+            <Form.Control type="email" className="form-control m-0" 
              id="email"
              name="email"
              value={formik.values.email}
@@ -130,7 +133,14 @@ const postSignUpUser=async(newUser)=>{
             />
           </Form.Group>
         </div>
-        <button className="btn btn-warning" type="submit">Sign Up</button>
+        <div className="row mb-1 px-3 py-2 d-flex flex-row justify-content-between">
+      <Button className="my-2 col-sm-3 col-lg-2 col-4 d-flex justify-content-center" variant="secondary" type="submit" onClick={() => navigate('/')}>
+        Cancel
+      </Button> 
+      <Button className="my-2 col-sm-3 col-lg-2 col-4 d-flex justify-content-center" variant="warning" type="submit">
+        Submit
+      </Button> 
+      </div>      
       </Form>
     </div>
 

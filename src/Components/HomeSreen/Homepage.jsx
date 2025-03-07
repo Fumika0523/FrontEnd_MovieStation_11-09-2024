@@ -4,7 +4,7 @@ import ContactUs_Section from "../Enquiries/ContactUs_Section"
 import Service_Section from "../Service_page/Service_Section"
 import Header from "./Header"
 import NavBar from "./NavBar"
-
+import Footer from "./Footer"
 
 function Homepage(){
 
@@ -15,7 +15,7 @@ function Homepage(){
         <AboutUs_Section/>
         <Service_Section/>
         <ContactUs_Section/>
-   
+        <Footer/>
         </>
     )
 }
