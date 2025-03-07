@@ -11,7 +11,7 @@ function Header (){
 
          <div className='bgFade my-lg-4' >
         <div 
-        className="d-flex justify-content-center mt-sm-4 mb-5 pb-5 pt-sm-5  align-items-center flex-column  border-4"
+        className="d-flex justify-content-center mt-sm-4 mt-5 mb-5 pb-5 pt-sm-5  align-items-center flex-column  border-4"
         >
         <div
          className="text-white fw-bold my-lg-1  col-md-10 col-lg-8 col-sm-10 fs-1 col-10" 
