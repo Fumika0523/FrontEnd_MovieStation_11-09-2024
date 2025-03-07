@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -21,7 +21,6 @@ import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
-
 
 export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
   const [specificMovieData,setSpecificMovieData] = useState([])
@@ -104,9 +103,13 @@ console.log("Specific Movie Data",specificMovieData)
 // find , some, filter,includes,map,every
 
    return (
-    <Card style={{width:"440px",marginBottom:"2%"}}
-    // sx={{ minWidth:10, mb:4 }}
-      >
+<>
+   {/* <Grid  container border={2} sx={{display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}> */}
+    <Grid lg={4} md={4} sm={6} xs={12} xl={3} item marginBottom={2}>
+    <Card 
+    style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto"}}
+    //md={{width:"590px"}}
+   >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[600] }} aria-label="movietitle">
@@ -124,7 +127,7 @@ console.log("Specific Movie Data",specificMovieData)
         subheader={rating}
       />
     <CardMedia
-    component="img" height="185" image={movieposter} alt="movieposter"/>
+    component="img" height="200" width="100%" image={movieposter} style={{objectFit:"cover"}} alt="movieposter"/>
      
     <CardActions className='d-flex justify-content-between'>
     
@@ -187,4 +190,7 @@ console.log("Specific Movie Data",specificMovieData)
     </CardContent>
     </Collapse>
     </Card>
+    </Grid>
+    {/* </Grid> */}
+    </>
   )}

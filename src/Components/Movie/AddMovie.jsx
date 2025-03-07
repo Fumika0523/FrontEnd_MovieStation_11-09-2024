@@ -48,7 +48,7 @@ const formik=useFormik({
       genres:"",
       category:"",
   },
-  // validationSchema:formSchema,
+  validationSchema:formSchema,
   onSubmit:(values)=>{ 
       console.log(values) 
       postMovies(values)
@@ -66,11 +66,12 @@ let config = {
 const postMovies=async(newMovie)=>{
    console.log("Movie Posted to the DB..")
   console.log("NEW MOVIE:",newMovie)
-
+ 
 
 let res = await axios.post(`${url}/addmovie`,newMovie,config)
 console.log(res)
 getMovieData();
+navigate('/allmovies')
 }
 
 //updating a data toer
@@ -114,7 +115,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
 </Grid>
 <Grid xs={6} item textAlign={"end"}>
 {/* ADD MOVIE */}
-<Button variant="contained"  className='fs-5' style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</Button>
+<Button variant="contained"  className='fs-5 text-black' onClick={()=>{navigate('/allmovies')}} style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</Button>
 </Grid>
 </Grid>
   <Grid container spacing={2}

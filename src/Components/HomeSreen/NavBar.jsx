@@ -66,7 +66,7 @@ console.log(greyColor)
           
         <Container fluid className="mx-2">
           {/* Brand */}
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/">
           <span className="ms-3 fs-4 navbar-brand" style={{color:mode=="light"? amberColor1:amberColor, fontWeight:"bold"}}><i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass"></i><a className="navbar-brand fs-4 ms-1" href="#"
           style={{color:mode=="light"? "black": amberColor}}>MovieStation</a></span>
           </Navbar.Brand>

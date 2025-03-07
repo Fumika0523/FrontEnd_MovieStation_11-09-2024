@@ -7,6 +7,7 @@ import {addItem,removeItem} from "../../utils/cartSlice"
 import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
+import { Box, Grid } from "@mui/material"
 
 function MovieDisplay({mode}) 
 {
@@ -37,12 +38,12 @@ return fData
 
 let displayStyle = {
     display: "flex",
-    flexWrap: "wrap",
-    gap: "2.7%",
-    margin: "1% 4% 1% 4%",
+    // flexWrap: "wrap",
+    gap: "0%",
+    margin: "1% 2%",
     // backgroundColor: "black",
-    position: "relative",
-    // border:"1px solid red",
+    // position: "relative",
+    border:"1px solid red",
     cursor: "pointer",
 }
 //console.log(searchTerm)
@@ -107,10 +108,20 @@ const handleAdditem=async(movieItem)=>{
 
 return (
 <>
-<div className="mt-1 mb-1" >
-
+{/* <div className="mt-1 mb-1" > */}
+<Box 
+display="flex"
+flexDirection={"column"}
+  alignItems="center"
+  justifyContent={"end"}
+  margin={2}
+  >
+<Grid  container 
+// style={displayStyle} 
+>
+    <Grid  justifyContent={"end"} display={"flex"} marginLeft={"auto"} >
     {/* Search*/}
-    <div className="d-flex justify-content-end ">
+    {/* <div className="d-flex justify-content-end "> */}
     <div className="iput-icons d-flex flex-row  border-danger me-5">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
 
@@ -132,11 +143,14 @@ return (
     setFilterMovieData(data)
     }}>Search</Button>
     </div>
-    </div>
-    
-    {/* each movie card */}
-    <div style={displayStyle} >
+    {/* </div> */}
+    </Grid>
+</Grid>
 
+    {/* each movie card */}
+    {/* <div style={displayStyle} > */}
+<Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"center"} marginTop={2}
+   >
     {!searchTerm ? movieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
@@ -153,8 +167,8 @@ return (
     // Redux
     reduxAddcartBtn={
         <Button
-        className='fs-5'
-        style={{color:mode=="light" ? "black":"white"}}
+        className='fs-5 px-3' variant="outline-secondary"
+        style={{color:"	#FFC107"}}
         onClick={()=>{handleAdditem(element)}}>
         <i className="fa-solid fa-cart-shopping "></i></Button>}
         
@@ -170,12 +184,14 @@ return (
 
     // Redux
     reduxAddcartBtn={
-    <Button className="btn px-w " onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping" 
+    <Button className="px-2" onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping" 
     // style={{color:mode=="light" ? greyColor:"white"}}
     ></i></Button>}/>
     ))}
-    </div>
-   </div>
+</Grid>
+</Box>
+    {/* </div> */}
+   {/* </div> */}
  </>
  )}
 export default MovieDisplay

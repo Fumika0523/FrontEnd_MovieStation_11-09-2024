@@ -111,7 +111,6 @@ const [mode, setMode]=useState("dark")
       </>
       }
   </Routes>
-  
 
 {/* Ternary operator */}
     {/* {token ? 
@@ -138,7 +137,5 @@ const [mode, setMode]=useState("dark")
   </ThemeProvider>
   </>
   )}
-
-
 export default App
 

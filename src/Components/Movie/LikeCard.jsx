@@ -8,30 +8,29 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
     return(
         <>
         {/* more than 1,000 -> in "K" */}
-          <i style={{color:mode=="light" ? "black":"lightgreen"}}
-           className="fa-regular fa-thumbs-up position-relative fs-5 mx-2 pt-2" onClick={()=>{
+        {/* Like */}
+        <Button variant="secondary d-flex flex-row justify-content-center text-start gap-1 align-items-center">
+          <i 
+        //   style={{color:mode=="light" ? "black":"lightgreen"}}
+           className="fa-regular fs-4 fa-thumbs-up "
+           onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
-        }}>
-        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill pt-2"
-        style={{color:mode=="light" ? "black":"lightgreen",ontSize:"60%"}}
-    >
+        }}></i>
+        <span className="fs-6">
             {like}
        </span>
-        </i>
-      
-        <i style={{color:mode=="light" ? "black":"red"}} className="fa-regular fa-thumbs-down position-relative fs-5 mx-2 pt-2" onClick={()=>{
+        </Button>
+
+      {/* Dislike */}
+      <Button variant="secondary d-flex flex-row justify-content-center text-start gap-1 align-items-center">
+      <i  className="fa-regular  fs-4 fa-thumbs-down" onClick={()=>{
             setDisLike(parseInt(disLike)+1)
-        }}>  
-        <span style={{color:mode=="light" ? "black":"red", fontSize:"60%"}}
-        className="position-absolute top-0 start-100 translate-middle badge rounded-pill" >
+        }}> </i>
+        <span 
+        className="fs-6" >
             {disLike}
        </span>
-       </i>
- 
-     
-      
-
-
+        </Button>
         </>
     )
 }

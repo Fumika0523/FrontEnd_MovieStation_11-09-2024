@@ -53,18 +53,18 @@ const postEnquiryDetail=async(newEnquiry)=>{
 }
     return(
 <>
-<div className="justify-content-center flex-column mb-4 align-items-center">
+<div className="justify-content-center flex-column my-5 align-items-center">
  {/*FORM  */}
  <div className="flex-row  -4 -primary d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
-<div className=" col-11" >
+<div className=" col-10" >
   <Button  variant="warning" className="d-flex me-2 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       style={{}} onClick={()=>navigate('/allenquiries')} ><div>All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
    {/* message */}
-   <div className="fs-5 my-5 col-10 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
+   <div className="fs-5 my-5 col-8 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
     </div>
 {/* <div className="  -4 ">    */}
     <form  onSubmit={formik.handleSubmit} className="col-11 col-sm-11 col-md-10 col-lg-8 mt-2 mx-auto" >

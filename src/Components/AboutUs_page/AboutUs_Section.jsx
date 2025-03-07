@@ -41,13 +41,12 @@ const bottomDesignData=[
 
     return(
         <>
-  
+  <div className="mb-5">
     <AboutUs_ImageBanner banner ={"https://static.justwatch.com/backdrop/137681/s1920/Marvels-The-Avengers"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide"/>
-
     <div className=" -4 -danger">
         {/* 1st */}
         <div className="whatwedo bg-light text-black mx-lg-5 mx-sm-0 py-5">
-        <h1 className="d-flex justify-content-center align-items-center mb-3 "
+        <h1 className="d-flex justify-content-center align-items-center mb-3" 
         > WHAT WE DO</h1>
         
         {/* <div className="d-flex  -4 -danger  justify-content-center"> */}
@@ -60,9 +59,9 @@ const bottomDesignData=[
         {/* </div> */}
         </div>
     </div>
-        <div className=" -4 -danger px-5 ">
+        <div className="px-5" style={{marginTop:"-3%"}}>
         <div >
-             <h2 className= "text-center mb-4 "
+             <h2 className= "text-center mb-5 "
              >WE WANT HEAR FROM YOU</h2>
         </div>
          {/* Last Section */}
@@ -74,6 +73,7 @@ const bottomDesignData=[
         <Button variant="secondary" className="fs-5 py-2 px-5" onClick={()=>{navigate('/contact')}} >Contact to MovieStation</Button>
         </div>
         </div>
+    </div>
     </div>
         </>
     )
