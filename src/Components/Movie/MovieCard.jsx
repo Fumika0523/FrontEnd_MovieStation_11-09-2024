@@ -23,10 +23,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
 
 export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
-  const [specificMovieData,setSpecificMovieData] = useState([])
-  console.log(mode)
+const [specificMovieData,setSpecificMovieData] = useState([])
+console.log(mode)
 
-  // Store:
+// Store:
 const dispatch=useDispatch()
 const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
@@ -38,8 +38,8 @@ const blueGreyColor = blueGrey[100]
     },
   });
 
-  const [expanded, setExpanded] = React.useState(false);
-  //useNavigate()
+const [expanded, setExpanded] = React.useState(false);
+//useNavigate()
 const navigate=useNavigate()
 //console.log(disLikeNum,likeNum)
 
@@ -101,11 +101,10 @@ console.log("Specific Movie Data",specificMovieData)
 // console.log(searchUserAddedMovie)
 // console.log(findUserAddedMovie) //find a value
 // find , some, filter,includes,map,every
-
    return (
 <>
    {/* <Grid  container border={2} sx={{display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}> */}
-    <Grid lg={4} md={4} sm={6} xs={12} xl={3} item marginBottom={2}>
+    <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2}>
     <Card 
     style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto"}}
     //md={{width:"590px"}}
@@ -129,7 +128,7 @@ console.log("Specific Movie Data",specificMovieData)
     <CardMedia
     component="img" height="200" width="100%" image={movieposter} style={{objectFit:"cover"}} alt="movieposter"/>
      
-    <CardActions className='d-flex justify-content-between'>
+    <CardActions className='d-flex align-items-center justify-content-between'>
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
     
@@ -141,10 +140,10 @@ console.log("Specific Movie Data",specificMovieData)
     <>
     {/* Edit Icon */}
     <Button 
-    className='fs-6'
-    style={{color:mode=="light" ? greyColor:blueGreyColor}}
+    className=''
+    style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
     onClick={()=>navigate(`/editmovie/${_id}`)}>
-    <i className="fa-solid fa-pencil" ></i></Button>
+    <i className="fa-solid fs-5 p-0 m-0 fa-pencil" ></i></Button>
 
     {/* Delete Icon */}
     {deleteBtn}

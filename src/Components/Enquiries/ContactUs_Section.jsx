@@ -30,7 +30,7 @@ const formik = useFormik({
   },
   validationSchema:formSchema,
   onSubmit:(values)=>{
-    //console.log(values)
+    console.log(values)
      postEnquiryDetail(values)
   }
 })
@@ -53,7 +53,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
 }
     return(
 <>
-<div className="d-flex justify-content-center flex-column align-items-center row mx-auto" style={{marginTop:"10%"}}>
+<div className="d-flex mb-4 justify-content-center flex-column align-items-center row mx-auto" style={{marginTop:"10%"}}>
  {/*FORM  */}
  <div className=" d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>

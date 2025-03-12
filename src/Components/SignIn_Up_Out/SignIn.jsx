@@ -54,7 +54,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
     <>
     <div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center">
     <Form 
-    onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-6 col-10 px-4 py-5 px-sm-5 " style={{marginTop:"10%"}} >
+    onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-4 col-10 px-4 py-5 px-sm-5 " style={{marginTop:"10%"}} >
        <h1 className="mb-3 text-center text-white">Sign in</h1>
      <Form.Group className="mb-3  " controlId="formBasicEmail">
        <Form.Label className="m-0">Email address</Form.Label>

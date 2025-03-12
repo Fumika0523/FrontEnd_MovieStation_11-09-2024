@@ -1,11 +1,12 @@
 import './App.css'
 import AboutUs_Section from './Components/AboutUs_page/AboutUs_Section';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MovieDisplay from './Components/Movie/MovieDisplay';
 import NavBar from './Components/HomeSreen/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
 import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
 import Homepage from './Components/HomeSreen/Homepage';
-import {Navigate, Route,Routes} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import Footer from './Components/HomeSreen/Footer';
 import MovieTrailer from './Components/Movie/MovieTrailer';
 import React, {useEffect,useState} from 'react'
@@ -95,7 +96,6 @@ const [mode, setMode]=useState("dark")
      <>
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
      {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
-
       <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' element={<Service_Section/>}/>
@@ -103,6 +103,7 @@ const [mode, setMode]=useState("dark")
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }></Route>
+
       <Route path="/signup" element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
       <Route path="allenquiries" element={<AllEnquiries/>}/>

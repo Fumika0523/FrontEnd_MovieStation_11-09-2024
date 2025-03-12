@@ -6,29 +6,24 @@ import Image from 'react-bootstrap/Image';
 function Header (){
       return(
         <>        
-        <div className="mainBackground d-flex justify-content-center align-items-center " style={{height:"350px"}}>
+        <div className="mainBackground  border-primary border-4  " >
          <Image  src={coverPage} alt="" className=" bg-header-image  "  />
-         <div className='bgFade d-flex justify-content-center align-items-center ' >
-        <div 
-        className="d-flex justify-content-center mt-sm-4 mt-5 mb-5 pb-5 pt-sm-5  align-items-center flex-column  border-4"
-        >
-        <div
-         className="text-white fw-bold my-lg-1  col-md-10 col-lg-8 col-sm-10 fs-2 col-10" 
+      <div className='bgFade row mx-auto border-danger border-4  ' >
+        <div className='d-flex justify-content-center align-items-center  flex-column gap-2 col-md-10 col-lg-9 col-sm-9 mt-md-4 mt-lg-3 mt-sm-3 mx-auto  '>
+        <div className=" text-white fw-bold my-lg-1 mx-auto fs-1 " 
          >Your streaming guide for movies, TV shows & sport</div>
         <div
-         className=' text-secondary col-md-10 col-lg-7 col-10 fs-md-4 ' 
-         >Find where to stream new, popular & upcoming entertainment with JustWatch.</div>   
-        <div className='d-display d-sm-block d-none d-sm-block col-lg-8 col-md-9  col-sm-10 col-10  d-flex  text-nowrap my-md-4 mt-3 d-flex justify-content-evenly' >
-        <Button variant="contained"  className="fs-6 fw-bold text-nowrap rounded rounded-4"
-        style={{backgroundColor:"#f0ad4e", overFlow: "hidden", textOverflow: "ellipsis",padding:"2% 5%"}}
+         className='  text-secondary  mx-auto fs-4 ' 
+         >Find where to stream new, popular & upcoming entertainment with JustWatch.</div>  
+        </div> 
+          <div className='d-none align-items-center d-sm-block row mx-auto d-flex justify-content-between ' style={{width:"80%"}}>
+        <Button variant="contained"  className="col-sm-7 me-3 me-md-5 col-md-6 col-lg-4 col-12 rounded fs-6 text-nowrap "
+        style={{backgroundColor:"#f0ad4e",height:"50px"}}
        >Discover Movies & TV shows</Button>
-        <Button variant="outlined" className="fw-bold rounded rounded-4 fw-bold fs-6 " style={{borderColor:"#adb5bd", color:"#adb5bd",padding:"2% 5%"}}  >Features</Button>
-        </div>
-        {/* </div> */}
+        <Button variant="outlined" className="col-sm-4 col-lg-3 col-md-4 col-12 rounded fs-6  " style={{borderColor:"#adb5bd",height:"50px", color:"#adb5bd",}}  >Features</Button>    
         </div>
         </div>
         </div>
-        {/* </Container> */}
         </>
     )
 }

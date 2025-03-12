@@ -2,10 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { removeItem, removeLastItem, removeFirstItem } from "../../utils/cartSlice"
 import { useNavigate } from "react-router-dom"
 import CartSummaryPage from "./CartSummaryPage";
-import { Button } from '@mui/base/Button';
 import axios from "axios";
-import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner";
 import { url } from "../../utils/constant";
+import { Button, Image } from "react-bootstrap";
 
 
 function Cartpage() {
@@ -39,28 +38,34 @@ function Cartpage() {
 
     return (
         <>
-            <div style={{ border: "2px solid grey", padding: "1%", width: "70%", margin: "3% 15%", borderRadius: "2%" }}>
-                <h2 className="text-center"><i class="fa-solid fa-bag-shopping me-1 text-warning  fs-1"></i>Your Shopping Cart</h2>
-
+        <div className="container-fluid"> 
+            <div className="row mx-auto w-100" >
+                <div className="col-lg-8 col-11 mx-auto my-5 p-4" style={{ border: "2px solid grey", borderRadius: "2%" }}>
+                <div className="text-center fs-2 text-nowrap"><i class="fa-solid fa-bag-shopping me-2 text-warning fs-1"></i>Your Shopping Cart</div>
+                <div className="my-3 d-flex align-items-center justify-content-end mx-auto ">
                 {/* Back */}
                 {
                     cartItems.length === 0 ?
-                        <Button onClick={() => navigate('/allmovies')} className="btn btn-secondary" style={{ marginLeft: "8%" }} >Back to All Movies</Button> :
-                        <Button onClick={() => navigate('/allmovies')} className="btn btn-secondary">Back to All Movies</Button>
+                        <Button variant="secondary" className="d-flex justify-content-end" onClick={() => navigate('/allmovies')}>
+                            Back to All Movies</Button> 
+                            :
+                        <Button variant="secondary"  className="d-flex justify-content-end" onClick={() => navigate('/allmovies')}>
+                            Back to All Movies</Button>
                 }
+                </div>
+          
+                <div className="fs-1 text-center">Your Cart is Empty !!</div>
 
                 {/* Clear Cart */}
-
                 {
                     cartItems.length === 0 ?
                         <></> :
                         <>
-                            <Button onClick={() => {
+                        <Button onClick={() => {
                                 handleClearitem()
                             }} className="btn btn-primary">Clear Cart</Button>
                         </>
                 }
-
 
                 {/*Remove 1 item from last  */}
 
@@ -81,16 +86,23 @@ function Cartpage() {
                             handleRemoveFirstItem()
                         }}>Remove 1 item from beginning</Button>
                 } */}
-
+            <div className="mx-auto d-flex justify-content-center col-lg-9 col-12">
                 {
                     cartItems.length === 0 ?
-                        <AboutUs_ImageBanner banner={"https://img.buzzfeed.com/buzzfeed-static/static/2021-10/23/0/asset/50c4363d5d1a/sub-buzz-943-1634947235-19.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto"} cardText={"The Cart is Empty🛒...!!!!" } /> :
+                        <Image className="mx-auto"
+                         src={"https://images-prod.dazeddigital.com/1280/azure/dazed-prod/1100/3/1103540.jpg"} 
+                         style={{objectFit:"cover",width:"100%"}}
+                        
+                        /> :
                         <>
                             <CartSummaryPage/>
                         </>
+                
                 }
-
+                </div>
+                </div>
             </div>
+        </div>
         </>
     )
 }

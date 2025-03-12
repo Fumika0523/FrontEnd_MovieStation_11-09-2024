@@ -9,8 +9,7 @@
 }
 
 .bg-header-image{
-  /* max-height:390px; */
-  height: 350px;
+  height: 450px;
   background-size:cover;
   background-position-y:top ;
   background-repeat: no-repeat;
@@ -20,6 +19,35 @@
   position: relative;
   width: 100%;
 }
+.mainBackground{
+  position: relative;
+  height: 450px;
+}
+
+.bgFade{
+  background-image: linear-gradient(180deg, transparent 0, #000000);
+  top:0px;
+  object-fit: cover;
+  /* border:5px solid red; */
+  width: 100%; 
+  height: 450px;
+   /* Black see-through
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;  */
+  /* margin-top: -700px; */
+  position: absolute;
+  /* border:"4px solid red"; */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .overlayImgBanner{
   position: relative;
   background-position: top;
@@ -45,12 +73,6 @@
   object-position: 50% -10% !important
 }
 
-
-
- :after, :before {
-  box-sizing: border-box;
-}
-
 .imageOverLay{
   position: absolute;
   z-index: 2;
@@ -65,62 +87,6 @@
   top: -100px;
   padding-bottom: 30px;
   z-index: 3;
-}
-
-/* .mainBackground{
-  position: relative;
-  height: auto;
-  border:4px solid pink;
-} */
-
-.bgFade{
-  background-image: linear-gradient(180deg, transparent 0, #000000);
-  top:69px;
-  object-fit: cover;
-  /* border:5px solid red; */
-  width: 100%; 
-  height: 350px;
- /* Black see-through
-  color: #f1f1f1;
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;  */
-  /* margin-top: -700px; */
-  position: absolute;
-  /* border:"4px solid red"; */
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.bgFade1{
-  background-color: white;
-  /* bottom: 100px; */
-  top:0;
-  opacity: 0.7;
-  /* border:5px solid red; */
-  height: auto; 
-   width: 100%;
- /* Black see-through
-  color: #f1f1f1;
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;  */
- 
-  /* margin-top: -700px; */
-  position: absolute;
-  border:"4px solid red";
-  display: flex;
-  justify-content: center;
-  text-align: center;
 }
 
 .navbar-scrolled{
@@ -235,3 +201,10 @@ th{
   background-color: rgb(55, 55, 56);
 }
 
+.likeBtn:hover{
+background-color: 	#4d4d4d !important;
+}
+
+.btnFont:hover{
+  color: white !important;
+}

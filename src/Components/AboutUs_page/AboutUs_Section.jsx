@@ -57,10 +57,10 @@ const bottomDesignData=[
         </div>
     </div>
     {/* 2nd */}
-        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-3%"}}>
+        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-15%"}}>
         <div >
-             <h2 className= "text-center mb-5 text-nowrap"
-             >WE WANT TO HEAR FROM YOU</h2>
+             <div className= " fs-3 fw-bold mx-auto text-center w-100 mb-5 text-nowrap"
+             >WE WANT TO HEAR FROM YOU</div>
         </div>
          {/* Last Section */}
          <div className="row d-flex flex-row justify-content-between">

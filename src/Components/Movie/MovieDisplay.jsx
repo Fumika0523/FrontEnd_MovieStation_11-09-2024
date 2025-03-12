@@ -8,6 +8,8 @@ import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
+import { FormControl } from '@mui/material';
+import { Input } from '@mui/material';
 
 function MovieDisplay({mode}) 
 {
@@ -36,16 +38,6 @@ let fData = allmovies.filter((element) => element.moviename.toLowerCase().includ
 return fData
 }
 
-let displayStyle = {
-    display: "flex",
-    // flexWrap: "wrap",
-    gap: "0%",
-    margin: "1% 2%",
-    // backgroundColor: "black",
-    // position: "relative",
-    border:"1px solid red",
-    cursor: "pointer",
-}
 //console.log(searchTerm)
 
 const token = sessionStorage.getItem('token')
@@ -116,25 +108,24 @@ flexDirection={"column"}
   justifyContent={"end"}
   margin={2}
   >
-<Grid  container 
+<Grid  container  className=" border-4"
 // style={displayStyle} 
 >
-    <Grid  justifyContent={"end"} display={"flex"} marginLeft={"auto"} >
+    <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
     {/* Search*/}
     {/* <div className="d-flex justify-content-end "> */}
-    <div className="iput-icons d-flex flex-row  border-danger me-5">
+    <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
-
     {
     token &&<Button variant="warning" onClick={()=>navigate('/usermovies')} className="text-nowrap me-3">My Movies</Button>
     }
-
-    <input
-    style={{color:mode=="light" ? "white":"white"}}
-    className="form-control me-2 ps-4 bg-dark " type="search" aria-label="Search" name="" id="" placeholder="   Search movie"
+ 
+   <input
+    className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
     onChange={(e) => {
     //console.log(e.target.value)
     setSearchTearm(e.target.value)}} />
+
     <Button variant="outline-secondary" className="" type="submit"
     onClick={() => {
     console.log("Button is cliecked,searchTerm")
@@ -143,7 +134,6 @@ flexDirection={"column"}
     setFilterMovieData(data)
     }}>Search</Button>
     </div>
-    {/* </div> */}
     </Grid>
 </Grid>
 
@@ -156,21 +146,22 @@ flexDirection={"column"}
                         
     // Delete Button
     deleteBtn={
-    <Button
-    className='fs-5'
+    <Button variant="outline-none"
+    className='px-3'
     onClick={()=> deleteMovie(element._id)}
-    style={{color:mode=="light" ? redColor1:redColor}}
+    style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
     >
-    <i className="fa-solid fa-trash"></i>
+    <i className="fa-solid fs-6 fa-trash"></i>
     </Button>}
     
     // Redux
     reduxAddcartBtn={
         <Button
-        className='fs-5 px-3' variant="outline-secondary"
-        style={{color:"	#FFC107"}}
-        onClick={()=>{handleAdditem(element)}}>
-        <i className="fa-solid fa-cart-shopping "></i></Button>}
+        className='likeBtn text-center d-flex align-items-center py-2 px-3' variant=""
+        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b"}}
+        onClick={()=>{handleAdditem(element)}}
+      >
+        <i className="fa-solid fs-5 text-center fa-cart-shopping text-warning "></i></Button>}
         
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (
@@ -178,15 +169,22 @@ flexDirection={"column"}
                             
     // Delete Button
     deleteBtn={
-    <Button className="btn px-w " onClick={()=> deleteMovie(element._id)}><i className="fa-solid fa-trash" 
-    // style={{color:mode=="light" ? greyColor:"white"}}
-    ></i></Button>}
+        <Button variant="outline-none"
+        className='px-3'
+        onClick={()=> deleteMovie(element._id)}
+        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
+        >
+        <i className="fa-solid fs-6 fa-trash"></i>
+        </Button>}
 
     // Redux
     reduxAddcartBtn={
-    <Button className="px-2" onClick={()=>{handleAdditem(element)}}><i className="fa-solid fa-cart-shopping" 
-    // style={{color:mode=="light" ? greyColor:"white"}}
-    ></i></Button>}/>
+        <Button
+        className='fs-5 likeBtn px-3' variant=""
+        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",padding:"0.8% 0"}}
+        onClick={()=>{handleAdditem(element)}}
+      >
+        <i className="fa-solid fa-cart-shopping text-warning "></i></Button>}/>
     ))}
 </Grid>
 </Box>

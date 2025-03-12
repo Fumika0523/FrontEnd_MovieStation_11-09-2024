@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { useFormik } from 'formik'
 import {url} from '../../utils/constant'
 import axios from 'axios';
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 
 export default function AddMovie({setMovieData}) {
@@ -85,44 +85,41 @@ const getMovieData=async()=>{
 
   return (
     <>
-    <Box border={2}
+    <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
+    <Box 
+     sx={{
+      width: {xs: "90%", md: "75%", sm: "85%", lg:"70%"},
+      margin:{lg:"8% 0%",md:"15% 0%", xs:"5% 0%", sm:"10% 0"}
+      }}
+    style={{padding:"4% 5%"}}
+    border={1}
     display="flex"
     flexDirection={"column"}
      borderColor="grey.600" 
      borderRadius={6}
      boxShadow={"5px 5px 10px #ccc"}
-     padding={3}
       component="form"
-      maxWidth={1000}
       alignItems="center"
       justifyContent={"center"}
-      margin="auto"
-      marginTop={5}
-      marginBlock={5}
-      // sx={{
-      //   '& .MuiTextField-root': { width: '30%' ,height:'8ch' },boxShadow:13,
-      // }}
       noValidate
       autoComplete="off" 
-      onSubmit = {formik.handleSubmit}  
-      // style={{margin:"5% auto",width:"75%", padding:"0% 5%"}}
-    >
-<Grid container  marginBottom={3} >
-<Grid  xs={6} item textAlign={"start"}>
-{/* Back */}
-<Button variant="contained" className=' fs-5'
-style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-2"></i>BACK</Button>
-</Grid>
-<Grid xs={6} item textAlign={"end"}>
+      onSubmit = {formik.handleSubmit}  >
+
+      {/* Buttons */}
+      <Grid container  marginBottom={3} >
+      <Grid  xs={6} item textAlign={"start"}>
+      {/* Back */}
+      <Button variant="contained" className='fs-6'
+      style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>BACK</Button>
+      </Grid>
+      <Grid xs={6} item textAlign={"end"}>
 {/* ADD MOVIE */}
-<Button variant="contained"  className='fs-5 text-black' onClick={()=>{navigate('/allmovies')}} style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-2"></i>ADD MOVIE</Button>
-</Grid>
-</Grid>
-  <Grid container spacing={2}
-  // direction="row"  useFlexGap flexWrap="wrap"
-  >
+<Button variant="contained"  className='fs-6 text-black' onClick={()=>{navigate('/allmovies')}} style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
+      </Grid>
+      </Grid>
+      <Grid container spacing={3} >
         {/* MOVIE NAME */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
         <TextField 
           fullWidth
           required
@@ -138,7 +135,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
         </Grid>
 
         {/* MOVIE POSTER */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
          <TextField
          fullWidth
           required
@@ -155,7 +152,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
         </Grid>
 
         {/* MOVIE Rating */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -171,7 +168,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
         </Grid>
 
         {/* Category */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -180,7 +177,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
           </Grid>
 
            {/* MOVIE Cast */}
-           <Grid xs={12} sm={4} item >
+           <Grid xs={12} sm={6} md={4} item >
            <TextField
             required
             fullWidth
@@ -189,7 +186,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
             </Grid>
 
           {/* Publish Year */}
-          <Grid xs={12} sm={4} item >
+          <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -198,7 +195,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
           </Grid>
 
         {/* Like Num */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -207,7 +204,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
           </Grid>
 
         {/* DISLIKE NUM */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -216,7 +213,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
         </Grid>
 
         {/* MOVIE GEnres */}
-        <Grid xs={12} sm={4} item >
+        <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -225,7 +222,7 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
           </Grid>
 
            {/* MOVIE TRAILER */}
-           <Grid xs={12} sm={6} item >
+           <Grid xs={12} sm={6} md={6} item >
            <TextField
            fullWidth
           required
@@ -234,12 +231,13 @@ style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmo
            </Grid>
 
          {/* Summary */}
-         <Grid xs={12} sm={6} item >
+         <Grid xs={12} sm={12} md={6} item >
         <TextField fullWidth required id="summary" 
           label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
            </Grid>
            </Grid>
    </Box>
+   </div>
 {/* </div> */}
 </>
   );}

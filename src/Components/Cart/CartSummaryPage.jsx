@@ -53,7 +53,7 @@ console.log(cartItems)
     return (
 
         <>
-            <div className="mx-4">
+            <div className="mx-4  row ">
                 <h1 className=" py-1">Cart Page</h1>
                 <div className="text-start py-1 text-secondary">Date: <span className="text-white">Feb 16,2022</span></div>
                 <div className="border-top border-secondary">
