@@ -10,7 +10,7 @@ import { Button,Stack, Container, Grid, Typography } from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 
 
-function EditUpdateMovieForm({ singleMovie, id }) {
+function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
   const navigate = useNavigate();
   const amberColor = amber[500];
   const formSchema = Yup.object().shape({
@@ -63,7 +63,7 @@ function EditUpdateMovieForm({ singleMovie, id }) {
 
     let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
     console.log(res)
-    // setMovieData();
+    setMovieData(res);
   }
 
   //updating a data 

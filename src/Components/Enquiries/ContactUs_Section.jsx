@@ -53,21 +53,22 @@ const postEnquiryDetail=async(newEnquiry)=>{
 }
     return(
 <>
-<div className="d-flex mb-4 justify-content-center flex-column align-items-center row mx-auto" style={{marginTop:"10%"}}>
- {/*FORM  */}
- <div className=" d-flex justify-content-center align-items-center ">
+<div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center mt-sm-5 mt-md-5 mt-lg-5 mt-1">
+{/*FORM  */}
+ <Form  onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-10 col-sm-10 col-lg-6 col-12 px-4 py-5 px-sm-5 " >
+
+ <div className="  d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
-<div className=" my-4 col-sm-10 col-lg-8 " >
-  <Button variant="secondary" className="d-flex me-3 px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
+<div className=" my-4 col-sm-10 col-lg-8 ms-auto" >
+  <Button variant="secondary" className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
    {/* message */}
    {/* <p className="fs-sm-5 my-sm-5 my-4 col-sm-8 col-10 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
     </p> */}
 {/* <div className="  -4 ">    */}
-    <Form  onSubmit={formik.handleSubmit} className="col-11 col-sm-11 col-md-10 col-lg-8 mt-3 mx-auto" >
 
         <div className="row  text-secondary justify-content-center">
         {/* First Name */}
@@ -141,7 +142,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
     <Button variant="warning" className="px-4 mt-4">Submit</Button>
   </div>
   </div>
-</Form>
+    </Form>
 </div>
 </>
     )

@@ -44,7 +44,7 @@ const [isAuthenticated,setIsAuthenticated]=useState(false)
 const [accessAddMovie,setAccessAddMovie] = useState("")
 
 useEffect(()=>{
-   const token = sessionStorage.getItem('token')
+  //  const token = sessionStorage.getItem('token')
   console.log(token)
   setIsAuthenticated(true)
   setAccessAddMovie(token) // if you have token
@@ -53,13 +53,12 @@ useEffect(()=>{
 // console.log(accessAddMovie)
   
 const getMovieData = async () => {
-
   console.log("Movie data is called....");
   let res = await axios.get(`${url}/movie`,config)//response in res.data >> moviedata
-  console.log(res.data.movieData);
+  console.log(res.data.movieData)
   console.log("movieData")
-  setMovieData(res.data.movieData);
-};
+  setMovieData(res.data.movieData)
+}
 
   useEffect(()=>{
     getMovieData()
@@ -83,17 +82,22 @@ const [mode, setMode]=useState("dark")
   <CssBaseline /> 
   <Provider store={store}>
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
-    {/* <Container fluid >  */}
     <Routes>
-    { token ?
+      {/* If there is a token, >> 4 routes visible */}
+ {/* //  No token >>> show remaining routes
+      //token >> login >> 4 routes visible || other routes wont b visible >> ERROR
+      //  Token , no token >> show remaing routes */}
+   
+    { 
+    token &&
        <>
        <Route path='/addmovie'  element={<AddMovie setMovieData={setMovieData}/>}/>
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
        <Route path="/ordersummary" element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        </>
-       :
-     <>
+
+    }
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
      {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
       <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
@@ -102,17 +106,15 @@ const [mode, setMode]=useState("dark")
       <Route path='/contact' element={<ContactUs_Section/>}/>
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
-    }></Route>
+    }/>
 
       <Route path="/signup" element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
       <Route path="allenquiries" element={<AllEnquiries/>}/>
       <Route path="/cartpage" element={<Cartpage/>}/>
       <Route path="/table" element={<Table/>}/> 
-      </>
-      }
-  </Routes>
-
+    
+    </Routes>
 {/* Ternary operator */}
     {/* {token ? 
     <>   
