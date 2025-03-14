@@ -208,3 +208,18 @@ background-color: 	#4d4d4d !important;
 .btnFont:hover{
   color: white !important;
 }
+
+
+.fontColorTrailerFont{
+color: rgb(142, 143, 148);
+font-size: 20px;
+font-weight: bold;
+}
+
+.trailerBtn{
+  background-color: #3b3b3b ! important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}

@@ -8,8 +8,7 @@ import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
-import { FormControl } from '@mui/material';
-import { Input } from '@mui/material';
+
 
 function MovieDisplay({mode}) 
 {
@@ -37,7 +36,6 @@ const filterData = (searchText, allmovies) => {
 let fData = allmovies.filter((element) => element.moviename.toLowerCase().includes(searchTerm.toLowerCase()))
 return fData
 }
-
 //console.log(searchTerm)
 
 const token = sessionStorage.getItem('token')

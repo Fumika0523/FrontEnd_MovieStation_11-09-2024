@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { url } from '../../utils/constant';
 import axios from 'axios';
 
-function MovieTrailer() {
+function MovieTrailer({mode}) {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState();
 
@@ -53,60 +53,89 @@ function MovieTrailer() {
     <>
       {
         movieInfo &&
-        <div>
-          <Container>
-            <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 mt-4' style={{ width: "100%", height: "450px" }}></iframe>
-          </Container>
-          {/* Middle Section */}
-          <Container className='d-flex' style={{ height: "450px" }}>
-            {/* Left Section */}
-            <div>
-              <Col>
-                <Image className='align-self-center my-3' src={movieInfo?.movieposter} roundedCircle style={{ width: "420px", height: "370px" }} />
-                {/* GREY SECTION */}
-                <div className='d-flex justify-content-center gap-3'>
-                  {/* List */}
-                  <button type="button" className="px-3 btn btn-secondary d-flex"> <i className="fa-solid fa-bookmark fs-5 px-1"></i>List</button>
-                  {/* Seen all */}
-                  <button type="button" className=" px-3 btn btn-secondary d-flex text-nowrap"> <i className="fa-solid fa-check px-1 fs-5"></i>Seen all</button>
-                  {/*Like*/}
-                  <button type="button" className=" px-3 btn btn-secondary d-flex"> <i className="fa-solid fa-thumbs-up px-1 fs-5"></i>{movieInfo.likeNum}</button>
-                  {/* disLike */}
-                  <button type="button" className="px-3 btn btn-secondary d-flex"> <i className="fa-solid fa-thumbs-down px-1 fs-5"></i>{movieInfo.disLikeNum}</button>
+          
+        <Container fluid
+          className=' -warning'
+          >
+            {/* Top */}
+            <Row className='mx-auto my-4  border-3'>
+            <Col className=' col-12 mx-auto'>
+              <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
+            </Col>
+            </Row>
+          
+            {/* Middle */}
+            <Row className=' px-5 my-4 border-primary border-3'>
+              {/* LEFT */}
+              <Col className='col-lg-4 col-sm-10 col-12 mx-auto border-3 '>
+                <div className='d-flex row mx-auto flex-column'>
 
+                {/* Image */}
+                <Image className='align-self-center my-3' src={movieInfo?.movieposter} roundedCircle style={{ width: "100%", height: "350px" }} />
+
+                {/* Buttons */}
+                <Row className='d-flex  mx-auto border-2  flex-row  justify-content-evenly align-items-center '>
+                  {/* List */}
+                  <Col className=" col-5">
+                  <Button variant="outline-none" className="py-3 w-100 d-flex trailerBtn mb-3"
+                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white",}}> <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
+                  </Col>
+                  <Col className=" col-5">
+                  {/* Seen all */}
+                  <Button variant="outline-none" className="py-3 px-3 trailerBtn w-100 d-flex mb-3"
+                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
+                  </Col>
+                  </Row>
+                  <Row className='d-flex  mx-auto border-2  flex-row  justify-content-evenly align-items-center '>
+                  <Col className="col-5">
+                  {/*Like*/}
+                  <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex  mb-3"
+                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}} > <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
+                  </Col>
+                  <Col className="col-5">
+                  {/* disLike */}
+                  <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex mb-3" 
+                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
+                   </Col>
+                  </Row>
                 </div>
               </Col>
-            </div>
-            {/* MIDDLE  SECTION */}
-            {/* Middle-TOP */}
-            <Row className='d-flex mx-5' style={{ width: "55%" }}>
-              <div className='d-flex pt-3  align-items-start' style={{ height: "20%" }}>
-                <Col className="fs-2 fw-bold">{movieInfo.moviename}</Col>
-                <Col className="fs-2 text-secondary">{movieInfo.publishYear}</Col>
-              </div>
-              <div>
-                <Col className="text-start" style={{ height: "80%" }} >{movieInfo.summary}</Col>
-                <Button variant="warning" style={{ width: "20%" }} onClick={() => {
+
+              {/* RIGHT */}
+              <Col className='col-lg-8 col-sm-10 col-12 mx-auto  border-3 border-danger'>
+              {/* Title */}
+              <Row className=' mx-auto d-flex -warning border-2 align-items-center justfify-content-start' >
+                <Col className="fs-1 col-sm-8 col-md-6  border-warning border-2  col-12 fw-bold">{movieInfo.moviename}</Col>
+                <Col className="fs-3 col-sm-4 col-md-6  border-warning border-2 col-12 text-secondary">{movieInfo.publishYear}</Col>
+              </Row>
+
+              {/* Content */}
+              <Row className='mx-auto d-flex flex-row  border-white border-2 align-items-start' >
+              {/* LEFT */}
+                <Col className="col-sm-6 col-12 p-3  border-danger border-2" style={{textAlign:"justify"}}>{movieInfo.summary}
+                </Col>
+              
+              {/* RIGHT */}
+              <Col className='col-sm-6 col-12 py-3 d-flex flex-column justify-content-center align-items-center border-' style={{textAlign:"justify"}}>
+              {/* <div className='row mx-auto w-100 text-start'> */}
+              <div className='d-flex w-100 flex-column mb-3'> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
+              <div className='d-flex w-100 flex-column mb-3'><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>
+              <div className='d-flex w-100 text-wrap flex-column mb-3'><span className='mb-1 fontColorTrailerFont '>CATEGORY</span><span className='text-wrap'>{movieInfo.category}</span></div>
+              {/* </div> */}
+              </Col>
+              <div className='d-flex justify-content-end' >
+                <Button style={{marginTop:"10%"}} variant="secondary" className="px-4 py-2"  onClick={() => {
                   navigate(`/`)
-                }}>Back</Button>{' '}
-              </div>
+                }}>Back</Button   >
+                </div>
+              </Row>
+              </Col>
             </Row>
-            <Row className='d-flex flex-column gap-3 text-start' style={{ width: "45%" }}>
-              <div className='d-flex pt-3' style={{ height: "15%" }}></div>
-              <div className='xs-12'>Cast : {movieInfo.cast}</div>
-              <div className='xs-12'>Genres : {movieInfo.genres}</div>
-              <div className='xs-12'>This show is : {movieInfo.category}</div>
-            </Row>
-
-
-            {/* <Col className='fs-4 text-warning'>Watch Now</Col> */}
-
-          </Container>
-        </div>
-        // </div>
-        // {/* </div> */}
+        </Container>
       }
+
       {/* Carousel */}
+      {/* <div> */}
       <Carousel className='my-5'>
         <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
           <div className='d-flex gap-4 mx-3'>
@@ -169,7 +198,8 @@ function MovieTrailer() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-
+      {/* </div> */}
+     
     </>
   )
 }
