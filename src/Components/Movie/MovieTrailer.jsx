@@ -13,21 +13,6 @@ function MovieTrailer({mode}) {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState();
 
-  const fontStyle = {
-    fontSize: "10.5px",
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "20%",
-  }
-
-  const iconStyle = {
-    fontSize: "21px",
-    display: "flex",
-    flexDirection: "column",
-    marginLeft: "11%",
-    alignItems: "center"
-  }
-  // useNavigate()
   const navigate = useNavigate()
 
   const token = sessionStorage.getItem('token')
@@ -53,7 +38,7 @@ function MovieTrailer({mode}) {
     <>
       {
         movieInfo &&
-          
+
         <Container fluid
           className=' -warning'
           >
@@ -65,40 +50,38 @@ function MovieTrailer({mode}) {
             </Row>
           
             {/* Middle */}
-            <Row className=' px-5 my-4 border-primary border-3'>
+            <Row className=' px-sm-5 my-4 border-primary border-3'>
               {/* LEFT */}
-              <Col className='col-lg-4 col-sm-10 col-12 mx-auto border-3 '>
-                <div className='d-flex row mx-auto flex-column'>
-
+              <Col className='mb-3 col-lg-4 col-sm-10 col-12 mx-auto border-3 '>
+                <Row className='d-flex mx-auto flex-column'>
                 {/* Image */}
-                <Image className='align-self-center my-3' src={movieInfo?.movieposter} roundedCircle style={{ width: "100%", height: "350px" }} />
-
+                <Image className='align-self-center my-3' src={movieInfo?.movieposter} roundedCircle style={{ width: "90%", height: "350px" }} />
+                </Row>
                 {/* Buttons */}
-                <Row className='d-flex  mx-auto border-2  flex-row  justify-content-evenly align-items-center '>
+                <Row className='d-flex  mx-auto border-2  flex-row  justify-content-center align-items-center '>
                   {/* List */}
-                  <Col className=" col-5">
+                  <Col className="col-sm-5 col-6">
                   <Button variant="outline-none" className="py-3 w-100 d-flex trailerBtn mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white",}}> <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
                   </Col>
-                  <Col className=" col-5">
+                  <Col className=" col-sm-5 col-6">
                   {/* Seen all */}
                   <Button variant="outline-none" className="py-3 px-3 trailerBtn w-100 d-flex mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
                   </Col>
                   </Row>
-                  <Row className='d-flex  mx-auto border-2  flex-row  justify-content-evenly align-items-center '>
-                  <Col className="col-5">
+                  <Row className='d-flex  mx-auto border-2  flex-row  justify-content-center align-items-center '>
+                  <Col className="col-sm-5">
                   {/*Like*/}
                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex  mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}} > <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
                   </Col>
-                  <Col className="col-5">
+                  <Col className="col-sm-5">
                   {/* disLike */}
                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex mb-3" 
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
                    </Col>
                   </Row>
-                </div>
               </Col>
 
               {/* RIGHT */}
@@ -106,14 +89,14 @@ function MovieTrailer({mode}) {
               {/* Title */}
               <Row className=' mx-auto d-flex -warning border-2 align-items-center justfify-content-start' >
                 <Col className="fs-1 col-sm-8 col-md-6  border-warning border-2  col-12 fw-bold">{movieInfo.moviename}</Col>
-                <Col className="fs-3 col-sm-4 col-md-6  border-warning border-2 col-12 text-secondary">{movieInfo.publishYear}</Col>
+                <Col className="fs-3 col-sm-4 col-md-6  border-warning border-2 col-12 text-secondary">({movieInfo.publishYear})</Col>
               </Row>
 
               {/* Content */}
               <Row className='mx-auto d-flex flex-row  border-white border-2 align-items-start' >
               {/* LEFT */}
-                <Col className="col-sm-6 col-12 p-3  border-danger border-2" style={{textAlign:"justify"}}>{movieInfo.summary}
-                </Col>
+              <Col className="col-sm-6 col-12 p-3  border-danger border-2" style={{textAlign:"justify"}}>{movieInfo.summary}
+              </Col>
               
               {/* RIGHT */}
               <Col className='col-sm-6 col-12 py-3 d-flex flex-column justify-content-center align-items-center border-' style={{textAlign:"justify"}}>
@@ -136,8 +119,8 @@ function MovieTrailer({mode}) {
 
       {/* Carousel */}
       {/* <div> */}
-      <Carousel className='my-5'>
-        <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
+      <Carousel className='d-none d-sm-block row border-4 mx-auto border-warning my-5'>
+        <Carousel.Item>
           <div className='d-flex gap-4 mx-3'>
             <img src="https://www.barbie-themovie.com/images/share.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWnFNUcX9OnSQzcOMWPpm7OAjvTfQcxDDcGg&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
@@ -149,7 +132,7 @@ function MovieTrailer({mode}) {
           </Carousel.Caption>
         </Carousel.Item>
 
-        <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
+        <Carousel.Item >
           <div className='d-flex gap-4 mx-3'>
             <img src="https://nefariousreviews.wordpress.com/wp-content/uploads/2015/11/princess-mononoke-featured.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
             <img src="https://laughingsquid.com/wp-content/uploads/2015/12/the-competition-a-new-animated-s.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
@@ -161,8 +144,7 @@ function MovieTrailer({mode}) {
           </Carousel.Caption>
         </Carousel.Item>
 
-
-        <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
+        <Carousel.Item >
           <div className='d-flex gap-4 mx-3'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvhXCWtIym-giLoInrcr3MqenfCn4Qted5Q&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
             <img src="https://images8.alphacoders.com/133/1337616.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
@@ -174,7 +156,7 @@ function MovieTrailer({mode}) {
           </Carousel.Caption>
         </Carousel.Item>
 
-        <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
+        <Carousel.Item >
           <div className='d-flex gap-4 mx-3'>
             <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/titanic-et00008457-1676022504.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReC1mrkfbZ1JOkr0LmyYEimI26SOONo6xldA&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
@@ -186,7 +168,7 @@ function MovieTrailer({mode}) {
           </Carousel.Caption>
         </Carousel.Item>
 
-        <Carousel.Item style={{ border: "1px solid black", width: "98%" }}>
+        <Carousel.Item >
           <div className='d-flex gap-4 mx-3'>
             <img src="https://img5.tokyvideo.com/videos/610/61097/previews/previews_0005_custom_1617956273.1385.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
             <img src="https://images.moviesanywhere.com/e45bfc010f1e0626b1ee9efbe2726e55/7e42ca11-be74-41b9-986c-3e5a8a431fe3.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
@@ -198,8 +180,6 @@ function MovieTrailer({mode}) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      {/* </div> */}
-     
     </>
   )
 }
