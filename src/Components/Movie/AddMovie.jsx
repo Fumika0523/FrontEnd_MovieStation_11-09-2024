@@ -1,24 +1,18 @@
-import Stack from '@mui/material/Stack';
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import { useNavigate, } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
 import { useFormik } from 'formik'
-import {url} from '../../utils/constant'
-import axios from 'axios';
-import { Button, Container, Grid, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import axios from "axios";
+import { url } from "../../utils/constant";
+import { Button,Stack, Container, Grid, Typography } from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
+
 
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
-const greyColor = grey[900]; // #212121
 const amberColor = amber[500];
-const amberColor1 = amber[700];
-const redColor = red[900];
-const pinkColor = pink[900]
-const darkGreyColor = grey[700];
-const blueGreyColor = blueGrey[500]
 
 const formSchema=Yup.object().shape({
   moviename:Yup.string().min(5,"Too Short"),
@@ -50,8 +44,8 @@ const formik=useFormik({
   },
   validationSchema:formSchema,
   onSubmit:(values)=>{ 
-      console.log(values) 
-      postMovies(values)
+  console.log(values) 
+  postMovies(values)
   }   
 })
 const token = sessionStorage.getItem('token')
@@ -66,27 +60,27 @@ let config = {
 const postMovies=async(newMovie)=>{
    console.log("Movie Posted to the DB..")
   console.log("NEW MOVIE:",newMovie)
- 
 
 let res = await axios.post(`${url}/addmovie`,newMovie,config)
 console.log(res)
-getMovieData();
-navigate('/allmovies')
+setMovieData(res)
 }
 
 //updating a data toer
-const getMovieData=async()=>{
-  console.log("Movie data is called....")
-  let res = await fetch(`${url}/movie`,config)//API call to get all movie data
-  let data = await res.json()//responding in string, conver to json format
-  console.log(data)
-  setMovieData(data)
-}
+  const getMovieData = async () => {
+    console.log("Movie data is called.....")
+    let res = await fetch(`${url}/movie`, config) //API call to get all movie data
+    let data = await res.json()
+    console.log(data)
+    getMovieData()
+  }
+
 
   return (
     <>
     <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
-    <Box 
+    <Box
+    component="form" 
      sx={{
       width: {xs: "90%", md: "75%", sm: "85%", lg:"70%"},
       margin:{lg:"8% 0%",md:"15% 0%", xs:"5% 0%", sm:"10% 0"}
@@ -98,7 +92,6 @@ const getMovieData=async()=>{
      borderColor="grey.600" 
      borderRadius={6}
      boxShadow={"5px 5px 10px #ccc"}
-      component="form"
       alignItems="center"
       justifyContent={"center"}
       noValidate
@@ -113,8 +106,11 @@ const getMovieData=async()=>{
       style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>BACK</Button>
       </Grid>
       <Grid xs={6} item textAlign={"end"}>
-{/* ADD MOVIE */}
-<Button variant="contained"  className='fs-6 text-black' onClick={()=>{navigate('/allmovies')}} style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
+      {/* ADD MOVIE */}
+        <Button onClick={() => {
+                navigate('/allmovies')
+              }}
+              variant="contained" type="submit" className='fs-6 text-black'  style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
       </Grid>
       </Grid>
       <Grid container spacing={3} >
@@ -235,7 +231,7 @@ const getMovieData=async()=>{
         <TextField fullWidth required id="summary" 
           label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
            </Grid>
-           </Grid>
+      </Grid>
    </Box>
    </div>
 {/* </div> */}

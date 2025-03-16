@@ -54,12 +54,11 @@ useEffect(()=>{
   
 const getMovieData = async () => {
   console.log("Movie data is called....");
-  let res = await axios.get(`${url}/movie`,config)//response in res.data >> moviedata
+  let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
   console.log(res.data.movieData)
   console.log("movieData")
   setMovieData(res.data.movieData)
 }
-
   useEffect(()=>{
     getMovieData()
   },[]) //API Call

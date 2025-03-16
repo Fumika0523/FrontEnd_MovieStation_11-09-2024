@@ -13,65 +13,68 @@ function AllEnquiries() {
     const navigate = useNavigate()
     const [enquiryData, setEnquiryData] = useState([]) //array
 
-    const token = sessionStorage.getItem('token')
-    console.log(token)
+    // const token = sessionStorage.getItem('token')
+    // console.log(token)
 
-    let config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
+    // let config = {
+    //     headers: {
+    //         Authorization: `Bearer ${token}`
+    //     }
+    // }
     const getEnquiryData = async () => {
         console.log("Enquiry Data is called....")
-        let res = await axios.get(`${url}/allenquiry`, config)
-        console.log(res.data.enquiryData)
-        setEnquiryData(res.data.enquiryData)
+        let res = await axios.get(`${url}/allenquiry`)
+        console.log(res.data.allEnquiry)
+        // console.log(res.data.enquiryData)
+        setEnquiryData(res.data.allEnquiry)
     }
 
     useEffect(() => {
         getEnquiryData()
     }, []) // API call has to be made inside UseEffect () only
     console.log(enquiryData)
+    
     return (
         <>
-        <div className="  border-warning d-flex align-items-center gap-3 justify-content-center flex-column" style={{height:"80vh"}} >
+        <div className=" my-3 row mx-auto border-4  border-warning " >
         {/* Back */}
-        <div className=" d-flex justify-content-end  col-10 col-lg-6 mx-auto"
-        onClick={()=>navigate('/contact')}>
-        <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center">
+        <div className="border-4 d-flex  flex-column col-10 col-lg-8 mx-auto"
+        >
+            <div className="d-flex mb-3 justify-content-end"><Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center"
+            onClick={()=>navigate('/contact')}>
         <i className="fa-solid fa-angles-left fs-6"></i>
-        <div className="fs-6">Back</div></Button>
-        </div>
+        <div className="fs-6">Back</div></Button></div>
+        
+       
         
         { 
-             enquiryData == null ? 
+             enquiryData.length === 0 ? 
         <div className="d-flex justify-content-center">
-<Card className="col-10 col-lg-11 outline-none bg-transparent" >
-<Image
+        <Card className="col-10 col-lg-11 outline-none bg-transparent" >
+        <Image
         className="overlayImgBanner outline-none"
-        src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}            
-          
-         />
+        src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
+        />
          <div className="imageOverLay "></div>
          
       <Card.ImgOverlay className="d-flex flex-column border-4 align-items-center justify-content-center  text-center"
        style={{zIndex:"3"}}
       >
-        <Card.Text className="fs-md-1 fs-5 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
-        </Card.ImgOverlay>
-</Card>
+         <Card.Text className="fs-md-1 fs-5 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
+       </Card.ImgOverlay>
+        </Card>
         </div>
             //  <AboutUs_ImageBanner
             //  cardText={"No Enquires Generated So Far!!"} 
             //  banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
             //  />
              
-             
-             :
+            :
             <>
             <CustomizedTables enquiryData = {enquiryData}/>
             </>
         }
+         </div>
             </div>
      </>
     )

@@ -63,7 +63,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
 
     let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
     console.log(res)
-    setMovieData(res);
+    // setMovieData(res);
   }
 
   //updating a data 
@@ -72,7 +72,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
     let res = await fetch(`${url}/movie`, config) //API call to get all movie data
     let data = await res.json()
     console.log(data)
-    getMovieData(data)
+    getMovieData()
   }
 
   return (
@@ -107,7 +107,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
 
             {/* UPDATE MOVIE */}
             <Grid xs={6} item textAlign={"end"}>
-              <Button variant="contained" className='fs-6'
+              <Button variant="contained" className='fs-6' type="submit"
               style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-1" onClick={() => {
                 navigate('/allmovies')
               }}></i>UPDATE MOVIE</Button>

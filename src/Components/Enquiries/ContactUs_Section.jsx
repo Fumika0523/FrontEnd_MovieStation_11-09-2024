@@ -5,16 +5,14 @@ import * as Yup from "yup";
 import { url } from "../../utils/constant";
 import { Button, Form } from "react-bootstrap";
 
-
 function ContactUs_Section (){
-
 const navigate = useNavigate()
 
 const formSchema=Yup.object().shape({
   firstname:Yup.string().required(),
   lastname:Yup.string().required(),
   email:Yup.string().required(),
-  mobilePhoneNum:Yup.number().required(),
+  phoneNum:Yup.number().required(),
   subject:Yup.string().required(),
   description:Yup.string().required(),
 })
@@ -24,7 +22,7 @@ const formik = useFormik({
     firstname:"",
     lastname:"",
     email:"",
-    mobilePhoneNum:"",
+    phoneNum:"",
     subject:"",
     description:"",
   },
@@ -45,7 +43,8 @@ headers:{
 }
 
 const postEnquiryDetail=async(newEnquiry)=>{
-  const res = await axios.post(`${url}/contact`,newEnquiry,config) 
+  console.log(newEnquiry)
+  const res = await axios.post(`${url}/contact`,newEnquiry) 
   console.log(res)
   if(res.status == 200){
     navigate('/allenquiries') 
@@ -72,62 +71,61 @@ const postEnquiryDetail=async(newEnquiry)=>{
 
         <div className="row  text-secondary justify-content-center">
         {/* First Name */}
-        <div className="col-6 col-sm-6 col-lg-6  mb-1">
-        <label for="inputmobileNum4" className="form-label m-0">First Name</label>
-      
-        <input 
+        <Form.Group  className="col-6 col-sm-6 col-lg-6  mb-1">
+        <Form.Label htmlFor="firstname" className="f m-0">First Name</Form.Label>
+        <Form.Control 
         type="text"
-         className="form-control"
          id="firstname"
          name="firstname"
          value={formik.values.firstname}
          onChange={formik.handleChange}
-         aria-label="First name"
          />
-        </div>
+        </Form.Group >
 
       {/* Last Name */}
-        <div className="col-sm-6 col-6 col-lg-6 mb-1">
-        <label for="inputmobileNum4" className="form-label m-0">Last Name</label>
-        <input type="text" className="form-control" aria-label="Last name"
+        <Form.Group className="col-sm-6 col-6 col-lg-6 mb-1">
+        <Form.Label htmlFor="lastname" className=" m-0">Last Name</Form.Label>
+        <Form.Control type="text" 
          id="lastname"
          name="lastname"
          value={formik.values.lastname}
          onChange={formik.handleChange}
          />
-        </div>
+        </Form.Group>
         </div>
 
         {/* Email */}
         <div className="row text-secondary justify-content-center">
-         <div className="col-6 col-sm-6 col-lg-6 mb-1">
-         <label for="inputEmail4" className="form-label m-0">Email</label>
-        <input type="email" className="form-control" id="email"
+         <Form.Group className="col-6 col-sm-6 col-lg-6 mb-1">
+         <Form.Label htmlFor="email" className=" m-0">Email</Form.Label>
+        <Form.Control type="email" className="form-control" id="email"
           name="email"
           value={formik.values.email}
           onChange={formik.handleChange}
           />
-        </div>
-        <div className="col-6 col-sm-6 col-lg-6 mb-1">
-        <label for="inputmobileNum4" className="form-label m-0">Mobile Phone No.</label>
-        <input type="mobileNum" className="form-control" id="mobilePhoneNum"
-          name="mobilePhoneNum"
-          value={formik.values.mobilePhoneNum}
+        </Form.Group>
+
+        <Form.Group className="col-6 col-sm-6 col-lg-6 mb-1">
+        <Form.Label htmlFor="phoneNum" className=" m-0">Mobile Phone No.</Form.Label>
+        <Form.Control type="text"  id="phoneNum"
+          name="phoneNum"
+          value={formik.values.phoneNum}
           onChange={formik.handleChange}
           />
+        </Form.Group>
         </div>
-        </div>
+
         <div className="row text-secondary justify-content-center">
-  <div className="col-8 col-sm-12 col-12 mb-1">
-    <label for="inputSub" className="form-label m-0">Subject</label>
-    <input type="text" className="form-control" id="subject"
-     name="subject"
-     value={formik.values.subject}
-     onChange={formik.handleChange}
+         <div className="col-8 col-sm-12 col-12 mb-1">
+         <Form.Label htmlFor="subject" className="m-0">Subject</Form.Label>
+        <Form.Control type="text" id="subject"
+          name="subject"
+         value={formik.values.subject}
+          onChange={formik.handleChange}
      />
   </div>
-  <div className="col-8 col-sm-12 col-12">
-    <label for="inputAddress2" className="form-label m-0">Description</label>
+  <Form.Group className="col-8 col-sm-12 col-12">
+    <Form.Label htmlFor="description" className="m-0">Description</Form.Label>
     <textarea className="form-control" id="description" rows="3"
      name="description"
      value={formik.values.description}
@@ -137,11 +135,12 @@ const postEnquiryDetail=async(newEnquiry)=>{
     
     <p className="text-secondary col-12 text-start my-2" >Please enter the details of your request. <br />
     A member of our support staff will respond as soon as possible.</p>
-  </div>
+  </Form.Group>
+
   <div className="col-12 d-flex justify-content-start">
-    <Button variant="warning" className="px-4 mt-4">Submit</Button>
+    <Button type="submit" variant="warning" className="px-4 mt-4">Submit</Button>
   </div>
-  </div>
+        </div>
     </Form>
 </div>
 </>

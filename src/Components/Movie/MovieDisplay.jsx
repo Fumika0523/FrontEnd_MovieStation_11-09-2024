@@ -14,13 +14,6 @@ function MovieDisplay({mode})
 {
 console.log(mode)
 // console.log(mode.mode)
-const greyColor = grey[900]; // #212121
-const amberColor = amber[700];
-const redColor = red[900];
-const redColor1 = red[600];
-const pinkColor = pink[900]
-const darkGreyColor = grey[700];
-const blueGreyColor = blueGrey[500]
 
 const navigate = useNavigate()
 const dispatch= useDispatch()
@@ -145,9 +138,11 @@ flexDirection={"column"}
     // Delete Button
     deleteBtn={
     <Button variant="outline-none"
-    className='px-3'
+    className='m-0'
     onClick={()=> deleteMovie(element._id)}
-    style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
+    style={{
+        // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
+        color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
     >
     <i className="fa-solid fs-6 fa-trash"></i>
     </Button>}
@@ -155,8 +150,17 @@ flexDirection={"column"}
     // Redux
     reduxAddcartBtn={
         <Button
-        className='likeBtn text-center d-flex align-items-center py-2 px-3' variant=""
-        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b"}}
+         className='
+    
+         text-center d-flex align-items-center m-0'
+        // className='
+        //  likeBtn
+        //  text-center d-flex align-items-center m-0'
+          variant=""
+        style={{
+            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b"
+        }}
+
         onClick={()=>{handleAdditem(element)}}
       >
         <i className="fa-solid fs-5 text-center fa-cart-shopping text-warning "></i></Button>}
@@ -168,7 +172,7 @@ flexDirection={"column"}
     // Delete Button
     deleteBtn={
         <Button variant="outline-none"
-        className='px-3'
+        className='m-0'
         onClick={()=> deleteMovie(element._id)}
         style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
         >

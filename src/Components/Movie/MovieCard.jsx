@@ -86,7 +86,7 @@ console.log("isMovieOwner",isMovieOwner)
 // SPECIFIC
 const getSpecificMovieData = async () =>{
   console.log("Specific Movie Data is called....")
-  let res = await axios.get(`${url}/specificmovie`,config)
+  let res = await axios.get(`${url}/specificmovie`)
   console.log(res.data.movieData)
   setSpecificMovieData(res.data.movieData)
 }
@@ -125,10 +125,10 @@ console.log("Specific Movie Data",specificMovieData)
         title={moviename}
         subheader={rating}
       />
-    <CardMedia
+    <CardMedia 
     component="img" height="200" width="100%" image={movieposter} style={{objectFit:"cover"}} alt="movieposter"/>
      
-    <CardActions className='d-flex align-items-center justify-content-between'>
+    <CardActions className=' d-flex align-items-center justify-content-between'>
     
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
     
@@ -140,8 +140,9 @@ console.log("Specific Movie Data",specificMovieData)
     <>
     {/* Edit Icon */}
     <Button 
-    className=''
-    style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
+    style={{
+      // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
+      color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
     onClick={()=>navigate(`/editmovie/${_id}`)}>
     <i className="fa-solid fs-5 p-0 m-0 fa-pencil" ></i></Button>
 
@@ -154,26 +155,14 @@ console.log("Specific Movie Data",specificMovieData)
       </>
     )}
 
-    {/* Edit Icon */}
-    {/* <Button 
-    className='fs-6'
-    style={{color:mode=="light" ? greyColor:blueGreyColor}}
-    onClick={()=>navigate(`/editmovie/${_id}`)}>
-    <i className="fa-solid fa-pencil" ></i></Button> */}
-
-    {/* Delete Icon */}
-    {/* {deleteBtn}
-     */}
-
     {/* REDUX */}
     {reduxAddcartBtn}
 
     <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-    <ExpandMoreIcon />
+    <ExpandMoreIcon className=''/>
     </ExpandMore>
     </CardActions>
-    
-    <Collapse in={!expanded}>
+        <Collapse in={!expanded}>
     <CardContent>
 
     <Typography setCastShow={setCastShow} paragraph>{cast}</Typography>  

@@ -31,7 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CustomizedTables({enquiryData}) {
 
   return (
-    <TableContainer component={Paper} style={{width:"80%", margin:"2% 10%", }}>
+    <TableContainer component={Paper} className='border' style={{ }}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -44,14 +44,14 @@ export default function CustomizedTables({enquiryData}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {enquiryData.map((element) => (
+          {enquiryData?.map((element) => (
             <StyledTableRow>
               <StyledTableCell  align="center" scope="row">
                 {element.firstname}
               </StyledTableCell>
               <StyledTableCell align="center">{element.lastname}</StyledTableCell>
               <StyledTableCell align="center">{element.email}</StyledTableCell>
-              <StyledTableCell align="center">{element.mobilePhoneNum}</StyledTableCell>
+              <StyledTableCell align="center">{element.phoneNum}</StyledTableCell>
               <StyledTableCell align="center">{element.subject}</StyledTableCell>
               <StyledTableCell align="center">{element.description}</StyledTableCell>
             </StyledTableRow>
