@@ -45,6 +45,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
     onSubmit: (values) => {
       console.log(values)
       updateMovies(values)
+      navigate('/allmovies')
     }
   })
 
@@ -63,7 +64,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
 
     let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
     console.log(res)
-    // setMovieData(res);
+    setMovieData(res);
   }
 
   //updating a data 
@@ -108,9 +109,6 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
             {/* UPDATE MOVIE */}
             <Grid xs={6} item textAlign={"end"}>
               <Button variant="contained" className='fs-6' type="submit"
-              onClick={() => {
-                navigate('/allmovies')
-              }}
               style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-1" ></i>UPDATE MOVIE</Button>
             </Grid>
           </Grid>

@@ -42,4 +42,4 @@ phone no: 100100
 2. "The cart is empty" is not showing. 
 3. Unable to add the movie to the cart
 4. Unable to load a ALL Movies in 1 time, (have to refresh several times) -- clear
-5. NavBar when you click the button it should close automatically. same function call << Try>>
+5. NavBar when you click the button it should close automatically. same function call << << DONE

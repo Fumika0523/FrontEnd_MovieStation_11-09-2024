@@ -96,14 +96,14 @@ function Cartpage() {
                             handleRemoveFirstItem()
                         }}>Remove 1 item from beginning</Button>
                 } */}
-            <div className="mx-auto  border-danger d-flex justify-content-center ">
+            <div className="mx-auto  border-danger d-flex flex-column justify-content-center ">
                 {
-                    cartItems.length === null ?
+                    cartItems.length === 0 ?
                     <>
-                <div className="fs-1 text-center">Your Cart is Empty !!</div>
-                        <Image className="mx-auto"
+                <div className="fs-1 fw-bold text-center">Your Cart is Empty !!</div>
+                <Image className="mx-auto"
                          src={"https://images-prod.dazeddigital.com/1280/azure/dazed-prod/1100/3/1103540.jpg"} 
-                         style={{objectFit:"cover",width:"100%"}}
+                         style={{objectFit:"cover",width:"100%", height:"auto"}}
 
                         />
                 </> :
