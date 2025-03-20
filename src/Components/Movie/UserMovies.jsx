@@ -1,20 +1,39 @@
-import axios from 'axios'
-import { useState } from 'react'
-import React, { useEffect } from 'react'
-import { url } from '../../utils/constant'
-import MovieCard from './MovieCard'
-import { Button } from "@mui/material"
+import { useEffect, useState } from "react"
+import MovieCard from "./MovieCard"
+import axios from "axios"
+import { url } from "../../utils/constant"
+import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
+import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
+import { Navigate, useNavigate } from "react-router-dom"
+import { Box, Grid } from "@mui/material"
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 const UserMovies = ({mode}) => {
-
+const navigate = useNavigate()
+const dispatch= useDispatch()
+const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
+const [specificMovieData,setSpecificMovieData] = useState([])
+const [searchTerm, setSearchTearm] = useState("")
 const [userMovieData,setUserMovieData] = useState([])
 const token = sessionStorage.getItem('token')
 let config = {
     headers: {
     Authorization: `Bearer ${token}`
 }}
+
+// Check if the typed word is included to the all movie data
+const filterData = (searchText, allmovies) => {
+    //console.log(searchText,allmovies)
+    let fData = allmovies.filter((element) => element.moviename.toLowerCase().includes(searchTerm.toLowerCase()))
+    return fData
+    }
+    //console.log(searchTerm)
+
 const getUserMovieData = async()=>{
     console.log("Get Specific Movie Data......")
     let res = await axios.get(`${url}/specificmovie`,config)
@@ -26,16 +45,6 @@ useEffect(()=>{
     console.log("UserMovies")
 },[])
 console.log("UserMovieData",userMovieData)
-let displayStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "2.7%",
-    margin: "1% 4% 1% 4%",
-    // backgroundColor: "black",
-    position: "relative",
-    // border:"1px solid red",
-    cursor: "pointer",
-}
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB...")
@@ -64,36 +73,67 @@ const redColor1 = red[600];
 
     return (
     // <div>UserMovies</div>
-    <div style={displayStyle}>
+    <Box 
+    display="flex"
+    flexDirection={"column"}
+      alignItems="center"
+      justifyContent={"end"}
+      margin={2}
+      >
+        <Grid  container  className=" border-4"
+        // style={displayStyle} 
+        >
+            <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
+            {/* Search*/}
+            {/* <div className="d-flex justify-content-end "> */}
+            <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+            {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
+            {/* {
+            token &&
+            // <Button variant="warning" onClick={()=>navigate('/usermovies')} className="text-nowrap me-3">My Movies</Button>
+            } */}
+            <Button variant="secondary" onClick={()=>navigate('/allmovies')} className="text-nowrap me-3">Back to All Movies</Button>
+           <input
+            className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+            onChange={(e) => {
+            //console.log(e.target.value)
+            setSearchTearm(e.target.value)}} />
+        
+            <Button variant="outline-secondary" className="" type="submit"
+            onClick={() => {
+            console.log("Button is cliecked,searchTerm")
+            const data = filterData(searchTerm, movieData)//passing the data
+            console.log(data)
+            setFilterMovieData(data)
+            }}>Search</Button>
+            </div>
+            </Grid>
+        </Grid>
+        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"center"} marginTop={2}
+   >
         {
-            userMovieData?.map((element,index)=>(
+          userMovieData?.map((element,index)=>(
                 <MovieCard {...element} key={index} setUserMovieData={setUserMovieData} userMovieData={userMovieData} element={element} mode={mode} 
 
                 //Delete Button
                 deleteBtn={
-                    <Button
-                    className='fs-5'
-                    onClick={()=> deleteMovie(element._id)}
-                    style={{color:mode=="light" ? redColor1:redColor}}
-                    >
-                    <i className="fa-solid fa-trash"></i>
-                    </Button>}
+                    <IconButton  
+                    onClick={()=> deleteMovie(element._id)}>
+                    <DeleteIcon />
+                </IconButton>
+                }
                     
-    // Redux
-    reduxAddcartBtn={
-        <Button
-        className='fs-5'
-        style={{color:mode=="light" ? "black":"white"}}
-        onClick={()=>{handleAdditem(element)}}>
-        <i className="fa-solid fa-cart-shopping "></i></Button>}
-                        
-                /> 
-   
-                 )
-                )
-        }
-    </div>
-
+                // Redux
+                reduxAddcartBtn={
+                <IconButton   
+                onClick={()=>{handleAdditem(element)}}>
+                 <ShoppingCartIcon />
+                </IconButton>
+            }
+     /> 
+   ))}
+   </Grid>
+</Box>
   )
 }
 

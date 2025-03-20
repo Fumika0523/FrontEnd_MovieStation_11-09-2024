@@ -39,11 +39,11 @@ console.log(cartItems)
         //console.log(movieItem) //the data you going to send to the add order
         // api call for updating the backend >> saving to the DB
         // Buy now >> Order Page || Sumary page
-        let res = await axios.post(`${url}/addorder`,{movies:cartItems},config)
+        let res = await axios.post(`${url}/addorder`,{movies:cartItems})
         console.log(res)
 
         if(res.status == 200){//success responses
-          await axios.delete(`${url}/clearcart`,config); // delete api call
+          await axios.delete(`${url}/clearcart`); // delete api call
           // clear the redux store
           dispatch(removeItem())
           navigate(`/ordersummary`) 

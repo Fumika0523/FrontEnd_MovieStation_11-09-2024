@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { url } from "../../utils/constant";
-import { Button,Stack, Container, Grid, Typography } from '@mui/material';
+import { Button,Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 
 
@@ -14,18 +14,19 @@ export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
 const amberColor = amber[500];
 
-const formSchema=Yup.object().shape({
-  moviename:Yup.string().min(5,"Too Short"),
-  movieposter:Yup.string().min(5,"Too Short").max(20,"Movie Name too long"),
+// 
+const formSchema = Yup.object().shape({
+  moviename:Yup.string().required().min(5,"Too Short"),
+  movieposter:Yup.string().required().min(5,"Too Short"),
   rating:Yup.number().required().positive(),
-  summary:Yup.string().min(5,"Too Short").max(250,"Summary Too long"),
-  cast:Yup.string().min(5,"Too Short").max(250,"Too Long"),
-  trailer:Yup.string().required(),
-  publishYear:Yup.string().required(),
-  likeNum:Yup.string().required(),
-  disLikeNum:Yup.string().required(),
-  genres:Yup.number().required(),
   category:Yup.string().required(),
+  cast:Yup.string().required().min(5,"Too Short").max(250,"Too Long"),
+  publishYear:Yup.string().required().min(5,"Too Short"),
+  likeNum:Yup.string().required().min(5,"Too Short"),
+  disLikeNum:Yup.string().required().min(5,"Too Short"),
+  genres:Yup.string().required().min(5,"Too Short"),
+  trailer:Yup.string().required().min(5,"Too Short"),
+  summary:Yup.string().min(5,"Too Short").max(250,"Summary Too long").required(),
 })
 
 const formik=useFormik({
@@ -75,7 +76,6 @@ setMovieData(res)
     getMovieData()
   }
 
-
   return (
     <>
     <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
@@ -102,15 +102,17 @@ setMovieData(res)
       <Grid container  marginBottom={3} >
       <Grid  xs={6} item textAlign={"start"}>
       {/* Back */}
-      <Button variant="contained" className='fs-6'
+      <Button variant="contained" className='fs-6' type="button"
       style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>BACK</Button>
       </Grid>
       <Grid xs={6} item textAlign={"end"}>
+
       {/* ADD MOVIE */}
-        <Button onClick={() => {
-                navigate('/allmovies')
-              }}
-              variant="contained" type="submit" className='fs-6 text-black'  style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
+        <Button type="submit"
+        //  onClick={() => {
+        //         navigate('/allmovies')
+        //       }}
+          variant="contained"  className='fs-6 text-black'  style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
       </Grid>
       </Grid>
       <Grid container spacing={3} >
@@ -140,10 +142,9 @@ setMovieData(res)
           id="movieposter"
           onChange={formik.handleChange}
           defaultValue={formik.values.movieposter}
-          
         />
         {formik.errors.movieposter && formik.touched.movieposter? (
-          <div>{formik.errors.moviename}</div>
+          <div style={{color:"white"}}>{formik.errors.moviename}</div>
         ) : null }
         </Grid>
 
@@ -170,6 +171,9 @@ setMovieData(res)
           required
           label="Category"
           name="category" id="category"  onChange={formik.handleChange} value={formik.values.category} /> 
+            {formik.errors.category && formik.touched.category? (
+          <div>{formik.errors.category}</div>
+        ) : null }
           </Grid>
 
            {/* MOVIE Cast */}
@@ -179,6 +183,9 @@ setMovieData(res)
             fullWidth
             label="Cast"
             name="cast" id="cast"  onChange={formik.handleChange} value={formik.values.cast} /> 
+              {formik.errors.cast && formik.touched.cast? (
+          <div>{formik.errors.cast}</div>
+        ) : null }
             </Grid>
 
           {/* Publish Year */}
@@ -188,6 +195,9 @@ setMovieData(res)
           required
           label="Publish Year"
           name="publishYear" id="publishYear"  onChange={formik.handleChange} value={formik.values.publishYear}/>
+          {formik.errors.publishYear && formik.touched.publishYear? (
+          <div>{formik.errors.publishYear}</div>
+        ) : null }
           </Grid>
 
         {/* Like Num */}
@@ -197,6 +207,9 @@ setMovieData(res)
           required
           label="Like Number"
           name="likeNum" id="likeNum" onChange={formik.handleChange} value={formik.values.likeNum} />
+          {formik.errors.likeNum && formik.touched.likeNum? (
+          <div>{formik.errors.likeNum}</div>
+        ) : null }
           </Grid>
 
         {/* DISLIKE NUM */}
@@ -206,6 +219,9 @@ setMovieData(res)
           required
           label="Dislike Number"
           name="disLikeNum" id="disLikeNum"  onChange={formik.handleChange} value={formik.values.disLikeNum} />
+          {formik.errors.disLikeNum && formik.touched.disLikeNum? (
+          <div>{formik.errors.disLikeNum}</div>
+        ) : null }
         </Grid>
 
         {/* MOVIE GEnres */}
@@ -215,6 +231,9 @@ setMovieData(res)
           required
           label="Movie Genres"
           name='genres' id="genres"  onChange={formik.handleChange} value={formik.values.genres} /> 
+          {formik.errors.genres && formik.touched.genres? (
+          <div>{formik.errors.genres}</div>
+        ) : null }
           </Grid>
 
            {/* MOVIE TRAILER */}
@@ -224,12 +243,18 @@ setMovieData(res)
           required
           label="Movie Trailer"
           name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer}  /> 
+            {formik.errors.trailer && formik.touched.trailer? (
+          <div>{formik.errors.trailer}</div>
+        ) : null }
            </Grid>
 
          {/* Summary */}
          <Grid xs={12} sm={12} md={6} item >
         <TextField fullWidth required id="summary" 
           label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
+          {formik.errors.summary && formik.touched.summary? (
+          <div>{formik.errors.summary}</div>
+        ) : null }
            </Grid>
       </Grid>
    </Box>

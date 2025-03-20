@@ -21,6 +21,8 @@ import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useEffect } from 'react';
+import ModeIcon from '@mui/icons-material/Mode';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
@@ -104,9 +106,9 @@ console.log("Specific Movie Data",specificMovieData)
    return (
 <>
    {/* <Grid  container border={2} sx={{display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}> */}
-    <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2}>
+    <Grid  lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2}>
     <Card 
-    style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto"}}
+    style={{maxWidth:"96%",minHeight:"460px",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto"}}
     //md={{width:"590px"}}
    >
       <CardHeader
@@ -128,8 +130,8 @@ console.log("Specific Movie Data",specificMovieData)
     <CardMedia 
     component="img" height="200" width="100%" image={movieposter} style={{objectFit:"cover"}} alt="movieposter"/>
      
-    <CardActions className=' d-flex align-items-center justify-content-between'>
-    
+    <CardActions disableSpacing className=' border-danger d-flex align-items-center'>
+   
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
     
     {/* movieData is 1 data that includes all movieData,
@@ -139,12 +141,16 @@ console.log("Specific Movie Data",specificMovieData)
     {token && isMovieOwner ? (
     <>
     {/* Edit Icon */}
-    <Button 
+    <IconButton onClick={()=>navigate(`/editmovie/${_id}`)}>
+      <ModeIcon />
+    </IconButton>
+
+    {/* <Button 
     style={{
       // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
       color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
     onClick={()=>navigate(`/editmovie/${_id}`)}>
-    <i className="fa-solid fs-5 p-0 m-0 fa-pencil" ></i></Button>
+    <i className="fa-solid fs-5 p-0 m-0 fa-pencil" ></i></Button> */}
 
     {/* Delete Icon */}
     {deleteBtn}
@@ -164,17 +170,13 @@ console.log("Specific Movie Data",specificMovieData)
     </CardActions>
         <Collapse in={!expanded}>
     <CardContent>
-
-    <Typography setCastShow={setCastShow} paragraph>{cast}</Typography>  
-    
+    <Typography  sx={{ color: 'text.secondary' }} setCastShow={setCastShow} paragraph>{cast}</Typography>  
     </CardContent>
     </Collapse>
 
     <Collapse in={expanded}>
     <CardContent>
-
     <Typography setSummaryShow={setSummaryShow} paragraph>{summary}</Typography>
-    
     </CardContent>
     </Collapse>
     </Card>

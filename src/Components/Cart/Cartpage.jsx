@@ -22,7 +22,7 @@ function Cartpage() {
         }
     }
     const handleClearitem = async () => {
-        let res = await axios.delete(`${url}/clearcart`, config)
+        let res = await axios.delete(`${url}/clearcart`)
         console.log(res)
         if (res.data) {
             dispatch(removeItem())

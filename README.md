@@ -36,3 +36,10 @@ filter.map
 Username:user100@gmail.com
 pw: user100@gmail.com
 phone no: 100100
+
+<!-- ISSUE -->
+1. Unable to add the New Movie >>> Error is not showing ? - clear <<< Change it to red color 
+2. "The cart is empty" is not showing. 
+3. Unable to add the movie to the cart
+4. Unable to load a ALL Movies in 1 time, (have to refresh several times) -- clear
+5. NavBar when you click the button it should close automatically. same function call << Try>>

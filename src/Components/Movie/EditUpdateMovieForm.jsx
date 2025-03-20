@@ -108,9 +108,10 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
             {/* UPDATE MOVIE */}
             <Grid xs={6} item textAlign={"end"}>
               <Button variant="contained" className='fs-6' type="submit"
-              style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-1" onClick={() => {
+              onClick={() => {
                 navigate('/allmovies')
-              }}></i>UPDATE MOVIE</Button>
+              }}
+              style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-1" ></i>UPDATE MOVIE</Button>
             </Grid>
           </Grid>
 

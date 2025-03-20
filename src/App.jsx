@@ -106,7 +106,6 @@ const [mode, setMode]=useState("dark")
       <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }/>
-
       <Route path="/signup" element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
       <Route path="allenquiries" element={<AllEnquiries/>}/>
@@ -130,9 +129,7 @@ const [mode, setMode]=useState("dark")
         <h1>Dont show</h1> 
     </>
    } */}
-
-    {/* <div className="border border-warning container-fluid" style={{position:"relative"}}> */}
-    {/* </div> */}
+    <Footer></Footer>
     {/* </Container> */}
     </Provider>
   </ThemeProvider>
@@ -140,3 +137,11 @@ const [mode, setMode]=useState("dark")
   )}
 export default App
 
+// function App(){
+//   return(
+//     <>
+//     <h1>Hello World</h1>
+//     </>
+//   )
+// }
+// export default  App

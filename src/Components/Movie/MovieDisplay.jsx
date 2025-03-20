@@ -8,7 +8,9 @@ import { Button } from "react-bootstrap"
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function MovieDisplay({mode}) 
 {
@@ -137,33 +139,40 @@ flexDirection={"column"}
                         
     // Delete Button
     deleteBtn={
-    <Button variant="outline-none"
-    className='m-0'
-    onClick={()=> deleteMovie(element._id)}
-    style={{
-        // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-        color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
-    >
-    <i className="fa-solid fs-6 fa-trash"></i>
-    </Button>}
+    // <Button variant="outline-none"
+    // className='m-0'
+    // onClick={()=> deleteMovie(element._id)}
+    // style={{
+    //     // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
+    //     color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
+    // >
+    // <i className="fa-solid fs-5 fa-trash"></i>
+    // </Button>
+    <IconButton        
+    onClick={()=> deleteMovie(element._id)}>
+        <DeleteIcon />
+    </IconButton>
+}
     
     // Redux
     reduxAddcartBtn={
-        <Button
-         className='
-    
-         text-center d-flex align-items-center m-0'
-        // className='
-        //  likeBtn
-        //  text-center d-flex align-items-center m-0'
-          variant=""
-        style={{
-            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b"
-        }}
-
-        onClick={()=>{handleAdditem(element)}}
-      >
-        <i className="fa-solid fs-5 text-center fa-cart-shopping text-warning "></i></Button>}
+    //     <Button
+    //      className='
+    //      text-center '
+    //     // className='
+    //     //  likeBtn
+    //     //  text-center d-flex align-items-center m-0'
+    //       variant=""
+    //     style={{
+    //         // backgroundColor:mode=="light" ? "transparent":"#3b3b3b"
+    //     }}
+    //     onClick={()=>{handleAdditem(element)}}
+    //   >
+    //     <i className="fa-solid fs-5 text-center fa-cart-shopping text-warning "></i></Button>
+    <IconButton onClick={()=>{handleAdditem(element)}}>
+    <ShoppingCartIcon />
+    </IconButton>
+        }
         
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (
@@ -171,22 +180,26 @@ flexDirection={"column"}
                             
     // Delete Button
     deleteBtn={
-        <Button variant="outline-none"
+        <Button variant=""
         className='m-0'
         onClick={()=> deleteMovie(element._id)}
-        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
+        style={{
+            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
+            color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
         >
-        <i className="fa-solid fs-6 fa-trash"></i>
+        <i className="fa-solid fs-5 fa-trash"></i>
         </Button>}
 
     // Redux
     reduxAddcartBtn={
         <Button
         className='fs-5 likeBtn px-3' variant=""
-        style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",padding:"0.8% 0"}}
+        style={{
+            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
+            }}
         onClick={()=>{handleAdditem(element)}}
       >
-        <i className="fa-solid fa-cart-shopping text-warning "></i></Button>}/>
+        <i className="fa-solid fs-5 fa-cart-shopping text-warning "></i></Button>}/>
     ))}
 </Grid>
 </Box>
