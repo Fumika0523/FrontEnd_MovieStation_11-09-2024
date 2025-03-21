@@ -46,8 +46,8 @@ function MovieTrailer({mode}) {
           className='mx-auto  border-4 border-warning'
           >
             {/* Top */}
-            <Row className='mx-auto mb-4  border-3' >
-            <Col className="col-8  d-flex flex-column aliten-items-center justify-content-center  border-warning border-2">
+            <Row className='mx-auto mx-md-5 mb-4  border-3' >
+            <Col className="col-8 mt-2 d-flex flex-column aliten-items-center justify-content-center  border-warning border-2">
             <div className='fs-1'>{movieInfo.moviename}</div>
             <div className='fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
             <Col className="col-4  d-flex align-items-start flex-column justify-content-center border-warning border-2">
@@ -60,14 +60,14 @@ function MovieTrailer({mode}) {
             </Col>
             </Row>
 
-            <Row className='mx-auto mb-4 border-3' >
+            <Row className='mx-auto mx-md-5 mb-4 border-3' >
             <Col className=' col-12 mx-auto'>
               <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
             </Col>
             </Row>
             
             {/* Middle */}
-            <Row className='mb-4 mx-auto border-primary border-3'>
+            <Row className='mb-4 mx-auto mx-md-5 border-primary border-3'>
               {/* LEFT */}
               <Col className='col-lg-4 col-sm-10 col-12 mx-auto border-3 d-flex justify-content-center align-items-center '>
                 {/* Image */}
@@ -77,7 +77,7 @@ function MovieTrailer({mode}) {
 
               {/* RIGHT */}
               <Col  style={{backgroundColor:" rgb(16, 23, 35)",borderRadius:"3%"}} 
-              className='col-lg-6 d-flex flex-column justify-content-center pt-2 col-sm-10 col-12 mx-auto  border-3 border-danger '>
+              className='col-lg-6 d-flex flex-column justify-content-center pt-2 col-sm-10 col-12 mx-auto mb-md-1 mb-3 border-3 border-danger '>
                 <div className='mb-2 '>{movieInfo.summary}</div>
                 <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
                 <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>

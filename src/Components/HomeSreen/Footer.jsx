@@ -1,9 +1,11 @@
+import { Container } from "react-bootstrap"
+
 function Footer (){
     
     return(
         <>
-        <footer className="mt-5 border-top border row mx-auto d-flex flex-column border-secondary pb-3 w-100" >
-            <div className="d-none row mx-auto d-md-flex d-sm-none  -3 my-4 flex-row  align-items-center justify-content-between">
+        <div className="mt-5 border-top row mx-auto d-flex flex-column border-secondary pb-3" >
+            <div className="d-none  border-4  d-md-flex d-sm-none  -3 my-4 flex-row  align-items-start justify-content-between">
             {/* 1st */}
             <div className="col-2">
                 <h6>Top 5 movies</h6>
@@ -46,11 +48,10 @@ function Footer (){
                 <li  className="footerListStyle">A Family Affair</li>
             </div>
         </div>
-            <div className="m-3 d-flex align-items-center justify-content-center flex-row ">
-            <div> © 2024 Copyright : </div>    
-            <a className="ms-1" href="">MovieStation.com</a>
+            <div className="my-3 border-danger border-4 row mx-auto ">
+            <div className="text-center"> © 2024 Copyright :<a className="ms-1" href="">MovieStation.com</a></div>    
             </div>
-        </footer>
+        </div>
         </>
     )
 }
