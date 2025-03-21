@@ -20,7 +20,6 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa";
 
-
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
   const amberColor = amber[500];
@@ -75,7 +74,7 @@ function NavBar({ mode, setMode }) {
         <Container fluid className="mx-2">
           {/* Brand */}
           <Navbar.Brand className="fw-bold">
-              <i  style={{color: mode == "light" ? amberColor1 :amberColor}} className="fa-solid  fa-couch"></i>
+              <i  style={{color: mode == "light" ? amberColor1 :amberColor}} className = "fa-solid  fa-couch"></i>
               <i className="fa-solid  fa-wine-glass" style={{color: mode == "light" ? amberColor1 :amberColor}}></i>
               <span className="fs-4 ms-1"
                 style={{ color: mode == "light" ? "black" : amberColor }}>MovieStation</span>
@@ -109,7 +108,7 @@ function NavBar({ mode, setMode }) {
               {/* <!-- About Us --> */}
               <Nav.Link href="#" >
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex text-nowrap justify-content-center align-items-end"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                  onClick={() => navigate('/about')} 
                   >
@@ -124,7 +123,7 @@ function NavBar({ mode, setMode }) {
               <Nav.Link href="#" className=""
               >
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex text-nowrap justify-content-center align-items-end"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                   onClick={() => navigate('/allmovies')}
                 >
@@ -141,7 +140,7 @@ function NavBar({ mode, setMode }) {
                 token &&
                 <Nav.Link href="#">
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex justify-content-center align-items-end text-nowrap"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                   onClick={() => navigate('/addmovie')}
                     >

@@ -9,9 +9,11 @@ import Button from 'react-bootstrap/Button';
 import { url } from '../../utils/constant';
 import axios from 'axios';
 import { FaStar } from "react-icons/fa";
-
+import {grey,yellow} from "@mui/material/colors";
 
 function MovieTrailer({mode}) {
+  const darkBg = grey[900]
+  const lightBg = yellow[50]
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState();
 
@@ -46,11 +48,11 @@ function MovieTrailer({mode}) {
           className='mx-auto  border-4 border-warning'
           >
             {/* Top */}
-            <Row className='mx-auto mx-md-5 mb-4  border-3' >
+            <Row className='mx-auto mx-md-5 border-3' >
             <Col className="col-8 mt-2 d-flex flex-column aliten-items-center justify-content-center  border-warning border-2">
-            <div className='fs-1'>{movieInfo.moviename}</div>
-            <div className='fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
-            <Col className="col-4  d-flex align-items-start flex-column justify-content-center border-warning border-2">
+            <div className='ps-1 fs-1'>{movieInfo.moviename}</div>
+            <div className='ps-1 fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
+            <Col className="col-3  d-flex align-items-start flex-column justify-content-center border-warning border-2">
             <div  className='fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
             <div className=" d-flex flex-row justify-content-center align-items-center border-warning -2">
               <FaStar className='text-warning fs-4'/>
@@ -58,27 +60,33 @@ function MovieTrailer({mode}) {
               <span className='text-secondary'> /10</span> 
             </div>
             </Col>
+            <Col className='col-1 d-flex align-items-start flex-column justify-content-center border-warning border-2'>
+            <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='w-100'
+            onClick={() => navigate('/allmovies')} >
+              Back
+            </Button>
+            </Col>
             </Row>
 
             <Row className='mx-auto mx-md-5 mb-4 border-3' >
-            <Col className=' col-12 mx-auto'>
+            <Col className=' col-12'>
               <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
             </Col>
             </Row>
             
             {/* Middle */}
-            <Row className='mb-4 mx-auto mx-md-5 border-primary border-3'>
+            <Row className='mb-4   mx-auto mx-md-5 border-primary border-3'>
               {/* LEFT */}
-              <Col className='col-lg-4 col-sm-10 col-12 mx-auto border-3 d-flex justify-content-center align-items-center '>
+              <Col className='col-lg-4 col-12 mx-auto border-3 d-flex justify-content-center align-items-center mb-md-1  mb-2'>
                 {/* Image */}
-                <Image className='' src={movieInfo?.movieposter} 
-                style={{ width: "100%", height: "auto" }} />
+                <Image className='w-100' style={{height:"100%"}} src={movieInfo?.movieposter} />
               </Col>
 
               {/* RIGHT */}
-              <Col  style={{backgroundColor:" rgb(16, 23, 35)",borderRadius:"3%"}} 
-              className='col-lg-6 d-flex flex-column justify-content-center pt-2 col-sm-10 col-12 mx-auto mb-md-1 mb-3 border-3 border-danger '>
-                <div className='mb-2 '>{movieInfo.summary}</div>
+              <Col           
+              className='col-lg-6 d-flex flex-column ps-3 pt-2 justify-content-center  col-sm-10 col-12 mx-auto mb-md-1  align-items-center mb-2'
+              style={{ backgroundColor: mode === "light" ? "rgb(248, 248, 245)": "rgb(8, 11, 13)" ,borderRadius:"3%"}}>
+                <div className='mb-3 '>{movieInfo.summary}</div>
                 <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
                 <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>
               <div className='mb-2 d-flex w-100 text-wrap flex-column'><span className='mb-1 fontColorTrailerFont '>CATEGORY</span><span className='text-wrap'>{movieInfo.category}</span></div>
@@ -90,22 +98,36 @@ function MovieTrailer({mode}) {
               {/* List */}
               <Col className="col-md-6 col-6 col-lg-12">
                 <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
-                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white",}}> <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
+                  // style={{backgroundColor:mode = "light" ? "pink":"white",
+                  //   color:mode = "light" ? "rgb(197, 199, 203)":"#25292e",
+                  // }}
+                  style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                    color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
+                  > <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
                 </Col>
               <Col className='col-md-6 col-lg-12'>
                   {/* Seen all */}
-                <Button variant="outline-none" className="py-3   trailerBtn w-100 d-flex mb-3"
-                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
+                <Button variant="outline-none" className="py-3 trailerBtn w-100 d-flex mb-3"
+                   style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                    color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
+                    > <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
               </Col>
               <Col className='col-md-6 col-lg-12' >
                   {/*Like*/}
                    <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex  mb-3"
-                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}} > <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
+                 style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                  color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                  borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}} > 
+                  <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
                   </Col>
                   <Col className='col-md-6 col-lg-12'>
                   {/* DisLike */}
                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex mb-3" 
-                  style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
+                  style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                    color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
               </Col>
               </Row>
               </Col>

@@ -101,16 +101,16 @@ const [mode, setMode]=useState("dark")
      {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
       <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
-      <Route path='/services' element={<Service_Section/>}/>
-      <Route path='/contact' element={<ContactUs_Section/>}/>
-      <Route path="/movietrailer/:id" element={<MovieTrailer movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <Route path='/services' mode={mode} element={<Service_Section/>}/>
+      <Route path='/contact'  mode={mode} element={<ContactUs_Section/>}/>
+      <Route path="/movietrailer/:id" element={<MovieTrailer mode={mode} movieData={movieData} setMovieData={setMovieData}/>}/>
+      <Route path="/signin" mode={mode} element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }/>
-      <Route path="/signup" element={<SignUp/>}/>
+      <Route path="/signup" mode={mode} element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
-      <Route path="allenquiries" element={<AllEnquiries/>}/>
-      <Route path="/cartpage" element={<Cartpage/>}/>
-      <Route path="/table" element={<Table/>}/> 
+      <Route path="allenquiries" mode={mode} element={<AllEnquiries/>}/>
+      <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
+      <Route path="/table" mode={mode} element={<Table/>}/> 
     
     </Routes>
 {/* Ternary operator */}
