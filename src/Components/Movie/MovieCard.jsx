@@ -88,7 +88,7 @@ console.log("isMovieOwner",isMovieOwner)
 // SPECIFIC
 const getSpecificMovieData = async () =>{
   console.log("Specific Movie Data is called....")
-  let res = await axios.get(`${url}/specificmovie`)
+  let res = await axios.get(`${url}/specificmovie`,config)
   console.log(res.data.movieData)
   setSpecificMovieData(res.data.movieData)
 }

@@ -2,7 +2,7 @@ function Footer (){
     
     return(
         <>
-        <footer className="mt-5 border-top row mx-auto d-flex flex-column border-secondary pb-3 w-100" >
+        <footer className="mt-5 border-top border row mx-auto d-flex flex-column border-secondary pb-3 w-100" >
             <div className="d-none row mx-auto d-md-flex d-sm-none  -3 my-4 flex-row  align-items-center justify-content-between">
             {/* 1st */}
             <div className="col-2">

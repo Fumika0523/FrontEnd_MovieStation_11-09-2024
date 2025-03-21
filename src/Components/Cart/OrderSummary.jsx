@@ -16,7 +16,7 @@ function OrderSummary(){
         Authorization:`Bearer ${token}`
       }}
 
-    const handleGetOrder=async()=>{
+    const handleGetOrder= async ()=>{
         let res = await axios.get(`${url}/order`,config)
         console.log(res.data.orderData)
        setOrderData(res.data.orderData)

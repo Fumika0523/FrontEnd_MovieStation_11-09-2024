@@ -189,6 +189,7 @@ overflow-x:hidden;
     border-radius: 2%;
   }
 
+
 .inputDesign{
   background-color:#26292b;
   border-color: black;
@@ -215,9 +216,10 @@ background-color: 	#4d4d4d !important;
 
 
 .fontColorTrailerFont{
-color: rgb(142, 143, 148);
-font-size: 20px;
-font-weight: bold;
+color: #6a7c8f;
+font-weight: "700";
+text-transform: "uppercase";
+font-size: "16px";
 }
 
 .trailerBtn{

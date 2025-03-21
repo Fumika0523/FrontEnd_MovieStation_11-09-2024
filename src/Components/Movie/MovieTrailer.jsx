@@ -8,6 +8,8 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import { url } from '../../utils/constant';
 import axios from 'axios';
+import { FaStar } from "react-icons/fa";
+
 
 function MovieTrailer({mode}) {
   const { id } = useParams();
@@ -28,6 +30,7 @@ function MovieTrailer({mode}) {
     console.log("Trailer data is called....")
     let res = await axios.get(`${url}/movie/${id}`, config)
     console.log(res.data[0])
+    console.log(res)
     setMovieInfo(res.data[0])
   }
   useEffect(() => {
@@ -40,86 +43,79 @@ function MovieTrailer({mode}) {
         movieInfo &&
 
         <Container fluid
-          className=' -warning'
+          className='mx-auto  border-4 border-warning'
           >
             {/* Top */}
-            <Row className='mx-auto my-4  border-3'>
+            <Row className='mx-auto mb-4  border-3' >
+            <Col className="col-8  d-flex flex-column aliten-items-center justify-content-center  border-warning border-2">
+            <div className='fs-1'>{movieInfo.moviename}</div>
+            <div className='fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
+            <Col className="col-4  d-flex align-items-start flex-column justify-content-center border-warning border-2">
+            <div  className='fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
+            <div className=" d-flex flex-row justify-content-center align-items-center border-warning -2">
+              <FaStar className='text-warning fs-4'/>
+              <span className="fw-bold mx-1" style={{fontSize:"20px"}}>{movieInfo.rating}</span>
+              <span className='text-secondary'> /10</span> 
+            </div>
+            </Col>
+            </Row>
+
+            <Row className='mx-auto mb-4 border-3' >
             <Col className=' col-12 mx-auto'>
               <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
             </Col>
             </Row>
-          
+            
             {/* Middle */}
-            <Row className=' px-sm-5 my-4 border-primary border-3'>
+            <Row className='mb-4 mx-auto border-primary border-3'>
               {/* LEFT */}
-              <Col className='mb-3 col-lg-4 col-sm-10 col-12 mx-auto border-3 '>
-                <Row className='d-flex mx-auto flex-column'>
+              <Col className='col-lg-4 col-sm-10 col-12 mx-auto border-3 d-flex justify-content-center align-items-center '>
                 {/* Image */}
-                <Image className='align-self-center my-3' src={movieInfo?.movieposter} roundedCircle style={{ width: "90%", height: "350px" }} />
-                </Row>
-                {/* Buttons */}
-                <Row className='d-flex  mx-auto border-2  flex-row  justify-content-center align-items-center '>
-                  {/* List */}
-                  <Col className="col-sm-5 col-6">
-                  <Button variant="outline-none" className="py-3 w-100 d-flex trailerBtn mb-3"
+                <Image className='' src={movieInfo?.movieposter} 
+                style={{ width: "100%", height: "auto" }} />
+              </Col>
+
+              {/* RIGHT */}
+              <Col  style={{backgroundColor:" rgb(16, 23, 35)",borderRadius:"3%"}} 
+              className='col-lg-6 d-flex flex-column justify-content-center pt-2 col-sm-10 col-12 mx-auto  border-3 border-danger '>
+                <div className='mb-2 '>{movieInfo.summary}</div>
+                <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
+                <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>
+              <div className='mb-2 d-flex w-100 text-wrap flex-column'><span className='mb-1 fontColorTrailerFont '>CATEGORY</span><span className='text-wrap'>{movieInfo.category}</span></div>
+              </Col>
+
+              {/* BUTTONS */}
+              <Col className='col-lg-2 col-md-10 col-12 mx-auto mt-1'>
+              <Row className='align-items-center mx-auto d-flex justify-content-evenly '>
+              {/* List */}
+              <Col className="col-md-6 col-6 col-lg-12">
+                <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white",}}> <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
-                  </Col>
-                  <Col className=" col-sm-5 col-6">
+                </Col>
+              <Col className='col-md-6 col-lg-12'>
                   {/* Seen all */}
-                  <Button variant="outline-none" className="py-3 px-3 trailerBtn w-100 d-flex mb-3"
+                <Button variant="outline-none" className="py-3   trailerBtn w-100 d-flex mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
-                  </Col>
-                  </Row>
-                  <Row className='d-flex  mx-auto border-2  flex-row  justify-content-center align-items-center '>
-                  <Col className="col-sm-5">
+              </Col>
+              <Col className='col-md-6 col-lg-12' >
                   {/*Like*/}
-                  <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex  mb-3"
+                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex  mb-3"
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}} > <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
                   </Col>
-                  <Col className="col-sm-5">
-                  {/* disLike */}
+                  <Col className='col-md-6 col-lg-12'>
+                  {/* DisLike */}
                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex mb-3" 
                   style={{backgroundColor:mode=="light" ? "transparent":"#3b3b3b",color:mode=="light" ? "rgb(66, 66, 66)":"white"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
-                   </Col>
-                  </Row>
               </Col>
-
-              {/* RIGHT */}
-              <Col className='col-lg-8 col-sm-10 col-12 mx-auto  border-3 border-danger'>
-              {/* Title */}
-              <Row className=' mx-auto d-flex -warning border-2 align-items-center justfify-content-start' >
-                <Col className="fs-1 col-sm-8 col-md-6  border-warning border-2  col-12 fw-bold">{movieInfo.moviename}</Col>
-                <Col className="fs-3 col-sm-4 col-md-6  border-warning border-2 col-12 text-secondary">({movieInfo.publishYear})</Col>
-              </Row>
-
-              {/* Content */}
-              <Row className='mx-auto d-flex flex-row  border-white border-2 align-items-start' >
-              {/* LEFT */}
-              <Col className="col-sm-6 col-12 p-3  border-danger border-2" style={{textAlign:"justify"}}>{movieInfo.summary}
-              </Col>
-              
-              {/* RIGHT */}
-              <Col className='col-sm-6 col-12 py-3 d-flex flex-column justify-content-center align-items-center border-' style={{textAlign:"justify"}}>
-              {/* <div className='row mx-auto w-100 text-start'> */}
-              <div className='d-flex w-100 flex-column mb-3'> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
-              <div className='d-flex w-100 flex-column mb-3'><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>
-              <div className='d-flex w-100 text-wrap flex-column mb-3'><span className='mb-1 fontColorTrailerFont '>CATEGORY</span><span className='text-wrap'>{movieInfo.category}</span></div>
-              {/* </div> */}
-              </Col>
-              <div className='d-flex justify-content-end' >
-                <Button style={{marginTop:"10%"}} variant="secondary" className="px-4 py-2"  onClick={() => {
-                  navigate(`/`)
-                }}>Back</Button   >
-                </div>
               </Row>
               </Col>
-            </Row>
+              </Row>
         </Container>
       }
 
       {/* Carousel */}
       {/* <div> */}
-      <Carousel className='d-none d-sm-block row border-4 mx-auto border-warning my-5'>
+      <Carousel className='d-none d-sm-block row -4 mx-auto border-warning my-5'>
         <Carousel.Item>
           <div className='d-flex gap-4 mx-3'>
             <img src="https://www.barbie-themovie.com/images/share.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
