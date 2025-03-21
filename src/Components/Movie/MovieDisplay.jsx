@@ -34,10 +34,12 @@ return fData
 //console.log(searchTerm)
 
 const token = sessionStorage.getItem('token')
+console.log("token",token)
 let config = {
     headers: {
     Authorization: `Bearer ${token}`
 }}
+
 // ALL
 const getMovieData = async () => {
     console.log("Movie Data is called.");
@@ -77,7 +79,7 @@ const deleteMovie=async(_id)=>{
    
 const getCartData=async()=>{
     let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
-    console.log(res.data.cartData);
+    console.log("getCartData",res)
     if(res.data && res.data.cartData){
     dispatch(removeItem());//clearing existing cart items from store
     res.data.cartData.map((element)=>dispatch(addItem(element)))
@@ -85,15 +87,19 @@ const getCartData=async()=>{
 
 const handleAdditem=async(movieItem)=>{
     console.log(movieItem)
-    // >> api call for updating the backend >> saving to the DB
-    let res=await axios.post(`${url}/addcart`, movieItem,config)
-    console.log(res)
-    getCartData()
-}
+    // >> api call for updating the backend >> saving to the DB  
+    // "=" << Assignment operator
+    // "==" << condition comparison operator
+    if (token == null){
+            navigate(`/signin`) 
+    } else {
+        let res=await axios.post(`${url}/addcart`, movieItem,config)
+        console.log(res)
+        getCartData()
+    }}
 
 return (
 <>
-{/* <div className="mt-1 mb-1" > */}
 <Box 
 display="flex"
 flexDirection={"column"}
@@ -139,15 +145,6 @@ flexDirection={"column"}
                         
     // Delete Button
     deleteBtn={
-    // <Button variant="outline-none"
-    // className='m-0'
-    // onClick={()=> deleteMovie(element._id)}
-    // style={{
-    //     // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-    //     color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
-    // >
-    // <i className="fa-solid fs-5 fa-trash"></i>
-    // </Button>
     <IconButton        
     onClick={()=> deleteMovie(element._id)}>
         <DeleteIcon />
@@ -156,20 +153,8 @@ flexDirection={"column"}
     
     // Redux
     reduxAddcartBtn={
-    //     <Button
-    //      className='
-    //      text-center '
-    //     // className='
-    //     //  likeBtn
-    //     //  text-center d-flex align-items-center m-0'
-    //       variant=""
-    //     style={{
-    //         // backgroundColor:mode=="light" ? "transparent":"#3b3b3b"
-    //     }}
-    //     onClick={()=>{handleAdditem(element)}}
-    //   >
-    //     <i className="fa-solid fs-5 text-center fa-cart-shopping text-warning "></i></Button>
-    <IconButton onClick={()=>{handleAdditem(element)}}>
+    <IconButton 
+    onClick={()=>{handleAdditem(element)}}>
     <ShoppingCartIcon />
     </IconButton>
         }

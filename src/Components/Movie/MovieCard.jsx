@@ -145,13 +145,6 @@ console.log("Specific Movie Data",specificMovieData)
       <ModeIcon />
     </IconButton>
 
-    {/* <Button 
-    style={{
-      // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-      color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
-    onClick={()=>navigate(`/editmovie/${_id}`)}>
-    <i className="fa-solid fs-5 p-0 m-0 fa-pencil" ></i></Button> */}
-
     {/* Delete Icon */}
     {deleteBtn}
       </>)

@@ -39,16 +39,16 @@ console.log(cartItems)
         //console.log(movieItem) //the data you going to send to the add order
         // api call for updating the backend >> saving to the DB
         // Buy now >> Order Page || Sumary page
-        let res = await axios.post(`${url}/addorder`,{movies:cartItems})
+        let res = await axios.post(`${url}/addorder`,{movies:cartItems},config)
         console.log(res)
 
         if(res.status == 200){//success responses
-          await axios.delete(`${url}/clearcart`); // delete api call
+          await axios.delete(`${url}/clearcart`,config); // delete api call
           // clear the redux store
           dispatch(removeItem())
           navigate(`/ordersummary`) 
-        }
-      }
+        }}
+
       return (
         <>
           <div className=" w-100 row mx-auto">
@@ -71,8 +71,7 @@ console.log(cartItems)
                         </div>
                         
                         <div className="d-flex justify-content-end">
-                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap mt-5 mb-3"  onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-1 me-1"/>Order Now </Button>
-                       
+                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap mt-5 mb-3"  onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-1 me-1"/>Order Now </Button>       
                 </div>
                 </div>
                 </div>

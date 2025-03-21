@@ -8,4 +8,4 @@ function AboutUs_BottomDesign({info}){
         </>
     )
 }
-export default AboutUs_BottomDesign
+export default AboutUs_BottomDesign 

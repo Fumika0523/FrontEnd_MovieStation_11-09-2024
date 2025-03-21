@@ -18,10 +18,11 @@ function OrderSummary(){
 
     const handleGetOrder= async ()=>{
         let res = await axios.get(`${url}/order`,config)
-        console.log(res.data.orderData)
+        console.log("handleGetOrder",res.data.orderData)
+        console.log(res)
        setOrderData(res.data.orderData)
         }
-// Calling API call for handlegetorder
+        // Calling API call for handlegetorder
     useEffect(()=>{
         handleGetOrder()
     },[])
@@ -31,12 +32,18 @@ function OrderSummary(){
         <>
         <div className="container border my-5 p-5" style={{width:"70%"}}>
             <h1 className="pb-3 fs-2">Order Summary</h1>
-            {orderData.map((element)=>(
+
+            {
+            orderData.map((element)=>(
             <div key = {element._id} className="mb-4">
              <div className="mb-3 fs-5">Order ID: {element._id}</div>
-             {element.movies.map((movie)=>(
-             <OrderSummaryCard key={movie._id} {...movie}/>
+             {/* <div>Ordered on {element.updatedAt}</div> */}
+
+             {
+             element.movies.map((movie)=>(
+             <OrderSummaryCard key={movie._id} {...movie} updatedAt={element.updatedAt}/>
              ))}
+
              <hr />
             </div>
             ))

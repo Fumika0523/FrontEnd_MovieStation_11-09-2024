@@ -36,6 +36,18 @@ function Cartpage() {
         dispatch(removeFirstItem())
     }
 
+    const getCartData=async()=>{
+        let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
+        console.log("getCartData",res);
+        if(res.data && res.data.cartData){
+        dispatch(removeItem());//clearing existing cart items from store
+        res.data.cartData.map((element)=>dispatch(addItem(element)))
+    }
+useEffect(()=>{
+    getCartData()
+})}
+    
+
     return (
         <>
         {/* <div className="container-fluid border border-4 border-warning">  */}
@@ -49,11 +61,9 @@ function Cartpage() {
                 {/* Back */}
                 {
                     cartItems.length === 0 ?
-                    
                         <Button variant="secondary" className="d-flex justify-content-end" onClick={() => navigate('/allmovies')}>
                             Back to All Movies</Button> 
                             :
-
                         <div style={{width:"75%"}} className="mt-3 mx-auto justify-content-end gap-3 d-flex"> 
                           <Button variant="danger" onClick={() => {
                                 handleClearitem()

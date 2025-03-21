@@ -2,8 +2,6 @@ import React from "react";
 
 
 function CartCard({ movieposter, moviename, amount }) {
-
-
     return (
         <>
             <div className="d-flex pt-4 pb-2 ">

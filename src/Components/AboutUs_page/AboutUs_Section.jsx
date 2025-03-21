@@ -10,17 +10,17 @@ const topDesignData=[
         heading1:"For our users",
         heading2:"Apps for movie & TV show fans",
         imgUrl:"https://images.unsplash.com/photo-1615986200762-a1ed9610d3b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHR2JTIwc2NyZWVufGVufDB8fDB8fHww",
-        textSummary:"We show you where you can legally watch movies and TV shows that you love. You are kept up to date with what is new on Netflix, Amazon Prime, Apple TV and many other streaming platforms. Our simple filter system allows you to see only what is important to you. We also allow users to track their favorite shows and movies, and can notify you when a title is available on one of your services..",
+        textSummary:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         btnComment:"Learn more about our apps",
-        design:" fs-3 col-lg-5 col-md-11 col-sm-10 d-flex col-11 flex-column gap-2 pb-sm-5 text-lg-end"
+        design:" fs-3 col-lg-5 col-md-11 col-sm-10 d-flex col-11 flex-column gap-2 pb-sm-5 text-center"
     },
     {
         heading1:"For our clients",
         heading2:"Next generation movie marketing",
         imgUrl:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWElMjBzdHJlYW1pbmd8ZW58MHx8MHx8fDA%3D",
-        textSummary:"JustWatch Media helps Entertainment brands around the world get to grips with new challenges and opportunities. From blockbuster movies, award winning shows, major sporting events and console games, we buy media for our clients across the major digital platforms. We offer our clients something no one else can, media buying based on audience content tastes.",
+        textSummary:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         btnComment:"Learn more about our marketing campaigns",
-        design:"text-start  fs-3 -4 -warning col-lg-5 col-md-11 col-sm-10 col-11 d-flex flex-column gap-2",
+        design:"text-start  fs-3 -4 -warning col-lg-5 col-md-11 col-sm-10 col-11 d-flex flex-column gap-2 text-center",
     }
 ]
 
@@ -57,7 +57,7 @@ const bottomDesignData=[
         </div>
     </div>
     {/* 2nd */}
-        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-15%"}}>
+        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-5%"}}>
         <div >
              <div className= " fs-3 fw-bold mx-auto text-center w-100 mb-5 text-nowrap"
              >WE WANT TO HEAR FROM YOU</div>
