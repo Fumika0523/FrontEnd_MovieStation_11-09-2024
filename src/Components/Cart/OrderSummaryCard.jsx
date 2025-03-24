@@ -1,30 +1,52 @@
+import { Button } from "react-bootstrap"
+
 function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
    
-   console.log(updatedAt)
-   
+//    console.log(updatedAt)
+//    console.log("amount",amount)
+//    console.log("moviename",moviename)
    const formatDate = (dateString) =>{
-    console.log(dateString)
+    // console.log(dateString)
     const date = new Date (dateString)
-    console.log(date)
+    // console.log(date)
     return date.toLocaleDateString('en-US',{
         year:"numeric",
         month:"short",
         day:"numeric"
     })
    }
+
+    const deliveryDate = ("Mar 21 2025")
+   const Date1 = new Date ()
+//    console.log("Today' Date", Date1)
+   const Today = formatDate(Date1)
+
     return(
         <>
-        <div className="d-flex" >
-            <img src={movieposter} alt="" style={{width:"28%",marginBottom:"1%"}}/>
-            <div className="ms-3" style={{width:"100%"}}>
+        <div className="d-flex flex-row mb-5 row mx-auto" style={{}} >
+            <div className=" d-flex justify-content-center align-items-center col-5"><img src={movieposter} alt="" style={{width:"100%"}}/></div>
+
+            <div className=" col-7">
                 {/* WHen you click today, >>  */}
-            <div className="mb-1 fs-5" >Ordered on {formatDate(updatedAt)}</div> 
+                <div className="d-flex flex-row justify-content-between align-items-center mb-2">
+            <div className="" >Order Date  {formatDate(updatedAt)} </div> 
+            {/* When the delivery date has crossed, automatically the status should change to delivered */}
+                {
+                    deliveryDate > Today ?
+                    <Button variant="warning" style={{fontSize:"17px",padding:"1px 2%"}}>Processing</Button>
+                    :
+                    <Button variant="primary" style={{fontSize:"17px",padding:"1px 2%"}}>Delivered</Button>
 
-            <div>Deliver on {formatDate(updatedAt)}</div>
+                }
+                </div>
 
-            <div className="d-flex" style={{justifyContent:"space-between"}}>
-             <div>MovieName: <span >{moviename}</span></div>
-            <div>Price : {amount}</div>
+            {/* <div className="text-secondary "> {formatDate(updatedAt)}</div> */}
+            <div className="text-secondary mb-3">Estimated delivery {deliveryDate}</div>
+
+            <div className="d-flex justify-content-between" >
+             <div>{moviename}</div>
+            <div>Price : $ {amount}</div>
+            
             </div>
             </div>
             </div>

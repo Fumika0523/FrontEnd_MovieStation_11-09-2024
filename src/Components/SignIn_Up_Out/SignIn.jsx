@@ -54,7 +54,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
     <>
     <div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center">
     <Form 
-    onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-5 col-sm-9 col-12 px-4 py-5 px-sm-5 " style={{marginTop:"10%"}} >
+    onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-5 col-sm-9 col-12 px-4 py-5 px-sm-5 " style={{marginTop:"5%"}} >
        <h1 className="mb-3 text-center ">Sign in</h1>
      <Form.Group className="mb-3  " controlId="formBasicEmail">
        <Form.Label className="m-0">Email address</Form.Label>
@@ -77,7 +77,7 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
          value={formik.values.password}
          onChange={formik.handleChange} style={inputDesign} /> 
       </Form.Group>
-      
+
       <div className="row px-3 py-3 d-flex flex-row justify-content-between">
       <Button className="my-2 col-sm-3 col-4 d-flex justify-content-center" variant="secondary" type="submit" onClick={() => navigate('/')}>
         Cancel
@@ -85,6 +85,10 @@ function SignIn({isAuthenticated,setIsAuthenticated}) {
       <Button className="my-2 col-sm-3 col-4 d-flex justify-content-center" variant="warning" type="submit">
         Submit
       </Button> 
+      </div>
+      <div className="d-flex flex-column justify-content-center align-items-center">
+      <div>Do not have an account yet?</div>
+      <Button variant="none" className="text-warning" onClick={() => navigate('/signup')}>Create a new account</Button>
       </div>
     </Form>
     </div>

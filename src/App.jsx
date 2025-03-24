@@ -77,6 +77,7 @@ const [mode, setMode]=useState("dark")
 
   return (
     <>
+    {/* <div className='border border-4 border-primary container-fluid'> */}
   <ThemeProvider theme={theme}>
   <CssBaseline /> 
   <Provider store={store}>
@@ -133,7 +134,9 @@ const [mode, setMode]=useState("dark")
     {/* </Container> */}
     </Provider>
   </ThemeProvider>
+  {/* </div> */}
   </>
+ 
   )}
 export default App
 

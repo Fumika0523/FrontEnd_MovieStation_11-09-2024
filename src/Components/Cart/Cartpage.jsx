@@ -5,6 +5,7 @@ import CartSummaryPage from "./CartSummaryPage";
 import axios from "axios";
 import { url } from "../../utils/constant";
 import { Button, Image } from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 
 
 function Cartpage() {
@@ -53,8 +54,8 @@ useEffect(()=>{
         {/* <div className="container-fluid border border-4 border-warning">  */}
             <div className="row mx-auto  border-primary border-3" >
                 <div className="col-lg-8 col-md-8 col-sm-10 col-11 mx-auto my-5 " style={{ border: "2px solid #3b3b3b", borderRadius: "2%" }}>
-                <div className="text-center mb-3 mt-2 align-items-center mx-auto fs-2  d-flex flex-row justify-content-center">
-                    <i class="fa-solid fa-bag-shopping me-2 text-warning fs-1"></i>
+                <div className="justify-content-center my-3  mx-auto fs-2  d-flex flex-row ">
+                    <FaShoppingCart className="text-warning fs-1 me-1"/>
                     <div className="fs-3">Your Shopping Cart</div>
                 </div>
                 <div className="mb-3  border-primary d-flex align-items-center justify-content-end mx-auto ">

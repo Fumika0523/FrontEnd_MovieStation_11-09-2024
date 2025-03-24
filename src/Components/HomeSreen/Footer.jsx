@@ -4,7 +4,7 @@ function Footer (){
     
     return(
         <>
-        <div className="mt-5 border-top row mx-auto d-flex flex-column border-secondary pb-3" >
+        <div className=" mt-5 border-top row mx-auto d-flex flex-column border-secondary pb-3" >
             <div className="d-none  border-4  d-md-flex d-sm-none  -3 my-4 flex-row  align-items-start justify-content-between">
             {/* 1st */}
             <div className="col-2">
@@ -39,7 +39,7 @@ function Footer (){
                 <li  className="footerListStyle">What's new on Apple TV Plus</li>
                 <li  className="footerListStyle">What's new on Apple TV</li>
             </div>
-            <div className=" col-2 ">
+            <div className=" col-2  border-warning border-3 ">
                 <h6>New upcpming movies</h6>
                 <li  className="footerListStyle">Outstanding:A Comedy</li>
                 <li  className="footerListStyle">Revolution</li>
@@ -48,7 +48,7 @@ function Footer (){
                 <li  className="footerListStyle">A Family Affair</li>
             </div>
         </div>
-            <div className="my-3 border-danger border-4 row mx-auto ">
+            <div className="my-3  border-danger border-4 row mx-auto ">
             <div className="text-center"> © 2024 Copyright :<a className="ms-1" href="">MovieStation.com</a></div>    
             </div>
         </div>

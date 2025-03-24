@@ -13,8 +13,6 @@ const navigate = useNavigate()
   backgroundColor:"#1B1C23",
    borderColor:"black",
    color:"white",
-  //  Padding:"0",
-  //  Margin:"0"
   }
   const formSchema=Yup.object().shape({
     name:Yup.string().min(5,"Too Short"),
@@ -55,7 +53,7 @@ const postSignUpUser=async(newUser)=>{
   return (
     <>
     <div className='container-fluid border-4 border-primary d-flex justify-content-center align-items-center' >
-     <Form onSubmit={formik.handleSubmit}className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-1 px-sm-5 " style={{marginTop:"8%"}} >
+     <Form onSubmit={formik.handleSubmit}className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
     <div className=' text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
           <Form.Group className="col-md-6 mb-1">
@@ -140,7 +138,11 @@ const postSignUpUser=async(newUser)=>{
       <Button className="my-2 col-sm-3 col-lg-2 col-4 d-flex justify-content-center" variant="warning" type="submit">
         Submit
       </Button> 
-      </div>      
+      </div>   
+      <div className="d-flex flex-column justify-content-center align-items-center">
+      <div>Already have an account?</div>
+      <Button variant="none" className="text-warning" onClick={() => navigate('/signin')}>Login to your account</Button>
+      </div>   
       </Form>
     </div>
 

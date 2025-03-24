@@ -19,6 +19,7 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa";
+import { Row } from "react-bootstrap";
 
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
@@ -68,10 +69,11 @@ function NavBar({ mode, setMode }) {
   let username = sessionStorage.getItem('username')
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" className="sticky-top border-warning border-2"
+
+      <Navbar   collapseOnSelect expand="lg" className=" border-warning border-2"
         style={{ backgroundColor: mode == "light" ? "white" : "black" }}  >
 
-        <Container fluid className="mx-2">
+        {/* <Container fluid className="" > */}
           {/* Brand */}
           <Navbar.Brand className="fw-bold">
               <i  style={{color: mode == "light" ? amberColor1 :amberColor}} className = "fa-solid  fa-couch"></i>
@@ -260,7 +262,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        </Container>
+        {/* </Container> */}
       </Navbar>
 
     </>

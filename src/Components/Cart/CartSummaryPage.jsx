@@ -48,15 +48,31 @@ console.log(cartItems)
           dispatch(removeItem())
           navigate(`/ordersummary`) 
         }}
+        const formatDate = (dateString) =>{
+          // console.log(dateString)
+          const date = new Date (dateString)
+          // console.log(date)
+          return date.toLocaleDateString('en-US',{
+              year:"numeric",
+              month:"short",
+              day:"numeric"
+          })
+         }
 
+        const currentDate = new Date ()
+         console.log("Today' Date", currentDate)
+         const Today = formatDate(currentDate)
+         console.log(Today)
+        
       return (
         <>
           <div className=" w-100 row mx-auto">
                 {/* <h1 className=" py-1">Cart Page</h1> */}
-                <div className="text-start  border-primary py-1 text-secondary">Date: <span className="text-white">Feb 16,2022</span></div>
+                <div className="text-start  border-primary py-1 text-secondary">Date: <span className="text-white">{Today}</span></div>
                 <div className="border-top border-secondary">
                     {
-                        cartItems?.map((element) => <CartCard {...element} />)
+                        cartItems?.map((element) =>
+                           <CartCard {...element} />)
                     }
                     <div style={{width:"40%"}} className="ms-auto ">
                     <div className="text-start pt-3 fs-6 mb-1" >Cart Summary</div>

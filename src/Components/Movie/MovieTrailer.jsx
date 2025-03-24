@@ -30,7 +30,7 @@ function MovieTrailer({mode}) {
 
   const getTrailerData = async () => {
     console.log("Trailer data is called....")
-    let res = await axios.get(`${url}/movie/${id}`, config)
+    let res = await axios.get(`${url}/movie/${id}`,config)
     console.log(res.data[0])
     console.log(res)
     setMovieInfo(res.data[0])
@@ -45,22 +45,22 @@ function MovieTrailer({mode}) {
         movieInfo &&
 
         <Container fluid
-          className='mx-auto  border-4 border-warning'
+          className='mx-auto '
           >
             {/* Top */}
-            <Row className='mx-auto mx-md-5 border-3' >
-            <Col className="col-8 mt-2 d-flex flex-column aliten-items-center justify-content-center  border-warning border-2">
+            <Row className='mx-auto mx-md-5 ' >
+            <Col className="col-lg-8 col-md-6 col-sm-6 col-12  mt-2 d-flex flex-column aliten-items-center justify-content-center">
             <div className='ps-1 fs-1'>{movieInfo.moviename}</div>
             <div className='ps-1 fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
-            <Col className="col-3  d-flex align-items-start flex-column justify-content-center border-warning border-2">
+            <Col className="col-lg-3 col-md-4 col-sm-4 col-9 d-flex align-items-start flex-column justify-content-center">
             <div  className='fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
-            <div className=" d-flex flex-row justify-content-center align-items-center border-warning -2">
+            <div className=" d-flex flex-row justify-content-center align-items-center">
               <FaStar className='text-warning fs-4'/>
               <span className="fw-bold mx-1" style={{fontSize:"20px"}}>{movieInfo.rating}</span>
               <span className='text-secondary'> /10</span> 
             </div>
             </Col>
-            <Col className='col-1 d-flex align-items-start flex-column justify-content-center border-warning border-2'>
+            <Col className='col-lg-1 col-md-2 col-sm-2 col-3 d-flex align-items-start flex-column justify-content-center '>
             <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='w-100'
             onClick={() => navigate('/allmovies')} >
               Back
@@ -68,16 +68,16 @@ function MovieTrailer({mode}) {
             </Col>
             </Row>
 
-            <Row className='mx-auto mx-md-5 mb-4 border-3' >
+            <Row className='mx-auto mx-md-5 mb-4 -3' >
             <Col className=' col-12'>
               <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
             </Col>
             </Row>
             
             {/* Middle */}
-            <Row className='mb-4   mx-auto mx-md-5 border-primary border-3'>
+            <Row className='mb-4 mx-auto mx-md-5'>
               {/* LEFT */}
-              <Col className='col-lg-4 col-12 mx-auto border-3 d-flex justify-content-center align-items-center mb-md-1  mb-2'>
+              <Col className='col-lg-4 col-12 mx-auto  d-flex justify-content-center align-items-center mb-md-1  mb-2'>
                 {/* Image */}
                 <Image className='w-100' style={{height:"100%"}} src={movieInfo?.movieposter} />
               </Col>
