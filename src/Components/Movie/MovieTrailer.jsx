@@ -49,9 +49,9 @@ function MovieTrailer({mode}) {
           >
             {/* Top */}
             <Row className='mx-auto mx-md-5 ' >
-            <Col className="col-lg-8 col-md-6 col-sm-6 col-12  mt-2 d-flex flex-column aliten-items-center justify-content-center">
-            <div className='ps-1 fs-1'>{movieInfo.moviename}</div>
-            <div className='ps-1 fs-6' style={{fontColor:"#b9bdcc"}}>{movieInfo.publishYear}</div></Col>
+            <Col className="col-lg-8 col-md-6 col-sm-6 col-12  mt-2 d-flex flex-row align-items-center justify-content-start">
+            <div className='ps-1  fs-1'>{movieInfo.moviename}</div>
+            <div className='ms-3 fs-4' style={{color:"#b9bdcc"}}>({movieInfo.publishYear})</div></Col>
             <Col className="col-lg-3 col-md-4 col-sm-4 col-9 d-flex align-items-start flex-column justify-content-center">
             <div  className='fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
             <div className=" d-flex flex-row justify-content-center align-items-center">
@@ -75,9 +75,9 @@ function MovieTrailer({mode}) {
             </Row>
             
             {/* Middle */}
-            <Row className='mb-4 mx-auto mx-md-5'>
+            <Row className='mb-4   mx-auto mx-md-5 border-primary border-3'>
               {/* LEFT */}
-              <Col className='col-lg-4 col-12 mx-auto  d-flex justify-content-center align-items-center mb-md-1  mb-2'>
+              <Col className='col-lg-4 col-12 mx-auto border-3 d-flex justify-content-center align-items-center mb-md-1  mb-2'>
                 {/* Image */}
                 <Image className='w-100' style={{height:"100%"}} src={movieInfo?.movieposter} />
               </Col>

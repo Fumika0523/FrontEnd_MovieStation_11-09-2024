@@ -73,7 +73,7 @@ function NavBar({ mode, setMode }) {
       <Navbar   collapseOnSelect expand="lg" className=" border-warning border-2"
         style={{ backgroundColor: mode == "light" ? "white" : "black" }}  >
 
-        {/* <Container fluid className="" > */}
+        <Container fluid className="" >
           {/* Brand */}
           <Navbar.Brand className="fw-bold">
               <i  style={{color: mode == "light" ? amberColor1 :amberColor}} className = "fa-solid  fa-couch"></i>
@@ -262,7 +262,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        {/* </Container> */}
+        </Container>
       </Navbar>
 
     </>
