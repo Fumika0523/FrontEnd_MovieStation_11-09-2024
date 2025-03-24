@@ -74,7 +74,14 @@ const [castShow,setCastShow] = useState(true)
     }   
 
 const userId=sessionStorage.getItem('userId')
-
+const trailerFun = () =>{
+  if(token == null){
+    navigate('/signin')
+  }
+  else{
+    navigate(`/movietrailer/${_id}`)
+  }
+}
 //id
 // 16 movies >> userID
 //loginUser Id === movie owner(userId)  >> Edit || Delete
@@ -118,8 +125,10 @@ console.log("Specific Movie Data",specificMovieData)
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings" onClick={()=>{
-            navigate(`/movietrailer/${_id}`)
+          <IconButton aria-label="settings" 
+          onClick={()=>{
+            // navigate(`/movietrailer/${_id}`)
+            trailerFun()
         }}>
         <MoreVertIcon />
         </IconButton>

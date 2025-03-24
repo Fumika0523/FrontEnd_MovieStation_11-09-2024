@@ -16,7 +16,7 @@ function AboutUs_ImageBanner ({appName,cardText,banner}){
          />
          <div className="imageOverLay"></div>
          
-      <Card.ImgOverlay className="my-md-5 border border-warning d-flex flex-column border-4 mt-sm-4 mx-auto col-sm-10 col-lg-6 text-center" style={{position:"absolute",zIndex:"3"}}
+      <Card.ImgOverlay className="my-md-5 border-warning d-flex flex-column border-4 mt-sm-4 mx-auto col-sm-10 col-lg-6 text-center" style={{position:"absolute",zIndex:"3"}}
       >
          {appName && <div className="text-warning fw-bold  text-nowrap text-center mx-auto fs-md-1 fs-2   ">
             <i className="fa-solid fa-couch"></i><i className="fa-solid fa-wine-glass text-warning mx-auto"></i> MovieStation</div>}
