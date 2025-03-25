@@ -34,21 +34,16 @@ function OrderSummary(){
     // setOrderSum(total)
     
     const totalOrderPrice = orderData.map((element)=>{
-        const price = (element.movies).map((p)=>{
-            // console.log(p.amount)
-            return p.amount
-        })
-        // console.log("price",price)
+         const price = (element.movies).map((p)=>{
+              console.log(p.amount) //250
+             return p.amount
+         })
+        console.log("price",price) // [250, 250]
         const total = price.reduce((acc,cv)=>acc+cv)
-        console.log("total",total)
+        console.log("total",total) //total 500
          return total
-      
     })   
-    console.log("totalOrderPrice",totalOrderPrice) 
-  
-    //array > Object
-
-
+     console.log("totalOrderPrice",totalOrderPrice) // [500,500,500,500]
 
     return(
         <>
@@ -60,6 +55,8 @@ function OrderSummary(){
             </div>
 
             {
+            //repeat end of each card
+            totalOrderPrice.map((x)=>(
             orderData.map((element)=>(
             <div key = {element._id} className="mb-4">
              <div className="mb-3 fs-6">Order ID: {element._id}</div>
@@ -69,26 +66,18 @@ function OrderSummary(){
              {
              element.movies.map((movie)=>(
              <OrderSummaryCard key={movie._id} {...movie} updatedAt={element.updatedAt} />
-             ))}
-
-                    
+             ))}        
         
-{
-            totalOrderPrice.map((p)=>(
-                    <div  {...p}>Total Price: {p}</div>
-                ))
+                {
+                    <div className="text-secondary text-end" >Total Price: {x}</div>
                  }  
              <hr />
-          
             </div> 
         
-        ))
-            
+        ))       
+    ) )
             }
                   
-            {/* */}
-           
-       
        </div>
        </div>
         </>

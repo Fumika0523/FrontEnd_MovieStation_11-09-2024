@@ -4,19 +4,24 @@ import React from "react";
 function CartCard({ movieposter, moviename, amount }) {
     return (
         <>
-            <div className="d-flex flex-row align-items-center justify-content-center pt-4 pb-2 ">
-                <img src={movieposter} className="rounded" alt="" style={{ width: "25%" }} />
-                <div className="text-start ms-4 mt-3" style={{ width: '65%' }}>
-                    <div className="">{moviename}</div>                   
+        {/* <div className="d-flex row mx-auto border border-4 border-danger "> */}
+            <div className="d-flex  border-4 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">
+                <div className="col-sm-5 col-12 mb-3 mx-auto col-lg-4 col-md-4">
+                <img src={movieposter} className="rounded w-100" style={{height:"160px"}} alt=""  />
+                </div>
+            {/* </div>
+            <div> */}
+                <div className="text-start col-lg-8 col-12  d-flex flex-row justify-content-between align-items-center col-sm-7 ">
+                    <div className="fs-5">{moviename}</div> 
+                    <div className="fs-6 text-end text-secondary">${amount}</div>                  
                 </div>
 
                 {/* Price & Qty */}
-                <div className="text-end" style={{ width: "35%" }}>
-                    <div>${amount}</div>
-                    {/* <div className="text-secondary">Qty:1</div> */}
-                </div>
+                {/* <div className=" col-4 col-lg-2 border"> */}
+                    
+                {/* </div> */}
             </div>
-
+            {/* </div> */}
         </>
     )
 }

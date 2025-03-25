@@ -20,6 +20,8 @@ import { FaHandHoldingHeart } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaEnvelope } from "react-icons/fa";
 import { Row } from "react-bootstrap";
+import { FaUserCheck } from "react-icons/fa";
+
 
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
@@ -70,7 +72,7 @@ function NavBar({ mode, setMode }) {
   return (
     <>
 
-      <Navbar   collapseOnSelect expand="lg" className=" border-warning border-2"
+      <Navbar   collapseOnSelect expand="lg" className="px-md-4 border-warning border-2"
         style={{ backgroundColor: mode == "light" ? "white" : "black" }}  >
 
         <Container fluid className="" >
@@ -81,9 +83,66 @@ function NavBar({ mode, setMode }) {
               <span className="fs-4 ms-1"
                 style={{ color: mode == "light" ? "black" : amberColor }}>MovieStation</span>
           </Navbar.Brand>
+          <Nav className="ms-auto  d-flex flex-row justify-content-center align-items-center">
+          {token ?
+          <>
+          {/* Power Off */}
+          <Nav.Link href="#" className="">
+                          <Button variant="none"
+                           type="submit" className="a"
+                           onClick={() => handleSignOut()} 
+                            >
+                            <FaPowerOff className="fs-5" style={{ color: "red" }}/>
+                          </Button>
+          </Nav.Link>
+            <Nav.Link href="#" className="mx-auto">
+                <Button variant="none" className=""
+                  style={{ color: mode == "light" ? greyColor : amberColor }}
+                  onClick={() => {
+                    //setMode("light")
+                    //true?"truedata":"falsedata"
+                    setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                    console.log(mode)
+                  }}>
+                  {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+                </Button>
+              </Nav.Link>
+          </>
+                    :
+          <>
+          {/* <Nav.Link href="#" className="mx-auto"> */}
+                <Button variant="none" className=""
+                  style={{ color: mode == "light" ? greyColor : amberColor }}
+                  onClick={() => {
+                    //setMode("light")
+                    //true?"truedata":"falsedata"
+                    setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                    console.log(mode)
+                  }}>
+                  {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+                </Button>
+          {/* </Nav.Link> */}
 
+                    {/* Sign in */}
+                    {/* <Nav.Link href="#" className="border "> */}
+                      <Button variant="text"
+                        style={{ color: mode == "light" ? greyColor : "white" }}
+                        className="d-none d-sm-block" type="submit" onClick={() => { navigate('/signin') }}><PiSignInFill className="fs-5" />
+                        <span className="d-none d-sm-block">Sign in</span>
+                     </Button>
+                      {/*  </Nav.Link> */}
+
+                    {/* Sign up */}
+                    {/* <Nav.Link href="#" className="border "> */}
+                      <Button variant="text"
+                        style={{ color: mode == "light" ? greyColor : "white" }}
+                        type="submit" className="" onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i><span className="d-none d-sm-block">Sign up</span></Button>
+                    {/* </Nav.Link> */}
+          </>
+          }
+        </Nav >
           {/* Toggler Icon */}
-          <Navbar.Toggle aria-controls="responsive-navbar-nav"
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" 
             style={{ color: mode == "light" ? darkGreyColor : "null", backgroundColor: mode == "light" ? null : amberColor }} />
           <Navbar.Collapse id="responsive-navbar-nav">
             {/* <Navbar.Toggle  
@@ -93,11 +152,11 @@ function NavBar({ mode, setMode }) {
             {/* <Nav className="me-auto">        
             </Nav> */}
 
-            <Nav className="me-auto d-flex align-items-center justify-content-center" >
+            <Nav className="me-auto  d-flex align-items-start justify-content-center" >
               {/* <!-- Home --> */}
               <Nav.Link href="#" >
                  <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex flex-row justify-content-center align-items-center"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                   onClick={() => navigate('/about')} 
                   >
@@ -110,7 +169,7 @@ function NavBar({ mode, setMode }) {
               {/* <!-- About Us --> */}
               <Nav.Link href="#" >
               <Button variant="none"
-                 className="d-flex text-nowrap justify-content-center align-items-end"
+                 className="d-flex flex-row justify-content-center align-items-center"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                  onClick={() => navigate('/about')} 
                   >
@@ -125,7 +184,7 @@ function NavBar({ mode, setMode }) {
               <Nav.Link href="#" className=""
               >
               <Button variant="none"
-                 className="d-flex text-nowrap justify-content-center align-items-end"
+                 className="d-flex flex-row justify-content-center align-items-center"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                   onClick={() => navigate('/allmovies')}
                 >
@@ -142,7 +201,7 @@ function NavBar({ mode, setMode }) {
                 token &&
                 <Nav.Link href="#">
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end text-nowrap"
+                 className="d-flex flex-row justify-content-center align-items-center text-nowrap"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                   onClick={() => navigate('/addmovie')}
                     >
@@ -156,7 +215,7 @@ function NavBar({ mode, setMode }) {
               {/* <!-- Service --> */}
               <Nav.Link href="#">              
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex flex-row justify-content-center align-items-center"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                  onClick={() => navigate('/services')}>
                   <FaHandHoldingHeart className="fs-4 me-1"
@@ -168,7 +227,7 @@ function NavBar({ mode, setMode }) {
               {/* <!-- Contact Us --> */}
               <Nav.Link className="" href="#" style={{ color: mode == "light" ? greyColor : amberColor }} onClick={() => navigate('/contact')}>             
               <Button variant="none"
-                 className="d-flex justify-content-center align-items-end"
+                 className="d-flex  justify-content-center align-items-end"
                  style={{ color: mode == "light" ? "black" :"rgb(160, 161, 161)" }}
                  onClick={() => navigate('/contact')}>
                   <FaEnvelope className="fs-4 me-1"
@@ -179,7 +238,7 @@ function NavBar({ mode, setMode }) {
 
 
               {/* Redux  -->> Badge*/}
-              <Nav.Link href="#" >              
+              <Nav.Link href="#">              
                 <Button className=""
                 variant="none">
                 <Badge variant="text" 
@@ -193,27 +252,25 @@ function NavBar({ mode, setMode }) {
                   color="primary" badgeContent={cartItems.length}
                   style={{ color: mode == "light" ? greyColor : amberColor ,}}
                   onClick={() => navigate('/cartpage')}
-                  className=" ms-1 p-0">
-                  <ShoppingCartIcon className=""  style={{color: mode == "light" ? amberColor1 :amberColor}} />
+                  className="p-0">
+                  <ShoppingCartIcon className="fs-3"  style={{color: mode == "light" ? amberColor1 :amberColor}} />
                   </Badge>
               </Button>
               </Nav.Link>
               </Nav>
-              <Nav className="ms-auto d-flex justify-content-center align-items-center">
+              <Nav className="ms-auto d-flex justify-content-center align-items-start">
               {/* Sign Out */}
               <ThemeProvider theme={theme}>
 
                 {token ?
                   <>
-                    <Nav.Link href="#"  
-                    >
-                      {/* <Button
-                        sx={{ padding: 0, minWidth: "130px", fontWeight: "bold", fontSize: "16px" }}
-                        className=""
-                      > */}
-                      <span style={{ color: mode == "light" ? "black" : "lightGray" }} 
-                      className="fw-bold">{username}</span>
+                    <Nav.Link href="#" className="d-flex justify-content-center align-items-center" > <FaUserCheck className="
+                     fs-2"
+                     style={{	color:"rgb(72, 142, 186)"}}/>
+                      <span  style={{ color: mode == "light" ? greyColor : "white"}}
+                      className="fw-bold fs-5 ms-2" >{username.toUpperCase()}</span>
                       </Nav.Link>
+                      {/* Power Off
                         <Nav.Link href="#" className=" ">
                           <Button variant="none"
                            type="submit" className="a"
@@ -221,34 +278,34 @@ function NavBar({ mode, setMode }) {
                             >
                             <FaPowerOff className="fs-5" style={{ color: "red" }}/>
                           </Button>
-                       
-                      {/* </Button> */}
-                    </Nav.Link>
+                    </Nav.Link> */}
                   </>
-                  // otherwise
                   :
+                  
+                  // otherwise
+                  // :
                   <>
                     {/* Sign in */}
 
-                    <Nav.Link href="#" className="px-2 ">
+                    {/* <Nav.Link href="#" className="px-2 ">
                       <Button variant="text"
                         style={{ color: mode == "light" ? greyColor : "white" }}
                         className="mx-2" type="submit" onClick={() => { navigate('/signin') }}><PiSignInFill className="fs-5 me-1" />
                         Sign in</Button>
-                    </Nav.Link>
+                    </Nav.Link> */}
 
                     {/* Sign up */}
-                    <Nav.Link href="#" className="px-2 ">
+                    {/* <Nav.Link href="#" className="px-2 ">
                       <Button variant="text"
                         style={{ color: mode == "light" ? greyColor : "white" }}
                         type="submit" className="py-1 " onClick={() => { navigate('/signup') }}><i class="fa-solid fa-user me-1"></i>Sign up</Button>
-                    </Nav.Link>
+                    </Nav.Link> */}
                   </>
                 }
               </ThemeProvider>
 
               {/* Light Dark Mode */}
-              <Nav.Link href="#" className="mx-auto">
+              {/* <Nav.Link href="#" className="mx-auto">
                 <Button variant="none" className=""
                   style={{ color: mode == "light" ? greyColor : amberColor }}
                   onClick={() => {
@@ -259,7 +316,7 @@ function NavBar({ mode, setMode }) {
                   }}>
                   {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
                 </Button>
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

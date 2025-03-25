@@ -18,9 +18,14 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
 
     const deliveryDate = ("Mar 21 2025")
    const Date1 = new Date ()
-//    console.log("Today' Date", Date1)
-   const Today = formatDate(Date1)
+    
+    const Today = Date1.setDate(Date1.getDate()+4)
+    console.log("Today' Date", Date1)
+    const EstimatedDeliveryDate = formatDate(Today )
+   console.log(EstimatedDeliveryDate)
 
+   // 1. comparing with orderDate < Deliverydate
+   // 2. orderDate + DeliveryDate should pass today >> Delivered
     return(
         <>
         <div className="d-flex flex-row mb-5 row mx-auto" style={{}} >
@@ -41,7 +46,7 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
                 </div>
 
             {/* <div className="text-secondary "> {formatDate(updatedAt)}</div> */}
-            <div className="text-secondary mb-3">Estimated delivery {deliveryDate}</div>
+            <div className="text-secondary mb-3">Estimated delivery {EstimatedDeliveryDate}</div>
 
             <div className="d-flex justify-content-between" >
              <div>{moviename}</div>

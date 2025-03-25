@@ -45,3 +45,4 @@ phone no: 100100
 5. NavBar when you click the button it should close automatically. same function call <<DONE>>
 6. WHen you click all enquiries, the table doesnt show first
 7. enquiry table is not mobile responsive
+8. unable to get all enquiry in front-end (able to get in postman)
