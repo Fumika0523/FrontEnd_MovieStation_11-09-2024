@@ -22,12 +22,13 @@ import SignIn from './Components/SignIn_Up_Out/SignIn';
 import axios from 'axios';
 import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
-import OrderSummary from './Components/Cart/OrderSummary'
+import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
 import { Box, Container } from "@mui/material"
 import UserMovies from './Components/Movie/UserMovies';
 import { RiH1 } from 'react-icons/ri';
 import { DiJavascript1 } from 'react-icons/di';
+import PageNotFound from './Components/HomeSreen/PageNotFound';
 
 
 function App() {
@@ -60,7 +61,7 @@ const getMovieData = async () => {
   setMovieData(res.data.movieData)
 }
   useEffect(()=>{
-    getMovieData()
+  getMovieData()
   },[]) //API Call
 //initial value is stored as dark
 const [mode, setMode]=useState("dark")
@@ -91,9 +92,9 @@ const [mode, setMode]=useState("dark")
     { 
     token &&
        <>
-       <Route path='/addmovie'  element={<AddMovie setMovieData={setMovieData}/>}/>
+       <Route path='/addmovie'  mode={mode}  element={<AddMovie setMovieData={setMovieData}/>}/>
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
-       <Route path="/ordersummary" element={<OrderSummary/>}/>
+       <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
        </>
@@ -112,7 +113,7 @@ const [mode, setMode]=useState("dark")
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
       <Route path="allenquiries" mode={mode} element={<AllEnquiries/>}/>
       <Route path="/table" mode={mode} element={<Table/>}/> 
-    
+      <Route path="/pagenotfound" mode={mode} element={<PageNotFound/>}/> 
     </Routes>
 {/* Ternary operator */}
     {/* {token ? 

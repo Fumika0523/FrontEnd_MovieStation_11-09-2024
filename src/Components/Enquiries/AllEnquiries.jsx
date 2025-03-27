@@ -28,7 +28,7 @@ function AllEnquiries() {
         console.log(res)
         console.log(res.data.allEnquiry)
         // console.log(res.data.enquiryData)
-        //setEnquiryData(res.data.allEnquiry)
+        setEnquiryData(res.data.allEnquiry)
     }
     useEffect(() => {
     getEnquiryData()
@@ -40,7 +40,6 @@ function AllEnquiries() {
         {/* Back */}
         <div className="border-4 d-flex  flex-column col-10 col-lg-8 mx-auto">
         <div className="d-flex mb-3 justify-content-end">
-            
             <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center"
             onClick={()=>navigate('/contact')}>
             <i className="fa-solid fa-angles-left fs-6"></i>

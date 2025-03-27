@@ -1,5 +1,5 @@
 import axios from "axios"
-import { url } from "../../utils/constant"
+import { url } from "../../utils/constant";
 import * as React from 'react';
 import { useEffect } from "react";
 import { useState } from "react";
@@ -20,7 +20,6 @@ function OrderSummary(){
     const handleGetOrder= async ()=>{
         let res = await axios.get(`${url}/order`,config)
         console.log("handleGetOrder",res.data.orderData)
-        // console.log(res)
        setOrderData(res.data.orderData)
        console.log(res.data.orderData)
     //    setOrderSum(res.data.orderData.movies.amount)
@@ -35,12 +34,12 @@ function OrderSummary(){
     
     const totalOrderPrice = orderData.map((element)=>{
          const price = (element.movies).map((p)=>{
-              console.log(p.amount) //250
+            //   console.log(p.amount) //250
              return p.amount
          })
-        console.log("price",price) // [250, 250]
+        // console.log("price",price) // [250, 250]
         const total = price.reduce((acc,cv)=>acc+cv)
-        console.log("total",total) //total 500
+        // console.log("total",total) //total 500
          return total
     })   
      console.log("totalOrderPrice",totalOrderPrice) // [500,500,500,500]
@@ -48,7 +47,7 @@ function OrderSummary(){
     return(
         <>
         <div className="row mx-auto">
-        <div className="mx-auto col-lg-6 col-md-8 col-12 border border-secondary my-4 px-5 py-3" style={{borderRadius:"3%"}}>
+        <div className="mx-auto col-lg-6 col-md-8 col-12 border border-secondary my-4 px-5 py-3" >
             <div className="fs-2 pb-3 d-flex flex-row text-center"><FaBagShopping className="fs-1 me-1 text-warning"/>
             <div>My Orders
             </div>
@@ -69,7 +68,8 @@ function OrderSummary(){
              ))}        
         
                 {
-                    <div className="text-secondary text-end" >Total Price: {x}</div>
+                    <div className="text-end fw-bold fs-4 " >Total Price :
+                    <span className="fw-bold ms-1 fs-4">${x}</span> </div>
                  }  
              <hr />
             </div> 

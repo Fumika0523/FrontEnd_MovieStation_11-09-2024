@@ -104,6 +104,8 @@ useEffect(() => {
 }, [])
 console.log("Specific Movie Data",specificMovieData)
 
+
+
 // const searchUserAddedMovie = specificMovieData.map((element)=>element._id)
 // const findUserAddedMovie = movieData.filter((element)=>searchUserAddedMovie.includes(element._id))
 

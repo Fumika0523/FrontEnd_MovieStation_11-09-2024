@@ -8,7 +8,7 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import { Button,Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
-
+import PageNotFound from '../../Components/HomeSreen/PageNotFound'
 
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
@@ -77,9 +77,16 @@ setMovieData(res)
     getMovieData()
   }
 
+  if(token == null){
+   console.log("NO TOKEN")
+  }
+  else{
+   console.log("YES TOKEN")
+  }
+
   return (
     <>
-    <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
+      <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
     <Box
     component="form" 
      sx={{
@@ -257,6 +264,6 @@ setMovieData(res)
       </Grid>
    </Box>
    </div>
-{/* </div> */}
+
 </>
   );}

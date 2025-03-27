@@ -58,7 +58,7 @@ useEffect(()=>{
                     <FaShoppingCart className="text-warning fs-1 me-1"/>
                     <div className="fs-3">Your Shopping Cart</div>
                 </div>
-                <div className="mb-3 row border-primary d-flex align-items-center justify-content-end mx-auto ">
+                <div className="mb-3  border-primary d-flex align-items-center justify-content-end mx-auto ">
                 {/* Back */}
                 {
                     cartItems.length === 0 ?
