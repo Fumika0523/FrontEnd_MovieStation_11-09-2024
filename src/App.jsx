@@ -78,17 +78,11 @@ const [mode, setMode]=useState("dark")
 
   return (
     <>
-    {/* <div className='border border-4 border-primary container-fluid'> */}
   <ThemeProvider theme={theme}>
   <CssBaseline /> 
   <Provider store={store}>
     <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
-    <Routes>
-      {/* If there is a token, >> 4 routes visible */}
- {/* //  No token >>> show remaining routes
-      //token >> login >> 4 routes visible || other routes wont b visible >> ERROR
-      //  Token , no token >> show remaing routes */}
-   
+    <Routes> 
     { 
     token &&
        <>
@@ -106,7 +100,7 @@ const [mode, setMode]=useState("dark")
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' mode={mode} element={<Service_Section/>}/>
       <Route path='/contact'  mode={mode} element={<ContactUs_Section/>}/>
-      <Route path="/movietrailer/:id" element={<MovieTrailer mode={mode} movieData={movieData} setMovieData={setMovieData}/>}/>
+      <Route path="/movietrailer/:id" mode={mode}  element={<MovieTrailer mode={mode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" mode={mode} element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }/>
       <Route path="/signup" mode={mode} element={<SignUp/>}/>
@@ -115,27 +109,10 @@ const [mode, setMode]=useState("dark")
       <Route path="/table" mode={mode} element={<Table/>}/> 
       <Route path="/pagenotfound" mode={mode} element={<PageNotFound/>}/> 
     </Routes>
-{/* Ternary operator */}
-    {/* {token ? 
-    <>   
-        <h1>Show</h1> 
-        <h1>Show</h1>
-        <h1>Show</h1> 
-        <h1>Show</h1>
-        <h1>Show</h1> 
-        <h1>Show</h1>
-    </>
-    :
-    <>
-        <h1>Dont show</h1> 
-        <h1>Dont show</h1> 
-    </>
-   } */}
-    <Footer></Footer>
-    {/* </Container> */}
+    <Footer />
     </Provider>
   </ThemeProvider>
-  {/* </div> */}
+
   </>
  
   )}

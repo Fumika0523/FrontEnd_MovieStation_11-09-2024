@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+
 function MovieDisplay({mode}) 
 {
 console.log(mode)
@@ -100,12 +101,15 @@ const handleAdditem=async(movieItem)=>{
 
 return (
 <>
+<div>
+
 <Box 
 display="flex"
 flexDirection={"column"}
   alignItems="center"
   justifyContent={"end"}
   margin={2}
+//   className="border border-4 border-danger"
   >
 <Grid  container  className=" border-4"
 // style={displayStyle} 
@@ -188,7 +192,7 @@ flexDirection={"column"}
     ))}
 </Grid>
 </Box>
-    {/* </div> */}
+</div>
    {/* </div> */}
  </>
  )}

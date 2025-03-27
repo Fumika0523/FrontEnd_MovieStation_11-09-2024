@@ -41,9 +41,9 @@ const bottomDesignData=[
 
     return(
         <>
-  <div className="mb-5  border-2">
+  <div className="mb-5">
     <AboutUs_ImageBanner banner ={"https://static.justwatch.com/backdrop/137681/s1920/Marvels-The-Avengers"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide" className=""/>
-    <div className="border-2  border-danger">
+    <div className="">
         {/* 1st */}
         <div className="whatwedo bg-light text-black mx-lg-5  mx-sm-0 py-5 my-md-0 my-4">
         <h1 className="d-flex justify-content-center align-items-center mb-3" 
@@ -77,7 +77,3 @@ const bottomDesignData=[
     )
 }
 export default AboutUs_Section
-
-//update the img and the text on What we do.
-//Last section, call 3 times for the 3 cols, map method.
-//className also you can pass as prop.

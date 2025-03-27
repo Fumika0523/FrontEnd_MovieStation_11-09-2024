@@ -12,6 +12,10 @@
   font-size: 15px;
 }
 
+.carousel-indicators {
+  display: none;
+}
+
 .bg-header-image{
   height: 450px;
   background-size:cover;

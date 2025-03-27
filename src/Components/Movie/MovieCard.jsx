@@ -88,15 +88,15 @@ const trailerFun = () =>{
 //Comparison operator
 //movieData is all movie datas that were added in the website
 const isMovieOwner = userId === element?.owner; // true || false
-console.log("element",element)
-console.log("userId",userId,element?.owner)
-console.log("isMovieOwner",isMovieOwner)
+// console.log("element",element)
+// console.log("userId",userId,element?.owner)
+// console.log("isMovieOwner",isMovieOwner)
 
 // SPECIFIC
 const getSpecificMovieData = async () =>{
-  console.log("Specific Movie Data is called....")
+  // console.log("Specific Movie Data is called....")
   let res = await axios.get(`${url}/specificmovie`,config)
-  console.log(res.data.movieData)
+  // console.log(res.data.movieData)
   setSpecificMovieData(res.data.movieData)
 }
 useEffect(() => {
@@ -104,14 +104,14 @@ useEffect(() => {
 }, [])
 console.log("Specific Movie Data",specificMovieData)
 
-
-
 // const searchUserAddedMovie = specificMovieData.map((element)=>element._id)
 // const findUserAddedMovie = movieData.filter((element)=>searchUserAddedMovie.includes(element._id))
 
 // console.log(searchUserAddedMovie)
 // console.log(findUserAddedMovie) //find a value
 // find , some, filter,includes,map,every
+
+
    return (
 <>
    {/* <Grid  container border={2} sx={{display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}> */}
@@ -174,13 +174,13 @@ console.log("Specific Movie Data",specificMovieData)
     </CardActions>
         <Collapse in={!expanded}>
     <CardContent>
-    <Typography  sx={{ color: 'text.secondary' }} setCastShow={setCastShow} paragraph>{cast}</Typography>  
+    <Typography  sx={{ color: 'text.secondary' }} setCastShow={setCastShow} paragraph>{cast.substring(0,65)+"..."}</Typography>  
     </CardContent>
     </Collapse>
 
     <Collapse in={expanded}>
     <CardContent>
-    <Typography setSummaryShow={setSummaryShow} paragraph>{summary}</Typography>
+    <Typography setSummaryShow={setSummaryShow} paragraph>{summary.substring(0,170)+"..."}</Typography>
     </CardContent>
     </Collapse>
     </Card>

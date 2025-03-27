@@ -1,5 +1,7 @@
 import { Button } from "react-bootstrap"
 import { TbTruckDelivery } from "react-icons/tb";
+import { FaCheck } from "react-icons/fa";
+
 
 function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
    
@@ -17,24 +19,39 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
     })
    }
 
+   const getDateOnly = (dateObj) => {
+    return dateObj.toISOString().split("T")[0]
+  };
     // const deliveryDate = ("Mar 21 2025")
     const TodayDate = new Date()
-     const currentDate = formatDate(TodayDate)
+    const orderDateObj = new Date(updatedAt)
+    const estimatedObj = new Date(orderDateObj)
+    estimatedObj.setDate(estimatedObj.getDate()+4)
+
+    const currentDate = getDateOnly(TodayDate)
+    const orderDate = getDateOnly(orderDateObj)
+    const estimatedDeliveryDate = getDateOnly(estimatedObj)
+    console.log("currentDate",currentDate)
+    console.log("orderDate",orderDate)
+    console.log("EstimatedDate",estimatedDeliveryDate)
     // const currentDate = "Mar 30, 2025"
     //  console.log("Today' Date:", currentDate)
 
-   const orderDate = formatDate(updatedAt)
-//    console.log("Order Date", orderDate)
+    // const orderDate = formatDate(updatedAt)
 
-     const Date1 = new Date (updatedAt)
+    // console.log("Order Date", orderDate)
+
+    //  const Date1 = new Date (updatedAt)
      //when its empty inside () >>> giving you a today' date. we want to get in iso format
     //  console.log(Date1)
-    const Today = Date1.setDate(Date1.getDate()+4)
-     const EstimatedDeliveryDate = formatDate(Today )
+
+    
+ 
+    //  const EstimatedDeliveryDate = formatDate(Today )
+     
     // const EstimatedDeliveryDate = "Mar 28, 2025"
     // const EstimatedDeliveryDate = updatedAt.setDate(updatedAt.getDate()+4)
-
-    //   console.log("estimateddeliverydate:",EstimatedDeliveryDate)
+//    console.log("estimateddeliverydate:",EstimatedDeliveryDate)
 
 //    if (currentDate == EstimatedDeliveryDate )
 //     {
@@ -47,7 +64,7 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
 //     console.log("Failed")
 // }
 
-// currentDate == EstimatedDeliveryDate && EstimatedDeliveryDate >= currentDate ? 
+// currentDate == EstimatedDeliveryDate || EstimatedDeliveryDate >= currentDate ? 
 // console.log("Success") :
 // currentDate < EstimatedDeliveryDate ?
 // console.log("Accepted") :
@@ -59,40 +76,36 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
    // 2. orderDate + DeliveryDate should pass today >> Delivered
     return(
     <>
-        <div className="d-flex flex-row mb-5 row mx-auto" style={{}} >
-            <div className=" d-flex justify-content-center align-items-center col-md-5 col-12">
+        <div className="d-flex flex-row mb-5 row mx-auto" 
+        style={{}} >
+            <div className=" d-flex justify-content-center align-items-center col-md-5 mb-2 col-12">
                 <img src={movieposter} alt="" style={{width:"100%"}}/></div>
-            <div className=" col-md-7 col-12 border">
-                {/* WHen you click today, >>  */}
-                
-            <div className="d-flex justify-content-between align-items-center mb-2">
-            <div className="col-8" >Order Date  {orderDate} </div> 
-            {/* When the delivery date has crossed, automatically the status should change to delivered */}
-            {/* Checking with Today' date or */}
+            <div className=" col-md-7 col-12">
+                {/* WHen you click today, >>  */}  
+            <div className="d-flex justify-content-between align-items-center  mb-2">
+            <div className="" >Ordered <FaCheck className="text-primary me-1" />
+            <span>{orderDate}</span> </div> 
+        
           {
-            (orderDate == EstimatedDeliveryDate && EstimatedDeliveryDate >= currentDate )?
-
-            <Button variant="primary" style={{fontSize:"17px",padding:"1px 2%"}}>Delivered</Button>
-            :
-            (orderDate < EstimatedDeliveryDate) ?
+             (estimatedDeliveryDate > orderDate  )?
+             <Button variant="primary" style={{fontSize:"17px",padding:"1px 2%"}}>Delivered</Button>
+            :  
+            <Button variant="secondary" style={{fontSize:"17px",padding:"1px 2%"}}>Pending</Button> 
+          }
+          {
+            (orderDate < estimatedDeliveryDate ) ?
             <>
             <Button variant="warning" style={{fontSize:"17px",padding:"1px 2%"}}>Processing</Button>
             </>
-            :
-            (orderDate > EstimatedDeliveryDate) ? 
-            <>
-        
-            <Button variant="primary" style={{fontSize:"17px",padding:"1px 2%"}}> Delivered</Button>
-            </>
-            :
-            <Button variant="secondary" style={{fontSize:"17px",padding:"1px 2%"}}>Pending</Button>
-    }
+             :
+             null
+            }
    </div>
 
-            {/* <div className="text-secondary "> {formatDate(updatedAt)}</div> */}
-            <div className="text-secondary mb-3 ">Estimated delivery 
+            {/* <div className="text-secondary "> {formatDate(updatedAt)}</div>  */}
+             <div className="text-secondary mb-3 ">Estimated delivery 
                 <TbTruckDelivery className="mx-1 fs-4 text-success"/>
-                {EstimatedDeliveryDate}</div>
+                {estimatedDeliveryDate}</div>
 
             <div className="d-flex justify-content-between" >
             <div>{moviename}</div>

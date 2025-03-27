@@ -71,7 +71,7 @@ function NavBar({ mode, setMode }) {
   let username = sessionStorage.getItem('username')
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" className="sticky-top"
+      <Navbar className="d-flex border-danger sticky-top border-3" collapseOnSelect expand="lg" 
         style={{ backgroundColor: mode == "light" ? "	rgb(250, 249, 246)" : "black" }}  >
 
         <Container  >
@@ -79,11 +79,11 @@ function NavBar({ mode, setMode }) {
           <Navbar.Brand className="fw-bold">
             <i style={{ color: mode == "light" ? amberColor1 : amberColor }} className="fa-solid  fa-couch"></i>
             <i className="fa-solid  fa-wine-glass" style={{ color: mode == "light" ? amberColor1 : amberColor }}></i>
-            <span className="fs-4 ms-1"
+            <span className="fs-4 d-none d-sm-block ms-1"
               style={{ color: mode == "light" ? "black" : amberColor }}>MovieStation</span>
           </Navbar.Brand>
 
-          <Nav className=" ms-auto d-flex text-nowrap justify-content-center align-items-center flex-row">
+          <Nav className="ms-auto d-flex text-nowrap justify-content-center align-items-center flex-row">
             {token ?
               <>
                 {/* Power Off */}
@@ -112,11 +112,16 @@ function NavBar({ mode, setMode }) {
 
                 {/* USERNAME */}
                 <Nav.Link href="/ordersummary" className="d-flex justify-content-center align-items-center" >
-                  {/* <FaUserCheck className="fs-2"
-                     /> */}
+                <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center d-sm-block d-none">
                   <span 
-                  style={{ color: "rgb(199, 97, 1)" }}             
-                    className="fw-bold fs-5 ms-1 me-3" >{username[0].toUpperCase()+username.slice(1)}</span>
+                  style={{ color: "rgb(252, 126, 15)" }}             
+                    className="fw-bold fs-5 ms-1 me-2 " >{username[0].toUpperCase()+username.slice(1)}</span>
+                </Button>
+                <Button variant="none" className="d-block d-sm-none d-flex text-nowrap justify-content-center align-items-center">
+                       <span 
+                  style={{ color: "rgb(252, 126, 15)" }}             
+                    className="fw-bold  fs-5 ms-1 me-2" >{username[0].toUpperCase()}</span>
+                     </Button>
                 </Nav.Link>
               </>
               :

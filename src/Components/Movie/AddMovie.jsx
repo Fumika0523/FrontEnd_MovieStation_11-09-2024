@@ -9,6 +9,7 @@ import { url } from "../../utils/constant";
 import { Button,Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import PageNotFound from '../../Components/HomeSreen/PageNotFound'
+import NavBar from "../HomeSreen/NavBar";
 
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
@@ -86,7 +87,7 @@ setMovieData(res)
 
   return (
     <>
-      <div className='h-100 d-flex justify-content-center align-items-center row mx-auto' >
+      <div className='h-100 d-flex justify-content-center align-items-center  row mx-auto' >
     <Box
     component="form" 
      sx={{
@@ -263,7 +264,6 @@ setMovieData(res)
            </Grid>
       </Grid>
    </Box>
-   </div>
-
-</>
+      </div>
+    </>
   );}
