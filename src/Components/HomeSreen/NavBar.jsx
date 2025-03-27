@@ -83,7 +83,7 @@ function NavBar({ mode, setMode }) {
               style={{ color: mode == "light" ? "black" : amberColor }}>MovieStation</span>
           </Navbar.Brand>
 
-          <Nav className=" ms-auto  d-flex flex-row">
+          <Nav className=" ms-auto d-flex text-nowrap justify-content-center align-items-center flex-row">
             {token ?
               <>
                 {/* Power Off */}
@@ -98,7 +98,7 @@ function NavBar({ mode, setMode }) {
 
                 {/* Dark / Light Mode */}
                 <Nav.Link href="#" className="mx-auto">
-                  <Button variant="none" className=""
+                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
                     style={{ color: mode == "light" ? greyColor : amberColor }}
                     onClick={() => {
                       //setMode("light")
@@ -148,7 +148,7 @@ function NavBar({ mode, setMode }) {
                   <Button variant="none"
                      className="d-flex text-nowrap justify-content-center align-items-center"
                       onClick={() => { navigate('/signup') }}><i class="fa-solid fs-5 fa-user me-1"
-                      style={{ color: mode == "light" ? "black" : "white" }}></i><span style={{ color: mode == "light" ? greyColor : "white" }} className="text-nowrap">Sign up</span></Button>
+                      style={{ color: mode == "light" ? "black" : "white" }}></i><span style={{ color: mode == "light" ? greyColor : "white" }} className="d-none d-sm-block  text-nowrap">Sign up</span></Button>
                 </Nav.Link>
               </>
             }
