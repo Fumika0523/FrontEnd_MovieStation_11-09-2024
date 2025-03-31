@@ -46,3 +46,8 @@ phone no: 100100
 6. WHen you click all enquiries, the table doesnt show first
 7. enquiry table is not mobile responsive
 8. unable to get all enquiry in front-end (able to get in postman)
+
+---
+9. filter by order
+10. Download button in pdf
+11. create a html base normal website

@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 
-function SignIn({isAuthenticated,setIsAuthenticated}) {
+function SignIn({setIsAuthenticated}) {
   const navigate = useNavigate()
   const formSchema=Yup.object().shape({
     password:Yup.string().required(),

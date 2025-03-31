@@ -233,3 +233,15 @@ font-size: "16px";
   align-items: center;
   flex-direction: row;
 }
+
+.downloadText{
+  display: none; 
+}
+.downloadBtn:hover +.downloadText{
+  display: block !important;
+  color:red !important
+}
+
+.downloadBtn  {
+  cursor: pointer;
+}

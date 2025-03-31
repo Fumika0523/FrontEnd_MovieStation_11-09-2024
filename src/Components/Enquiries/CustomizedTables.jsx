@@ -28,8 +28,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedTables({enquiryData}) {
 
+
+export default function CustomizedTables({enquiryData}) {
+  console.log(enquiryData)
+  
   return (
     <TableContainer component={Paper} className='border' style={{ }}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -37,7 +40,7 @@ export default function CustomizedTables({enquiryData}) {
           <TableRow>
             <StyledTableCell align="center">First Name</StyledTableCell>
             <StyledTableCell align="center">Last Name</StyledTableCell>
-            <StyledTableCell align="center">Email</StyledTableCell>
+            <StyledTableCell align="centnper">Email</StyledTableCell>
             <StyledTableCell align="center">Phone No.</StyledTableCell>
             <StyledTableCell align="center">Subject</StyledTableCell>
             <StyledTableCell align="center">Description</StyledTableCell>

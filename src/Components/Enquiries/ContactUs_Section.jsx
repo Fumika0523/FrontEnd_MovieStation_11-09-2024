@@ -3,10 +3,13 @@ import { useFormik } from "formik"
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { url } from "../../utils/constant";
-import { Button, Form } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useState } from "react";
 
 function ContactUs_Section (){
 const navigate = useNavigate()
+const [enquiryData,  setEnquiryData] = useState([])
 
 const formSchema=Yup.object().shape({
   firstname:Yup.string().required(),
@@ -33,28 +36,41 @@ const formik = useFormik({
   }
 })
 
-const token = sessionStorage.getItem('token')
-//console.log(token)
+// const token = sessionStorage.getItem('token')
+// //console.log(token)
 
-let config = {
-headers:{
-  Authorization:`Bearer ${token}`
-}
-}
+// let config = {
+// headers:{
+//   Authorization:`Bearer ${token}`
+// }
+// }
 
 const postEnquiryDetail=async(newEnquiry)=>{
-  console.log(newEnquiry)
-  const res = await axios.post(`${url}/contact`,newEnquiry) 
-  console.log(res)
+   console.log("NEW Enquiry",newEnquiry)
+  
+   let res = await axios.post(`${url}/contact`,newEnquiry) 
+   console.log(res)
+   setEnquiryData(res)
   if(res.status == 200){
     navigate('/allenquiries') 
-  }
-}
+   }
+ }
+
+   const getEnquiryData = async () =>{
+    console.log("ContactUsSection")
+    let res = await fetch(`${url}/allenquiry`)
+    let data = await res.json()
+    console.log(data)
+    getEnquiryData()
+   }
+
+
     return(
 <>
 <div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center mt-sm-5 mt-md-5 mt-lg-5 mt-1">
 {/*FORM  */}
- <Form  onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-10 col-sm-10 col-lg-6 col-12 px-4 py-5 px-sm-5 " >
+
+ <Form   onSubmit={formik.handleSubmit}className="sign_up_in_container col-md-10 col-sm-10 col-lg-6 col-12 px-4 py-5 px-sm-5 " >
 
  <div className="  d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>
@@ -64,10 +80,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
   <Button variant="secondary" className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
 </div>
-   {/* message */}
-   {/* <p className="fs-sm-5 my-sm-5 my-4 col-sm-8 col-10 mx-auto " >In order to solve your report, we ask you fill in as many fields as possible. Fields like the IMDb ID and JustWatch URL especially allow us to solve your report quickly.
-    </p> */}
-{/* <div className="  -4 ">    */}
+
 
         <div className="row  text-secondary justify-content-center">
         {/* First Name */}

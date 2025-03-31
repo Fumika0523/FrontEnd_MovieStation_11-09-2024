@@ -5,7 +5,6 @@ import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
 import { Button } from "react-bootstrap"
-import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';

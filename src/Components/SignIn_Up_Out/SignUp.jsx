@@ -53,7 +53,7 @@ const postSignUpUser=async(newUser)=>{
   return (
     <>
     <div className='container-fluid border-4 border-primary d-flex justify-content-center align-items-center' >
-     <Form onSubmit={formik.handleSubmit}className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
+     <Form onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
     <div className=' text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
           <Form.Group className="col-md-6 mb-1">

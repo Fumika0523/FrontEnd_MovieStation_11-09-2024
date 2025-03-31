@@ -8,31 +8,32 @@ import CustomizedTables from "./CustomizedTables"
 import { Image } from "react-bootstrap"
 import Card from 'react-bootstrap/Card';
 
-function AllEnquiries() {
+function AllEnquiries({mode}) {
  
     const navigate = useNavigate()
     const [enquiryData, setEnquiryData] = useState([]) //array
 
-    const token = sessionStorage.getItem('token')
-    console.log(token)
+    // const getEnquiryData = async () => {
+    //     console.log("Enquiry Data is called....")
+    //     let res = await axios.get(`${url}/allenquiry`)
+    //      console.log(res.data.enquiryData)
+    //     //setEnquiryData(res.data.allEnquiry)
+    // }
+    // useEffect(() => {
+    // getEnquiryData()
+    // }, []) // API call has to be made inside UseEffect () only
 
-    let config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+    const getEnquiryData = async () =>{
+        console.log("EnquiryData is called..")
+        let res = await axios.get(`${url}/allenquiry`)
+        console.log("res.data",res.data.enquiryData )
+        setEnquiryData(res.data.enquiryData )
     }
-
-    const getEnquiryData = async () => {
-        console.log("Enquiry Data is called....")
-        let res = await axios.get(`${url}/allenquiry`,config)
-        console.log(res)
-        console.log(res.data.allEnquiry)
-        // console.log(res.data.enquiryData)
-        setEnquiryData(res.data.allEnquiry)
-    }
-    useEffect(() => {
-    getEnquiryData()
-    }, []) // API call has to be made inside UseEffect () only
+        useEffect(()=>{
+        getEnquiryData()
+        console.log("AllEnquiries")
+        },[])
+    
     
     return (
         <>
@@ -40,6 +41,7 @@ function AllEnquiries() {
         {/* Back */}
         <div className="border-4 d-flex  flex-column col-10 col-lg-8 mx-auto">
         <div className="d-flex mb-3 justify-content-end">
+            
             <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center"
             onClick={()=>navigate('/contact')}>
             <i className="fa-solid fa-angles-left fs-6"></i>

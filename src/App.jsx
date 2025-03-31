@@ -100,12 +100,13 @@ const [mode, setMode]=useState("dark")
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' mode={mode} element={<Service_Section/>}/>
       <Route path='/contact'  mode={mode} element={<ContactUs_Section/>}/>
+      <Route path="/allenquiries" mode={mode} element={<AllEnquiries/>}/>
       <Route path="/movietrailer/:id" mode={mode}  element={<MovieTrailer mode={mode} movieData={movieData} setMovieData={setMovieData}/>}/>
       <Route path="/signin" mode={mode} element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
     }/>
       <Route path="/signup" mode={mode} element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
-      <Route path="allenquiries" mode={mode} element={<AllEnquiries/>}/>
+     
       <Route path="/table" mode={mode} element={<Table/>}/> 
       <Route path="/pagenotfound" mode={mode} element={<PageNotFound/>}/> 
     </Routes>
