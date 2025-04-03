@@ -17,8 +17,9 @@
 }
 
 .bg-header-image{
-  height: 450px;
+  min-height: min-content;
   background-size:cover;
+  
   background-position-y:top ;
   background-repeat: no-repeat;
   display: block;
@@ -33,7 +34,7 @@
 }
 
 .bgFade{
-  background-image: linear-gradient(180deg, transparent 0, #000000);
+  /* background-image: linear-gradient(180deg, transparent 0, #000000); */
   top:0px;
   object-fit: cover;
   /* border:5px solid red; */

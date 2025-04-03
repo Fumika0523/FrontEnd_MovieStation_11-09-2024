@@ -13,70 +13,69 @@ import Button from 'react-bootstrap/Button';
 
 function OrderSummary({ mode }) {
     const [orderData, setOrderData] = useState([])
-    const [sortedData, setSortedData] =useState([])
+    const [sortedData, setSortedData] =useState("createdAt:desc") //default
+
     console.log("sortedData",sortedData)
     console.log("orderData",orderData)
     const [loading,setLoading] = useState(false)
 
     const token = sessionStorage.getItem('token')
-
     let config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
 
-    const handleGetOrder = async () => {
-        let res = await axios.get(`${url}/order`, config)
-        console.log("handleGetOrder", res.data.orderData)
-        setOrderData(res.data.orderData)
-        console.log(res.data.orderData)
-        //setOrderSum(res.data.orderData.movies.amount)
+ const fetchOrders = async(sortBy)=>{
+    setLoading(true);
+    try{
+        // /order?sortBy=createdAt:asc
+        const res = await axios.get(`${url}/order?sortBy=${sortBy}`,config)
+        console.log(`${url}/order?sortBy=${sortBy}`)
+        setOrderData(res.data.OrderData)
+        console.log(res.data.OrderData
+            )
     }
-    // Calling API call for handlegetorder
-    useEffect(() => {
-        handleGetOrder()
-    }, [])
+    catch(error){
+        console.log("Error fetching orders:",error);
+    }
+    setLoading(false)
+}
 
-    // Onclick
-    //true >> asc >> faul >> desc
-    const getSortedData = async()=>{
-        setLoading(true)
-        let res = await axios.get(`${url}/order?sortBy=createdAt:desc`,config)
-        console.log("GetSortedData",res.data.orderData)
-        setSortedData(res.data.orderData)
-    }
+useEffect(()=>{
+    fetchOrders(sortedData)
+},[])
+
+const toggleSortOrder= () =>{
+    const newSortOrder = sortedData === "createdAt:asc" ? "createdAt:desc" : "createdAt:asc";
+    setSortedData(newSortOrder)
+    console.log(sortedData)
+    fetchOrders(newSortOrder)
+}
 
     //declearing
-    let totalOrderPrice ;
-    if(loading == true) // it has to display only 6 
-         {
-            console.log("loading",loading)
-         totalOrderPrice = sortedData.map((element) => {
-            const price = (element.movies).map((p) => {
-                return p.amount
-            })
-            const total = price.reduce((acc, cv) => acc + cv)
-            return total
+    const  totalOrderPrice = orderData.map((element) => {
+        const price = (element.movies).map((p) => {
+            return p.amount
         })
-    }else{
-         totalOrderPrice = orderData.map((element) => {
-            const price = (element.movies).map((p) => {
-                return p.amount
-            })
-            const total = price.reduce((acc, cv) => acc + cv)
-            return total
-        })
-    }
-    
-console.log(totalOrderPrice)
+        const total = price.reduce((acc, cv) => acc + cv)
+        return total
+    })
+
 
     const renderTooltip = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-            Download
+        <Tooltip id="button-tooltip"  {...props}>
+            Download As PDF
         </Tooltip>
     );
 
+const downloadFile = () =>{
+    const el = document.createElement("a");
+    el.href = WebStories.pdf;
+    el.download = "OrderSummary.pdf";
+    document.body.appendChile(el);
+    el.click()    
+}
     return (
         <>
             <div className="row mx-auto">
@@ -90,44 +89,10 @@ console.log(totalOrderPrice)
                         </div>
                         <div>
                             <BiSort className="fs-4"
-                            onClick={()=>{ getSortedData()}} />
+                            onClick={()=>{toggleSortOrder()}} />
                         </div>
                     </div>
-                    {
-                        // checking toggle
-                        loading == true ?
-                        // <h1>Sorted Order</h1>
-                        totalOrderPrice.map((x) => (
-                            sortedData.map((element) => (
-                                <div key={element._id} className="mb-4">
-                                    <div className="d-flex mx-3  flex-row justify-content-between align-items-center my-2 ">
-                                        <div className="fs-6 fw-bold">Order ID : {element._id}</div>
-                                        <OverlayTrigger
-                                            placement="right"
-                                            delay={{ show: 250, hide: 400 }}
-                                            overlay={renderTooltip} >
-                                            <Button variant="none">
-                                                <MdDownloading className="fs-2"
-                                                style={{color:"rgb(46, 197, 54)"}} />
-                                            </Button>
-                                        </OverlayTrigger>
-                                    </div>
-                                    {
-                                        element.movies.map((movie) => (
-                                            <OrderSummaryCard key={movie._id} {...movie} updatedAt={element.updatedAt} />
-                                        ))}
-
-                                    {
-                                        <div className="text-end fw-bold fs-4 mx-2">Total Price :
-                                            <span className="fw-bold ms-1 fs-4">${x}</span> 
-                                        </div>
-                                    }
-                                    <hr />
-                                </div>
-                            ))
-                        ))
-                        :
-                         
+                    {                      
                         totalOrderPrice.map((x) => (
                             orderData.map((element) => (
                                 <div key={element._id} className="mb-4">
@@ -137,9 +102,10 @@ console.log(totalOrderPrice)
                                             placement="right"
                                             delay={{ show: 250, hide: 400 }}
                                             overlay={renderTooltip} >
-                                            <Button variant="none">
+                                            <Button variant="none"
+                                            onClick={downloadFile}>
                                                 <MdDownloading className="fs-2"
-                                                style={{color:"rgb(46, 197, 54)"}} />
+                                                style={{color:"rgb(251, 181, 4)"}} />
                                             </Button>
                                         </OverlayTrigger>
                                     </div>
