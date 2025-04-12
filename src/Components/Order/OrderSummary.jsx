@@ -87,8 +87,10 @@ const downloadFile = () =>{
                             </div>
                             <div>My Orders</div>
                         </div>
-                        <div>
-                            <BiSort className="fs-4"
+                        <div
+                        style={{backgroundColor:"transparent"}}>
+                            <BiSort className="fs-4 "
+                            style={{cursor:"pointer"}}
                             onClick={()=>{toggleSortOrder()}} />
                         </div>
                     </div>

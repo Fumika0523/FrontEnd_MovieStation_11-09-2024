@@ -16,9 +16,10 @@ const navigate = useNavigate()
   }
   const formSchema=Yup.object().shape({
     name:Yup.string().min(5,"Too Short"),
+    lastname:Yup.string(),
     age:Yup.number().required().positive(),
     gender:Yup.string(),
-    phone_number:Yup.number().required(),
+    phone_number:Yup.number().min(10,"Too short").max(10,"Too long").required(),
     password:Yup.string().required(),
     email:Yup.string().required(),
 })
@@ -26,6 +27,7 @@ const navigate = useNavigate()
 const formik=useFormik({
   initialValues:{
       name:"",
+      lastname:"",
       age:"",
       gender:"",
       phone_number:"",
@@ -34,7 +36,7 @@ const formik=useFormik({
   },
   validationSchema:formSchema,
   onSubmit:(values)=>{
-      console.log(values) 
+      console.log(values) //get a proper data
       postSignUpUser(values)
   }   
 })
@@ -44,7 +46,7 @@ const postSignUpUser=async(newUser)=>{
   // console.log(newUser)
   // http://localhost:8001/signup
   const res=await axios.post(`${url}/signup`,newUser)
-  console.log(res)  
+  console.log(res)  //get a proper data
   if(res.status ==200){
     //navigate to signin page >> siginin
     navigate('/signin')
@@ -56,8 +58,9 @@ const postSignUpUser=async(newUser)=>{
      <Form onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
     <div className=' text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
+          {/* Name */}
           <Form.Group className="col-md-6 mb-1">
-            <Form.Label htmlFor="name" className="form-label m-0">Name</Form.Label>
+            <Form.Label htmlFor="name" className="form-label m-0">First Name</Form.Label>
             <Form.Control 
             type="text" 
             // className="form-control "
@@ -68,8 +71,25 @@ const postSignUpUser=async(newUser)=>{
             style={inputDesign}/>
           </Form.Group>
 
-          {/* AGE */}
+
+          {/* LAST NAME */}
           <Form.Group className="col-md-6 mb-1">
+            <Form.Label htmlFor="lastname">Last Name</Form.Label>
+            <Form.Control
+            type="text" 
+            // className="form-control "
+            id="lastname"
+            name="lastname"
+            value={formik.values.lastname}
+            onChange={formik.handleChange}  
+            style={inputDesign}/>
+          </Form.Group>
+
+     
+          </div>
+          <div className="mb-1 row ">
+            {/* AGE */}
+            <Form.Group className="col-md-2 mb-1">
             <Form.Label htmlFor="age" className="form-label m-1">Age</Form.Label>
             <Form.Control type="text" className="sign_up_input form-control" 
              id="age"
@@ -79,11 +99,10 @@ const postSignUpUser=async(newUser)=>{
              style={inputDesign}
             />
           </Form.Group>
-          </div>
-          <div className="mb-1 row ">
+
           {/* Gender */}
-         <div className="col-md-6 d-flex flex-column justify-content-start align-items-start">
-        <div className='ps-1'>Gender :</div>
+         <div className="col-md-4 m d-flex flex-column justify-content-start align-items-start">
+        <div className='ps-2 mb-2'>Gender :</div>
         <div className='d-flex flex-row justify-content-start ps-2 align-items-center gap-3'>
         <Form.Check type="radio" name="gender" label={`Male`} 
           value="male"

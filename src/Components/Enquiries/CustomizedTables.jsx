@@ -8,10 +8,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.grey,
     color: theme.palette.common.white,
+    fontSize: 16,
+
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -20,47 +23,48 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+  backgroundColor: theme.palette.action.hover.grey,
+
   },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
+  // // hide last border
+  // '&:last-child td, &:last-child th': {
+  //   border: 0,
+  // },
 }));
-
-
 
 export default function CustomizedTables({enquiryData}) {
   console.log(enquiryData)
   
   return (
-    <TableContainer component={Paper} className='border' style={{ }}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+
+    <TableContainer component={Paper} className='border border-4' style={{}} >
+      <Table   aria-label="customized table">
         <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">First Name</StyledTableCell>
-            <StyledTableCell align="center">Last Name</StyledTableCell>
-            <StyledTableCell align="centnper">Email</StyledTableCell>
-            <StyledTableCell align="center">Phone No.</StyledTableCell>
-            <StyledTableCell align="center">Subject</StyledTableCell>
-            <StyledTableCell align="center">Description</StyledTableCell>
+          <TableRow >
+            <StyledTableCell noWrap="false" align="left" >First Name</StyledTableCell>
+            <StyledTableCell noWrap="false" align="left">Last Name</StyledTableCell>
+            <StyledTableCell noWrap="false" align="centnper">Email</StyledTableCell>
+            <StyledTableCell noWrap="false" align="left">Phone No.</StyledTableCell>
+            <StyledTableCell noWrap="false" align="left">Subject</StyledTableCell>
+            <StyledTableCell noWrap="false" align="left">Description</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody  style={{fontWeight:"light"}}>
           {enquiryData?.map((element) => (
-            <StyledTableRow>
-              <StyledTableCell  align="center" scope="row">
+            <StyledTableRow hover={true} >
+              <StyledTableCell  align="left" scope="row">
                 {element.firstname}
               </StyledTableCell>
-              <StyledTableCell align="center">{element.lastname}</StyledTableCell>
-              <StyledTableCell align="center">{element.email}</StyledTableCell>
-              <StyledTableCell align="center">{element.phoneNum}</StyledTableCell>
-              <StyledTableCell align="center">{element.subject}</StyledTableCell>
-              <StyledTableCell align="center">{element.description}</StyledTableCell>
+              <StyledTableCell align="left">{element.lastname}</StyledTableCell>
+              <StyledTableCell align="left">{element.email}</StyledTableCell>
+              <StyledTableCell align="left">{element.phone_number}</StyledTableCell>
+              <StyledTableCell align="left">{element.subject}</StyledTableCell>
+              <StyledTableCell align="left">{element.description.substring(0,220)+"..."}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+
   );
 }

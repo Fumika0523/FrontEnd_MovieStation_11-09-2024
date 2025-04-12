@@ -6,7 +6,6 @@ import NavBar from './Components/HomeSreen/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
 import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
 import Homepage from './Components/HomeSreen/Homepage';
-import {Navigate} from 'react-router-dom';
 import Footer from './Components/HomeSreen/Footer';
 import MovieTrailer from './Components/Movie/MovieTrailer';
 import React, {useEffect,useState} from 'react'
@@ -24,10 +23,7 @@ import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
-import { Box, Container } from "@mui/material"
 import UserMovies from './Components/Movie/UserMovies';
-import { RiH1 } from 'react-icons/ri';
-import { DiJavascript1 } from 'react-icons/di';
 import PageNotFound from './Components/HomeSreen/PageNotFound';
 
 
@@ -75,6 +71,7 @@ const [mode, setMode]=useState("dark")
   // If there is a token, you should access to AddMovie.
   //check if the token is stored in sessionstorage after login.
   //if no token >> signup/signin page
+const [userData,setUserData]=useState([])
 
   return (
     <>
@@ -118,12 +115,3 @@ const [mode, setMode]=useState("dark")
  
   )}
 export default App
-
-// function App(){
-//   return(
-//     <>
-//     <h1>Hello World</h1>
-//     </>
-//   )
-// }
-// export default  App

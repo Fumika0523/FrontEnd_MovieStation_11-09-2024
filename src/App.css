@@ -246,3 +246,14 @@ font-size: "16px";
 .downloadBtn  {
   cursor: pointer;
 }
+
+.dropdownMenu{
+  transition-timing-function: ease-in-out !important;
+  transition-duration: 1.5s !important;
+}
+
+.dropDownItem:hover{
+  background-color: #3b4852;
+}
+
+

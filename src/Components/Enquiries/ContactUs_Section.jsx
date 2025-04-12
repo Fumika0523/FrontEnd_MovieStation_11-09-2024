@@ -5,45 +5,84 @@ import * as Yup from "yup";
 import { url } from "../../utils/constant";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Last } from "react-bootstrap/esm/PageItem";
 
 function ContactUs_Section (){
 const navigate = useNavigate()
 const [enquiryData,  setEnquiryData] = useState([])
+const token = sessionStorage.getItem('token')
+console.log('token',token)
+
+// const firstname = sessionStorage.getItem('name')
+// console.log('firstname',firstname)
+
+// const lastname = sessionStorage.getItem('lastname')
+// console.log('lastname',lastname)
+
+// const email = sessionStorage.getItem('email')
+// console.log('email',email)
+
+// const phone_number = sessionStorage.getItem('phone_number')
+// console.log('phone_number',phone_number)
+
+const [userData,setUserData]=useState([])
+//without sessionStorage 
 
 const formSchema=Yup.object().shape({
   firstname:Yup.string().required(),
   lastname:Yup.string().required(),
   email:Yup.string().required(),
-  phoneNum:Yup.number().required(),
+  phone_number:Yup.number().required(),
   subject:Yup.string().required(),
   description:Yup.string().required(),
 })
 
 const formik = useFormik({
   initialValues:{
-    firstname:"",
-    lastname:"",
-    email:"",
-    phoneNum:"",
+    firstname:(token) ? userData.name : "",
+    lastname:(token) ? userData.lastname : "",
+    email:(token) ? userData.email : "",
+    phone_number:(token) ? userData.phone_number : "",
     subject:"",
     description:"",
   },
+  enableReinitialize:true,
+  //if there is any updates in my initial Value, please make it update (re-initialize value) >> enable:true
+  
+  //IF you are using sessionStorage, please refer below:
+  // initialValues:{
+  //   firstname: (token) ? firstname: "",
+  //   lastname:(token) ? lastname: "",
+  //   email:(token) ? email: "",
+  //   phone_number:(token) ? phone_number: "",
+  //   subject:"",
+  //   description:"",
+  // },
   validationSchema:formSchema,
   onSubmit:(values)=>{
     console.log(values)
-     postEnquiryDetail(values)
+    postEnquiryDetail(values)
   }
 })
 
-// const token = sessionStorage.getItem('token')
-// //console.log(token)
+let config = {
+headers:{
+  Authorization:`Bearer ${token}`
+}
+}
 
-// let config = {
-// headers:{
-//   Authorization:`Bearer ${token}`
-// }
-// }
+const getUserData = async()=>{
+console.log("User data is called........")
+let res = await axios.get(`${url}/user`,config)
+console.log("getUserData",res.data.userDetail)
+setUserData(res.data.userDetail)
+}
+// console.log("userData",userData)
+// console.log("firstname",userData.name)
+useEffect(()=>{
+getUserData()
+},[])
 
 const postEnquiryDetail=async(newEnquiry)=>{
    console.log("NEW Enquiry",newEnquiry)
@@ -63,7 +102,6 @@ const postEnquiryDetail=async(newEnquiry)=>{
     console.log(data)
     getEnquiryData()
    }
-
 
     return(
 <>
@@ -119,10 +157,10 @@ const postEnquiryDetail=async(newEnquiry)=>{
         </Form.Group>
 
         <Form.Group className="col-6 col-sm-6 col-lg-6 mb-1">
-        <Form.Label htmlFor="phoneNum" className=" m-0">Mobile Phone No.</Form.Label>
-        <Form.Control type="text"  id="phoneNum"
-          name="phoneNum"
-          value={formik.values.phoneNum}
+        <Form.Label htmlFor="phone_number" className=" m-0">Mobile Phone No.</Form.Label>
+        <Form.Control type="text"  id="phone_number"
+          name="phone_number"
+          value={formik.values.phone_number}
           onChange={formik.handleChange}
           />
         </Form.Group>
