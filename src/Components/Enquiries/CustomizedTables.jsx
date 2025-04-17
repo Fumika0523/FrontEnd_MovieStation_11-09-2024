@@ -7,7 +7,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import { Button } from '@mui/material';
+import {url} from '../../utils/constant'
+import { useState } from 'react';
+import ReadmoreDescription from './ReadmoreDescription';
+import { MdOutlineModeEdit } from "react-icons/md";
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import EditEnquiryForm from './EditEnquiryForm';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -26,19 +34,59 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   backgroundColor: theme.palette.action.hover.grey,
 
   },
-  // // hide last border
-  // '&:last-child td, &:last-child th': {
-  //   border: 0,
-  // },
 }));
 
-export default function CustomizedTables({enquiryData}) {
+export default function CustomizedTables({enquiryData,setEnquiryData}) {
   console.log(enquiryData)
-  
-  return (
+  // const [specificEnquiryData,setSpecificEnquiryData] = useState([])
+const [singleEnquiry,setSingleEnquiry] = useState(null)
+const [show, setShow] = useState(false);
+const [showEditModal, setShowEditModal] = useState(false);
 
-    <TableContainer component={Paper} className='border border-4' style={{}} >
-      <Table   aria-label="customized table">
+const handleDescriptionClick = (element) =>{
+    setShow(true);
+    setSingleEnquiry(element)
+}
+
+const handleEditClick = (element) => {
+  setShowEditModal(true);
+  setSingleEnquiry(element);
+};
+
+const navigate=useNavigate()
+const token = sessionStorage.getItem('token')
+console.log("token",token)
+let config = {
+headers:{
+  Authorization:`Bearer ${token}`
+}
+}
+
+// const getSpecificEnquiryData = async()=>{
+//   console.log("Specific Enquiry Data is calledd...")
+//   let res = await axios.get(`${url}/specificenquiry`,config)
+//   console.log(res.data)
+//   setSpecificEnquiryData(res.data)
+// }
+// useEffect(()=>{
+//   getSpecificEnquiryData()
+// },[])
+// console.log("getSpecificEnquiryData",specificEnquiryData)
+// const userId = sessionStorage.getItem('userId')
+// console.log('userId',userId)
+
+// const isEnquiryOwner = userId === element?.owner;
+// console.log("element",element)
+// console.log("userId",userId,element?.owner)
+
+// Smaller screen size = description is 30letter
+// larger screen size >>
+//edit option is only for logged in user who added this enquiry
+
+  return (
+  <>
+    <TableContainer component={Paper} className='border border-2 border-secondary' style={{}} >
+      <Table aria-label="customized table">
         <TableHead>
           <TableRow >
             <StyledTableCell noWrap="false" align="left" >First Name</StyledTableCell>
@@ -47,6 +95,7 @@ export default function CustomizedTables({enquiryData}) {
             <StyledTableCell noWrap="false" align="left">Phone No.</StyledTableCell>
             <StyledTableCell noWrap="false" align="left">Subject</StyledTableCell>
             <StyledTableCell noWrap="false" align="left">Description</StyledTableCell>
+            <StyledTableCell noWrap="false" align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody  style={{fontWeight:"light"}}>
@@ -59,12 +108,48 @@ export default function CustomizedTables({enquiryData}) {
               <StyledTableCell align="left">{element.email}</StyledTableCell>
               <StyledTableCell align="left">{element.phone_number}</StyledTableCell>
               <StyledTableCell align="left">{element.subject}</StyledTableCell>
-              <StyledTableCell align="left">{element.description.substring(0,220)+"..."}</StyledTableCell>
+              {
+                (element.description.length) <= 290 ?
+              <StyledTableCell align="left">
+               {element.description}
+               </StyledTableCell>
+                  :
+                <StyledTableCell align="left">
+                {element.description.substring(0,290)+"..."}
+                <div className='text-end'>
+                <Button 
+                onClick={()=>handleDescriptionClick(element)}
+                variant="contained" style={{fontSize:"10px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
+                </div>
+                </StyledTableCell>
+                }
+                {/* If you have posted, then the edit option should show */}
+                <StyledTableCell align="left">
+                  <MdOutlineModeEdit className='fs-5'
+                     onClick={() => handleEditClick(element)}/></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
 
+    {show && (
+      <ReadmoreDescription
+      show={show}
+      setShow={setShow}
+      singleEnquiry={singleEnquiry} 
+      setSingleEnquiry={setSingleEnquiry} 
+  />
+    )}
+    
+    {showEditModal && (
+      <EditEnquiryForm
+      showEditModal={showEditModal} 
+      setShowEditModal={setShowEditModal}
+      singleEnquiry={singleEnquiry} 
+      setSingleEnquiry={setSingleEnquiry}
+      />
+    )}
+  </>
   );
 }

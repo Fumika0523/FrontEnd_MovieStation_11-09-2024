@@ -4,7 +4,7 @@ function Footer (){
     
     return(
         <>
-        <div className=" mt-5 border-top row mx-auto d-flex flex-column border-secondary pb-3" >
+        <div className=" mt-5 ps-5 border-top row mx-auto d-flex flex-column border-secondary pb-3" >
             <div className="d-none  border-4  d-md-flex d-sm-none  -3 my-4 flex-row  align-items-start justify-content-between">
             {/* 1st */}
             <div className="col-2">

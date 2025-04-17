@@ -8,12 +8,15 @@ import CustomizedTables from "./CustomizedTables"
 
 
 function AllEnquiries({mode}) {
-    
-    const token = sessionStorage.getItem('token')
-    console.log("token",token)
     // const firstname = sessionStorage.getItem('firstname')
     // console.log("firstname",firstname)
-
+    const token = sessionStorage.getItem('token')
+console.log("token",token)
+let config = {
+headers:{
+  Authorization:`Bearer ${token}`
+}
+}
 
     const navigate = useNavigate()
   
@@ -38,7 +41,7 @@ function AllEnquiries({mode}) {
         <>
         <div className="my-3 row mx-auto border-4  border-warning " >
         {/* Back */}
-        <div className="border-4 d-flex  flex-column col-11  col-md-10 mx-auto">
+        <div className="border-4 d-flex  flex-column col-11  mx-auto">
         <div className="d-flex mb-3 justify-content-end">
         <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center"
         onClick={()=>navigate('/contact')}>
@@ -69,7 +72,7 @@ function AllEnquiries({mode}) {
             </>
             :
             <>
-            <CustomizedTables enquiryData = {enquiryData}/>
+            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData}/>
          
              </>
         } 

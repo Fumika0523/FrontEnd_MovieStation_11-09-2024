@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Grid } from "@mui/material";
+import {Grid } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -17,12 +17,11 @@ import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
+import { grey,amber,red,blueGrey} from '@mui/material/colors';
 import { useState } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme} from '@mui/material/styles';
 import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function MovieCard({mode,setMode, movieposter,moviename,rating,summary,cast,_id,setMovieData,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
@@ -114,7 +113,7 @@ console.log("Specific Movie Data",specificMovieData)
 
    return (
 <>
-   {/* <Grid  container border={2} sx={{display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 }}> */}
+   
     <Grid  lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2}>
     <Card 
     style={{maxWidth:"96%",minHeight:"460px",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto"}}

@@ -25,6 +25,7 @@ import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
 import UserMovies from './Components/Movie/UserMovies';
 import PageNotFound from './Components/HomeSreen/PageNotFound';
+import EditEnquiry from './Components/Enquiries/EditEnquiry';
 
 
 function App() {
@@ -85,6 +86,7 @@ const [userData,setUserData]=useState([])
        <>
        <Route path='/addmovie'  mode={mode}  element={<AddMovie setMovieData={setMovieData}/>}/>
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
+       <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
@@ -106,6 +108,7 @@ const [userData,setUserData]=useState([])
      
       <Route path="/table" mode={mode} element={<Table/>}/> 
       <Route path="/pagenotfound" mode={mode} element={<PageNotFound/>}/> 
+     
     </Routes>
     <Footer />
     </Provider>
