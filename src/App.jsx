@@ -26,6 +26,7 @@ import {url} from './utils/constant'
 import UserMovies from './Components/Movie/UserMovies';
 import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
+import ProfileEdit from './Components/Profile/ProfileEdit';
 
 
 function App() {
@@ -90,6 +91,7 @@ const [userData,setUserData]=useState([])
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
+       <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
        </>
 
     }

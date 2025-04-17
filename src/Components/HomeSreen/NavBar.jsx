@@ -247,7 +247,7 @@ function NavBar({ mode, setMode }) {
                    <Dropdown.Item 
                     className="dropDownItem d-flex justify-content-center border-bottom align-items-center"
                       // href="/ordersummary"
-                      onClick={() => navigate('/ordersummary')}  
+                      onClick={() => navigate('/profile')}  
                       >
                     <span className="fs-6 text-white">My Account</span></Dropdown.Item>
                     <Dropdown.Item 

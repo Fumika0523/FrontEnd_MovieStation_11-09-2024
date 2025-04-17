@@ -12,10 +12,11 @@ import {url} from '../../utils/constant'
 import { useState } from 'react';
 import ReadmoreDescription from './ReadmoreDescription';
 import { MdOutlineModeEdit } from "react-icons/md";
-import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import EditEnquiryForm from './EditEnquiryForm'
+import { useEffect } from 'react';
 import axios from 'axios';
-import EditEnquiryForm from './EditEnquiryForm';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +41,7 @@ export default function CustomizedTables({enquiryData,setEnquiryData}) {
   console.log(enquiryData)
   // const [specificEnquiryData,setSpecificEnquiryData] = useState([])
 const [singleEnquiry,setSingleEnquiry] = useState(null)
+const [specificEnquiryData,setSpecificEnquiryData ] = useState([])
 const [show, setShow] = useState(false);
 const [showEditModal, setShowEditModal] = useState(false);
 
@@ -62,22 +64,22 @@ headers:{
 }
 }
 
-// const getSpecificEnquiryData = async()=>{
-//   console.log("Specific Enquiry Data is calledd...")
-//   let res = await axios.get(`${url}/specificenquiry`,config)
-//   console.log(res.data)
-//   setSpecificEnquiryData(res.data)
-// }
-// useEffect(()=>{
-//   getSpecificEnquiryData()
-// },[])
-// console.log("getSpecificEnquiryData",specificEnquiryData)
-// const userId = sessionStorage.getItem('userId')
-// console.log('userId',userId)
+const getSpecificEnquiryData = async()=>{
+  console.log("Specific Enquiry Data is calledd...")
+  let res = await axios.get(`${url}/specificenquiry`,config)
+  console.log(res.data)
+  setSpecificEnquiryData(res.data)
+}
+useEffect(()=>{
+  getSpecificEnquiryData()
+},[])
+console.log("getSpecificEnquiryData",specificEnquiryData)
+const userId = sessionStorage.getItem('userId')
+console.log('userId',userId)
 
-// const isEnquiryOwner = userId === element?.owner;
-// console.log("element",element)
-// console.log("userId",userId,element?.owner)
+const isEnquiryOwner = userId === specificEnquiryData?.owner;
+console.log("isEnquiryOwner",isEnquiryOwner)
+console.log("userId",userId,specificEnquiryData?.owner)
 
 // Smaller screen size = description is 30letter
 // larger screen size >>
@@ -95,7 +97,6 @@ headers:{
             <StyledTableCell noWrap="false" align="left">Phone No.</StyledTableCell>
             <StyledTableCell noWrap="false" align="left">Subject</StyledTableCell>
             <StyledTableCell noWrap="false" align="left">Description</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody  style={{fontWeight:"light"}}>
@@ -112,21 +113,57 @@ headers:{
                 (element.description.length) <= 290 ?
               <StyledTableCell align="left">
                {element.description}
+
+               { token && isEnquiryOwner ?
+               (
+                <>
+                {/* Edit Icon */}
+               <Button variant="outlined" color="success" className='ms-3'>
+                <MdOutlineModeEdit className='fs-5'
+                onClick={() => handleEditClick(element)}/>
+                </Button>
+                </>
+               )
+               :
+               (
+                <>
+                {/* NOTHING  */}
+                </>
+               )        
+              }
                </StyledTableCell>
                   :
                 <StyledTableCell align="left">
                 {element.description.substring(0,290)+"..."}
                 <div className='text-end'>
+                {/* READMORE */}
                 <Button 
                 onClick={()=>handleDescriptionClick(element)}
                 variant="contained" style={{fontSize:"10px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
+
+              {
+                token && isEnquiryOwner ?
+                (
+                  <>
+                 {/* EDIT */}
+                <Button variant="outlined" color="success" className='ms-3'>
+                <MdOutlineModeEdit className='fs-5'
+                onClick={() => handleEditClick(element)}/>
+                </Button>
+                  </>
+                )
+                :
+                <>
+                {/* NO ICON */}
+                </>
+              }
                 </div>
                 </StyledTableCell>
                 }
                 {/* If you have posted, then the edit option should show */}
-                <StyledTableCell align="left">
-                  <MdOutlineModeEdit className='fs-5'
-                     onClick={() => handleEditClick(element)}/></StyledTableCell>
+                {/* <StyledTableCell align="left">
+            
+                </StyledTableCell> */}
             </StyledTableRow>
           ))}
         </TableBody>

@@ -13,6 +13,7 @@ console.log("singleEnquiry",singleEnquiry)
 const navigate = useNavigate()
 const token = sessionStorage.getItem('token')
 console.log('token',token)
+
 const [userData,setUserData]=useState([])
 const getUserData = async()=>{
     console.log("User data is called........")
@@ -163,7 +164,6 @@ Edit Enquiry Information
         </div>
     </Form>
 </Modal>
-
 </>
     )
 }
