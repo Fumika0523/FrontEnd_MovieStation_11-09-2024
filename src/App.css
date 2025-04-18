@@ -258,3 +258,12 @@ font-size: "16px";
 }
 
 
+.editBtn:hover{
+  cursor: pointer;
+  background-color:rgba(5, 205, 5, 0.691);
+  /* background-color: green; */
+}
+
+.editBtn {
+  background-color:green; ;
+}

@@ -50,7 +50,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
   })
 
   const token = sessionStorage.getItem('token')
-  console.log(token)
+  // console.log(token)
 
   let config = {
     headers: {

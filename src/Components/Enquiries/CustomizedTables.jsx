@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import EditEnquiryForm from './EditEnquiryForm'
 import { useEffect } from 'react';
 import axios from 'axios';
+import { Height, Padding } from '@mui/icons-material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -27,19 +28,36 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    Padding:0,
+    Height:1
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-  backgroundColor: theme.palette.action.hover.grey,
-
+    backgroundColor: theme.palette.action.hover.grey,
+    height: "50px"
   },
+  // hide last border
+  // '&:last-child td, &:last-child th': {
+  //   border: 0,
+  //   height: "55px",
+  // },
+  '& td': {
+    padding: '0',
+    height: "50px"
+    },
 }));
+
+// const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//   '&:nth-of-type(odd)': {
+//   backgroundColor: theme.palette.action.hover.grey,
+
+//   },
+// }));
 
 export default function CustomizedTables({enquiryData,setEnquiryData}) {
   console.log(enquiryData)
-  // const [specificEnquiryData,setSpecificEnquiryData] = useState([])
 const [singleEnquiry,setSingleEnquiry] = useState(null)
 const [specificEnquiryData,setSpecificEnquiryData ] = useState([])
 const [show, setShow] = useState(false);
@@ -88,6 +106,7 @@ const userId = sessionStorage.getItem('userId')
       <Table aria-label="customized table">
         <TableHead>
           <TableRow >
+            <StyledTableCell noWrap="false" align="left">No.</StyledTableCell>
             <StyledTableCell noWrap="false" align="left" >First Name</StyledTableCell>
             <StyledTableCell noWrap="false" align="left">Last Name</StyledTableCell>
             <StyledTableCell noWrap="false" align="centnper">Email</StyledTableCell>
@@ -99,7 +118,8 @@ const userId = sessionStorage.getItem('userId')
         <TableBody  style={{fontWeight:"light"}}>
           {enquiryData?.map((element) => (
             <StyledTableRow hover={true} >
-              <StyledTableCell  align="left" scope="row">
+              <StyledTableCell  align="left"  >1</StyledTableCell>
+              <StyledTableCell  align="left" scope="row"  >
                 {element.firstname}
               </StyledTableCell>
               <StyledTableCell align="left">{element.lastname}</StyledTableCell>
@@ -107,21 +127,20 @@ const userId = sessionStorage.getItem('userId')
               <StyledTableCell align="left">{element.phone_number}</StyledTableCell>
               <StyledTableCell align="left">{element.subject}</StyledTableCell>
               {
-                (element.description.length) <= 290 ?
+                (element.description.length) <= 100 ?
               <StyledTableCell align="left">
                {element.description}
 
                { element.owner == userId  && token  ?
                (
                 <>
-                <div className='text-end'>
-                {/* Edit Icon */}
-               <Button variant="outlined" color="success" className='ms-3'
-               onClick={() => handleEditClick(element)}>
-                <MdOutlineModeEdit className='fs-5'
-                />
-                </Button>
-                </div>
+                {/* <div className='text-end border border-danger border-4'> */}
+              {/* EDIT Btn*/}
+              <div className='border editBtn  text-end' style={{width:"36px",height:"36px",borderRadius:"50%"}}
+                  onClick={() => handleEditClick(element)}>
+                  <MdOutlineModeEdit className='fs-5 me-1 mt-1'/>
+                  </div>
+                {/* </div> */}
                 </>
                )
                :
@@ -134,23 +153,24 @@ const userId = sessionStorage.getItem('userId')
                </StyledTableCell>
                   :
                 <StyledTableCell align="left">
-                {element.description.substring(0,290)+"..."}
-                <div className='text-end'>
+                  <div className='d-flex justify-content-end '>
+                  {/* EDIT Btn*/}
+                  <div className=' editBtn  text-end' style={{width:"30px",height:"30px",borderRadius:"50%"}}
+                  onClick={() => handleEditClick(element)}>
+                  <MdOutlineModeEdit className=' me-1 mt-1' style={{fontSize:"20px"}}/>
+                  </div>
+                  </div>
+         
+                {element.description.substring(0,95)+"..."}
+                {/* <div className='text-end b-inline '> */}
                 {/* READMORE */}
-                <Button 
+                <Button className='ms-1 py-0 px-2'
                 onClick={()=>handleDescriptionClick(element)}
                 variant="contained" style={{fontSize:"10px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
-
               {
                 element.owner == userId  && token   ?
                 (
                   <>
-                
-                 {/* EDIT */}
-                <Button variant="outlined" color="success" className='ms-3 ' 
-                onClick={() => handleEditClick(element)}>
-                <MdOutlineModeEdit className=' fs-5'/>
-                </Button>
                   </>
                 )
                 :
@@ -158,13 +178,11 @@ const userId = sessionStorage.getItem('userId')
                 {/* NO ICON */}
                 </>
               }
-                </div>
+                {/* </div> */}
                 </StyledTableCell>
                 }
                 {/* If you have posted, then the edit option should show */}
-                {/* <StyledTableCell align="left">
-            
-                </StyledTableCell> */}
+          
             </StyledTableRow>
           ))}
         </TableBody>
@@ -186,6 +204,8 @@ const userId = sessionStorage.getItem('userId')
       setShowEditModal={setShowEditModal}
       singleEnquiry={singleEnquiry} 
       setSingleEnquiry={setSingleEnquiry}
+      setEnquiryData ={setEnquiryData}
+      enquiryData={enquiryData}
       />
     )}
   </>
