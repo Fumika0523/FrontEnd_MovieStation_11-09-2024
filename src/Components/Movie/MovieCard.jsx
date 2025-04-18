@@ -87,9 +87,9 @@ const trailerFun = () =>{
 //Comparison operator
 //movieData is all movie datas that were added in the website
 const isMovieOwner = userId === element?.owner; // true || false
-// console.log("element",element)
-// console.log("userId",userId,element?.owner)
-// console.log("isMovieOwner",isMovieOwner)
+console.log("element",element)
+console.log("userId",userId,"element?.owner",element?.owner)
+console.log("isMovieOwner",isMovieOwner)
 
 // SPECIFIC
 const getSpecificMovieData = async () =>{

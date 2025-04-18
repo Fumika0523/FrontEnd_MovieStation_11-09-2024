@@ -72,7 +72,7 @@ headers:{
             </>
             :
             <>
-            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData}/>
+            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData} />
          
              </>
         } 

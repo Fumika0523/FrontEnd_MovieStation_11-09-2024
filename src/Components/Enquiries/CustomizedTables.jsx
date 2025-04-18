@@ -67,19 +67,16 @@ headers:{
 const getSpecificEnquiryData = async()=>{
   console.log("Specific Enquiry Data is calledd...")
   let res = await axios.get(`${url}/specificenquiry`,config)
-  console.log(res.data)
-  setSpecificEnquiryData(res.data)
+  console.log("getSpecificEnquiryData",res.data.getEnquiry)
+  setSpecificEnquiryData(res.data.getEnquiry)
 }
 useEffect(()=>{
   getSpecificEnquiryData()
 },[])
 console.log("getSpecificEnquiryData",specificEnquiryData)
 const userId = sessionStorage.getItem('userId')
-console.log('userId',userId)
+// console.log('userId',userId)
 
-const isEnquiryOwner = userId === specificEnquiryData?.owner;
-console.log("isEnquiryOwner",isEnquiryOwner)
-console.log("userId",userId,specificEnquiryData?.owner)
 
 // Smaller screen size = description is 30letter
 // larger screen size >>
@@ -114,14 +111,17 @@ console.log("userId",userId,specificEnquiryData?.owner)
               <StyledTableCell align="left">
                {element.description}
 
-               { token && isEnquiryOwner ?
+               { element.owner == userId  && token  ?
                (
                 <>
+                <div className='text-end'>
                 {/* Edit Icon */}
-               <Button variant="outlined" color="success" className='ms-3'>
+               <Button variant="outlined" color="success" className='ms-3'
+               onClick={() => handleEditClick(element)}>
                 <MdOutlineModeEdit className='fs-5'
-                onClick={() => handleEditClick(element)}/>
+                />
                 </Button>
+                </div>
                 </>
                )
                :
@@ -142,13 +142,14 @@ console.log("userId",userId,specificEnquiryData?.owner)
                 variant="contained" style={{fontSize:"10px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
 
               {
-                token && isEnquiryOwner ?
+                element.owner == userId  && token   ?
                 (
                   <>
+                
                  {/* EDIT */}
-                <Button variant="outlined" color="success" className='ms-3'>
-                <MdOutlineModeEdit className='fs-5'
-                onClick={() => handleEditClick(element)}/>
+                <Button variant="outlined" color="success" className='ms-3 ' 
+                onClick={() => handleEditClick(element)}>
+                <MdOutlineModeEdit className=' fs-5'/>
                 </Button>
                   </>
                 )
