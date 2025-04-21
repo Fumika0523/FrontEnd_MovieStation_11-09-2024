@@ -258,12 +258,10 @@ font-size: "16px";
 }
 
 
-.editBtn:hover{
+.hover-edit:hover{
   cursor: pointer;
-  background-color:rgba(5, 205, 5, 0.691);
+  /* border: 2px solid rgb(119, 221, 119); */
   /* background-color: green; */
+  transform: scale(1.09);
 }
 
-.editBtn {
-  background-color:green; ;
-}

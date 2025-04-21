@@ -45,6 +45,7 @@ const formik = useFormik({
     phone_number:(token) ? userData.phone_number : "",
     subject:"",
     description:"",
+    owner:(token)? userData._id : "",
   },
   enableReinitialize:true,
   //if there is any updates in my initial Value, please make it update (re-initialize value) >> enable:true
@@ -60,7 +61,7 @@ const formik = useFormik({
   // },
   validationSchema:formSchema,
   onSubmit:(values)=>{
-    console.log(values)
+    console.log("postEnquiryDetail",values)
     postEnquiryDetail(values)
   }
 })
@@ -77,7 +78,7 @@ let res = await axios.get(`${url}/user`,config)
 console.log("getUserData",res.data.userDetail)
 setUserData(res.data.userDetail)
 }
-// console.log("userData",userData)
+console.log("userData",userData)
 // console.log("firstname",userData.name)
 useEffect(()=>{
 getUserData()
@@ -87,8 +88,8 @@ const postEnquiryDetail=async(newEnquiry)=>{
    console.log("NEW Enquiry",newEnquiry)
   
    let res = await axios.post(`${url}/contact`,newEnquiry) 
-   console.log(res)
-   setEnquiryData(res)
+   console.log(res.data.enquiryDetail)
+   setEnquiryData(res.data.enquiryDetail)
   if(res.status == 200){
     navigate('/allenquiries') 
    }

@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import EditEnquiryForm from './EditEnquiryForm'
 import { useEffect } from 'react';
 import axios from 'axios';
-import { Height, Padding } from '@mui/icons-material';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -24,28 +24,27 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: theme.palette.common.grey,
     color: theme.palette.common.white,
     fontSize: 16,
-
+    padding: '10px 5px',
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    Padding:0,
-    Height:1
+    // Padding:0,
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover.grey,
-    height: "50px"
+    height: "55px",
   },
   // hide last border
   // '&:last-child td, &:last-child th': {
   //   border: 0,
-  //   height: "55px",
+    //  height: "55px",
   // },
   '& td': {
-    padding: '0',
-    height: "50px"
+    padding: '10px 11px',
+    //  height: "20px"
     },
 }));
 
@@ -77,9 +76,9 @@ const navigate=useNavigate()
 const token = sessionStorage.getItem('token')
 console.log("token",token)
 let config = {
-headers:{
+  headers:{
   Authorization:`Bearer ${token}`
-}
+  }
 }
 
 const getSpecificEnquiryData = async()=>{
@@ -93,97 +92,90 @@ useEffect(()=>{
 },[])
 console.log("getSpecificEnquiryData",specificEnquiryData)
 const userId = sessionStorage.getItem('userId')
-// console.log('userId',userId)
+console.log('userId',userId)
+// console.log(element.owner)
 
+const number=[]
+for(var i=1; i<=enquiryData.length; i++)
+  number.push(i)
+  console.log(number)
+const columnNum = number.map((element)=>(element))
+console.log(columnNum)
 
-// Smaller screen size = description is 30letter
-// larger screen size >>
-//edit option is only for logged in user who added this enquiry
-
-  return (
+ return (
   <>
-    <TableContainer component={Paper} className='border border-2 border-secondary' style={{}} >
+    <TableContainer component={Paper}  >
       <Table aria-label="customized table">
         <TableHead>
           <TableRow >
-            <StyledTableCell noWrap="false" align="left">No.</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left" >First Name</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left">Last Name</StyledTableCell>
-            <StyledTableCell noWrap="false" align="centnper">Email</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left">Phone No.</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left">Subject</StyledTableCell>
-            <StyledTableCell noWrap="false" align="left">Description</StyledTableCell>
+            <StyledTableCell noWrap="false" align="center" style={{width:"3%"}}>No.</StyledTableCell>
+            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>First Name</StyledTableCell>
+            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>Last Name</StyledTableCell>
+            <StyledTableCell noWrap="false" align="center" style={{width:"15%"}}>Email</StyledTableCell>
+            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>Phone No.</StyledTableCell>
+            <StyledTableCell style={{width:"12%"}} noWrap="false" align="center">Subject</StyledTableCell>
+            <StyledTableCell style={{width:"40%"}} noWrap="false" align="center">Description</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody  style={{fontWeight:"light"}}>
-          {enquiryData?.map((element) => (
-            <StyledTableRow hover={true} >
-              <StyledTableCell  align="left"  >1</StyledTableCell>
-              <StyledTableCell  align="left" scope="row"  >
-                {element.firstname}
+          {enquiryData?.map((element,index) => (
+          // console.log(element.owner)
+          // console.log(element)
+           <StyledTableRow >
+                 <StyledTableCell  align="center" style={{width:"3%"}}  >
+                  {index + 1}
+                  </StyledTableCell> 
+  
+              <StyledTableCell  align="center" style={{width:"10%"}} >
+              {element.firstname}
               </StyledTableCell>
-              <StyledTableCell align="left">{element.lastname}</StyledTableCell>
-              <StyledTableCell align="left">{element.email}</StyledTableCell>
-              <StyledTableCell align="left">{element.phone_number}</StyledTableCell>
-              <StyledTableCell align="left">{element.subject}</StyledTableCell>
-              {
-                (element.description.length) <= 100 ?
-              <StyledTableCell align="left">
-               {element.description}
-
-               { element.owner == userId  && token  ?
-               (
-                <>
-                {/* <div className='text-end border border-danger border-4'> */}
-              {/* EDIT Btn*/}
-              <div className='border editBtn  text-end' style={{width:"36px",height:"36px",borderRadius:"50%"}}
-                  onClick={() => handleEditClick(element)}>
-                  <MdOutlineModeEdit className='fs-5 me-1 mt-1'/>
-                  </div>
-                {/* </div> */}
-                </>
-               )
-               :
-               (
-                <>
-                {/* NOTHING  */}
-                </>
-               )        
-              }
-               </StyledTableCell>
-                  :
-                <StyledTableCell align="left">
-                  <div className='d-flex justify-content-end '>
-                  {/* EDIT Btn*/}
-                  <div className=' editBtn  text-end' style={{width:"30px",height:"30px",borderRadius:"50%"}}
-                  onClick={() => handleEditClick(element)}>
-                  <MdOutlineModeEdit className=' me-1 mt-1' style={{fontSize:"20px"}}/>
-                  </div>
-                  </div>
-         
-                {element.description.substring(0,95)+"..."}
-                {/* <div className='text-end b-inline '> */}
-                {/* READMORE */}
-                <Button className='ms-1 py-0 px-2'
-                onClick={()=>handleDescriptionClick(element)}
-                variant="contained" style={{fontSize:"10px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
-              {
-                element.owner == userId  && token   ?
-                (
-                  <>
-                  </>
-                )
-                :
-                <>
-                {/* NO ICON */}
-                </>
-              }
-                {/* </div> */}
-                </StyledTableCell>
-                }
-                {/* If you have posted, then the edit option should show */}
-          
-            </StyledTableRow>
+              <StyledTableCell align="center" style={{width:"10%"}}>{element.lastname}</StyledTableCell>
+               <StyledTableCell align="center" style={{width:"15%"}}>{element.email}</StyledTableCell>
+               <StyledTableCell align="center" style={{width:"10%"}}>{element.phone_number}</StyledTableCell>
+               <StyledTableCell style={{width:"12%"}} align="center">{element.subject}</StyledTableCell>
+              <StyledTableCell style={{width:"40%",padding:"5px 30px"}} align="center">
+              <>
+              <div className=' d-flex flex-row  position-relative align-items-start' style={{textAlign:"justify"}}>
+                {/* Description */}
+                    {
+                    (element.description.length) >=200 ?
+                        <>
+                        { element.description.substring(0,200)+"..."}
+                        </>
+                        :
+                        <>
+                         {element.description}
+                        </>
+                      }
+                     
+                     {/* EDIT Btn*/}
+                     {
+                      element.owner == userId  && token   ?
+                     <div className='position-absolute translate-middle' style={{right:"-38px",marginTop:'2.5%'}} >
+                     <button className=' hover-edit rounded-circle btn btn-success d-flex justify-content-center p-0 align-items-center'
+                     style={{height:"24px",width:"24px",right:"60px"}}
+                     onClick={() => handleEditClick(element)}>
+                     <MdOutlineModeEdit className='fs-6' /> 
+                     </button>
+                     </div>
+                     :
+                     null
+}
+                   </div>           
+                   {/* READMORE */}
+                   {
+                   (element.description.length) >= 200 ?
+                   <div className='position-absolute translate-middle ' style={{right:"7.5%",marginTop:"-0.6%"}} >
+                   <Button className='py-0 px-1'
+                   onClick={()=>handleDescriptionClick(element)}
+                 variant="contained" style={{fontSize:"9px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
+                   </div>
+                   :
+                   null
+                  }
+                   </>
+                 </ StyledTableCell >
+                 </StyledTableRow >
           ))}
         </TableBody>
       </Table>
