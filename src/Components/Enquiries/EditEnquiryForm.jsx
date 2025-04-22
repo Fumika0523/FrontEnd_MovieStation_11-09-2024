@@ -12,6 +12,11 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
   console.log("singleEnquiry _ID", singleEnquiry._id)
   console.log("singleEnquiry", singleEnquiry)
   const navigate = useNavigate()
+  
+  const handleClose = () => {
+    setShowEditModal(false)
+    navigate('/allenquiries') 
+  }
   const token = sessionStorage.getItem('token')
   // console.log('token',token)
 
@@ -22,8 +27,6 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
     // console.log("getUserData",res.data.userDetail)
     setUserData(res.data.userDetail)
   }
-  // console.log("userData",userData)
-  // console.log("firstname",userData.name)
   useEffect(() => {
     getUserData()
   }, [])
@@ -59,26 +62,22 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
       Authorization: `Bearer ${token}`
     }
   }
-
-  const handleClose = () => {
-    setShowEditModal(false)
-    
-  }
-
+//update
   const updateEnquiry = async (updatedEnquiry) => {
     console.log("Enquiry is posted to the DB")
-    let res = await axios.put(`${url}/updateenquiry/${singleEnquiry._id}`, updatedEnquiry, config)
-    console.log(res)
-    if (res) {
-      let res = await axios.get(`${url}/allenquiry`)
-      console.log(res)
-      console.log("updatedEnquiry:", updatedEnquiry)
-      console.log("res.data",res.data.updateEnquiry)
-     setEnquiryData(res.data.updateEnquiry)
-      handleClose()
-    }
-  }
-
+    try{
+      let res = await axios.put(`${url}/updateenquiry/${singleEnquiry._id}`,updatedEnquiry,config)
+      console.log("res",res)
+      if(res){
+        let res = await axios.get(`${url}/movie`)
+        // console.log("res",updateEnquiry)
+        setEnquiryData(res.data.enquiryData)
+        handleClose()
+      }
+    }catch(e){
+      console.error('Error Editing Student:',e)
+    }}
+    
   return (
     <>
       <Modal className=' sign_up_in_container '

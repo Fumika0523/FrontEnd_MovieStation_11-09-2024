@@ -48,15 +48,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-// const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//   '&:nth-of-type(odd)': {
-//   backgroundColor: theme.palette.action.hover.grey,
-
-//   },
-// }));
 
 export default function CustomizedTables({enquiryData,setEnquiryData}) {
-  console.log(enquiryData)
+
 const [singleEnquiry,setSingleEnquiry] = useState(null)
 const [specificEnquiryData,setSpecificEnquiryData ] = useState([])
 const [show, setShow] = useState(false);
@@ -72,9 +66,8 @@ const handleEditClick = (element) => {
   setSingleEnquiry(element);
 };
 
-const navigate=useNavigate()
 const token = sessionStorage.getItem('token')
-console.log("token",token)
+// console.log("token",token)
 let config = {
   headers:{
   Authorization:`Bearer ${token}`
@@ -95,12 +88,7 @@ const userId = sessionStorage.getItem('userId')
 console.log('userId',userId)
 // console.log(element.owner)
 
-const number=[]
-for(var i=1; i<=enquiryData.length; i++)
-  number.push(i)
-  console.log(number)
-const columnNum = number.map((element)=>(element))
-console.log(columnNum)
+
 
  return (
   <>
@@ -125,7 +113,6 @@ console.log(columnNum)
                  <StyledTableCell  align="center" style={{width:"3%"}}  >
                   {index + 1}
                   </StyledTableCell> 
-  
               <StyledTableCell  align="center" style={{width:"10%"}} >
               {element.firstname}
               </StyledTableCell>
@@ -133,14 +120,14 @@ console.log(columnNum)
                <StyledTableCell align="center" style={{width:"15%"}}>{element.email}</StyledTableCell>
                <StyledTableCell align="center" style={{width:"10%"}}>{element.phone_number}</StyledTableCell>
                <StyledTableCell style={{width:"12%"}} align="center">{element.subject}</StyledTableCell>
-              <StyledTableCell style={{width:"40%",padding:"5px 30px"}} align="center">
+              <StyledTableCell style={{width:"40%",padding:"5px 35px 5px 16px"}} align="center">
               <>
               <div className=' d-flex flex-row  position-relative align-items-start' style={{textAlign:"justify"}}>
                 {/* Description */}
                     {
                     (element.description.length) >=200 ?
                         <>
-                        { element.description.substring(0,200)+"..."}
+                        { element.description.substring(0,195)+"..."}
                         </>
                         :
                         <>
@@ -151,7 +138,7 @@ console.log(columnNum)
                      {/* EDIT Btn*/}
                      {
                       element.owner == userId  && token   ?
-                     <div className='position-absolute translate-middle' style={{right:"-38px",marginTop:'2.5%'}} >
+                     <div className='position-absolute translate-middle' style={{right:"-43px",marginTop:'2.5%'}} >
                      <button className=' hover-edit rounded-circle btn btn-success d-flex justify-content-center p-0 align-items-center'
                      style={{height:"24px",width:"24px",right:"60px"}}
                      onClick={() => handleEditClick(element)}>
@@ -165,7 +152,7 @@ console.log(columnNum)
                    {/* READMORE */}
                    {
                    (element.description.length) >= 200 ?
-                   <div className='position-absolute translate-middle ' style={{right:"7.5%",marginTop:"-0.6%"}} >
+                   <div className='position-absolute translate-middle ' style={{right:"8%",marginTop:"-0.6%"}} >
                    <Button className='py-0 px-1'
                    onClick={()=>handleDescriptionClick(element)}
                  variant="contained" style={{fontSize:"9px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
@@ -197,7 +184,6 @@ console.log(columnNum)
       singleEnquiry={singleEnquiry} 
       setSingleEnquiry={setSingleEnquiry}
       setEnquiryData ={setEnquiryData}
-      enquiryData={enquiryData}
       />
     )}
   </>

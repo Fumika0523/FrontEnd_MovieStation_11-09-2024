@@ -13,8 +13,6 @@ import {grey,yellow} from "@mui/material/colors";
 import NavBar from '../HomeSreen/NavBar';
 
 function MovieTrailer({mode}) {
-  const darkBg = grey[900]
-  const lightBg = yellow[50]
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState();
 
@@ -32,18 +30,18 @@ function MovieTrailer({mode}) {
   const getTrailerData = async () => {
     console.log("Trailer data is called....")
     let res = await axios.get(`${url}/movie/${id}`,config)
-    console.log(res.data[0])
-    console.log(res)
-    setMovieInfo(res.data[0])
+    console.log("movieTrailer",res.data)
+    console.log("res",res)
+    setMovieInfo(res.data)
   }
   useEffect(() => {
     getTrailerData()
   }, []) //API Call
 
+  console.log("movieInfo",movieInfo)
+  // watchlater from Trailer should remove
   return (
     <>
-    {/* <Container fluid> */}
-      {/* <NavBar/> */}
       {
         movieInfo &&
         
@@ -52,23 +50,31 @@ function MovieTrailer({mode}) {
           >
             {/* Top */}
             <Row className='mx-auto mx-md-5 ' >
-            <Col className="col-lg-8  border-4  col-md-6 col-sm-6 col-12  my-2 d-flex flex-row align-items-center justify-content-start">
+            <Col className="col-lg-8  border-4  col-md-6 col-sm-6 col-6  my-2 d-flex flex-row align-items-center justify-content-start">
             <div className='ps-1 border-4  fs-1'>{movieInfo.moviename}</div>
             <div className='ms-3 border-4  fs-4' style={{color:"#b9bdcc"}}>({movieInfo.publishYear})</div></Col>
-            <Col className="border-4  col-lg-3 col-md-4 col-sm-4 col-9 d-flex align-items-start flex-column justify-content-center">
+            <Col className="border-4  col-lg-4 col-md-6 col-sm-6 col-6 d-flex align-items-end flex-row justify-content-between  mb-3">
+            <div>
             <div  className='border-4  fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
-            <div className="border-4  d-flex flex-row justify-content-center align-items-center">
+            <div className="border-4 d-flex flex-row justify-content-center align-items-center">
               <FaStar className='text-warning fs-4'/>
               <span className="fw-bold mx-1" style={{fontSize:"20px"}}>{movieInfo.rating}</span>
               <span className='text-secondary'> /10</span> 
             </div>
-            </Col>
-            <Col className='border-4  col-lg-1 col-md-2 col-sm-2 col-3 d-flex align-items-start flex-column justify-content-center '>
-            <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='w-100'
+            </div>
+            <div>
+            <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='px-4'
             onClick={() => navigate('/allmovies')} >
               Back
             </Button>
+            </div>
             </Col>
+            {/* <Col className='border-4 d-flex align-items-start flex-column justify-content-end border border'> */}
+            {/* <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className=''
+            onClick={() => navigate('/allmovies')} >
+              Back
+            </Button> */}
+            {/* </Col> */}
             </Row>
 
             <Row className='mx-auto mx-md-5 mb-4 -3' >
@@ -155,7 +161,6 @@ function MovieTrailer({mode}) {
             <div className="col-2">
             <img src="https://scera.org/wp-content/uploads/2019/05/Aladdin-2019-Wallpaper-HD.jpg" className="w-100 d-block rounded-circle" alt="" style={{ height: "270px" }} />
             </div>
-
           </div>
         </Carousel.Item>
 
@@ -178,44 +183,7 @@ function MovieTrailer({mode}) {
             </div>
           </div>
         </Carousel.Item>
-{/* 
-        <Carousel.Item >
-          <div className='d-flex gap-4 mx-3'>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvhXCWtIym-giLoInrcr3MqenfCn4Qted5Q&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://images8.alphacoders.com/133/1337616.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuF88DC7D1R9Za0ODmeWwdWJjIPsPJaBf_iw&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ockLWWjSTFjIxj3qTdsdumqWjIsjcAhMCw&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6YP2uoyWEL-rCCGzT0HuRpZZ3IOcrRrjoGw&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-          </div>
-          <Carousel.Caption>
-          </Carousel.Caption>
-        </Carousel.Item> */}
-
-        {/* <Carousel.Item >
-          <div className='d-flex gap-4 mx-3'>
-            <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/titanic-et00008457-1676022504.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReC1mrkfbZ1JOkr0LmyYEimI26SOONo6xldA&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://i0.wp.com/the-art-of-autism.com/wp-content/uploads/2021/06/The-Theory-of-Everything.jpg?fit=638%2C479&ssl=1" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://m.media-amazon.com/images/S/pv-target-images/c16f37633b6d90c2d86731e1a7334c915656c3fa4a62175fe1fa25b9c82007ff._UR1920,1080_SX720_FMjpg_.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://m.media-amazon.com/images/S/pv-target-images/edd2932f6f5d7749138a3b2a8fb0dad862d03ca3c4049359f3f5e5b30a0650e4.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-          </div>
-          <Carousel.Caption>
-          </Carousel.Caption>
-        </Carousel.Item> */}
-
-        {/* <Carousel.Item >
-          <div className='d-flex gap-4 mx-3'>
-            <img src="https://img5.tokyvideo.com/videos/610/61097/previews/previews_0005_custom_1617956273.1385.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://images.moviesanywhere.com/e45bfc010f1e0626b1ee9efbe2726e55/7e42ca11-be74-41b9-986c-3e5a8a431fe3.jpg" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw7-sOcvL5Xl3ca4qSG9jP3y8hyQ5kgWdczg&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmMFX3-so34pgn1r-UXTGdkeOXSdiNLyX8ZQ&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnETUFhpSMFsDjAwJ1xqBCHTjAIDULe84u5g&s" className="ms-2 d-block rounded-circle" alt="" style={{ height: "270px", width: "18%" }} />
-          </div>
-          <Carousel.Caption>
-          </Carousel.Caption>
-        </Carousel.Item> */}
       </Carousel>
-      {/* </Container> */}
     </>
   )
 }

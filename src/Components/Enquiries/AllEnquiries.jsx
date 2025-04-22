@@ -8,35 +8,22 @@ import CustomizedTables from "./CustomizedTables"
 
 
 function AllEnquiries({mode}) {
-    // const firstname = sessionStorage.getItem('firstname')
-    // console.log("firstname",firstname)
-    const token = sessionStorage.getItem('token')
-console.log("token",token)
-let config = {
-headers:{
-  Authorization:`Bearer ${token}`
-}
-}
+const token = sessionStorage.getItem('token')
+const navigate = useNavigate()
+const [enquiryData, setEnquiryData] = useState([]) 
 
-    const navigate = useNavigate()
-  
-    const [enquiryData, setEnquiryData] = useState([]) //array
-
+// ALL
     const getEnquiryData = async () =>{
-        console.log("EnquiryData is called..")
-        let res = await axios.get(`${url}/allenquiry`)
-        console.log("res.data",res.data.allEnquiry)
-        setEnquiryData(res.data.allEnquiry )
+    console.log("EnquiryData is called..")
+    let res = await axios.get(`${url}/allenquiry`)
+    console.log("res.data.allEnquiry",res.data.allEnquiry)
+    setEnquiryData(res.data.allEnquiry )
     }
-        useEffect(()=>{
-        getEnquiryData()
-        console.log("AllEnquiries")
-        },[])
+    useEffect(()=>{
+    getEnquiryData()
+    },[])
          // API call has to be made inside UseEffect () only
         
-        //Widen the table
-        // readMore only next to more than 3 lines of Description >>> Modal
-        // To the subject >> Limit the word
     return (
         <>
         <div className="my-3 row mx-auto border-4  border-warning " >

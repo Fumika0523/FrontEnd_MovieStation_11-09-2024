@@ -23,14 +23,14 @@ const getMovieData=async()=>{
     console.log("Movie data is called.........")
     let res = await fetch (`${url}/movie/${id}`,config)//API call
     let data =await res.json()//responsing in string so we cant use string so, converting to json format
-    console.log("not found",data[0])
-    setSingleMovies(data[0])
+    console.log("not found",data)
+    setSingleMovies(data)
     //axios
     // let res = await axios.get(`${url}/movie/${id}`,config)
     // console.log(res.data[0])
     // setSingleMovies(res.data[0])
 }
-console.log(singleMovie)// Movie data is stored in singleMovie
+console.log("singleMovie",singleMovie)// Movie data is stored in singleMovie
 useEffect(()=>{
     getMovieData()
 },[])//when your page is loaded
