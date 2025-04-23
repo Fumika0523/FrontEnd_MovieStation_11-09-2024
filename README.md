@@ -51,3 +51,10 @@ phone no: 100100
 9. filter by order
 10. Download button in pdf
 11. create a html base normal website
+
+
+
+{/* movieData is 1 data that includes all movieData,
+    element is single movie data showing each data (map method) */}
+    {/* isMovieOwner : compare if it's matched both element(each movie data' movieOwner id) and userId(logged in userId) >> true or false  */}
+    {/* IF token and isMovieOwner are noth "true" >> show the edit & delete buttton, otherwise hide these buttons */}

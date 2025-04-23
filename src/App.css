@@ -257,7 +257,6 @@ font-size: "16px";
   background-color: #3b4852;
 }
 
-
 .hover-edit:hover{
   cursor: pointer;
   /* border: 2px solid rgb(119, 221, 119); */
@@ -265,3 +264,52 @@ font-size: "16px";
   transform: scale(1.09);
 }
 
+.movieCard{
+  position: relative;
+  /* border:2px solid blue */
+}
+
+.overlay:hover {
+  height: 35%;
+  padding:1.5%;
+  background-color: #161718;
+}
+.movieCast{
+  display: block;
+}
+
+.movieSummary{
+  display: none;
+}
+
+.overlay:hover .movieCast{
+  display: none;
+}
+.overlay:hover .movieSummary{
+  display: block;
+}
+.overlay{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 15%;
+  transition: .99s ease;
+}
+
+.moiveEditIcon:hover{
+  transform: scale(1.05);
+  transition: .49s ease;
+  background-color: gray;
+  opacity: 100%;
+}
+
+/* .moiveEditIcon{
+background-color: transparent !important;
+color: white !important;
+box-shadow: none;
+text-shadow: none;
+
+} */

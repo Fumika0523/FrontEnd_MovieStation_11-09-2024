@@ -18,21 +18,7 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
     
     return(
         <>
-        {/* <Button variant=""
-        className="d-flex col-2  me-1 flex-row justify-content-center  gap-1 align-items-center likeBtn btnFont"
-        style={{
-          // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-          color:mode=="light" ? "rgb(66, 66, 66)":"white"}}>
-          <i 
-           className="fa-regular fs-4 fa-thumbs-up "
-           onClick={()=>{
-            setLike(parseInt(like)+1) //converting to number 
-        }}></i>
-        <span  style={{fontSize:"15px"}}>
-            {formatNumber(like)}
-       </span>
-        </Button> */}
-        <IconButton>
+        <IconButton className="movieCardIcon">
           <ThumbUpOffAltIcon  sx={{ fontSize: 25 }} 
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
@@ -42,21 +28,8 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
           </span>
         </IconButton>
 
-      {/* Dislike */}
-      {/* <Button variant="outline-none"
-        className="d-flex col-2   flex-row justify-content-center text-start gap-1 align-items-center likeBtn btnFont"
-        style={{
-          // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-          color:mode=="light" ? "rgb(66, 66, 66)":"white"}}>
-      <i  className="fa-regular  fs-5 fa-thumbs-down" onClick={()=>{
-            setDisLike(parseInt(disLike)+1)
-        }}> </i>
-        <span 
-        className="" >
-            {formatNumber(disLike)}
-       </span>
-        </Button> */}
-        <IconButton>
+        {/* Dislike */}
+        <IconButton className="movieCardIcon">
           <ThumbDownOffAltIcon  sx={{ fontSize: 25 }} 
           onClick={()=>{
             setDisLike(parseInt(disLike)+1)

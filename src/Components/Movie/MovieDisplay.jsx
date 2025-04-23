@@ -10,6 +10,7 @@ import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Tooltip from '@mui/material/Tooltip';
 
 
 function MovieDisplay({mode}) 
@@ -156,10 +157,16 @@ flexDirection={"column"}
     
     // Redux
     reduxAddcartBtn={
-    <IconButton 
-    onClick={()=>{handleAdditem(element)}}>
-    <ShoppingCartIcon />
-    </IconButton>
+    // <IconButton 
+    // onClick={()=>{handleAdditem(element)}}>
+    // <ShoppingCartIcon />
+    // </IconButton>
+   <Tooltip title="Add to Cart">
+      <IconButton className="moiveEditIcon" onClick={()=>{handleAdditem(element)}}  >
+        <ShoppingCartIcon />
+      </IconButton>
+    </Tooltip>
+
         }
         
     /> //spread operator

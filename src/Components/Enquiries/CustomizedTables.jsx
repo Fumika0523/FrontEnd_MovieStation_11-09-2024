@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import EditEnquiryForm from './EditEnquiryForm'
 import { useEffect } from 'react';
 import axios from 'axios';
-
+import TablePagination from '@mui/material/TablePagination';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -167,6 +167,7 @@ console.log('userId',userId)
         </TableBody>
       </Table>
     </TableContainer>
+    
 
     {show && (
       <ReadmoreDescription

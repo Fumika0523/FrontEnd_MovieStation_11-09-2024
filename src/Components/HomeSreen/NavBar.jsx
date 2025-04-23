@@ -207,19 +207,21 @@ function NavBar({ mode, setMode }) {
                   <Badge variant="text"
                     sx={{
                       "& .MuiBadge-badge": {
-                        fontSize: "0.6rem", // Reduce font size
+                        fontSize: "0.7rem", // Reduce font size
                         minWidth: "10px",   // Adjust width to fit smaller content
                         height: "16px",     // Adjust height
+                        right: 3,
+                        top: -2,
                       },
                     }}
                     color="primary" badgeContent={cartItems.length}
-                    style={{ color: mode == "light" ? greyColor : amberColor, }}
+                    // style={{ color: mode == "light" ? greyColor : amberColor, }}
                     onClick={() => navigate('/cartpage')}
-                    className="p-0">
-                    <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
-                    <span className="fs-5"
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span>  
+                    >
+                  <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                   </Badge>
+                  <span className="ms-1 fs-5"
+                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span>
                 </Button>
               </Nav.Link>
             </Nav>
