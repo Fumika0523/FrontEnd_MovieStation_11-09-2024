@@ -71,30 +71,26 @@ console.log(cartItems)
                 <div className="text-start  border-primary py-1 fs-5 text-secondary">Date: <span className="text-white">{Today}</span></div>
                 <div className="border-top border-secondary">
                     {
-                        cartItems?.map((element) =>
-                           <CartCard {...element} />)
+                        cartItems?.map((element,index) =>
+                           <CartCard {...element} key={element._id} />)
                     }
-                    <div style={{width:"40%"}} className="ms-auto ">
+                    <div style={{width:"40%"}} className="ms-auto  mb-4 mt-3  ">
                     {/* <div className="text-start pt-3 fs-6 mb-1" >Cart Summary</div> */}
                     {/* Dotted underline */}
                     <div style={{ borderBottom: "1px dotted grey"}}>
                     </div>
-
-                    <div className="d-flex mt-1 me-2 justify-content-between " >
+                    <div className="d-flex me-2 justify-content-between " >
                         <div className="">Total: </div>
                         <div className=" text-secondary">$ {sum}</div>
                         </div>  
                         </div>
                         
-                        <div className="d-flex justify-content-end">
-                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap mt-5 mb-3"  onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-1 me-1"/>Order Now </Button>       
+                        <div className="d-flex justify-content-end align-items-center">
+                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap my-3"  onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-3 me-1"/><span className="fs-6">Order Now</span> </Button>       
                 </div>
                 </div>
                 </div>
             </>
             )
-}
+          }
             export default CartSummaryPage
-
-
-// OrderSumary

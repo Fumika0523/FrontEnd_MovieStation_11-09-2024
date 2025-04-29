@@ -25,8 +25,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { TbLetterMSmall } from "react-icons/tb";
 import { TbLetterS } from "react-icons/tb";
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup  from 'react-bootstrap/ButtonGroup';
+import { FaUser } from "react-icons/fa";
 
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
@@ -245,15 +244,19 @@ function NavBar({ mode, setMode }) {
                   <span style={{ color: "rgb(248, 228, 118)",backgroundColor:"purple"}} className="rounded-circle fw-bold rounded px-3 py-1 fs-4 ms-1 me-2" >{name[0].toUpperCase()}</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className="bg-dark dropdownMenu px-2 ms-5" >
+                  className="bg-dark dropdownMenu px-2 " >
+                    {/* MY ACCOUNT */}
                    <Dropdown.Item 
-                    className="dropDownItem d-flex justify-content-center border-bottom align-items-center"
-                      // href="/ordersummary"
-                      onClick={() => navigate('/profile')}  
+                    className="d-flex dropDownItem justify-content-start align-items-center border-bottom"
+                     href="/profile"
                       >
-                    <span className="fs-6 text-white">My Account</span></Dropdown.Item>
+                    <FaUser className="me-1 fs-4 text-warning" />
+                    <span className="fs-6 text-white">
+                    My Account</span></Dropdown.Item>
+
+                    {/* MY ORDER */}
                     <Dropdown.Item 
-                    className="d-flex dropDownItem justify-content-center align-items-center"
+                    className="d-flex dropDownItem justify-content-start align-items-center"
                       href="/ordersummary">
                     <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6 text-white">My Order</span>
                     </Dropdown.Item>

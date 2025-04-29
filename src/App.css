@@ -276,10 +276,12 @@ font-size: "16px";
 }
 .movieCast{
   display: block;
+  color: #bdbfc2;
 }
 
 .movieSummary{
   display: none;
+  color: #bdbfc2;
 }
 
 .overlay:hover .movieCast{
@@ -306,10 +308,52 @@ font-size: "16px";
   opacity: 100%;
 }
 
-/* .moiveEditIcon{
+.reduxIcon{
 background-color: transparent !important;
 color: white !important;
 box-shadow: none;
 text-shadow: none;
+}
 
-} */
+.reduxIcon:hover{
+  transform: scale(1.25);
+  transition: .49s ease;
+  opacity: 100%;
+  /* background-color: #edb204 !important; */
+}
+
+.movieDeleteBtn:hover{
+  transform: scale(1.28);
+  transition: .49s ease;
+  color:rgb(221, 4, 4) !important ;
+  background-color: white!important;
+  padding: 3px !important;
+  opacity: 100%;
+}
+
+.movieDeleteBtn {
+background-color: transparent !important;
+padding: 0px !important;
+margin-left: 10px !important;
+color: white;
+box-shadow: none;
+text-shadow: none;
+}
+
+.editBtn{
+background-color: transparent !important;
+padding: 0px !important;
+margin-left: 10px !important;
+color: white;
+box-shadow: none;
+text-shadow: none;
+}
+
+.editBtn:hover{
+  transform: scale(1.26);
+  transition: .49s ease;
+  color: rgb(2, 115, 2) !important;
+  background-color:white!important;
+  padding: 4px !important; 
+  opacity: 100%;
+}

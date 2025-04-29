@@ -11,12 +11,39 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Tooltip from '@mui/material/Tooltip';
+import { ToastContainer, toast } from 'react-toastify';
 
 
+// cart item is added to the card >> green
+//this movie is already purchased, please check the order history >> error
 function MovieDisplay({mode}) 
 {
-console.log(mode)
-// console.log(mode.mode)
+
+//conditionally done.
+const successNotify = () => toast.success('Added to the cart!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    // transition: Bounce,
+    });
+
+const errorNotify = () => toast.error('This movie is already purchased, please check the order history', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+        });
+
 
 const navigate = useNavigate()
 const dispatch= useDispatch()
@@ -46,10 +73,8 @@ const getMovieData = async () => {
     console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
     // res.data. {object} 
-    console.log(res.data)
-    console.log(res.data.movieData)
-    // console.log(res.data.movieData._id);
-    console.log("movieData")
+    // console.log(res.data.movieData)
+    // // console.log(res.data.movieData._id);
     setMovieData(res.data.movieData);
     setFilterMovieData(res.data.movieData)
     };
@@ -87,7 +112,7 @@ const getCartData=async()=>{
 }}
 
 const handleAdditem=async(movieItem)=>{
-    console.log(movieItem)
+    console.log("movieItem,",movieItem)
     // >> api call for updating the backend >> saving to the DB  
     // "=" << Assignment operator
     // "==" << condition comparison operator
@@ -95,7 +120,12 @@ const handleAdditem=async(movieItem)=>{
             navigate(`/signin`) 
     } else {
         let res=await axios.post(`${url}/addcart`, movieItem,config)
-        console.log(res)
+        console.log("res",res.data.message)
+        if(res.data.message == "Cart has been added successfully!"){
+            successNotify()
+        } else {
+            return   errorNotify()
+        }
         getCartData()
     }}
 
@@ -104,19 +134,14 @@ return (
 <div>
 
 <Box 
-display="flex"
-flexDirection={"column"}
-  alignItems="center"
-  justifyContent={"end"}
-  margin={2}
-//   className="border border-4 border-danger"
-  >
-<Grid  container  className=" border-4"
-// style={displayStyle} 
->
+    display="flex"
+    flexDirection={"column"}
+    alignItems="center"
+    justifyContent={"end"}
+    margin={2} >
+    <Grid  container  className=" border-4">
     <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
     {/* Search*/}
-    {/* <div className="d-flex justify-content-end "> */}
     <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
     {
@@ -128,78 +153,96 @@ flexDirection={"column"}
     onChange={(e) => {
     //console.log(e.target.value)
     setSearchTearm(e.target.value)}} />
-
     <Button variant="outline-secondary" className="" type="submit"
     onClick={() => {
     console.log("Button is cliecked,searchTerm")
-    const data = filterData(searchTerm, movieData)//passing the data
+    const data = filterData(searchTerm, movieData) //passing the data
     console.log(data)
     setFilterMovieData(data)
     }}>Search</Button>
     </div>
     </Grid>
-</Grid>
+    </Grid>
 
     {/* each movie card */}
-    {/* <div style={displayStyle} > */}
-<Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"center"} marginTop={2}
-   >
+    <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"center"} marginTop={2}>
     {!searchTerm ? movieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
-    <IconButton        
+    <IconButton   className="movieDeleteBtn"
     onClick={()=> deleteMovie(element._id)}>
         <DeleteIcon />
     </IconButton>
 }
     
     // Redux
+
     reduxAddcartBtn={
-    // <IconButton 
-    // onClick={()=>{handleAdditem(element)}}>
-    // <ShoppingCartIcon />
-    // </IconButton>
-   <Tooltip title="Add to Cart">
-      <IconButton className="moiveEditIcon" onClick={()=>{handleAdditem(element)}}  >
+  <>
+      <IconButton className="reduxIcon" onClick={()=>{handleAdditem(element)}}  >
         <ShoppingCartIcon />
       </IconButton>
-    </Tooltip>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+        />
+  </>
         }
-        
+          
+
     /> //spread operator
     )) : filterMovieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData}  element={element} mode={mode} 
                             
     // Delete Button
     deleteBtn={
-        <Button variant=""
-        className='m-0'
+        <Button variant="primary"
         onClick={()=> deleteMovie(element._id)}
         style={{
             // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-            color:mode=="light" ? "rgb(66, 66, 66)":"white"}}
-        >
+            color:mode=="light" ? "rgb(66, 66, 66)":"white"}}>
         <i className="fa-solid fs-5 fa-trash"></i>
         </Button>}
 
     // Redux
     reduxAddcartBtn={
+        <>
         <Button
         className='fs-5 likeBtn px-3' variant=""
         style={{
             // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
             }}
         onClick={()=>{handleAdditem(element)}}
-      >
-        <i className="fa-solid fs-5 fa-cart-shopping text-warning "></i></Button>}/>
+      ><i className="fa-solid fs-5 fa-cart-shopping text-warning "></i></Button>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        // transition={Bounce}
+        /> </>
+    }/>
     ))}
 </Grid>
 </Box>
 </div>
-   {/* </div> */}
  </>
  )}
 export default MovieDisplay

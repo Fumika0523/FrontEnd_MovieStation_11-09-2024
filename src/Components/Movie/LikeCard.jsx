@@ -18,26 +18,33 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
     
     return(
         <>
-        <IconButton className="movieCardIcon">
-          <ThumbUpOffAltIcon  sx={{ fontSize: 25 }} 
+        <div className="d-flex justify-content-center align-items-center flex-row">
+        <div>
+        <ThumbUpOffAltIcon  sx={{ fontSize: 25 }} 
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
         }}/>
           <span  style={{fontSize:"15px",marginLeft:"3px"}}>
             {formatNumber(like)}
           </span>
-        </IconButton>
+        </div>
+        {/* <IconButton className="movieCardIcon"> */}
+ 
+        {/* </IconButton> */}
 
         {/* Dislike */}
-        <IconButton className="movieCardIcon">
-          <ThumbDownOffAltIcon  sx={{ fontSize: 25 }} 
+        {/* <IconButton className="movieCardIcon"> */}
+        <div className="ms-3">
+        <ThumbDownOffAltIcon  sx={{ fontSize: 25 }} 
           onClick={()=>{
             setDisLike(parseInt(disLike)+1)
            }}/>
            <span  style={{fontSize:"15px",marginLeft:"3px"}}>
             {formatNumber(disLike)}
            </span>
-        </IconButton>
+        </div>
+        </div>
+        {/* </IconButton> */}
         </>
     )
 }

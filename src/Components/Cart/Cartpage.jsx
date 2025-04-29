@@ -53,28 +53,27 @@ useEffect(()=>{
         <>
         {/* <div className="container-fluid border border-4 border-warning">  */}
             <div className="row mx-auto  border-primary border-3" >
-                <div className="col-lg-8 col-md-8 col-sm-10 col-11 mx-auto my-5 rounded" style={{ border: "2px solid #3b3b3b" }}>
+                <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-5 rounded" style={{ border: "2px solid #3b3b3b" }}>
                 <div className="justify-content-center my-3  mx-auto fs-2  d-flex flex-row ">
                     <FaShoppingCart className="text-warning fs-1 me-1"/>
                     <div className="fs-3">Your Shopping Cart</div>
                 </div>
-                <div className="mb-3  border-primary d-flex align-items-center justify-content-end mx-auto ">
+        
                 {/* Back */}
                 {
                     cartItems.length === 0 ?
-                        <Button variant="secondary" className="d-flex justify-content-end align-items-center text-nowrap" onClick={() => navigate('/allmovies')}>
+                        <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}>
                             Back to All Movies</Button> 
                             :
-                        <div  className="mt-3 text-nowarap mx-auto justify-content-end  gap-3 d-flex"> 
+                        <div  className="mb-2 d-flex align-items-center justify-content-end flex-row gap-3"> 
+                        {/* CLEAR CART */}
                           <Button variant="danger" onClick={() => {
                                 handleClearitem()
                          }} >Clear Cart</Button>
-                        <Button variant="secondary"  className="d-flex justify-content-end" onClick={() => navigate('/allmovies')}>
-                            Back to All Movies</Button>
-                      
-                        </div>  
+                        {/* BACK */}
+                        <Button variant="secondary"   onClick={() => navigate('/allmovies')}> Back to All Movies</Button>                        </div>  
                 }
-                </div>
+    
                 {/* Clear Cart */}
                 {/* {
                     cartItems.length === 0 ?

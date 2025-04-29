@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import {Button, ButtonBase, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -20,9 +20,11 @@ import { useState } from 'react';
 import { createTheme} from '@mui/material/styles';
 import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
-import Fab from '@mui/material/Fab';
-import Tooltip from '@mui/material/Tooltip';
-
+import { ToastContainer, toast } from 'react-toastify';
+import { FaStar } from "react-icons/fa";
+import { FaStarHalfStroke } from "react-icons/fa6";
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
@@ -87,14 +89,28 @@ useEffect(() => {
 // console.log(findUserAddedMovie) //find a value
 // find , some, filter,includes,map,every
 
+const ratNum = {rating } 
+const starNum = ratNum.rating / 2
+// console.log("ratNum",ratNum.rating)
+console.log("starNum.toFixed(1)",starNum.toFixed(1)) 
+// console.log("starNUm.ceil()",Math.ceil(starNum))
+// console.log("starNum.floor()",Math.floor(starNum))
+// console.log("starNum.round()",Math.round(starNum))
+// console.log(Math.ceil(4.1)) //5
+// console.log(Math.floor(4.1)) //4
+// console.log(Math.round(4.1)) //4
+const rating1 = {rating}
+console.log(rating1)
+console.log(rating1.rating, "/10")
+
    return (
   <>
     <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
       <Card  className="movieCard" style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 10px 0"}}>
-      <CardHeader className="py-2 fw-bold" avatar={
+      <CardHeader className="py-2 fw-bold" 
+      avatar={
           <Avatar sx={{ bgcolor: red[900],color:"lightgray" }} aria-label="movietitle">
             {moviename.substring(0,1)}
-            {/* {rating} */}
           </Avatar>
           }
            action={
@@ -106,39 +122,39 @@ useEffect(() => {
           :
             null
           }
-
-      title={moviename}
-      subheader={rating}
+          titleTypographyProps={{fontSize:"16x",paddingBottom:"0px",marginBottom:"0px" }}
+        title={moviename}
+        subheaderTypographyProps={{display:"flex",flexDirection:"row",justifyContent:"start",alignItems:"center",gap:"5px",fontSize:"13px"}}
+       subheader={
+        <>
+        {rating} /10
+        <Rating size="small" name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5}  style={{paddingTop:"5px"}} />
+        </>
+    
+      }
       />
+      {/* <div className='position-absolute d-flex flex-row justify-content-start align-items-start' style={{top:"35px",left:"70px"}}>
+      <div style={{fontSize:"14px"}}>{rating}/10</div>
+      <div>   <Rating size="small" name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5} /></div>
+      </div> */}
     <CardMedia 
     component="img"  
     className=""
-    width="100%" image={movieposter} style={{objectFit:"cover",display:"block",filter: "brightness(50%)",height:"210px"}} alt="movieposter"/>
-
-    <div style={{right:"0px",top:'55px',position:"absolute"}}>
+    width="100%" image={movieposter} style={{objectFit:"cover",display:"block",filter: "brightness(55%)",height:"210px"}} alt="movieposter"/>
+    {/* CART ICON */}
+    <div style={{right:"0px",top:'63px',position:"absolute"}}>
     {reduxAddcartBtn} 
     </div>
-    {/* <Fab size="small"  className='moiveEditIcon'  style={{right:"0px",top:'55px',position:"absolute"}}
-    onClick={()=>{handleAdditem(element)}}>
-    <ShoppingCartIcon/>
-    </Fab> */}
 
-    {/* <Tooltip title="Add to Cart">
-      <IconButton  onClick={()=>{handleAdditem(element)}} style={{right:"0px",top:'55px',position:"absolute"}} >
-        <ShoppingCartIcon />
-      </IconButton>
-    </Tooltip> */}
-
-
-     {/* ICONS */}
-    <CardActions disableSpacing className='  p-0 d-block position-absolute' style={{bottom:"50px"}}>
+     {/* Bottom Card ICONS */}
+    <CardActions disableSpacing className='d-flex flex-row  d-block position-absolute' style={{bottom:"45px",left:"5px"}}>
    
-    <LikeCard className="p-0" likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
+    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
     
         {token && isMovieOwner ? (
     <>
     {/* Edit Icon */}
-    <IconButton className="p-0" onClick={()=>navigate(`/editmovie/${_id}`)}>
+    <IconButton className="editBtn" onClick={()=>navigate(`/editmovie/${_id}`)}>
       <ModeIcon />
     </IconButton>
 
@@ -151,23 +167,13 @@ useEffect(() => {
       </>
     )}
 
-    {/* REDUX */}
-    {/* {reduxAddcartBtn} */}
-
-    {/* EXPAND */}
-    {/* <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-    <ExpandMoreIcon className=''/>
-    </ExpandMore> */}
     </CardActions>
-    
-    {/* <CardContent className='overlay border border-danger '>
-    <Typography > */}
     <CardContent >
-     <div className='overlay text-start' style={{fontSize:"14px"}}>
+     <div className='overlay px-3 d-flejustify-content-center align-items-center' style={{fontSize:"14px",textAlign:"justify"}}>
 
-    <span className='movieCast px-2' >{cast.substring(0,65)+"..."}</span>
+    <span className='movieCast pb-1' >{cast.substring(0,65)+"..."}</span>
 
-    <p className="movieSummary px-2 pt-1" >{summary.substring(0,170)+"..."}</p>
+    <p className="movieSummary text-white pt-2" >{summary.substring(0,180)+"..."}</p>
     </div>
     </CardContent>
 {/*     

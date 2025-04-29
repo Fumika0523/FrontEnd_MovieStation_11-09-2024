@@ -56,20 +56,20 @@ const handleProfEditClick = (ProfileData)=>{
             <div className="d-flex justify-content-between mb-3">
             <div className='fw-bold pb-2 fs-5'>Personal Info
             </div>
-            <Button variant="success" className="px-4 py-0 "
-                    onClick={()=>handleProfEditClick(ProfileData)}><FaPencilAlt className="m-0"/>
+            <Button variant="success" className="px-3 py-0 "
+              onClick={()=>handleProfEditClick(ProfileData)}><FaPencilAlt className="m-0"/>
             </Button>                  
                 </div>
                
                 {/* FirstName */}
-                <div className='d-flex flex-column justify-content-start col-sm-4  align-items-start ' >
+                <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
                 <div className="text-secondary   " style={{fontSize:"14px"}}>First Name</div>
                 <div style={{fontSize:"18px"}}
                 >{name}</div>
                 </div>
 
                 {/* LastName */}
-                <div className=' justify-content-start  align-items-start d-flex flex-column col-sm-4 '>
+                <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
                 <div className=" text-secondary" 
                 style={{fontSize:"14px"}}>Last Name</div>
                 <div style={{fontSize:"18px"}}
@@ -77,7 +77,7 @@ const handleProfEditClick = (ProfileData)=>{
                 </div>
                 
                 {/* Gender*/}
-                <div className='justify-content-start  align-items-start d-flex flex-column col-sm-2'>
+                  <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
                   <div className=" text-secondary"
                   style={{fontSize:"14px"}}
                   >Gender</div>
@@ -85,7 +85,7 @@ const handleProfEditClick = (ProfileData)=>{
                   </div>
 
                  {/* Gender*/}
-                 <div className='justify-content-start  align-items-start d-flex flex-column col-sm-2 '>
+                 <div className='justify-content-start  align-items-center d-flex flex-column col-sm-3 '>
                   <div className=" text-secondary"
                   style={{fontSize:"14px"}}
                   >Age</div>
