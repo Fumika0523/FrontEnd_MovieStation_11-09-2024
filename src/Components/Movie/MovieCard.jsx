@@ -92,7 +92,7 @@ useEffect(() => {
 const ratNum = {rating } 
 const starNum = ratNum.rating / 2
 // console.log("ratNum",ratNum.rating)
-console.log("starNum.toFixed(1)",starNum.toFixed(1)) 
+// console.log("starNum.toFixed(1)",starNum.toFixed(1)) 
 // console.log("starNUm.ceil()",Math.ceil(starNum))
 // console.log("starNum.floor()",Math.floor(starNum))
 // console.log("starNum.round()",Math.round(starNum))
@@ -100,8 +100,8 @@ console.log("starNum.toFixed(1)",starNum.toFixed(1))
 // console.log(Math.floor(4.1)) //4
 // console.log(Math.round(4.1)) //4
 const rating1 = {rating}
-console.log(rating1)
-console.log(rating1.rating, "/10")
+// console.log(rating1)
+// console.log(rating1.rating, "/10")
 
    return (
   <>
@@ -128,7 +128,10 @@ console.log(rating1.rating, "/10")
        subheader={
         <>
         {rating} /10
-        <Rating size="small" name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5}  style={{paddingTop:"5px"}} />
+        <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5}  style={{paddingBottom:"5px",
+           color:"#FDCC0D"
+
+            }} />
         </>
     
       }
@@ -168,12 +171,14 @@ console.log(rating1.rating, "/10")
     )}
 
     </CardActions>
-    <CardContent >
-     <div className='overlay px-3 d-flejustify-content-center align-items-center' style={{fontSize:"14px",textAlign:"justify"}}>
+    <CardContent className=''>
+     <div className='overlay  px-3' style={{fontSize:"13.5px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"#bdbfc2"}}>
 
-    <span className='movieCast pb-1' >{cast.substring(0,65)+"..."}</span>
+    <span className='movieCast d-flex pt-1 align-items-center ' 
+    >{cast.substring(0,65)+"..."}</span>
 
-    <p className="movieSummary text-white pt-2" >{summary.substring(0,180)+"..."}</p>
+    <p className="movieSummary "
+      >{summary.substring(0,180)+"..."}</p>
     </div>
     </CardContent>
 {/*     

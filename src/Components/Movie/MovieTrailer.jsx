@@ -79,7 +79,8 @@ function MovieTrailer({mode}) {
 
             <Row className='mx-auto mx-md-5 mb-4 -3' >
             <Col className='col-12'>
-              <iframe src={movieInfo?.trailer} frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
+              <iframe src={movieInfo?.trailer }   showinfo="0" allow="encrypted-media" frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
+            
             </Col>
             </Row>
             

@@ -7,7 +7,7 @@ function Header (){
       return(
         <>        
         <div className="mainBackground  border-primary border-4  " >
-         <Image style={{minHeight:"minContent"}} src={coverPage} alt="" className=" bg-header-image  "  />
+         <Image  src={coverPage} alt="" className=" bg-header-image  min-vh-100"  />
       <div className='bgFade row mx-auto border-danger border-4  ' >
         <div className='d-flex justify-content-center align-items-center  flex-column gap-2 col-md-10 col-lg-9 col-sm-9 mt-md-4 mt-lg-3 mt-sm-3 mx-auto  '>
         <div className=" text-white fw-bold my-lg-1 mx-auto fs-1 " 

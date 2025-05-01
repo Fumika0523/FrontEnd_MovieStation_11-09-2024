@@ -6,6 +6,8 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import { Button, Image } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
+import { IoChevronBackOutline } from "react-icons/io5";
+
 
 
 function Cartpage() {
@@ -62,8 +64,9 @@ useEffect(()=>{
                 {/* Back */}
                 {
                     cartItems.length === 0 ?
-                        <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}>
-                            Back to All Movies</Button> 
+                    <div className="d-flex justify-content-end align-items-center"> <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}> 
+                    <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button> </div>
+                       
                             :
                         <div  className="mb-2 d-flex align-items-center justify-content-end flex-row gap-3"> 
                         {/* CLEAR CART */}

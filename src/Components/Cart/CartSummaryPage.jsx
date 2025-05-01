@@ -75,7 +75,6 @@ console.log(cartItems)
                            <CartCard {...element} key={element._id} />)
                     }
                     <div style={{width:"40%"}} className="ms-auto  mb-4 mt-3  ">
-                    {/* <div className="text-start pt-3 fs-6 mb-1" >Cart Summary</div> */}
                     {/* Dotted underline */}
                     <div style={{ borderBottom: "1px dotted grey"}}>
                     </div>

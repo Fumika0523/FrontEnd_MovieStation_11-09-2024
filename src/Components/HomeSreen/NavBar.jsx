@@ -26,6 +26,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { TbLetterMSmall } from "react-icons/tb";
 import { TbLetterS } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
+import { BorderAll } from "@mui/icons-material";
 
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
@@ -74,7 +75,7 @@ function NavBar({ mode, setMode }) {
   let name = sessionStorage.getItem('name')
   return (
     <>
-    <div className="d-flex align-items-center justify-content-between ">
+    <div className="d-flex navbarAll align-items-center justify-content-between ">
       <Navbar className="d-flex align-items-center  justify-content-center me-auto" collapseOnSelect expand="lg">
         <Container fluid className=" d-flex flex-row align-items-center  justify-content-start"  >    
           {/* Toggle */}
@@ -95,11 +96,10 @@ function NavBar({ mode, setMode }) {
             <Nav className=""  >
 
               {/* <!-- Home --> */}
-              <Nav.Link href="#" className="">
+              <Nav.Link href="/" className="">
                 <Button variant="none"  className="d-flex  text-nowrap 
                 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
-                  onClick={() => navigate('/about')}
                 >
                   <FaHome className="me-1 text-nowrap fs-3"
                     style={{ color: mode == "light" ? amberColor1 : amberColor }} />
@@ -126,11 +126,12 @@ function NavBar({ mode, setMode }) {
               {/* MOVIE */}
           <Dropdown 
             align={{ lg: 'down' }}
-            className="d-flex py-1 dropdownMenu    justify-content-start justify-content-lg-center align-items-start align-items-lg-center">
+            className="d-flex py-1 dropdownMenu   justify-content-start justify-content-lg-center align-items-start align-items-lg-center"
+           >
            <Dropdown.Toggle variant="none" id="dropdown-basic" 
            className=" d-flex text-nowrap  justify-content-center align-items-center"
-          style={{ color: mode == "light" ? "black" : "white" }}
-                  >
+           style={{color:mode == "light" ? "black":"white"}} 
+            >
               < PiFilmSlateFill
                 className=" fs-3 me-1"
                 style={{ color: mode == "light" ? amberColor1 : amberColor }}
@@ -140,17 +141,18 @@ function NavBar({ mode, setMode }) {
                  >Movies</span> 
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className="bg-dark  dropdownMenu px-2 " >
+                  className=" dropdownMenu px-2 " 
+                  style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
                    <Dropdown.Item 
-                      className="dropDownItem"
+                      className="border-bottom d-flex justify-content-start align-items-center flex-row"
                       onClick={() => navigate('/allmovies')}     
-                      style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
+                      style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)"}}
                       >
                     <GiFilmProjector
                     className="fs-3 me-1"
                     style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                      <span className=""
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
+                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}
                     >All Movie</span>  
                   </Dropdown.Item>
                   {
@@ -158,7 +160,7 @@ function NavBar({ mode, setMode }) {
                     <Dropdown.Item 
                     onClick={() => navigate('/addmovie')}
                     href=""
-                    className="dropDownItem"
+                    className=" d-flex justify-content-center align-items-center flex-row"
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                     >               
                     < MdAddPhotoAlternate className="fs-3 me-1"
@@ -200,7 +202,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* Redux  -->> Badge*/}
-              <Nav.Link href="#" className="">
+              <Nav.Link href="/cartpage" className="">
                 <Button  className="d-flex  justify-content-center align-items-end"
                   variant="none">
                   <Badge variant="text"
@@ -215,7 +217,6 @@ function NavBar({ mode, setMode }) {
                     }}
                     color="primary" badgeContent={cartItems.length}
                     // style={{ color: mode == "light" ? greyColor : amberColor, }}
-                    onClick={() => navigate('/cartpage')}
                     >
                   <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                   </Badge>
@@ -244,21 +245,23 @@ function NavBar({ mode, setMode }) {
                   <span style={{ color: "rgb(248, 228, 118)",backgroundColor:"purple"}} className="rounded-circle fw-bold rounded px-3 py-1 fs-4 ms-1 me-2" >{name[0].toUpperCase()}</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className="bg-dark dropdownMenu px-2 " >
+                  className="dropdownMenu px-2 " style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
                     {/* MY ACCOUNT */}
                    <Dropdown.Item 
-                    className="d-flex dropDownItem justify-content-start align-items-center border-bottom"
+                    className="d-flex justify-content-start align-items-center border-bottom"
                      href="/profile"
                       >
                     <FaUser className="me-1 fs-4 text-warning" />
-                    <span className="fs-6 text-white">
+                    <span className="fs-6" 
+                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>
                     My Account</span></Dropdown.Item>
 
                     {/* MY ORDER */}
                     <Dropdown.Item 
-                    className="d-flex dropDownItem justify-content-start align-items-center"
+                    className="d-flex  justify-content-start align-items-center"
                       href="/ordersummary">
-                    <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6 text-white">My Order</span>
+                    <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6" 
+                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>My Order</span>
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

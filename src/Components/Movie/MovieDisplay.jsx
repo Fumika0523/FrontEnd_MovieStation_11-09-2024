@@ -10,8 +10,9 @@ import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Tooltip from '@mui/material/Tooltip';
+import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
+import { FaHeart } from "react-icons/fa";
 
 
 // cart item is added to the card >> green
@@ -92,14 +93,14 @@ const getSpecificMovieData = async () =>{
     console.log(res.data.movieData)
     setSpecificMovieData(res.data.movieData)
 }
-console.log("Specific Movie Data",specificMovieData)
+// console.log("Specific Movie Data",specificMovieData)
 // console.log("Specific ID",specificMovieData._id)
-console.log("movieData",movieData)
+// console.log("movieData",movieData)
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB..")
     let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
-    console.log(res)
+    // console.log(res)
     getMovieData()
 }
    
@@ -112,7 +113,7 @@ const getCartData=async()=>{
 }}
 
 const handleAdditem=async(movieItem)=>{
-    console.log("movieItem,",movieItem)
+    // console.log("movieItem,",movieItem)
     // >> api call for updating the backend >> saving to the DB  
     // "=" << Assignment operator
     // "==" << condition comparison operator
@@ -132,53 +133,64 @@ const handleAdditem=async(movieItem)=>{
 return (
 <>
 <div>
-
 <Box 
     display="flex"
     flexDirection={"column"}
     alignItems="center"
-    justifyContent={"end"}
+    justifyContent={"center"}
     margin={2} >
-    <Grid  container  className=" border-4">
-    <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
+    <Grid  container  className="mx-auto d-flex justify-content-end flex-row align-items-center">
+    {/* <Grid className=""  > */}
     {/* Search*/}
-    <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
     {
-    token &&<Button variant="warning" onClick={()=>navigate('/usermovies')} className="text-nowrap me-3">My Movies</Button>
+    token &&
+    <>
+   
+    <Button variant="success" className="text-nowrap me-1 d-flex align-items-center gap-1" onClick={()=>navigate('/addmovie')} >
+     <FaPlusCircle className="fs-5 " /><span className="d-sm-block d-none">Add Movie</span></Button>
+    
+    <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
+    <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none"  >My Movies</span> </Button>
+    </>
     }
- 
+  {/* debounce */}
    <input
     className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+    style={{width:"180px"}}
     onChange={(e) => {
-    //console.log(e.target.value)
-    setSearchTearm(e.target.value)}} />
-    <Button variant="outline-secondary" className="" type="submit"
+    console.log(e.target.value)
+    setSearchTearm(e.target.value)}}
+    />
+    {/* Button is for to call 1 API */}
+    {/* <Button variant="outline-secondary" className="" type="submit"
     onClick={() => {
     console.log("Button is cliecked,searchTerm")
     const data = filterData(searchTerm, movieData) //passing the data
     console.log(data)
     setFilterMovieData(data)
-    }}>Search</Button>
+    }}>Search</Button> */}
+
+
     </div>
-    </Grid>
+    {/* </Grid> */}
     </Grid>
 
     {/* each movie card */}
-    <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"center"} marginTop={2}>
+    <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
     {!searchTerm ? movieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
-    <IconButton   className="movieDeleteBtn"
+    <IconButton className="movieDeleteBtn"
     onClick={()=> deleteMovie(element._id)}>
         <DeleteIcon />
     </IconButton>
 }
     
     // Redux
-
     reduxAddcartBtn={
   <>
       <IconButton className="reduxIcon" onClick={()=>{handleAdditem(element)}}  >
