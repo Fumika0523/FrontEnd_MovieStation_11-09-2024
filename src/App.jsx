@@ -62,6 +62,7 @@ const getMovieData = async () => {
   getMovieData()
   },[]) //API Call
 //initial value is stored as dark
+
 const [mode, setMode]=useState("dark")
 
   const theme = createTheme({

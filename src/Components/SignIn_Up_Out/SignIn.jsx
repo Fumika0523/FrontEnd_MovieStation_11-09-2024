@@ -67,6 +67,7 @@ function SignIn({setIsAuthenticated}) {
          value={formik.values.email}
          onChange={formik.handleChange}  style={inputDesign} />
       </Form.Group>
+      
       <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
         <Form.Label className="m-0">Phone No.</Form.Label>
         <Form.Control type="phone_number" placeholder=""

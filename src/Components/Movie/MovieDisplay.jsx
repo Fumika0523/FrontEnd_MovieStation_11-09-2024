@@ -172,7 +172,6 @@ return (
     setFilterMovieData(data)
     }}>Search</Button> */}
 
-
     </div>
     {/* </Grid> */}
     </Grid>

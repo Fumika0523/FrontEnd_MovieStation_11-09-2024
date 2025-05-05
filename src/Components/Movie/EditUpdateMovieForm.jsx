@@ -45,7 +45,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
     onSubmit: (values) => {
       console.log(values)
       updateMovies(values)
-      navigate('/allmovies')
+      // navigate('/allmovies')
     }
   })
 
@@ -64,7 +64,11 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
 
     let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
     console.log(res)
-    setMovieData(res);
+    if(res){
+      console.log("updated successfully")
+      getMovieData()
+      navigate(`/allmovies`)
+    }
   }
 
   //updating a data 
@@ -73,7 +77,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
     let res = await fetch(`${url}/movie`, config) //API call to get all movie data
     let data = await res.json()
     console.log(data)
-    getMovieData()
+    setMovieData()
   }
 
   return (

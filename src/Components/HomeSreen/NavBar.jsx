@@ -48,16 +48,16 @@ function NavBar({ mode, setMode }) {
   const location = useLocation();
   console.log(location)
 
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#424242',
-      },
-      secondary: {
-        main: '#ffc107',
-      },
-    },
-  });
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: '#424242',
+  //     },
+  //     secondary: {
+  //       main: '#ffc107',
+  //     },
+  //   },
+  // });
 
   // Space between icon &
   //drop down
