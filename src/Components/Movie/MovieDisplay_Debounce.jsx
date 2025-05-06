@@ -14,10 +14,9 @@ import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 
-
 // cart item is added to the card >> green
 //this movie is already purchased, please check the order history >> error
-function MovieDisplay({mode}) 
+function MovieDisplay_Debounce({mode}) 
 {
 
 //conditionally done.
@@ -45,31 +44,13 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
         // transition: Bounce,
         });
 
-
 const navigate = useNavigate()
 const dispatch= useDispatch()
 // STate valiable
 const [movieData, setMovieData] = useState([])
-const [searchTerm, setSearchTearm] = useState("")//hold search value
+const [searchTerm, setSearchTearm] = useState("")//initial value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
-const [specificMovieData,setSpecificMovieData] = useState([])
 
-// Check if the typed word is included to the all movie data
-const filterData = (searchText, allmovies) => {
-//console.log(searchText,allmovies)
-let fData = allmovies.filter((element) => element.moviename.toLowerCase().includes(searchTerm.toLowerCase()))
-return fData
-}
-//console.log(searchTerm)
-
-const token = sessionStorage.getItem('token')
-console.log("token",token)
-let config = {
-    headers: {
-    Authorization: `Bearer ${token}`
-}}
-
-// ALL
 const getMovieData = async () => {
     console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
@@ -77,31 +58,66 @@ const getMovieData = async () => {
     // console.log(res.data.movieData)
     // // console.log(res.data.movieData._id);
     setMovieData(res.data.movieData);
-    setFilterMovieData(res.data.movieData)
     };
-    useEffect(() => {
-    getMovieData()
-    getSpecificMovieData()
-    console.log("MovieDisplay")
-}, [])
-//console.log(searchTerm)
+    useEffect(()=>{
+        getMovieData()
+    },[])
 
-// SPECIFIC
-const getSpecificMovieData = async () =>{
-    console.log("Specific Movie Data is called....")
-    let res = await axios.get(`${url}/specificmovie`,config)
-    console.log(res.data.movieData)
-    setSpecificMovieData(res.data.movieData)
+const fetchData = (searchTerm)=>{
+    console.log("Searching For",searchTerm)
+    //apil call
+    const filterData=(searchText,allMovies)=>{
+      return allMovies.filter((element)=>
+        element.moviename.toLowerCase().includes(searchText.toLowerCase()) //searching by element.title >> JSON structure always review
+      )
+    }
+    return filterData(searchTerm,movieData)
+  }
+console.log("filterMovieData",filterMovieData)
+
+const token = sessionStorage.getItem('token')
+// console.log("token",token)
+let config = {
+    headers: {
+    Authorization: `Bearer ${token}`
+}}
+
+   // ALL
+    useEffect(() => {
+    const timeoutId = setTimeout(()=>{
+    if(searchTerm.trim()!==""){ //not empty
+    const fData = fetchData(searchTerm)
+     setFilterMovieData(fData)
+    }else{ //empty
+    setFilterMovieData(movieData) //reset to all blogs if search is empty
+    console.log("Re-render with searchTerm")
+    //searchTerm >> search reupdated >> depenedency Array >> re-render whenever you are typing in seach box  >> blog data  will be updated >> filteration >> .filter
+     }   
+    },900)
+return()=>{
+    clearTimeout(timeoutId)
 }
-// console.log("Specific Movie Data",specificMovieData)
-// console.log("Specific ID",specificMovieData._id)
-// console.log("movieData",movieData)
+}, [searchTerm,movieData])
+console.log("filtermoviedata",filterMovieData)
+console.log("moviedata",movieData)
+
+useEffect(()=>{
+    if(movieData){
+        setFilterMovieData(movieData)
+        // getSpecificMovieData()
+    }
+    // getMovieData()
+    // console.log("MovieDisplay")
+},[movieData])
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB..")
     let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
-    // console.log(res)
+    if(res){
     getMovieData()
+    navigate(`/allmovies`)
+    } 
+  
 }
    
 const getCartData=async()=>{
@@ -140,51 +156,41 @@ return (
     justifyContent={"center"}
     margin={2} >
     <Grid  container  className="mx-auto d-flex justify-content-end flex-row align-items-center">
-    {/* <Grid className=""  > */}
     {/* Search*/}
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
     {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
     {
-    token &&
+        token &&
     <>
-   
+    {/* ADD MOVIE */}
     <Button variant="success" className="text-nowrap me-1 d-flex align-items-center gap-1" onClick={()=>navigate('/addmovie')} >
-     <FaPlusCircle className="fs-5 " /><span className="d-sm-block d-none">Add Movie</span></Button>
+     <FaPlusCircle className="fs-5 " /><span className="d-md-block d-none">Add Movie</span></Button>
     
+    {/* My MOVIES */}
     <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
     <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none"  >My Movies</span> </Button>
     </>
     }
-  {/* debounce */}
-   <input
-    className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
-    style={{width:"180px"}}
-    onChange={(e) => {
-    console.log(e.target.value)
-    setSearchTearm(e.target.value)}}
-    />
-    {/* Button is for to call 1 API */}
-    <Button variant="outline-secondary" className="" type="submit"
-    onClick={() => {
-    console.log("Button is cliecked,searchTerm")
-    const data = filterData(searchTerm, movieData) //passing the data
-    console.log(data)
-    setFilterMovieData(data)
-    }}>Search</Button>
-
-
-    </div>
-    {/* </Grid> */}
-    </Grid>
-
+  
+    <>
+        {/* Debounce Search*/}
+        <input
+        className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+            style={{width:"180px"}}
+            onChange={(e) => {
+            console.log(e.target.value)
+        setSearchTearm(e.target.value)}}/>
+    </>
+  </div>
+</Grid>
     {/* each movie card */}
     <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
-    {!searchTerm ? movieData?.map((element, index) => (
+    {filterMovieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
-    <IconButton className="movieDeleteBtn"
+    <IconButton variant="none" className="movieDeleteBtn"
     onClick={()=> deleteMovie(element._id)}>
         <DeleteIcon />
     </IconButton>
@@ -192,69 +198,30 @@ return (
     
     // Redux
     reduxAddcartBtn={
-  <>
-      <IconButton className="reduxIcon" onClick={()=>{handleAdditem(element)}}  >
-        <ShoppingCartIcon />
-      </IconButton>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        // transition={Bounce}
-        />
-  </>
-        }
-          
+    <>
+    <IconButton className="reduxIcon" 
+    onClick={()=>{handleAdditem(element)}}  >
+       <ShoppingCartIcon />
+    </IconButton>
+    <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick={false}
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light" />
+    </>
+              }
+/> 
+    )) }
 
-    /> //spread operator
-    )) : filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData}  element={element} mode={mode} 
-                            
-    // Delete Button
-    deleteBtn={
-        <Button variant="primary"
-        onClick={()=> deleteMovie(element._id)}
-        style={{
-            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-            color:mode=="light" ? "rgb(66, 66, 66)":"white"}}>
-        <i className="fa-solid fs-5 fa-trash"></i>
-        </Button>}
-
-    // Redux
-    reduxAddcartBtn={
-        <>
-        <Button
-        className='fs-5 likeBtn px-3' variant=""
-        style={{
-            // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
-            }}
-        onClick={()=>{handleAdditem(element)}}
-      ><i className="fa-solid fs-5 fa-cart-shopping text-warning "></i></Button>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        // transition={Bounce}
-        /> </>
-    }/>
-    ))}
 </Grid>
 </Box>
 </div>
  </>
  )}
-export default MovieDisplay
+export default MovieDisplay_Debounce

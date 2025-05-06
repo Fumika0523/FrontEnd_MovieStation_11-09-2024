@@ -6,8 +6,9 @@ import { useFormik } from 'formik'
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { url } from "../../utils/constant";
-import { Button,Stack, Container, Grid, Typography } from '@mui/material';
+import { Stack, Container, Grid, Typography } from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
+import { Button } from "react-bootstrap";
 
 
 function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
@@ -106,14 +107,14 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
           <Grid container marginBottom={3} >
             <Grid xs={6} item textAlign={"start"}>
               {/* Back */}
-              <Button variant="contained" className='fs-6'
-                style={{ backgroundColor: "#6c757d", color: "White" }} onClick={() => { navigate('/allmovies') }} ><i class="fa-solid fa-circle-left me-1 "></i>BACK</Button>
+              <Button variant="secondary" className='fs-6'
+                onClick={() => { navigate('/allmovies') }} ><i class="fa-solid fa-circle-left me-1 "></i>Back</Button>
             </Grid>
 
             {/* UPDATE MOVIE */}
             <Grid xs={6} item textAlign={"end"}>
-              <Button variant="contained" className='fs-6' type="submit"
-              style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fa-solid fa-circle-plus me-1" ></i>UPDATE MOVIE</Button>
+              <Button variant="warning" className='text-nowrap fs-6' type="submit"
+              ><i class="fa-solid fa-circle-plus me-1" ></i>Update Movie</Button>
             </Grid>
           </Grid>
 

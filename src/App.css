@@ -253,10 +253,10 @@ font-size: "16px";
   transition-duration: 1.5s !important;
 }
 
-
-/* .dropDownItem:hover{
-  background-color: #3b4852;
-} */
+.dropdown-item:active {
+  background-color: rgb(254, 254, 254);
+  color: #2b2c2d !important;
+}
 
 .hover-edit:hover{
   cursor: pointer;
@@ -325,11 +325,11 @@ text-shadow: none;
 }
 
 .movieDeleteBtn:hover{
-  transform: scale(1.28);
+  transform: scale(1.1);
   transition: .49s ease;
-  color:rgb(221, 4, 4) !important ;
-  background-color: white!important;
-  padding: 3px !important;
+  color:rgb(149, 2, 2) !important ;
+  background-color: rgba(255, 118, 118, 0.969)!important;
+  padding: 2px !important;
   opacity: 100%;
 }
 
@@ -352,11 +352,11 @@ text-shadow: none;
 }
 
 .editBtn:hover{
-  transform: scale(1.26);
+  transform: scale(1.1);
   transition: .49s ease;
   color: rgb(2, 115, 2) !important;
-  background-color:white!important;
-  padding: 4px !important; 
+  background-color:rgb(141, 253, 167)!important;
+  padding: 2px !important; 
   opacity: 100%;
 }
 

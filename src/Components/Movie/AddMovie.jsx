@@ -6,10 +6,11 @@ import { useFormik } from 'formik'
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { url } from "../../utils/constant";
-import { Button,Grid} from '@mui/material';
+import { Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import PageNotFound from '../../Components/HomeSreen/PageNotFound'
 import NavBar from "../HomeSreen/NavBar";
+import { Button } from "react-bootstrap";
 
 export default function AddMovie({setMovieData}) {
 const navigate = useNavigate();
@@ -17,7 +18,7 @@ const amberColor = amber[500];
 
 // 
 const formSchema = Yup.object().shape({
-  moviename:Yup.string().required().min(5,"Too Short"),
+  moviename:Yup.string().required(),
   movieposter:Yup.string().required().min(5,"Too Short"),
   rating:Yup.number().required().positive(),
   category:Yup.string().required(),
@@ -48,7 +49,6 @@ const formik=useFormik({
   onSubmit:(values)=>{ 
   console.log(values) 
   postMovies(values)
-  navigate('/allmovies')
   }   
 })
 const token = sessionStorage.getItem('token')
@@ -63,10 +63,13 @@ let config = {
 const postMovies=async(newMovie)=>{
    console.log("Movie Posted to the DB..")
   console.log("NEW MOVIE:",newMovie)
-
 let res = await axios.post(`${url}/addmovie`,newMovie,config)
 console.log(res)
-setMovieData(res)
+if(res){
+  getMovieData()
+  navigate(`/allmovies`)
+}
+
 }
 
 //updating a data toer
@@ -75,15 +78,17 @@ setMovieData(res)
     let res = await fetch(`${url}/movie`, config) //API call to get all movie data
     let data = await res.json()
     console.log(data)
-    getMovieData()
+    setMovieData()
+
+   
   }
 
-  if(token == null){
-   console.log("NO TOKEN")
-  }
-  else{
-   console.log("YES TOKEN")
-  }
+  // if(token == null){
+  //  console.log("NO TOKEN")
+  // }
+  // else{
+  //  console.log("YES TOKEN")
+  // }
 
   return (
     <>
@@ -111,15 +116,16 @@ setMovieData(res)
       <Grid container  marginBottom={3} >
       <Grid  xs={6} item textAlign={"start"}>
       {/* Back */}
-      <Button variant="contained" className='fs-6' type="button"
-      style={{backgroundColor:"#6c757d",color:"White"}} onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>BACK</Button>
+      <Button variant="secondary" className='fs-6' 
+    onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>Back</Button>
       </Grid>
       <Grid xs={6} item textAlign={"end"}>
 
       {/* ADD MOVIE */}
-        <Button type="submit"
-          variant="contained"  className='fs-6 text-black'  style={{backgroundColor:amberColor,textWrap:"nowrap"}}><i class="fs-6 fa-solid fa-circle-plus me-1"></i>ADD MOVIE</Button>
+        <Button type="warning"
+          variant="success"  className='fs-6 text-nowrap'  ><i class="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
       </Grid>
+
       </Grid>
       <Grid container spacing={3} >
         {/* MOVIE NAME */}

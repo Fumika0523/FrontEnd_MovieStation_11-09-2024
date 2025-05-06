@@ -23,11 +23,11 @@ import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
-import UserMovies from './Components/Movie/UserMovies';
+import UserMovies from './Components/Movie/UserMoviesDisplay_Debounce';
 import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
-
+import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
 
 function App() {
   const [movieData,setMovieData] = useState([])
@@ -98,7 +98,10 @@ const [userData,setUserData]=useState([])
     }
       <Route path="/" element={<Homepage movieData={movieData}/>}/>
      {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
-      <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/>
+      {/* Search with a submit Button */}
+      {/* <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> */}
+      {/* Debounce */}
+      <Route path='/allmovies' element={<MovieDisplay_Debounce mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> 
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services' mode={mode} element={<Service_Section/>}/>
       <Route path='/contact'  mode={mode} element={<ContactUs_Section/>}/>

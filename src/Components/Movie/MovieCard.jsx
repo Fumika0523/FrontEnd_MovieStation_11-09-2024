@@ -136,25 +136,21 @@ const rating1 = {rating}
     
       }
       />
-      {/* <div className='position-absolute d-flex flex-row justify-content-start align-items-start' style={{top:"35px",left:"70px"}}>
-      <div style={{fontSize:"14px"}}>{rating}/10</div>
-      <div>   <Rating size="small" name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5} /></div>
-      </div> */}
     <CardMedia 
     component="img"  
     className=""
     width="100%" image={movieposter} style={{objectFit:"cover",display:"block",filter: "brightness(55%)",height:"210px"}} alt="movieposter"/>
+
     {/* CART ICON */}
-    <div style={{right:"0px",top:'63px',position:"absolute"}}>
+    <div className='' style={{right:"0px",top:'63px',position:"absolute"}}>
     {reduxAddcartBtn} 
     </div>
 
      {/* Bottom Card ICONS */}
-    <CardActions disableSpacing className='d-flex flex-row  d-block position-absolute' style={{bottom:"45px",left:"5px"}}>
+    <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{bottom:"45px",left:"0px"}}>
    
     <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
-    
-        {token && isMovieOwner ? (
+       {token && isMovieOwner ? (
     <>
     {/* Edit Icon */}
     <IconButton className="editBtn" onClick={()=>navigate(`/editmovie/${_id}`)}>

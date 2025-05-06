@@ -140,13 +140,14 @@ function NavBar({ mode, setMode }) {
                 style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                  >Movies</span> 
                   </Dropdown.Toggle>
+                  
                   <Dropdown.Menu 
                   className=" dropdownMenu px-2 " 
                   style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
                    <Dropdown.Item 
-                      className="border-bottom d-flex justify-content-start align-items-center flex-row"
-                      onClick={() => navigate('/allmovies')}     
-                      style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)"}}
+                    className="border-bottom d-flex justify-content-start dropdownItem align-items-center flex-row"
+                    onClick={() => navigate('/allmovies')}     
+                    style={{ color: mode == "light" ? "black" : "rgb(74, 74, 74)"}}
                       >
                     <GiFilmProjector
                     className="fs-3 me-1"
@@ -228,8 +229,7 @@ function NavBar({ mode, setMode }) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-          {/* RIGHT SIDE */}
+      {/* RIGHT SIDE */}
           <Nav className=" d-flex pt-2 text-nowrap justify-content-center align-item-center align-item- flex-row "
           style={{position:"absolute",right:"0%",top:"0%"}}
           

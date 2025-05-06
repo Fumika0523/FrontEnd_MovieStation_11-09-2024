@@ -24,22 +24,19 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
         }}/>
-          <span  style={{fontSize:"15px",marginLeft:"3px"}}>
+          <span  style={{fontSize:"12px",marginLeft:"2px"}}>
             {formatNumber(like)}
           </span>
         </div>
-        {/* <IconButton className="movieCardIcon"> */}
- 
-        {/* </IconButton> */}
 
         {/* Dislike */}
         {/* <IconButton className="movieCardIcon"> */}
-        <div className="ms-3">
+        <div className="ms-2">
         <ThumbDownOffAltIcon  sx={{ fontSize: 25 }} 
           onClick={()=>{
             setDisLike(parseInt(disLike)+1)
            }}/>
-           <span  style={{fontSize:"15px",marginLeft:"3px"}}>
+           <span  style={{fontSize:"12px",marginLeft:"2px"}}>
             {formatNumber(disLike)}
            </span>
         </div>
