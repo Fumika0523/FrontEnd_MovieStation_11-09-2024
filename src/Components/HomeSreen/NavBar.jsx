@@ -82,10 +82,11 @@ function NavBar({ mode, setMode }) {
             <Nav className=""  >
 
               {/* <!-- Home --> */}
-              <Nav.Link href="/" className="">
+              <Nav.Link href="/" className="pb-0">
                 <Button variant="none"  className="d-flex  text-nowrap 
                 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
+                  onClick={() => navigate('/')}
                 >
                   <FaHome className="me-1 text-nowrap fs-3"
                     style={{ color: mode == "light" ? amberColor1 : amberColor }} />
@@ -110,6 +111,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* MOVIE */}
+              
           <Dropdown 
             align={{ lg: 'down' }}
             className="d-flex py-1 dropdownMenu   justify-content-start justify-content-lg-center align-items-start align-items-lg-center"
@@ -130,6 +132,7 @@ function NavBar({ mode, setMode }) {
                   <Dropdown.Menu 
                   className=" dropdownMenu px-2 " 
                   style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
+                     <Nav.Link href="#" className="">
                    <Dropdown.Item 
                     className="border-bottom d-flex justify-content-start dropdownItem align-items-center flex-row"
                     onClick={() => navigate('/allmovies')}     
@@ -142,8 +145,10 @@ function NavBar({ mode, setMode }) {
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}
                     >All Movie</span>  
                   </Dropdown.Item>
+                  </Nav.Link>
                   {
                 token &&
+                <Nav.Link href="#" className="">
                     <Dropdown.Item 
                     onClick={() => navigate('/addmovie')}
                     href=""
@@ -156,7 +161,8 @@ function NavBar({ mode, setMode }) {
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                    >Add Movie</span>                
                   </Dropdown.Item>
-                 }
+                 </Nav.Link>
+                    }
                   </Dropdown.Menu>
           </Dropdown>
           
