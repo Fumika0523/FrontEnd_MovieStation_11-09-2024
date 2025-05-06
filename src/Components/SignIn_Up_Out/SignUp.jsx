@@ -9,11 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 function SignUp() {
 const navigate = useNavigate()
-  const inputDesign={
-  backgroundColor:"#1B1C23",
-   borderColor:"black",
-   color:"white",
-  }
+
   const formSchema=Yup.object().shape({
     name:Yup.string().min(5,"Too Short"),
     lastname:Yup.string(),
@@ -68,7 +64,7 @@ const postSignUpUser=async(newUser)=>{
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}  
-            style={inputDesign}/>
+            />
           </Form.Group>
 
 
@@ -82,7 +78,7 @@ const postSignUpUser=async(newUser)=>{
             name="lastname"
             value={formik.values.lastname}
             onChange={formik.handleChange}  
-            style={inputDesign}/>
+            />
           </Form.Group>
 
      
@@ -96,7 +92,7 @@ const postSignUpUser=async(newUser)=>{
              name="age"
              value={formik.values.age}
              onChange={formik.handleChange}  
-             style={inputDesign}
+            
             />
           </Form.Group>
 
@@ -121,7 +117,7 @@ const postSignUpUser=async(newUser)=>{
          name="phone_number"
          value={formik.values.phone_number}
          onChange={formik.handleChange} 
-         style={inputDesign} />
+         />
           </Form.Group>
         </div>
 
@@ -134,7 +130,7 @@ const postSignUpUser=async(newUser)=>{
              name="email"
              value={formik.values.email}
              onChange={formik.handleChange} 
-             style={inputDesign} 
+            
             />
           </Form.Group>
 
@@ -146,7 +142,7 @@ const postSignUpUser=async(newUser)=>{
              name="password"
              value={formik.values.password}
              onChange={formik.handleChange} 
-             style={inputDesign} 
+         
             />
           </Form.Group>
         </div>

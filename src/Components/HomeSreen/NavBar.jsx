@@ -48,20 +48,6 @@ function NavBar({ mode, setMode }) {
   const location = useLocation();
   console.log(location)
 
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: {
-  //       main: '#424242',
-  //     },
-  //     secondary: {
-  //       main: '#ffc107',
-  //     },
-  //   },
-  // });
-
-  // Space between icon &
-  //drop down
-
   //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
   //Check if current path is in the excludedPaths array
@@ -75,8 +61,8 @@ function NavBar({ mode, setMode }) {
   let name = sessionStorage.getItem('name')
   return (
     <>
-    <div className="d-flex navbarAll align-items-center justify-content-between ">
-      <Navbar className="d-flex align-items-center  justify-content-center me-auto" collapseOnSelect expand="lg">
+      <Navbar  className="d-flex shadow-sm align-items-center justify-content-center me-auto" collapseOnSelect expand="lg"
+      style={{ backgroundColor: mode == "light" ? "rgb(251, 251, 249)" : "rgb(19, 19, 21)" ,}}>
         <Container fluid className=" d-flex flex-row align-items-center  justify-content-start"  >    
           {/* Toggle */}
           <Navbar.Toggle 
@@ -228,9 +214,9 @@ function NavBar({ mode, setMode }) {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
-      {/* RIGHT SIDE */}
-          <Nav className=" d-flex pt-2 text-nowrap justify-content-center align-item-center align-item- flex-row "
+      
+           {/* RIGHT SIDE */}
+           <Nav className=" d-flex pt-2 text-nowrap justify-content-center align-item-center align-item- flex-row "
           style={{position:"absolute",right:"0%",top:"0%"}}
           
           >
@@ -277,7 +263,7 @@ function NavBar({ mode, setMode }) {
 
                 {/* Dark / Light Mode */}
                 <Nav.Link href="#" className="p-1 mt-1">
-                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
+                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center "
                     style={{ color: mode == "light" ? greyColor : amberColor }}
                     onClick={() => {
                       //setMode("light")
@@ -292,20 +278,18 @@ function NavBar({ mode, setMode }) {
               </>
               :
               <>
-                <Nav.Link href="#" className="">
+                <Nav.Link href="" className="position-absolute " style={{top:"10px", right:"5px",color: mode == "light" ? greyColor : amberColor }}>
                   <Button variant="none" className=""
-                    style={{ color: mode == "light" ? greyColor : amberColor }}
+                  style={{padding:"1.5px 2.5px"}}
                     onClick={() => {
-                      //setMode("light")
-                      //true?"truedata":"falsedata"
                       setMode(mode == "light" ? "dark" : "light")//setMode(light)
-                      console.log(mode)
                     }}>
-                    {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+                    {mode === "light" ? <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3 text-warning" />}
                   </Button>
                 </Nav.Link>
 
                 {/* Sign in */}
+                <Nav.Link href="" className="position-absolute" style={{top:"10px",right:"100px"}}>
                 <OverlayTrigger placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Sign In</Tooltip>} 
                   >
@@ -314,7 +298,8 @@ function NavBar({ mode, setMode }) {
                           variant="none"
                           ref={ref}
                           {...triggerHandler}
-                          className="d-inline-flex align-items-center"
+                          className=" d-inline-flex align-items-center"
+                          style={{padding:"3.3px 5px"}}
                           onClick={() => { navigate('/signin') }}
                         >
                         <PiSignInFill 
@@ -322,8 +307,10 @@ function NavBar({ mode, setMode }) {
                         </Button>
                       )}
                  </OverlayTrigger>
+                 </Nav.Link>
 
                 {/* Sign up */}
+                <Nav.Link href="" className="   position-absolute" style={{top:"10px",right:"55px"}}>
                 <OverlayTrigger placement="bottom"
                       overlay={<Tooltip id="button-tooltip-2">Sign Up</Tooltip>}
                     >
@@ -332,17 +319,19 @@ function NavBar({ mode, setMode }) {
                           variant="none"
                           ref={ref}
                           {...triggerHandler}
-                          className="d-inline-flex align-items-center"
+                          className="d-inline-flex  align-items-center"
+                          style={{padding:"4px 5px",}}
                           onClick={() => { navigate('/signup') }}
                         >
-                         <i class="fa-solid fs-5 fa-user" style={{ color: mode == "light" ? "black" : "white" }}></i>
+                         <i class="fa-solid fs-4 fa-user" style={{ color: mode == "light" ? "black" : "white" }}></i>
                         </Button>
                       )}
                  </OverlayTrigger>
+                 </Nav.Link>
               </>
             }
           </Nav >
-      </div>
+      </Navbar>
     </>
   )
 }
