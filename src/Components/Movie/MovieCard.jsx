@@ -6,7 +6,6 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -133,16 +132,15 @@ const rating1 = {rating}
 
             }} />
         </>
-    
       }
       />
     <CardMedia 
     component="img"  
     className=""
-    width="100%" image={movieposter} style={{objectFit:"cover",display:"block",filter: "brightness(55%)",height:"210px"}} alt="movieposter"/>
-
+    width="100%" image={movieposter} style={{objectFit:"cover",display:"block",height:"210px"}} alt="movieposter"/>
+    <div className='content'></div>
     {/* CART ICON */}
-    <div className='' style={{right:"0px",top:'63px',position:"absolute"}}>
+    <div className='' style={{right:"3px",top:'63px',position:"absolute"}}>
     {reduxAddcartBtn} 
     </div>
 
@@ -159,6 +157,11 @@ const rating1 = {rating}
 
     {/* Delete Icon */}
     {deleteBtn}
+
+    {/* Redux */}
+{/*     
+    {reduxAddcartBtn}  */}
+
       </>)
       :
       (<>

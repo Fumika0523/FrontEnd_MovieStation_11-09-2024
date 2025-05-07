@@ -58,3 +58,12 @@ phone no: 100100
     element is single movie data showing each data (map method) */}
     {/* isMovieOwner : compare if it's matched both element(each movie data' movieOwner id) and userId(logged in userId) >> true or false  */}
     {/* IF token and isMovieOwner are noth "true" >> show the edit & delete buttton, otherwise hide these buttons */}
+
+>> 07/05/2025 -- Pending
+icons color
+not found image and text alignment
+search box alignment 
+search alongwith submit button (little bit difficult)
+invoice part -> little time (tommorow)
+search >> if a user tries found a movie(if a movie is not found explore other movies .. do check next week for "inception") 
+>> developer should add that movie and trigger email to be sent out

@@ -40,19 +40,7 @@ const [enquiryData, setEnquiryData] = useState([])
         {
         enquiryData?.length === 0 ?
         <> 
-        {/* <div className="d-flex justify-content-center">
-        <Card className="col-10 col-lg-11 outline-none bg-transparent" >
-        <Image className="overlayImgBanner outline-none" src={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
-        /> */}
-         {/* <div className="imageOverLay "></div> */}
-         
-        {/* <Card.ImgOverlay className="d-flex flex-column border-4 align-items-center justify-content-center text-center" style={{zIndex:"3"}}> */}
-
-        {/* <Card.Text className="fs-md-1 fs-5 text-white fw-bold" style={{fontStyle:"italic"}}>"No Enquires Generated So Far !!"</Card.Text>
-        </Card.ImgOverlay>
-        </Card>
-        </div> */}
-             <AboutUs_ImageBanner
+           <AboutUs_ImageBanner
              cardText={"No Enquires Generated So Far!!"} 
              banner={"https://img.pikbest.com/wp/202405/tv-console-contemporary-displaying-a-modern-smart-in-sleek-living-room-with-dark-flooring-3d-rendered_9845708.jpg!bw700"}
              />

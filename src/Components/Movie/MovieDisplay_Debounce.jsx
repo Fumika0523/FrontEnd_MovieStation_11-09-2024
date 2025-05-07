@@ -4,7 +4,7 @@ import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
-import { Button } from "react-bootstrap"
+import { Button, ButtonGroup } from "react-bootstrap"
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -13,10 +13,13 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
+import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
+import { TbShoppingBagPlus } from "react-icons/tb";
+
 
 // cart item is added to the card >> green
 //this movie is already purchased, please check the order history >> error
-function MovieDisplay_Debounce({mode}) 
+function MovieDisplay_Debounce({mode,movieData,setMovieData}) 
 {
 
 //conditionally done.
@@ -47,7 +50,7 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
 const navigate = useNavigate()
 const dispatch= useDispatch()
 // STate valiable
-const [movieData, setMovieData] = useState([])
+// const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//initial value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
 
@@ -64,7 +67,7 @@ const getMovieData = async () => {
     },[])
 
 const fetchData = (searchTerm)=>{
-    console.log("Searching For",searchTerm)
+    console.log("searchTerm",searchTerm)
     //apil call
     const filterData=(searchText,allMovies)=>{
       return allMovies.filter((element)=>
@@ -146,6 +149,10 @@ const handleAdditem=async(movieItem)=>{
         getCartData()
     }}
 
+const [foundSearch,setFoundSearch] = useState(false)
+
+
+
 return (
 <>
 <div>
@@ -185,7 +192,24 @@ return (
 </Grid>
     {/* each movie card */}
     <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
-    {filterMovieData?.map((element, index) => (
+
+{ 
+ filterMovieData?.length === 0?
+ <>
+ {/* <h1 className="text-white">NOT FOUND</h1> */}
+ <div className="w-100 row position-relative" >
+    <div className="col-md-11 col-10 mx-auto">
+    <h1 className="text-white" style={{position:"absolute",left:"40%",top:"50%"}}>
+    The Movie is Not Found. Explore other movies, please check next week for "inception"</h1>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAA9lBMVEX///8B//8AAP7MzMz/P/wB/wH9JB///wEAAAAtRpgGPllcXFw/Pz9sbGyXl5fIyNb5+iLw/wC4jbj/Nv//JBniIEEC/7jI09jQ1ecAMVAbO5RpaWklQZpVVVWNjY2nr88GP1Ht/v7t/+3t7f79AACiotoBxwHHevxQT+/S08kEK6QfMGr/7/7/7+7HxwFf0f7GHRjZ2dleVVX//+3+uf4/p6asrKwAACi4L7YmJiYEKz7m5uZLS0szMzMBuLcfR5SSQ8QfnsX/Hv/gAC2fn+PDwyO9yAZFzbiRk7e0IDq+F7YSKCQfHx/KheFuPaQfKGUfeqQmN5YqyoA5AAAB+0lEQVR4nO3a6U4TURyH4VFR0baA4EZLEXFfQMEFkIoK7uDS+78ZQfwwEGF+jiQN4Xkv4GT+z5xzkkmmKCRJ0jHoWdjNsNms4nHWXNitqOJM0uj5rEunsq6ezRpfn4i6nbVxOio0GRuQycRQ1Lmoy1eYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMMlNso7Y5E7S+w/zUR+fZH26m/X5XtbTrC/3o4qMbmk4K3yvX8Pl1sJ9Fy63+SDqiE2y4z+0PBiTlYXopmDChAkTJkyYMGHChAmTv1T18TdYk63Q5GHU5Ku9vTyg54f37e1u3x9F/fj5brcXFTV3WinV7JVqdP7U2n7CVnXFTNTFfRX1utF+87sLYVPtqZ36rcXDa2zXbZbqlmecHikVbKdi/7RZtU1Sjb00rUZ1B5p0mDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmJwgk8la1TXpt+vU73Sr670u1euU+meTa7WqabJ6vV4L/9VqueR/e0mSNNB+ASj/pPAOQG03AAAAAElFTkSuQmCC" alt="" className=" mx-auto" style={{width:"100%",height:"80%",filter:"brightness(50%)"}} />
+    </div>
+
+ </div>
+
+ </>
+    :
+<>
+{filterMovieData?.map((element, index) => (
     <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
                         
     // Delete Button
@@ -199,10 +223,14 @@ return (
     // Redux
     reduxAddcartBtn={
     <>
-    <IconButton className="reduxIcon" 
-    onClick={()=>{handleAdditem(element)}}  >
-       <ShoppingCartIcon />
-    </IconButton>
+    {/* <IconButton className="reduxIcon"  */}
+    {/* <Button size="sm" variant="warning" className="reduxIcon"
+     > */}
+       <ShoppingCartIcon className="reduxIcon fs-3"
+       onClick={()=>{handleAdditem(element)}} 
+       />
+       {/* </Button> */}
+    {/* </IconButton> */}
     <ToastContainer
     position="top-right"
     autoClose={5000}
@@ -218,6 +246,9 @@ return (
               }
 /> 
     )) }
+</>
+}
+
 
 </Grid>
 </Box>
