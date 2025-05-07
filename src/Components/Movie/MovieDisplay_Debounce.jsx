@@ -165,7 +165,7 @@ return (
     <Grid  container  className="mx-auto d-flex justify-content-end flex-row align-items-center">
     {/* Search*/}
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
-    {/* <i className="fas fa-search icon fs-5 pt-2 px-3 "></i> */}
+
     {
         token &&
     <>
@@ -182,7 +182,7 @@ return (
     <>
         {/* Debounce Search*/}
         <input
-        className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+        className="form-control  border-secondary ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
             style={{width:"180px"}}
             onChange={(e) => {
             console.log(e.target.value)
@@ -226,7 +226,7 @@ return (
     {/* <IconButton className="reduxIcon"  */}
     {/* <Button size="sm" variant="warning" className="reduxIcon"
      > */}
-       <ShoppingCartIcon className="reduxIcon fs-3"
+       <ShoppingCartIcon className="reduxIcon fs-2"
        onClick={()=>{handleAdditem(element)}} 
        />
        {/* </Button> */}

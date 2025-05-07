@@ -323,7 +323,7 @@ text-shadow: none;
   /* transition: .49s ease; */
   cursor: pointer;
   opacity: 100%;
-  color: rgb(248, 251, 73) !important;
+  color: rgb(251, 221, 73) !important;
   /* background-color: #edb204 !important; */
 }
 
@@ -341,7 +341,7 @@ background-color: transparent !important;
 padding: 0px !important;
 margin-left: 10px !important;
 /* color: white; */
-color:rgba(228, 3, 3, 0.802) !important ;
+color:rgba(161, 3, 3, 0.918) !important ;
 box-shadow: none;
 text-shadow: none;
 }
@@ -351,7 +351,7 @@ background-color: transparent !important;
 padding: 0px !important;
 margin-left: 10px !important;
 /* color: white; */
-color: rgba(5, 164, 5, 0.759) !important;
+color: rgba(68, 166, 68, 0.782) !important;
 box-shadow: none;
 text-shadow: none;
 }

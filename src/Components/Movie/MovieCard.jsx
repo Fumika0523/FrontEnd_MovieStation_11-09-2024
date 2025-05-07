@@ -128,7 +128,7 @@ const rating1 = {rating}
         <>
         {rating} /10
         <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5}  style={{paddingBottom:"5px",
-           color:"#FDCC0D"
+           color:"rgb(242, 154, 3)"
 
             }} />
         </>
