@@ -45,7 +45,9 @@ const bottomDesignData=[
     <AboutUs_ImageBanner banner ={"https://static.justwatch.com/backdrop/137681/s1920/Marvels-The-Avengers"} appName="MovieStation" cardText="Connecting movie fans with their favourite content worldwide" className=""/>
     <div className="">
         {/* 1st */}
-        <div className="whatwedo bg-light text-black mx-lg-5  mx-sm-0 py-5 my-md-0 my-4">
+        <div className="whatwedo   mx-lg-5  mx-sm-0 py-5 my-md-0 my-4"
+        style={{ backgroundColor: mode == "light" ? "white" : "#121212"}}
+        >
         <h1 className="d-flex justify-content-center align-items-center mb-3" 
         > WHAT WE DO</h1>
          <div className="d-flex row mx-auto justify-content-center gap-3   ">
@@ -57,7 +59,7 @@ const bottomDesignData=[
         </div>
     </div>
     {/* 2nd */}
-        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-5%"}}>
+        <div className="col-10 com-md-8 mx-auto" style={{marginTop:"-20%"}}>
         <div >
              <div className= " fs-3 fw-bold mx-auto text-center w-100 mb-5 "
              >WE WANT TO HEAR FROM YOU</div>

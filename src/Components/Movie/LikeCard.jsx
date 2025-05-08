@@ -28,7 +28,8 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
         }}/>
-          <span  style={{fontSize:"12.5px",marginLeft:"3px"}}>
+          <span  style={{fontSize:"12.5px",marginLeft:"3px",color: mode == "light" ? "white" : "rgba(174, 170, 171, 0.89)"}}>
+
             {formatNumber(like)}
           </span>
         </div>

@@ -109,7 +109,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
 {/*FORM  */}
 
  <Form   onSubmit={formik.handleSubmit}
- className="sign_up_in_container col-md-10 col-sm-10 col-lg-6 col-12 px-4 py-5 px-sm-5 " >
+ className="border border-secondary  rounded shadow col-md-10 col-sm-10 col-lg-6 col-12 px-4 pt-4 pb-5 px-sm-5 " >
 
  <div className="  d-flex justify-content-center align-items-center ">
   <h1 className="text-nowrap">Submit a request</h1>

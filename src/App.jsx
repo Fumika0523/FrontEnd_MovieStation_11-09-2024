@@ -96,24 +96,24 @@ const [userData,setUserData]=useState([])
        </>
 
     }
-      <Route path="/" element={<Homepage movieData={movieData}/>}/>
+      <Route path="/" element={<Homepage mode={mode} movieData={movieData}/>}/>
      {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
       {/* Search with a submit Button */}
       {/* <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> */}
       {/* Debounce */}
       <Route path='/allmovies' element={<MovieDisplay_Debounce mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> 
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
-      <Route path='/services' mode={mode} element={<Service_Section/>}/>
-      <Route path='/contact'  mode={mode} element={<ContactUs_Section/>}/>
+      <Route path='/services'  element={<Service_Section mode={mode}/>}/>
+      <Route path='/contact'  element={<ContactUs_Section  mode={mode} />}/>
       <Route path="/allenquiries" mode={mode} element={<AllEnquiries/>}/>
       <Route path="/movietrailer/:id" mode={mode}  element={<MovieTrailer mode={mode} movieData={movieData} setMovieData={setMovieData}/>}/>
-      <Route path="/signin" mode={mode} element={<SignIn isAuthenticated = {isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+      <Route path="/signin" element={<SignIn isAuthenticated = {isAuthenticated} mode={mode}  setIsAuthenticated={setIsAuthenticated} />
     }/>
       <Route path="/signup" mode={mode} element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
      
       <Route path="/table" mode={mode} element={<Table/>}/> 
-      <Route path="/pagenotfound" mode={mode} element={<PageNotFound/>}/> 
+      <Route path="/pagenotfound" mode={mode} element={<PageNotFound mode={mode}/>}/> 
      
     </Routes>
     <Footer />

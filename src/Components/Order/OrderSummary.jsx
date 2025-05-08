@@ -79,7 +79,7 @@ const downloadFile = () =>{
     return (
         <>
             <div className="row mx-auto">
-                <div className="mx-auto col-lg-8 col-md-10 col-12 border rounded border-secondary  my-4 px-sm-5 py-3" >
+                <div className="mx-auto col-lg-8 col-md-10 col-11 border rounded border-secondary-50  mx-auto my-4 px-sm-5 py-3" >
                     <div className="fs-2 justify-content-between mx-2 align-items-center pb-3 d-flex flex-row">
                         <div className="d-flex flex-row ">
                             <div>

@@ -65,7 +65,7 @@ function SignIn({setIsAuthenticated}) {
         <Form.Control  type="email" placeholder=""
          name="email"
          value={formik.values.email}
-         onChange={formik.handleChange}  style={inputDesign} />
+         onChange={formik.handleChange} />
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
@@ -73,14 +73,14 @@ function SignIn({setIsAuthenticated}) {
         <Form.Control type="phone_number" placeholder=""
          name="phone_number"
          value={formik.values.phone_number}
-         onChange={formik.handleChange} style={inputDesign}  />
+         onChange={formik.handleChange}  />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label className="m-0">Password</Form.Label>
         <Form.Control type="password" placeholder=""
          name="password"
          value={formik.values.password}
-         onChange={formik.handleChange} style={inputDesign} /> 
+         onChange={formik.handleChange} /> 
       </Form.Group>
 
       <div className="row px-3 py-3 d-flex flex-row justify-content-between">

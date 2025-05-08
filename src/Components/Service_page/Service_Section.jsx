@@ -2,7 +2,7 @@ import Service_TopDesign from './Service_TopDesign'
 import Service_MiddleDesign from './Service_MiddleDesign'
 import Service_BottomDesign from './Service_BottomDesign'
 
-function Service_Section (){
+function Service_Section({mode}){
     return(
         <>
         <div className=" gap-2 mt-5 d-flex flex-column px-2" >

@@ -5,15 +5,15 @@ import Service_Section from "../Service_page/Service_Section"
 import Header from "./Header"
 import Footer from "./Footer"
 
-function Homepage(){
+function Homepage({mode}){
 
     return(
         <>
         {/* <NavBar/> */}
-        <Header/>
-        <AboutUs_Section/>
-        <Service_Section/>
-        <ContactUs_Section/>
+        <Header mode={mode}/>
+        <AboutUs_Section mode={mode}/>
+        <Service_Section mode={mode}/>
+        <ContactUs_Section mode={mode}/>
         {/* <Footer/> */}
         </>
     )

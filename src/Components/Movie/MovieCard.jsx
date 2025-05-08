@@ -114,7 +114,8 @@ const rating1 = {rating}
           }
            action={
             token ?
-            <IconButton aria-label="settings" 
+            <IconButton 
+            aria-label="settings" 
             onClick={()=>{navigate(`/movietrailer/${_id}`)}}>
               <MoreVertIcon />
             </IconButton>
