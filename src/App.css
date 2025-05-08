@@ -222,7 +222,7 @@ background-color: 	#4d4d4d !important;
 
 
 .fontColorTrailerFont{
-color: #6a7c8f;
+color: #ffffff;
 font-weight: "700";
 text-transform: "uppercase";
 font-size: "16px";
@@ -315,8 +315,8 @@ display: none ;
 color: rgb(232, 191, 10);
 box-shadow: none;
 text-shadow: none;
-
 }
+
 
 .reduxIcon:hover{
   /* transform: scale(1.25); */
@@ -373,4 +373,12 @@ background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, 
   position: relative;
   margin-top: -210px;
   height: 210px;
+}
+
+.trailerImg{
+  /* background: rgba(255, 255, 255, 0) ;
+  background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, rgb(19, 19, 20) 100%);
+  position: relative;
+  height:230px;
+  width:300px; */
 }

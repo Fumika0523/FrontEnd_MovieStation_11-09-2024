@@ -49,61 +49,67 @@ function MovieTrailer({mode}) {
           className='mx-auto'
           >
             {/* Top */}
-            <Row className='mx-auto mx-md-5 ' >
-            <Col className="col-lg-8  border-4  col-md-6 col-sm-6 col-6  my-2 d-flex flex-row align-items-center justify-content-start">
-            <div className='ps-1 border-4  fs-1'>{movieInfo.moviename}</div>
-            <div className='ms-3 border-4  fs-4' style={{color:"#b9bdcc"}}>({movieInfo.publishYear})</div></Col>
-            <Col className="border-4  col-lg-4 col-md-6 col-sm-6 col-6 d-flex align-items-end flex-row justify-content-between  mb-3">
-            <div>
-            <div  className='border-4  fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
-            <div className="border-4 d-flex flex-row justify-content-center align-items-center">
-              <FaStar className='text-warning fs-4'/>
-              <span className="fw-bold mx-1" style={{fontSize:"20px"}}>{movieInfo.rating}</span>
-              <span className='text-secondary'> /10</span> 
-            </div>
-            </div>
-            <div>
-            <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='px-4'
+            <Row className='mx-auto mx-md-5 mb-3 -3' >
+            <div className='text-end mb-2'>
+            <Button size="sm" variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className='px-3'
             onClick={() => navigate('/allmovies')} >
               Back
             </Button>
             </div>
+            {/* YOUTUBE */}
+
+            <Col className='col-12'>
+            <iframe src={movieInfo?.trailer }  
+            className='iframe w-100'
+               showinfo="0" allow="encrypted-media" frameborder="0" 
+               style={{height:"400px"}}
+              ></iframe>
+
             </Col>
-            {/* <Col className='border-4 d-flex align-items-start flex-column justify-content-end border border'> */}
-            {/* <Button variant="outline-none" style={{color:"white", backgroundColor:"rgb(62, 63, 63)"}} className=''
-            onClick={() => navigate('/allmovies')} >
-              Back
-            </Button> */}
-            {/* </Col> */}
             </Row>
 
-            <Row className='mx-auto mx-md-5 mb-4 -3' >
-            <Col className='col-12'>
-              <iframe src={movieInfo?.trailer }   showinfo="0" allow="encrypted-media" frameborder="0" className='opacity-75 w-100' style={{height: "450px" }}></iframe>
-            
+            {/* TITLE */}
+            <Row className='mx-5 border-primary d-flex flex-row align-items-end justify-content-' >
+            <Col className="col-lg-8  border-4  col-md-6 col-sm-8 col-9">
+            <div className='text-nowrap border-4 text-start fs-3'>{movieInfo.moviename}
+            <span className='ms-1 border-4  fs-6' style={{color:"#b9bdcc"}}>({movieInfo.publishYear})</span></div>
+            </Col>
+            <Col className="border-4  col-lg-4 col-md-6 col-sm-4 col-3">
+            {/* <div className='border-danger d-flex flex-column justify-content-center align-items-end'>
+            <div  className='border-4  fw-bold text-secondary ' style={{fontSize:"13px"}}>RATING</div>
+            <div className="border-4 d-flex flex-row justify-content-center align-items-center">
+              <FaStar className='text-warning fs-3'/>
+              <span className="fw-bold mx-1" style={{fontSize:"18px"}}>{movieInfo.rating}</span>
+              <span className='text-secondary' 
+              style={{fontSize:"17px"}}> /10</span> 
+            </div>
+            </div> */}
+      
             </Col>
             </Row>
             
             {/* Middle */}
-            <Row className='mb-4  mx-auto mx-md-5 '>
+            <Row className='mb-4  mx-5'>
               {/* LEFT */}
-              <Col className='col-lg-4 col-12 mx-auto  d-flex justify-content-center align-items-center mb-md-1  mb-2'>
+              <Col className='col-lg-4 col-12 mx-auto d-flex justify-content-center align-items-center mb-md-1  mb-2'>
                 {/* Image */}
-                <Image className='w-100' style={{height:"100%"}} src={movieInfo?.movieposter} />
+                <Image className='w-100 d-block  border-4 border-danger' style={{height:"auto",objectFit:"cover"}} src={movieInfo?.movieposter} />
+               
               </Col>
 
               {/* RIGHT */}
               <Col           
-              className='col-lg-6 d-flex flex-column ps-3 pt-2 justify-content-center  col-sm-10  col-12 mx-auto mb-md-1  align-items-center mb-2'
-              style={{ backgroundColor: mode === "light" ? "rgb(248, 248, 245)": "rgb(8, 11, 13)" }}>
-                <div className='mb-3 '>{movieInfo.summary}</div>
+              className='col-lg-6 d-flex flex-column ps-3 pt-2 justify-content-center  col-sm-11  col-12 mx-auto mb-md-1  align-items-center mb-2'
+              style={{ color: mode === "light" ? "rgb(248, 248, 245)": "rgb(128, 129, 130)" }}>
+                <div className='mb-3'
+                >{movieInfo.summary}</div>
                 <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
                 <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>
               <div className='mb-2 d-flex w-100 text-wrap flex-column'><span className='mb-1 fontColorTrailerFont '>CATEGORY</span><span className='text-wrap'>{movieInfo.category}</span></div>
               </Col>
 
               {/* BUTTONS */}
-              <Col className='col-lg-2 col-md-10 col-12 col-sm-10 mx-auto mt-1'>
+              <Col className='col-lg-2 col-sm-10 mx-auto mt-1'>
               <Row className='align-items-center mx-auto d-flex justify-content-evenly '>
               {/* List */}
               <Col className="col-md-6 col-6 col-sm-6 col-lg-12">
@@ -111,7 +117,23 @@ function MovieTrailer({mode}) {
                   style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
                     color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
                     borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
-                  > <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
+                  > 
+                  {/* <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div> */}
+                  <div className='border-danger d-flex flex-row gap-2 justify-content-center align-items-end'>
+           
+            <div className="border-4 d-flex flex-row justify-content-center align-items-center"
+            style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+              color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+              borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
+            >
+              <FaStar className='text-warning fs-4 me-2'/>
+              <span>{movieInfo.rating}</span>
+              <span> /10</span> 
+               {/* <div  className='border-4  fw-bold text-secondary ' style={{fontSize:"13px"}}>RATING</div> */}
+            </div>
+            </div>
+
+                  </Button>
                 </Col>
               <Col className='col-md-6 col-sm-6 col-lg-12'>
                   {/* Seen all */}

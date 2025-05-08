@@ -15,6 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
 import { TbShoppingBagPlus } from "react-icons/tb";
+import { object } from "yup"
 
 
 // cart item is added to the card >> green
@@ -196,14 +197,14 @@ return (
 { 
  filterMovieData?.length === 0?
  <>
- {/* <h1 className="text-white">NOT FOUND</h1> */}
- <div className="w-100 row position-relative" >
-    <div className="col-md-11 col-10 mx-auto">
-    <h1 className="text-white" style={{position:"absolute",left:"40%",top:"50%"}}>
-    The Movie is Not Found. Explore other movies, please check next week for "inception"</h1>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAA9lBMVEX///8B//8AAP7MzMz/P/wB/wH9JB///wEAAAAtRpgGPllcXFw/Pz9sbGyXl5fIyNb5+iLw/wC4jbj/Nv//JBniIEEC/7jI09jQ1ecAMVAbO5RpaWklQZpVVVWNjY2nr88GP1Ht/v7t/+3t7f79AACiotoBxwHHevxQT+/S08kEK6QfMGr/7/7/7+7HxwFf0f7GHRjZ2dleVVX//+3+uf4/p6asrKwAACi4L7YmJiYEKz7m5uZLS0szMzMBuLcfR5SSQ8QfnsX/Hv/gAC2fn+PDwyO9yAZFzbiRk7e0IDq+F7YSKCQfHx/KheFuPaQfKGUfeqQmN5YqyoA5AAAB+0lEQVR4nO3a6U4TURyH4VFR0baA4EZLEXFfQMEFkIoK7uDS+78ZQfwwEGF+jiQN4Xkv4GT+z5xzkkmmKCRJ0jHoWdjNsNms4nHWXNitqOJM0uj5rEunsq6ezRpfn4i6nbVxOio0GRuQycRQ1Lmoy1eYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMGHChAkTJkyYMMlNso7Y5E7S+w/zUR+fZH26m/X5XtbTrC/3o4qMbmk4K3yvX8Pl1sJ9Fy63+SDqiE2y4z+0PBiTlYXopmDChAkTJkyYMGHChAmTv1T18TdYk63Q5GHU5Ku9vTyg54f37e1u3x9F/fj5brcXFTV3WinV7JVqdP7U2n7CVnXFTNTFfRX1utF+87sLYVPtqZ36rcXDa2zXbZbqlmecHikVbKdi/7RZtU1Sjb00rUZ1B5p0mDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmDBhwoQJEyZMmJwgk8la1TXpt+vU73Sr670u1euU+meTa7WqabJ6vV4L/9VqueR/e0mSNNB+ASj/pPAOQG03AAAAAElFTkSuQmCC" alt="" className=" mx-auto" style={{width:"100%",height:"80%",filter:"brightness(50%)"}} />
-    </div>
 
+ <div className="position-relative mt-2 border-4" 
+ style={{maxHeight:"390px", width:"100%"}} >
+     <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
+     <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
+     <span className="text-warning">The Movie is Not Found. </span><br />
+     Explore other movies,and please check next week for "inception"</h4>
+   
  </div>
 
  </>
@@ -244,7 +245,7 @@ return (
     theme="light" />
     </>
               }
-/> 
+        /> 
     )) }
 </>
 }
