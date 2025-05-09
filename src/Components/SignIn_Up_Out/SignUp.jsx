@@ -13,7 +13,7 @@ const navigate = useNavigate()
   const formSchema=Yup.object().shape({
     name:Yup.string().min(5,"Too Short"),
     lastname:Yup.string(),
-    age:Yup.number().required().positive(),
+    // age:Yup.number().required().positive(),
     gender:Yup.string(),
     phone_number:Yup.number().min(10,"Too short").max(10,"Too long").required(),
     password:Yup.string().required(),
@@ -24,7 +24,7 @@ const formik=useFormik({
   initialValues:{
       name:"",
       lastname:"",
-      age:"",
+      // age:"",
       gender:"",
       phone_number:"",
       email:"",
@@ -51,7 +51,7 @@ const postSignUpUser=async(newUser)=>{
   return (
     <>
     <div className='container-fluid border-4 border-primary d-flex justify-content-center align-items-center' >
-     <Form onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-sm-10 col-lg-5 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
+     <Form onSubmit={formik.handleSubmit} className="sign_up_in_container  col-md-8 col-sm-10 col-lg-6 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
     <div className=' text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
           {/* Name */}
@@ -83,7 +83,7 @@ const postSignUpUser=async(newUser)=>{
 
           <div className="mb-1  row ">
             {/* AGE */}
-            <Form.Group className="col-md-2 mb-2">
+            {/* <Form.Group className="col-md-2 mb-2">
             <Form.Label htmlFor="age" className="form-label m-0">Age</Form.Label>
             <Form.Control type="text" className="sign_up_input form-control" 
              id="age"
@@ -92,12 +92,12 @@ const postSignUpUser=async(newUser)=>{
              onChange={formik.handleChange}  
             
             />
-          </Form.Group>
+          </Form.Group> */}
 
           {/* Gender */}
-         <div className="col-md-4 d-flex flex-column justify-content-start pt-1 align-items-start">
-        <div className='ps-2 mb-2'>Gender :</div>
-        <div className='d-flex flex-row justify-content-start ps-2 align-items-center gap-3'>
+         <div className="col-md-6 mb-2 d-flex flex-column justify-content-start  align-items-start  ">
+        <div className=' mb-1'>Gender :</div>
+        <div className='d-flex flex-row justify-content-start  align-items-center gap-3'>
         <Form.Check type="radio" name="gender" label={`Male`} 
           value="male"
           onChange={formik.handleChange}/> 
@@ -142,11 +142,11 @@ const postSignUpUser=async(newUser)=>{
            />
           </Form.Group>
         </div>
-        <div className="row mb-1 px-3 py-2 d-flex flex-row justify-content-between">
-      <Button className="my-2 col-sm-3 col-lg-2 col-4 d-flex justify-content-center" variant="secondary" type="submit" onClick={() => navigate('/')}>
+        <div className="d-flex flex-row justify-content-between">
+      <Button className="px-3 d-flex justify-content-center" variant="secondary" type="submit" onClick={() => navigate('/')}>
         Cancel
       </Button> 
-      <Button className="my-2 col-sm-3 col-lg-2 col-4 d-flex justify-content-center" variant="warning" type="submit">
+      <Button className="px-3 d-flex justify-content-center" variant="warning" type="submit">
         Submit
       </Button> 
       </div>   

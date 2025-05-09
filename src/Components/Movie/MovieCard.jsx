@@ -20,7 +20,7 @@ import { createTheme} from '@mui/material/styles';
 import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
 import { ToastContainer, toast } from 'react-toastify';
-import { FaStar } from "react-icons/fa";
+import { FaHeart  } from "react-icons/fa";
 import { FaStarHalfStroke } from "react-icons/fa6";
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
@@ -140,11 +140,17 @@ const rating1 = {rating}
     className=""
     width="100%" image={movieposter} style={{objectFit:"cover",display:"block",height:"210px"}} alt="movieposter"/>
     <div className='content'></div>
-    {/* CART ICON */}
-    <div className='' style={{right:"3px",top:'63px',position:"absolute"}}>
-    {reduxAddcartBtn} 
-    </div>
 
+      {/* BookMark */}
+      <div style={{right:"38px",top:'63px',position:"absolute"}}>
+      {reduxAddcartBtn} 
+      </div>
+
+    {/* My Wish List*/}
+    <div className='' style={{right:"5px",top:'63px',position:"absolute"}}>
+    <FaHeart className='text-danger fs-4'/>
+ 
+    </div>
      {/* Bottom Card ICONS */}
     <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{bottom:"45px",left:"0px"}}>
    

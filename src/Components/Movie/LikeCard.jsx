@@ -23,28 +23,32 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
     return(
         <>
         <div className="d-flex justify-content-center align-items-center flex-row">
-        <div>
-        <FaHeart className="fs-5" style={{color:"	rgba(223, 77, 119, 0.89)"}} 
+        <div className="d-flex align-items-center justify-content-center">
+        {/* <span className="bg-primary d-flex align-items-center justify-content-center rounded-circle" style={{width:"28px",height:"28px"}}> */}
+        <FaThumbsUp className=" fs-6" style={{color:"white"}} 
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
         }}/>
-          <span  style={{fontSize:"12.5px",marginLeft:"3px",color: mode == "light" ? "white" : "rgba(174, 170, 171, 0.89)"}}>
-
+        {/* </span> */}
+          <span className="" style={{fontSize:"13px",marginLeft:"3px"}}>
             {formatNumber(like)}
           </span>
         </div>
 
         {/* Dislike */}
         {/* <IconButton className="movieCardIcon"> */}
-        {/* <div className="ms-2">
-        <MdThumbDownAlt style={{color:"rgb(101, 227, 79)"}} className="fs-4" 
+        <div className="ms-2 d-flex align-items-center ">
+        {/* <span className="bg-secondary d-flex align-items-center justify-content-center rounded-circle" style={{width:"28px",height:"28px"}}> */}
+          <MdThumbDownAlt style={{color:""}} className="fs-5" 
           onClick={()=>{
             setDisLike(parseInt(disLike)+1)
            }}/>
+          {/* </span> */}
+
            <span  style={{fontSize:"12px",marginLeft:"2px"}}>
             {formatNumber(disLike)}
            </span>
-        </div> */}
+        </div>
         </div>
         {/* </IconButton> */}
         </>

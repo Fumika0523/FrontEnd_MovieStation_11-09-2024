@@ -26,7 +26,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { TbLetterMSmall } from "react-icons/tb";
 import { TbLetterS } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
-import { BorderAll } from "@mui/icons-material";
+
 
 function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
@@ -96,9 +96,10 @@ function NavBar({ mode, setMode }) {
             <Nav className=""  >
 
               {/* <!-- Home --> */}
-              <Nav.Link href="/" className="">
+              <Nav.Link href="#" className="pb-0">
                 <Button variant="none"  className="d-flex  text-nowrap 
                 justify-content-center align-items-center"
+                onClick={() => navigate('/')}
                   style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                 >
                   <FaHome className="me-1 text-nowrap fs-3"
@@ -230,22 +231,21 @@ function NavBar({ mode, setMode }) {
       </Navbar>
 
           {/* RIGHT SIDE */}
-          <Nav className=" d-flex pt-2 text-nowrap justify-content-center align-item-center align-item- flex-row "
-          style={{position:"absolute",right:"0%",top:"0%"}}
-          
+          <Nav className=" d-flex text-nowrap justify-content-center align-item-center align-item- flex-row position-absolute top-0"
+          style={{right:"3px"}}
           >
             {token ?
               <>
                 {/* USERNAME */}
                 <Dropdown className="dropdownMenu">
                   <Dropdown.Toggle variant="none" id="dropdown-basic" 
-                  className=" d-flex text-nowrap  px-1 justify-content-center align-items-center"
+                  className=" d-flex text-nowrap px-1 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "white" }}
                   >
-                  <span style={{ color: "rgb(248, 228, 118)",backgroundColor:"purple",width:"37px"}} className="rounded-circle fw-bold rounded fs-4  me-1" >{name[0].toUpperCase()}</span>
+                  <span style={{ color: "rgb(248, 228, 118)",backgroundColor:"purple",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className="dropdownMenu px-2 " style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
+                  className="dropdownMenu px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>#
                     {/* MY ACCOUNT */}
                    <Dropdown.Item 
                     className="d-flex justify-content-start align-items-center border-bottom"
@@ -267,7 +267,7 @@ function NavBar({ mode, setMode }) {
                 </Dropdown>
 
                 {/* Power Off */}
-                <Nav.Link href="#" className="mt-1 p-1">
+                <Nav.Link href="#" className="px-0">
                   <Button variant="none"
                     type="submit" className=""
                     onClick={() => handleSignOut()}>
@@ -276,42 +276,30 @@ function NavBar({ mode, setMode }) {
                 </Nav.Link>
 
                 {/* Dark / Light Mode */}
-                <Nav.Link href="#" className="p-1 mt-1">
+                <Nav.Link href="#" className="px-0">
                   <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
                     style={{ color: mode == "light" ? greyColor : amberColor }}
                     onClick={() => {
                       //setMode("light")
                       //true?"truedata":"falsedata"
                       setMode(mode == "light" ? "dark" : "light")//setMode(light)
-                      console.log(mode)
+                      // console.log(mode)
                     }}>
                     {mode === "light" ? 
-                    <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
+                    <DarkModeIcon className="fs-4"/> : <LightModeIcon className="fs-4" />}
                   </Button>
                 </Nav.Link>
               </>
               :
               <>
-                <Nav.Link href="#" className="">
-                  <Button variant="none" className=""
-                    style={{ color: mode == "light" ? greyColor : amberColor }}
-                    onClick={() => {
-                      //setMode("light")
-                      //true?"truedata":"falsedata"
-                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
-                      console.log(mode)
-                    }}>
-                    {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-                  </Button>
-                </Nav.Link>
-
-                {/* Sign in */}
+               {/* Sign in */}
+                <Nav.Link href="#" className="px-0 me-1 ">
                 <OverlayTrigger placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Sign In</Tooltip>} 
                   >
-                      {({ ref, ...triggerHandler }) => (
-                        <Button
-                          variant="none"
+                {({ ref, ...triggerHandler }) => (
+                 <Button
+                     variant="none"
                           ref={ref}
                           {...triggerHandler}
                           className="d-inline-flex align-items-center"
@@ -322,8 +310,10 @@ function NavBar({ mode, setMode }) {
                         </Button>
                       )}
                  </OverlayTrigger>
+                 </Nav.Link>
 
                 {/* Sign up */}
+                <Nav.Link href="#" className="px-0  me-1">
                 <OverlayTrigger placement="bottom"
                       overlay={<Tooltip id="button-tooltip-2">Sign Up</Tooltip>}
                     >
@@ -335,10 +325,41 @@ function NavBar({ mode, setMode }) {
                           className="d-inline-flex align-items-center"
                           onClick={() => { navigate('/signup') }}
                         >
-                         <i class="fa-solid fs-5 fa-user" style={{ color: mode == "light" ? "black" : "white" }}></i>
+                          <FaUser
+                          class="fs-5" style={{ color: mode == "light" ? "black" : "white" }}
+                          />
                         </Button>
                       )}
                  </OverlayTrigger>
+                 </Nav.Link>
+
+                 {/* LIGHT DARK MODE */}
+                 {/* <Nav.Link href="#" className="px-0 me-1 ">
+                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center "
+                    style={{ color: mode == "light" ? greyColor : amberColor }}
+                    onClick={() => {
+                      //setMode("light")
+                      //true?"truedata":"falsedata"
+                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                      // console.log(mode)
+                    }}>
+                    {mode === "light" ? <DarkModeIcon className="fs-4" /> : <LightModeIcon className="fs-4" />}
+                  </Button>
+                </Nav.Link> */}
+                   {/* Dark / Light Mode */}
+                   <Nav.Link href="#" className="px-0">
+                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
+                    style={{ color: mode == "light" ? greyColor : amberColor }}
+                    onClick={() => {
+                      //setMode("light")
+                      //true?"truedata":"falsedata"
+                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                      // console.log(mode)
+                    }}>
+                    {mode === "light" ? 
+                    <DarkModeIcon className="fs-4"/> : <LightModeIcon className="fs-4" />}
+                  </Button>
+                </Nav.Link>
               </>
             }
           </Nav >

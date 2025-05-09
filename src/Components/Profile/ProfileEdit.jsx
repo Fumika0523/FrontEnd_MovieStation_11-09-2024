@@ -37,12 +37,14 @@ useEffect(()=>{
 console.log("ProfileData",ProfileData)
 
 //destructuring of the object
-const {email,password,name,lastname,phone_number,gender,age} = ProfileData
+const {email,password,name,lastname,phone_number,gender} = ProfileData
 
 const handleProfEditClick = (ProfileData)=>{
     setShowModal(true)
     setProfileData(ProfileData)
 }
+
+console.log(lastname)
 
     return(
         <>  
@@ -62,14 +64,14 @@ const handleProfEditClick = (ProfileData)=>{
                 </div>
                
                 {/* FirstName */}
-                <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
+                <div className='d-flex flex-column justify-content-center col-sm-4  align-items-center' >
                 <div className="text-secondary   " style={{fontSize:"14px"}}>First Name</div>
                 <div style={{fontSize:"18px"}}
                 >{name}</div>
                 </div>
 
                 {/* LastName */}
-                <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
+                <div className='d-flex flex-column justify-content-center col-sm-4  align-items-center' >
                 <div className=" text-secondary" 
                 style={{fontSize:"14px"}}>Last Name</div>
                 <div style={{fontSize:"18px"}}
@@ -77,20 +79,20 @@ const handleProfEditClick = (ProfileData)=>{
                 </div>
                 
                 {/* Gender*/}
-                  <div className='d-flex flex-column justify-content-center col-sm-3  align-items-center' >
+                  <div className='d-flex flex-column justify-content-center col-sm-4  align-items-center' >
                   <div className=" text-secondary"
                   style={{fontSize:"14px"}}
                   >Gender</div>
                   <div style={{fontSize:"18px"}}  >{gender}</div>
                   </div>
 
-                 {/* Gender*/}
+                 {/* Gender
                  <div className='justify-content-start  align-items-center d-flex flex-column col-sm-3 '>
                   <div className=" text-secondary"
                   style={{fontSize:"14px"}}
                   >Age</div>
                   <div style={{fontSize:"18px"}} >{age}</div>
-                  </div>
+                  </div> */}
               
             </div>
       

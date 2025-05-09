@@ -24,7 +24,7 @@ function SignIn({setIsAuthenticated}) {
     },
     validationSchema:formSchema,
     onSubmit:(values)=>{
-      console.log(values) // req.body
+     // console.log(values) // req.body
       //update the value >> signin data
      postSignInUser(values)
     }
@@ -35,24 +35,15 @@ function SignIn({setIsAuthenticated}) {
     const res=await axios.post(`${url}/signin`,loginuser)
     console.log(res.data)
     sessionStorage.setItem('token',res.data.token)
-    sessionStorage.setItem('name',res.data.user.name)
-    sessionStorage.setItem('userId',res.data.user._id)
-    sessionStorage.setItem('firstname',res.data.user.name)
-    sessionStorage.setItem('lastname',res.data.user.lastname)
-    sessionStorage.setItem('email',res.data.user.email)
-    sessionStorage.setItem('phone_number',res.data.user.phone_number)
     // setAccessAddMovie(res.data.token)
     if(res.data.token){
       setIsAuthenticated(true)
     }  
-    navigate('/')  
+    navigate('/') 
+    console.log("Signin")
   }
 
-  const inputDesign={
-    backgroundColor:"#1B1C23",
-    borderColor:"black",
-    color:"white",
-   }
+
 
   return (
     <>

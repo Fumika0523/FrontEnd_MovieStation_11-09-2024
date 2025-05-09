@@ -4,8 +4,8 @@ import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
-import { Button, ButtonGroup } from "react-bootstrap"
-import { Navigate, useNavigate } from "react-router-dom"
+import { Button} from "react-bootstrap"
+import {  useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
@@ -13,9 +13,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
-import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
-import { TbShoppingBagPlus } from "react-icons/tb";
-import { object } from "yup"
+import { FaBookmark } from "react-icons/fa";
 
 
 // cart item is added to the card >> green
@@ -170,13 +168,20 @@ return (
     {
         token &&
     <>
+    {/* Wish List */}
+    <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
+    <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none">    
+        My Wish List</span>
+    </Button>
+
+
     {/* ADD MOVIE */}
     <Button variant="success" className="text-nowrap me-1 d-flex align-items-center gap-1" onClick={()=>navigate('/addmovie')} >
      <FaPlusCircle className="fs-5 " /><span className="d-md-block d-none">Add Movie</span></Button>
     
     {/* My MOVIES */}
-    <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
-    <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none"  >My Movies</span> </Button>
+    <Button variant="light" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
+    <FaBookmark className="fs-5" style={{ color: "navy"}}/><span className="d-md-block d-none">My Movies</span> </Button>
     </>
     }
   
@@ -201,7 +206,7 @@ return (
  <div className="position-relative mt-2 border-4" 
  style={{maxHeight:"390px", width:"100%"}} >
      <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
-     <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
+     <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
      <span className="text-warning">The Movie is Not Found. </span><br />
      Explore other movies,and please check next week for "inception"</h4>
    
@@ -221,6 +226,7 @@ return (
     </IconButton>
 }
     
+
     // Redux
     reduxAddcartBtn={
     <>
@@ -249,8 +255,6 @@ return (
     )) }
 </>
 }
-
-
 </Grid>
 </Box>
 </div>

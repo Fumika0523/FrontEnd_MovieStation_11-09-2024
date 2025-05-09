@@ -67,3 +67,5 @@ search alongwith submit button (little bit difficult)
 invoice part -> little time (tommorow)
 search >> if a user tries found a movie(if a movie is not found explore other movies .. do check next week for "inception") 
 >> developer should add that movie and trigger email to be sent out
+
+From wish 
