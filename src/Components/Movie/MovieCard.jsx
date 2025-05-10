@@ -1,4 +1,16 @@
 import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import CardCover from '@mui/joy/CardCover';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Box from "@mui/material/Box";
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 import { styled } from '@mui/material/styles';
 import { Grid } from "@mui/material";
 import Card from '@mui/material/Card';
@@ -6,10 +18,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import LikeCard from '../Movie/LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
@@ -21,9 +30,11 @@ import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart  } from "react-icons/fa";
-import { FaStarHalfStroke } from "react-icons/fa6";
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { IoEyeSharp } from "react-icons/io5";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 
 export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
@@ -99,26 +110,53 @@ const starNum = ratNum.rating / 2
 // console.log(Math.floor(4.1)) //4
 // console.log(Math.round(4.1)) //4
 const rating1 = {rating}
-// console.log(rating1)
-// console.log(rating1.rating, "/10")
 
    return (
   <>
     <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
-      <Card  className="movieCard" style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 10px 0"}}>
-      <CardHeader className="py-2 fw-bold" 
+      <Card  className="movieCard" 
+      style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 8px 0"}}>
+         <CardHeader className="py-2 fw-bold"
+
       avatar={
-          <Avatar sx={{ bgcolor: red[900],color:"lightgray" }} aria-label="movietitle">
+          <Avatar sx={{ color:"white",backgroundColor:"rgba(246, 90, 23, 0.64)"}} aria-label="movietitle">
             {moviename.substring(0,1)}
           </Avatar>
           }
+
+
            action={
+
             token ?
-            <IconButton 
+          <>
+          
+          {/* EDIT */}
+          <IconButton className="editBtn mt-1 p-1 me-1" onClick={()=>navigate(`/editmovie/${_id}`)}>
+          <ModeIcon className='fs-5'/>
+          </IconButton>
+
+          {/* Delete Icon */}
+           {deleteBtn}
+
+          {/* Add to Wish List */}
+          <Tooltip title="Add to Wish List">
+            <IconButton className=' mt-1 p-1'
+            aria-label="settings" 
+            onClick={()=>{navigate(`/movietrailer/${_id}`)}}
+            >
+            <FaHeart className='addmyListIcon fs-6' />
+            </IconButton>
+            </Tooltip>
+
+            {/* See More */}
+            <Tooltip title="See More">
+            <IconButton className=' mt-1 p-1'
             aria-label="settings" 
             onClick={()=>{navigate(`/movietrailer/${_id}`)}}>
-              <MoreVertIcon />
+              <MoreVertIcon className='seeMoreIcon fs-5'/>
             </IconButton>
+            </Tooltip>
+          </>         
           :
             null
           }
@@ -135,67 +173,55 @@ const rating1 = {rating}
         </>
       }
       />
-    <CardMedia 
+  
+  {/* IMAGE */}
+  <CardMedia 
     component="img"  
     className=""
     width="100%" image={movieposter} style={{objectFit:"cover",display:"block",height:"210px"}} alt="movieposter"/>
     <div className='content'></div>
 
-      {/* BookMark */}
-      <div style={{right:"38px",top:'63px',position:"absolute"}}>
-      {reduxAddcartBtn} 
-      </div>
-
-    {/* My Wish List*/}
+    {/* My CART ICON*/}
     <div className='' style={{right:"5px",top:'63px',position:"absolute"}}>
-    <FaHeart className='text-danger fs-4'/>
- 
+    {reduxAddcartBtn} 
     </div>
-     {/* Bottom Card ICONS */}
-    <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{bottom:"45px",left:"0px"}}>
+
+  {/* Bottom Card ICONS */}
+<CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{bottom:"45px",left:"0px"}}>
    
-    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
-       {token && isMovieOwner ? (
-    <>
-    {/* Edit Icon */}
-    <IconButton className="editBtn" onClick={()=>navigate(`/editmovie/${_id}`)}>
-      <ModeIcon />
-    </IconButton>
+   <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
 
-    {/* Delete Icon */}
-    {deleteBtn}
 
-    {/* Redux */}
-{/*     
-    {reduxAddcartBtn}  */}
+      {/* {token && isMovieOwner ? (
+   <>
+   <div className='position-absolute d-flex flex-row gap-2' style={{right:"0px"}}> */}
+   {/* Edit Icon */}
+   {/* <IconButton className="editBtn" onClick={()=>navigate(`/editmovie/${_id}`)}>
+     <ModeIcon />
+   </IconButton> */}
 
-      </>)
-      :
-      (<>
-      {/* <h1>Dont display</h1> */}
-      </>
-    )}
+   {/* Delete Icon */}
+   {/* {deleteBtn}
+   </div>
+     </>)
+     :
+     (<> */}
+     {/* <h1>Dont display</h1> */}
+     {/* </>
+   )}*/}
+</CardActions> 
 
-    </CardActions>
+    {/* CAST & SUMMARY  */}
     <CardContent className=''>
-     <div className='overlay  px-3' style={{fontSize:"13.5px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"#bdbfc2"}}>
+     <div className='overlay px-3' style={{fontSize:"13px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"#bdbfc2"}}>
 
-    <span className='movieCast d-flex pt-1 align-items-center ' 
+    <span className='movieCast d-flex align-items-center' style={{paddingTop:"1px"}} 
     >{cast.substring(0,65)+"..."}</span>
 
-    <p className="movieSummary "
-      >{summary.substring(0,180)+"..."}</p>
+    <p className="movieSummary"
+      >{summary.substring(0,205)+"..."}</p>
     </div>
     </CardContent>
-{/*     
-    </Typography>  
-    </CardContent> */}
-  
-    {/* <Collapse in={expanded}>
-    <CardContent className=' border-danger py-0'>
-    <Typography className="movieSummary" setSummaryShow={setSummaryShow} paragraph>{summary.substring(0,170)+"..."}</Typography>
-    </CardContent>
-    </Collapse> */}
     </Card>
     </Grid>
     </>

@@ -184,9 +184,9 @@ return (
                         
     // Delete Button
     deleteBtn={
-    <IconButton className="movieDeleteBtn"
+    <IconButton className=""
     onClick={()=> deleteMovie(element._id)}>
-        <DeleteIcon />
+        <DeleteIcon className="text-secondary" />
     </IconButton>
 }
     
@@ -219,13 +219,13 @@ return (
                             
     // Delete Button
     deleteBtn={
-        <Button variant="primary"
+        <IconButton variant="primary"
         onClick={()=> deleteMovie(element._id)}
         style={{
             // backgroundColor:mode=="light" ? "transparent":"#3b3b3b",
             color:mode=="light" ? "rgb(66, 66, 66)":"white"}}>
-        <i className="fa-solid fs-5 fa-trash"></i>
-        </Button>}
+        <i className="fa-solid text-secondary fs-5 fa-trash"></i>
+        </IconButton>}
 
     // Redux
     reduxAddcartBtn={

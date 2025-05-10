@@ -14,6 +14,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import Tooltip from '@mui/material/Tooltip';
 
 
 // cart item is added to the card >> green
@@ -169,27 +170,25 @@ return (
         token &&
     <>
     {/* Wish List */}
-    <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
-    <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none">    
-        My Wish List</span>
+    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
+    <FaHeart className="fs-5 iconHeart me-1" /><span className="d-md-block d-none">    
+    My Wish List
+    </span>
     </Button>
 
-
     {/* ADD MOVIE */}
-    <Button variant="success" className="text-nowrap me-1 d-flex align-items-center gap-1" onClick={()=>navigate('/addmovie')} >
-     <FaPlusCircle className="fs-5 " /><span className="d-md-block d-none">Add Movie</span></Button>
+    <Button variant="none" className="movieDisplayBtn" onClick={()=>navigate('/addmovie')} >
+     <FaPlusCircle className="fs-5 me-1 addIcon"  /><span className="d-md-block d-none">Add Movie</span></Button>
     
     {/* My MOVIES */}
-    <Button variant="light" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
-    <FaBookmark className="fs-5" style={{ color: "navy"}}/><span className="d-md-block d-none">My Movies</span> </Button>
+    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
+    <FaBookmark className="fs-5 me-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> </Button>
     </>
     }
-  
     <>
         {/* Debounce Search*/}
-        <input
-        className="form-control  border-secondary ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
-            style={{width:"180px"}}
+        <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"180px",color:"white"}}
+        className="form-control  border-0  ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
             onChange={(e) => {
             console.log(e.target.value)
         setSearchTearm(e.target.value)}}/>
@@ -220,24 +219,20 @@ return (
                         
     // Delete Button
     deleteBtn={
-    <IconButton variant="none" className="movieDeleteBtn"
-    onClick={()=> deleteMovie(element._id)}>
-        <DeleteIcon />
-    </IconButton>
+    <Tooltip title="Delete">
+        <DeleteIcon style={{cursor:"pointer"}}
+           onClick={()=> deleteMovie(element._id)}
+           className="text-secondary"/>
+    </Tooltip>
 }
     
 
     // Redux
     reduxAddcartBtn={
     <>
-    {/* <IconButton className="reduxIcon"  */}
-    {/* <Button size="sm" variant="warning" className="reduxIcon"
-     > */}
-       <ShoppingCartIcon className="reduxIcon fs-2"
+       <ShoppingCartIcon className="reduxIcon fs-3"
        onClick={()=>{handleAdditem(element)}} 
        />
-       {/* </Button> */}
-    {/* </IconButton> */}
     <ToastContainer
     position="top-right"
     autoClose={5000}

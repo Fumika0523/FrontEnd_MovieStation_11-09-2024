@@ -75,13 +75,14 @@ function NavBar({ mode, setMode }) {
   let name = sessionStorage.getItem('name')
   return (
     <>
-    <div className="d-flex navbarAll align-items-center justify-content-between ">
+    <div className="d-flex navbarAll shadow-sm align-items-center justify-content-between ">
       <Navbar className="d-flex align-items-center  justify-content-center me-auto" collapseOnSelect expand="lg">
-        <Container fluid className=" d-flex flex-row align-items-center  justify-content-start"  >    
+        <Container fluid className=" d-flex flex-row align-items-center  justify-content-start"  >   
+
           {/* Toggle */}
           <Navbar.Toggle 
-          aria-controls="responsive-navbar-nav" 
-          style={{backgroundColor: mode == "light" ? null : amberColor }}/>
+          aria-controls="basic-navbar-nav" className="border border-secondary opacity-50"
+         />
   
           <Navbar.Brand
           style={{cursor:"pointer"}}
@@ -92,11 +93,10 @@ function NavBar({ mode, setMode }) {
           </Navbar.Brand>
         
            {/* </div> */}
-          <Navbar.Collapse className="ms-auto"  id="responsive-navbar-nav">
+          <Navbar.Collapse className="ms-auto mt-sm-0 mt-2"  id="responsive-navbar-nav">
             <Nav className=""  >
-
               {/* <!-- Home --> */}
-              <Nav.Link href="#" className="pb-0">
+              <Nav.Link href="#" className=" p-0">
                 <Button variant="none"  className="d-flex  text-nowrap 
                 justify-content-center align-items-center"
                 onClick={() => navigate('/')}
@@ -111,9 +111,9 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* <!-- About Us --> */}
-              <Nav.Link href="#" className=" " >
+              <Nav.Link href="#" className=" p-0">
                 <Button variant="none"
-                   className="d-flex  text-nowrap  justify-content-center align-items-center"
+                   className="d-flex  text-nowrap justify-content-center align-items-center"
                   onClick={() => navigate('/about')}>
                   <FaPersonCircleQuestion className=" fs-3 me-1"
                     style={{ color: mode == "light" ? amberColor1 : amberColor }}
@@ -124,14 +124,17 @@ function NavBar({ mode, setMode }) {
                 </Button>
               </Nav.Link>
 
-              {/* MOVIE */}
-          
+
+
+
+
+          {/* MOVIE */}
           <Dropdown 
             align={{ lg: 'down' }}
-            className="d-flex py-1 dropdownMenu   justify-content-start justify-content-lg-center align-items-start align-items-lg-center"
-           >
-           <Dropdown.Toggle variant="none" id="dropdown-basic" 
-           className=" d-flex text-nowrap  justify-content-center align-items-center"
+            className="d-flex  dropdownMenu  p-0  justify-content-start justify-content-lg-center align-items-start align-items-lg-center">
+          
+          <Dropdown.Toggle variant="none" id="dropdown-basic" 
+           className="d-flex text-nowrap justify-content-start p-2 align-items-center"
            style={{color:mode == "light" ? "black":"white"}} 
             >
               < PiFilmSlateFill
@@ -175,9 +178,9 @@ function NavBar({ mode, setMode }) {
           </Dropdown>
           
               {/* <!-- Service --> */}
-              <Nav.Link href="#" className="">
+              <Nav.Link href="#" className=" p-0">
                 <Button variant="none"
-                  className="d-flex  text-nowrap justify-content-center align-items-center"
+                  className="d-flex text-nowrap justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                   onClick={() => navigate('/services')}>
                   <FaHandHoldingHeart className="fs-3 me-1"
@@ -189,7 +192,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* <!-- Contact Us --> */}
-              <Nav.Link className="" href="#" style={{ color: mode == "light" ? greyColor : amberColor }}>
+              <Nav.Link className="p-0" href="#" style={{ color: mode == "light" ? greyColor : amberColor }}>
                 <Button variant="none"
                   className="d-flex  text-nowrap justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
@@ -203,9 +206,10 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* Redux  -->> Badge*/}
-              <Nav.Link href="/cartpage" className="">
+              <Nav.Link href="#" className=" p-0">
                 <Button  className="d-flex  justify-content-center align-items-end"
-                  variant="none">
+                  variant="none"
+                  onClick={() => navigate('/cartpage')}>
                   <Badge variant="text"
                     sx={{
                       "& .MuiBadge-badge": {
@@ -231,21 +235,21 @@ function NavBar({ mode, setMode }) {
       </Navbar>
 
           {/* RIGHT SIDE */}
-          <Nav className=" d-flex text-nowrap justify-content-center align-item-center align-item- flex-row position-absolute top-0"
-          style={{right:"3px"}}
+          <Nav className=" d-flex text-nowrap justify-content-center align-item-center align-item- flex-row position-absolute "
+          style={{right:"3px",top:"10px"}}
           >
             {token ?
               <>
                 {/* USERNAME */}
-                <Dropdown className="dropdownMenu">
+                <Dropdown className="dropdownMenu ">
                   <Dropdown.Toggle variant="none" id="dropdown-basic" 
                   className=" d-flex text-nowrap px-1 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "white" }}
                   >
-                  <span style={{ color: "rgb(248, 228, 118)",backgroundColor:"purple",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
+                  <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(171, 9, 168, 0.58)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className="dropdownMenu px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>#
+                  className="dropdownMenu border px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>
                     {/* MY ACCOUNT */}
                    <Dropdown.Item 
                     className="d-flex justify-content-start align-items-center border-bottom"
@@ -271,7 +275,7 @@ function NavBar({ mode, setMode }) {
                   <Button variant="none"
                     type="submit" className=""
                     onClick={() => handleSignOut()}>
-                    <FaPowerOff className="fs-4" style={{ color: "red" }} />
+                    <FaPowerOff className="fs-4" style={{ color: "rgba(250, 27, 27, 0.58)" }} />
                   </Button>
                 </Nav.Link>
 
@@ -286,7 +290,7 @@ function NavBar({ mode, setMode }) {
                       // console.log(mode)
                     }}>
                     {mode === "light" ? 
-                    <DarkModeIcon className="fs-4"/> : <LightModeIcon className="fs-4" />}
+                    <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
                   </Button>
                 </Nav.Link>
               </>
@@ -357,7 +361,7 @@ function NavBar({ mode, setMode }) {
                       // console.log(mode)
                     }}>
                     {mode === "light" ? 
-                    <DarkModeIcon className="fs-4"/> : <LightModeIcon className="fs-4" />}
+                    <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
                   </Button>
                 </Nav.Link>
               </>

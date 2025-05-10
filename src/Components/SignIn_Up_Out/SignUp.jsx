@@ -95,9 +95,9 @@ const postSignUpUser=async(newUser)=>{
           </Form.Group> */}
 
           {/* Gender */}
-         <div className="col-md-6 mb-2 d-flex flex-column justify-content-start  align-items-start  ">
+         <div className="col-md-6 mb-2 d-flex flex-column justify-content-center  align-items-start  ">
         <div className=' mb-1'>Gender :</div>
-        <div className='d-flex flex-row justify-content-start  align-items-center gap-3'>
+        <div className='d-flex flex-row justify-content-center  align-items-center gap-5'>
         <Form.Check type="radio" name="gender" label={`Male`} 
           value="male"
           onChange={formik.handleChange}/> 

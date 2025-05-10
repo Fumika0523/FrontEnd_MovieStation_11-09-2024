@@ -1,5 +1,5 @@
-.navToggle{
-  background-color:rgb(68, 69, 69)
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(120, 130, 144, 0.808) ' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 .navIcon{
@@ -20,7 +20,6 @@
 .bg-header-image{
   min-height: min-content;
   background-size:cover;
-  
   background-position-y:top ;
   background-repeat: no-repeat;
   display: block;
@@ -267,11 +266,16 @@ font-size: "16px";
 
 .movieCard{
   position: relative;
-  /* border:2px solid blue */
 }
 
+/* .movieCard:hover .content{
+  display: none;
+  background: rgba(255, 255, 255, 0) ;
+  background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, rgb(19, 19, 20) 0%);
+} */
+
 .overlay:hover {
-  height: 30%;
+  height: 25%;
   padding:1.5%;
   /* background-color: #161718; */
 }
@@ -291,7 +295,9 @@ display: none ;
 
 .overlay:hover .movieSummary{
   display: block;
+
 }
+
 .overlay{
   position: absolute;
   bottom: 0;
@@ -299,20 +305,26 @@ display: none ;
   right: 0;
   overflow: hidden;
   width: 100%;
-  height: 16.5%;
+  height: 15%;
   transition: .99s ease;
 }
 
-.moiveEditIcon:hover{
-  transform: scale(1.05);
-  transition: .49s ease;
-  background-color: gray;
-  opacity: 100%;
+.addmyListIcon:hover{
+  color: rgba(216, 59, 59, 0.593)  !important;
 }
 
+.addmyListIcon{
+  color: rgba(163, 162, 162, 0.648);
+}
+.seeMoreIcon{
+  color: rgba(163, 162, 162, 0.648);
+}
+.seeMoreIcon:hover{
+  color: white;
+}
 .reduxIcon{
 /* color: rgb(251, 194, 5); */
-color: rgb(232, 191, 10);
+color: rgb(253, 212, 5);
 box-shadow: none;
 text-shadow: none;
 }
@@ -327,31 +339,13 @@ text-shadow: none;
   /* background-color: #edb204 !important; */
 }
 
-.movieDeleteBtn:hover{
-  /* transform: scale(1.01); */
-  /* transition: .49s ease; */
-  color:rgb(253, 23, 23) !important ;
-  /* background-color: rgba(250, 132, 181, 0.969)!important; */
-  /* padding: 2px !important; */
-  opacity: 100%;
-}
-
-.movieDeleteBtn {
-background-color: transparent !important;
-padding: 0px !important;
-margin-left: 10px !important;
-/* color: white; */
-color:rgba(161, 3, 3, 0.918) !important ;
-box-shadow: none;
-text-shadow: none;
-}
-
 .editBtn{
 background-color: transparent !important;
 padding: 0px !important;
 margin-left: 10px !important;
 /* color: white; */
-color: rgba(68, 166, 68, 0.782) !important;
+/* color: rgba(68, 166, 68, 0.782) !important; */
+color: rgba(209, 209, 213, 0.63) !important;
 box-shadow: none;
 text-shadow: none;
 }
@@ -359,20 +353,60 @@ text-shadow: none;
 .editBtn:hover{
   /* transform: scale(1.0.25);
   transition: .4s ease; */
-  color: rgb(80, 251, 80) !important;
+  color:rgb(247, 247, 250)  !important;
+  /* color: rgb(80, 251, 80) !important; */
   /* background-color:rgb(141, 253, 167)!important; */
   /* background-color: rgba(246, 250, 247, 0.537) !important; */
   /* padding: 2px !important;  */
   opacity: 100%;
 }
 
-.content{
-  /* background: rgba(255, 255, 255, 0) linear-gradient(to bottom,  rgba(255, 255, 255, 0.083) 40%, rgb(5, 5, 5) 100%) repeat scroll 0 0; */
-background: rgba(255, 255, 255, 0) ;
-background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, rgb(19, 19, 20) 100%);
-  position: relative;
-  margin-top: -210px;
-  height: 210px;
+
+
+.movieDisplayBtn{
+  background-color: rgba(45, 45, 47, 0.52);
+  color:rgba(209, 209, 213, 0.63);
+  flex-wrap: nowrap;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
 
+.movieDisplayBtn:hover{
+  background-color: rgb(45, 45, 47);
+  color: rgba(244, 190, 54, 0.721);
+}
 
+.movieDisplayBtn:hover .iconHeart{
+  color: rgba(216, 59, 59, 0.593) !important;
+}
+
+.movieDisplayBtn:hover .addIcon{
+  color: rgba(71, 160, 96, 0.647) !important;
+}
+
+.movieDisplayBtn:hover .myMovieIcon{
+  color: rgba(53, 128, 197, 0.666) !important;
+}
+
+.movieImg:hover .content{
+  border:2px solid red !important;
+}
+
+.movieImg{
+  object-fit:cover;
+  height:210px;
+  position:relative
+}
+
+.content {
+  display: block;
+  background: rgba(255, 255, 255, 0) ;
+  background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, rgb(19, 19, 20) 100%);
+    position: abs;
+    margin-top: -210px;
+    height: 210px;
+    transition:4s
+  }
