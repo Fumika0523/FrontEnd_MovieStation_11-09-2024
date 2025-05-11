@@ -225,7 +225,7 @@ return (
     <Tooltip title="Delete">
         <DeleteIcon style={{cursor:"pointer"}}
            onClick={()=> deleteMovie(element._id)}
-           className="deleteBtn fs-5"/>
+           className="deleteBtn fs-4"/>
     </Tooltip>
 }
     

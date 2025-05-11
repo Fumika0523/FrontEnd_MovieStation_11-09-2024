@@ -268,11 +268,6 @@ font-size: "16px";
   position: relative;
 }
 
-.movieCard:hover {
-cursor: pointer;
-
-}
-
 .overlay:hover {
   height: 25%;
   padding:1.5%;

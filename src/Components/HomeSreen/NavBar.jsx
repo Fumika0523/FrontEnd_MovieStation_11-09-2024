@@ -236,7 +236,7 @@ function NavBar({ mode, setMode }) {
                   className=" d-flex text-nowrap px-1 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "white" }}
                   >
-                  {/* <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span> */}
+                  <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
                   className="dropdownMenu border px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>

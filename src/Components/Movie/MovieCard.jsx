@@ -1,16 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import CardCover from '@mui/joy/CardCover';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Box from "@mui/material/Box";
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import { styled } from '@mui/material/styles';
 import { Grid } from "@mui/material";
 import Card from '@mui/material/Card';
@@ -18,21 +9,16 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import LikeCard from '../Movie/LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
-import { amber,red } from '@mui/material/colors';
 import { useState } from 'react';
 import { createTheme} from '@mui/material/styles';
 import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
 import { ToastContainer, toast } from 'react-toastify';
-import { FaHeart  } from "react-icons/fa";
-import Rating from '@mui/material/Rating';
-import Button from '@mui/material/Button';
-import { IoEyeSharp } from "react-icons/io5";
+import FavoriteIcon from '@mui/icons-material/Favorite';import Rating from '@mui/material/Rating';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
@@ -126,7 +112,6 @@ const rating1 = {rating}
           </Avatar>
           }
 
-
           action={
             
             token && isMovieOwner ?
@@ -141,42 +126,51 @@ const rating1 = {rating}
           {/* Delete Icon */}
            {deleteBtn}
 
-          {/* Add to Wish List */}
-          <Tooltip title="Add to Wish List">
-            <FaHeart 
-              onClick={()=>{navigate(`/movietrailer/${_id}`)}}
-              className='addmyListIcon fs-6' />
-            </Tooltip>
+        {/* Add to Wish List */}
+        <Tooltip title="Add to Wish List">
+        <FavoriteIcon onClick={()=>{navigate(`/movietrailer/${_id}`)}}
+        className='addmyListIcon fs-5' />
+        </Tooltip>
 
-            {/* See More */}
+           {/* See More */}
+        <Tooltip title="See More">
+            {/* <IconButton className=' p-1'
+            aria-label="settings" 
+            onClick={()=>{navigate(`/movietrailer/${_id}`)}}> */}
+              <MoreVertIcon 
+               onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
+            {/* </IconButton> */}
+        </Tooltip>
+            </span>
+          </>         
+          :
+        token ?
+          <>
+        <span className=' d-flex flex-row align-items-center justify-content-center gap-1' style={{ position:"absolute",right:"3px",top:"28px"}}>
+
+            {/* Add to Wish List */}
+        <Tooltip title="Add to Wish List">
+        <FavoriteIcon onClick={()=>{navigate(`/movietrailer/${_id}`)}}
+        className='addmyListIcon fs-5' />
+        </Tooltip>
+      
+               {/* See More */}
             <Tooltip title="See More">
             {/* <IconButton className=' p-1'
             aria-label="settings" 
             onClick={()=>{navigate(`/movietrailer/${_id}`)}}> */}
               <MoreVertIcon 
-               onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-5'/>
+               onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
             {/* </IconButton> */}
-            </Tooltip>
-            </span>
-          </>         
-          :
-            null
-          
-            ||
-
-          token ?
-          <IconButton 
-            aria-label="settings" 
-            onClick={()=>{navigate(`/movietrailer/${_id}`)}}>
-              <MoreVertIcon />
-            </IconButton>
+        </Tooltip>
+        </span>
+            </>
           :
             null
           
           }
-
-          
-          titleTypographyProps={{fontSize:"16x",paddingBottom:"0px",marginBottom:"0px" }}
+ 
+      titleTypographyProps={{fontSize:"20x",paddingBottom:"0px",marginBottom:"0px" }}
         title={moviename}
         subheaderTypographyProps={{display:"flex",flexDirection:"row",justifyContent:"start",alignItems:"center",gap:"5px",fontSize:"13px"}}
        subheader={
@@ -184,9 +178,8 @@ const rating1 = {rating}
         {rating} /10
         <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5}  style={{paddingBottom:"5px",
            color:"rgb(242, 154, 3)"
-
             }} />
-        </>
+        </>          
       }
       />
   
@@ -206,25 +199,6 @@ const rating1 = {rating}
 <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{bottom:"45px",left:"0px"}}>
    
    <LikeCard  likeNum={likeNum} disLikeNum={disLikeNum} mode={mode}/>
-
-
-      {/* {token && isMovieOwner ? (
-   <>
-   <div className='position-absolute d-flex flex-row gap-2' style={{right:"0px"}}> */}
-   {/* Edit Icon */}
-   {/* <IconButton className="editBtn" onClick={()=>navigate(`/editmovie/${_id}`)}>
-     <ModeIcon />
-   </IconButton> */}
-
-   {/* Delete Icon */}
-   {/* {deleteBtn}
-   </div>
-     </>)
-     :
-     (<> */}
-     {/* <h1>Dont display</h1> */}
-     {/* </>
-   )} */}
 </CardActions> 
 
     {/* CAST & SUMMARY  */}
@@ -232,7 +206,18 @@ const rating1 = {rating}
      <div className='overlay px-3' style={{fontSize:"13px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"#bdbfc2"}}>
 
     <span className='movieCast d-flex align-items-center' style={{paddingTop:"1px"}} 
-    >{cast.substring(0,65)+"..."}</span>
+    >
+    { 
+        (cast.length) >=90 ?
+        <>
+       {cast.substring(0,90)+"..."}
+        </>
+          :
+          <>
+      {cast}
+          </>
+    }
+    </span>
 
     <p className="movieSummary"
       >{summary.substring(0,205)+"..."}</p>
