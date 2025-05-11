@@ -32,7 +32,6 @@ function NavBar({ mode, setMode }) {
   const greyColor = grey[900]; // #212121
   const amberColor = amber[500];
   const amberColor1 = amber[700];
-  // console.log(greyColor)
 
   // const [showToggle,setShowToggle] = useState(true)
 
@@ -40,7 +39,11 @@ function NavBar({ mode, setMode }) {
   console.log("token", token)
 
   const handleSignOut = () => {
-    sessionStorage.removeItem('token')
+    // sessionStorage.removeItem('token')
+    // sessionStorage.removeItem('userId')
+    sessionStorage.clear()// Removes all session data
+
+
     navigate('/')
   }
 
@@ -48,19 +51,6 @@ function NavBar({ mode, setMode }) {
   const location = useLocation();
   console.log(location)
 
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: {
-  //       main: '#424242',
-  //     },
-  //     secondary: {
-  //       main: '#ffc107',
-  //     },
-  //   },
-  // });
-
-  // Space between icon &
-  //drop down
 
   //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
@@ -246,7 +236,7 @@ function NavBar({ mode, setMode }) {
                   className=" d-flex text-nowrap px-1 justify-content-center align-items-center"
                   style={{ color: mode == "light" ? "black" : "white" }}
                   >
-                  <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(171, 9, 168, 0.58)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
+                  {/* <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span> */}
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
                   className="dropdownMenu border px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>

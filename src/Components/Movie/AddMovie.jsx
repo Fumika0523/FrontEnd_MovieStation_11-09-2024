@@ -26,9 +26,9 @@ const formSchema = Yup.object().shape({
   publishYear:Yup.string().required(),
   likeNum:Yup.string().required(),
   disLikeNum:Yup.string().required(),
-  genres:Yup.string().required(),
+  genres:Yup.string(),
   trailer:Yup.string().required().min(5,"Too Short"),
-  summary:Yup.string().min(5,"Too Short").required(),
+  summary:Yup.string().min(200,"Too Short").required(),
 })
 
 const formik=useFormik({
@@ -42,7 +42,7 @@ const formik=useFormik({
       publishYear:"",
       likeNum:"",
       disLikeNum:"",
-      genres:"",
+      // genres:"",
       category:"",
   },
   validationSchema:formSchema,
@@ -237,7 +237,7 @@ if(res){
         </Grid>
 
         {/* MOVIE GEnres */}
-        <Grid xs={12} sm={6} md={4} item >
+        {/* <Grid xs={12} sm={6} md={4} item >
           <TextField
           fullWidth
           required
@@ -246,10 +246,10 @@ if(res){
           {formik.errors.genres && formik.touched.genres? (
           <div style={{color:"red"}}>{formik.errors.genres}</div>
         ) : null }
-          </Grid>
+          </Grid> */}
 
            {/* MOVIE TRAILER */}
-           <Grid xs={12} sm={6} md={6} item >
+           <Grid xs={12} sm={12} md={4} item >
            <TextField
            fullWidth
           required
@@ -261,7 +261,7 @@ if(res){
            </Grid>
 
          {/* Summary */}
-         <Grid xs={12} sm={12} md={6} item >
+         <Grid xs={12}  item >
         <TextField fullWidth required id="summary" 
           label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
           {formik.errors.summary && formik.touched.summary? (

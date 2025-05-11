@@ -268,11 +268,10 @@ font-size: "16px";
   position: relative;
 }
 
-/* .movieCard:hover .content{
-  display: none;
-  background: rgba(255, 255, 255, 0) ;
-  background: linear-gradient(180deg,rgb(14, 14, 14) 0%, rgba(18, 18, 17, 0) 55%, rgb(19, 19, 20) 0%);
-} */
+.movieCard:hover {
+cursor: pointer;
+
+}
 
 .overlay:hover {
   height: 25%;
@@ -322,6 +321,15 @@ display: none ;
 .seeMoreIcon:hover{
   color: white;
 }
+
+.deleteBtn{
+  color: rgba(163, 162, 162, 0.648);
+}
+
+.deleteBtn:hover{
+  color: white;
+}
+
 .reduxIcon{
 /* color: rgb(251, 194, 5); */
 color: rgb(253, 212, 5);

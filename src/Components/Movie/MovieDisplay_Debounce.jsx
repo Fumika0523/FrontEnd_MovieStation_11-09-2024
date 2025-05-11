@@ -79,6 +79,9 @@ const fetchData = (searchTerm)=>{
 console.log("filterMovieData",filterMovieData)
 
 const token = sessionStorage.getItem('token')
+const userId = sessionStorage.getItem
+('userId')
+console.log(userId)
 // console.log("token",token)
 let config = {
     headers: {
@@ -222,7 +225,7 @@ return (
     <Tooltip title="Delete">
         <DeleteIcon style={{cursor:"pointer"}}
            onClick={()=> deleteMovie(element._id)}
-           className="text-secondary"/>
+           className="deleteBtn fs-5"/>
     </Tooltip>
 }
     

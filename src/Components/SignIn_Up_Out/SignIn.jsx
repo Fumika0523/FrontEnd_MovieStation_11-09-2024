@@ -33,8 +33,10 @@ function SignIn({setIsAuthenticated}) {
   const postSignInUser=async(loginuser)=>{
     console.log(loginuser)
     const res=await axios.post(`${url}/signin`,loginuser)
-    console.log(res.data)
+    console.log("res.data",res.data)
     sessionStorage.setItem('token',res.data.token)
+    sessionStorage.setItem('userId',res.data.user._id)
+    console.log('userId')
     // setAccessAddMovie(res.data.token)
     if(res.data.token){
       setIsAuthenticated(true)

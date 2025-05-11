@@ -77,13 +77,14 @@ const ExpandMore = styled((props) => {
 //three dot shouldnt show
 const userId=sessionStorage.getItem('userId')
 
-//id
-// 16 movies >> userID
 //loginUser Id === movie owner(userId)  >> Edit || Delete
 //Comparison operator
 //movieData is all movie datas that were added in the website
 const isMovieOwner = userId === element?.owner; // true || false
-
+console.log("isMovieOwner",isMovieOwner)
+console.log("userId",userId)
+console.log("token",token)
+console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
 // SPECIFIC
 const getSpecificMovieData = async () =>{
   // console.log("Specific Movie Data is called....")
@@ -114,7 +115,8 @@ const rating1 = {rating}
    return (
   <>
     <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
-      <Card  className="movieCard" 
+      <Card     
+       className="movieCard" 
       style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 8px 0"}}>
          <CardHeader className="py-2 fw-bold"
 
@@ -125,41 +127,55 @@ const rating1 = {rating}
           }
 
 
-           action={
-
-            token ?
+          action={
+            
+            token && isMovieOwner ?
           <>
-          
+       <span className=' d-flex flex-row align-items-center justify-content-center gap-1' style={{ position:"absolute",right:"3px",top:"28px"}}>
+
           {/* EDIT */}
-          <IconButton className="editBtn mt-1 p-1 me-1" onClick={()=>navigate(`/editmovie/${_id}`)}>
-          <ModeIcon className='fs-5'/>
-          </IconButton>
+          <Tooltip title="Edit">
+          <ModeIcon onClick={()=>navigate(`/editmovie/${_id}`)} className='editBtn fs-5'/>
+          </Tooltip>
 
           {/* Delete Icon */}
            {deleteBtn}
 
           {/* Add to Wish List */}
           <Tooltip title="Add to Wish List">
-            <IconButton className=' mt-1 p-1'
-            aria-label="settings" 
-            onClick={()=>{navigate(`/movietrailer/${_id}`)}}
-            >
-            <FaHeart className='addmyListIcon fs-6' />
-            </IconButton>
+            <FaHeart 
+              onClick={()=>{navigate(`/movietrailer/${_id}`)}}
+              className='addmyListIcon fs-6' />
             </Tooltip>
 
             {/* See More */}
             <Tooltip title="See More">
-            <IconButton className=' mt-1 p-1'
+            {/* <IconButton className=' p-1'
             aria-label="settings" 
-            onClick={()=>{navigate(`/movietrailer/${_id}`)}}>
-              <MoreVertIcon className='seeMoreIcon fs-5'/>
-            </IconButton>
+            onClick={()=>{navigate(`/movietrailer/${_id}`)}}> */}
+              <MoreVertIcon 
+               onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-5'/>
+            {/* </IconButton> */}
             </Tooltip>
+            </span>
           </>         
           :
             null
+          
+            ||
+
+          token ?
+          <IconButton 
+            aria-label="settings" 
+            onClick={()=>{navigate(`/movietrailer/${_id}`)}}>
+              <MoreVertIcon />
+            </IconButton>
+          :
+            null
+          
           }
+
+          
           titleTypographyProps={{fontSize:"16x",paddingBottom:"0px",marginBottom:"0px" }}
         title={moviename}
         subheaderTypographyProps={{display:"flex",flexDirection:"row",justifyContent:"start",alignItems:"center",gap:"5px",fontSize:"13px"}}
@@ -208,7 +224,7 @@ const rating1 = {rating}
      (<> */}
      {/* <h1>Dont display</h1> */}
      {/* </>
-   )}*/}
+   )} */}
 </CardActions> 
 
     {/* CAST & SUMMARY  */}
