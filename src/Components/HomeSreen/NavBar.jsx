@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { createTheme,  } from '@mui/material/styles';
 import { grey, amber, red, pink, blueGrey } from '@mui/material/colors';
 import Badge from '@mui/material/Badge';
 import { PiSignInFill } from "react-icons/pi";
@@ -36,14 +35,13 @@ function NavBar({ mode, setMode }) {
   // const [showToggle,setShowToggle] = useState(true)
 
   const token = sessionStorage.getItem('token')
+  const name = sessionStorage.getItem('name')
   console.log("token", token)
 
   const handleSignOut = () => {
     // sessionStorage.removeItem('token')
     // sessionStorage.removeItem('userId')
     sessionStorage.clear()// Removes all session data
-
-
     navigate('/')
   }
 
@@ -62,7 +60,7 @@ function NavBar({ mode, setMode }) {
   const cartItems = useSelector(store => store.cart.items)
   console.log(cartItems.length)
 
-  let name = sessionStorage.getItem('name')
+ 
   return (
     <>
     <div className="d-flex navbarAll shadow-sm align-items-center justify-content-between ">
@@ -113,10 +111,6 @@ function NavBar({ mode, setMode }) {
                    >About Us</span>
                 </Button>
               </Nav.Link>
-
-
-
-
 
           {/* MOVIE */}
           <Dropdown 
@@ -215,7 +209,7 @@ function NavBar({ mode, setMode }) {
                     >
                   <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                   </Badge>
-                  <span className="ms-1 fs-5"
+                  <span className="fs-5"
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span>
                 </Button>
               </Nav.Link>

@@ -215,11 +215,6 @@ th{
 background-color: 	#4d4d4d !important;
 }
 
-.btnFont:hover{
-  color: white !important;
-}
-
-
 .fontColorTrailerFont{
 color: #ffffff;
 font-weight: "700";
@@ -240,7 +235,7 @@ font-size: "16px";
 }
 .downloadBtn:hover +.downloadText{
   display: block !important;
-  color:red !important
+  color:red !important;
 }
 
 .downloadBtn  {
@@ -303,19 +298,19 @@ display: none ;
   transition: .99s ease;
 }
 
-.addmyListIcon:hover{
-  color: rgba(216, 59, 59, 0.593)  !important;
-}
-
-.addmyListIcon{
-  color: rgba(163, 162, 162, 0.648);
-}
 .seeMoreIcon{
   color: rgba(163, 162, 162, 0.648);
 }
 .seeMoreIcon:hover{
   color: white;
+  cursor: pointer;
 }
+
+.addmyListIcon:hover{
+  color: white !important;
+  cursor: pointer;
+}
+
 
 .deleteBtn{
   color: rgba(163, 162, 162, 0.648);
@@ -323,6 +318,7 @@ display: none ;
 
 .deleteBtn:hover{
   color: white;
+  cursor: pointer;
 }
 
 .reduxIcon{
@@ -346,25 +342,16 @@ text-shadow: none;
 background-color: transparent !important;
 padding: 0px !important;
 margin-left: 10px !important;
-/* color: white; */
-/* color: rgba(68, 166, 68, 0.782) !important; */
 color: rgba(209, 209, 213, 0.63) !important;
 box-shadow: none;
 text-shadow: none;
 }
 
 .editBtn:hover{
-  /* transform: scale(1.0.25);
-  transition: .4s ease; */
+  cursor: pointer;
   color:rgb(247, 247, 250)  !important;
-  /* color: rgb(80, 251, 80) !important; */
-  /* background-color:rgb(141, 253, 167)!important; */
-  /* background-color: rgba(246, 250, 247, 0.537) !important; */
-  /* padding: 2px !important;  */
   opacity: 100%;
 }
-
-
 
 .movieDisplayBtn{
   background-color: rgba(45, 45, 47, 0.52);

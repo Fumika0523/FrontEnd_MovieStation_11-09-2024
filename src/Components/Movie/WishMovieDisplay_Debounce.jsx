@@ -8,7 +8,6 @@ import { Button} from "react-bootstrap"
 import {  useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,11 +16,10 @@ import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
 
 
-// cart item is added to the card >> green
-//this movie is already purchased, please check the order history >> error
-function MovieDisplay_Debounce({mode,movieData,setMovieData}) 
+function WishMovieDisplay_Debounce({mode}) 
 {
 
+  const [wishMovieData,setWishMovieData] = useState([])
   const [isHovered, setIsHovered] = useState(false);
 
   const divStyle = {
@@ -57,22 +55,9 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
 
 const navigate = useNavigate()
 const dispatch= useDispatch()
-// STate valiable
-// const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//initial value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
 
-const getMovieData = async () => {
-    console.log("Movie Data is called.");
-    let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
-    // res.data. {object} 
-    // console.log(res.data.movieData)
-    // // console.log(res.data.movieData._id);
-    setMovieData(res.data.movieData);
-    };
-    useEffect(()=>{
-        getMovieData()
-    },[])
 
 const fetchData = (searchTerm)=>{
     console.log("searchTerm",searchTerm)
@@ -82,7 +67,7 @@ const fetchData = (searchTerm)=>{
         element.moviename.toLowerCase().includes(searchText.toLowerCase()) //searching by element.title >> JSON structure always review
       )
     }
-    return filterData(searchTerm,movieData)
+    return filterData(searchTerm,wishMovieData)
   }
 console.log("filterMovieData",filterMovieData)
 
@@ -103,26 +88,25 @@ let config = {
     const fData = fetchData(searchTerm)
      setFilterMovieData(fData)
     }else{ //empty
-    setFilterMovieData(movieData) //reset to all blogs if search is empty
+    setFilterMovieData(wishMovieData)
     console.log("Re-render with searchTerm")
-    //searchTerm >> search reupdated >> depenedency Array >> re-render whenever you are typing in seach box  >> blog data  will be updated >> filteration >> .filter
      }   
     },900)
 return()=>{
     clearTimeout(timeoutId)
 }
-}, [searchTerm,movieData])
+}, [searchTerm,wishMovieData])
 console.log("filtermoviedata",filterMovieData)
-console.log("moviedata",movieData)
+console.log("wishMoviedata",wishMovieData)
 
 useEffect(()=>{
-    if(movieData){
-        setFilterMovieData(movieData)
+    if(wishMovieData){
+        setFilterMovieData(wishMovieData)
         // getSpecificMovieData()
     }
     // getMovieData()
     // console.log("MovieDisplay")
-},[movieData])
+},[wishMovieData])
 
 const deleteMovie=async(_id)=>{
     console.log("Movie Deleted from the DB..")
@@ -141,19 +125,9 @@ const getCartData=async()=>{
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
 
-const getWishData = async()=>{
-    let res = await axios.get(`${url}/add-wish-list`,config)
-    console.log("getWishData",getWishData)
-    // if(res.data && res.data.wishData){
-    
-    // }
-}
 
 const handleAdditem=async(movieItem)=>{
      console.log("movieItem,",movieItem)
-    // >> api call for updating the backend >> saving to the DB  
-    // "=" << Assignment operator
-    // "==" << condition comparison operator
     if (token == null){
             navigate(`/signin`) 
     } else {
@@ -196,6 +170,16 @@ const handleAdditem=async(movieItem)=>{
             }
             getCartData()
         }}
+
+    const getWishData = async()=>{
+    let res = await axios.get(`${url}/wish-list`,config)
+    console.log("getWishData",getWishData)
+    console.log("res",res)
+    setWishMovieData(res.data.wishData)
+}
+    useEffect(()=>{
+    getWishData()
+       },[]) 
 
 return (
 <>
@@ -261,7 +245,7 @@ return (
     :
 <>
 {filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
+    <MovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
                         
     // Delete Button
     deleteBtn={
@@ -330,4 +314,4 @@ return (
 </div>
  </>
  )}
-export default MovieDisplay_Debounce
+export default WishMovieDisplay_Debounce

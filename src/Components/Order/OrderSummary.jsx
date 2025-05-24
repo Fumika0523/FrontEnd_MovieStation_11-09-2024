@@ -32,9 +32,8 @@ function OrderSummary({ mode }) {
         // /order?sortBy=createdAt:asc
         const res = await axios.get(`${url}/order?sortBy=${sortBy}`,config)
         console.log(`${url}/order?sortBy=${sortBy}`)
-        setOrderData(res.data.OrderData)
-        console.log(res.data.OrderData
-            )
+        setOrderData(res.data.orderData)
+        console.log("res.data",res.data.orderData)
     }
     catch(error){
         console.log("Error fetching orders:",error);
@@ -54,14 +53,13 @@ const toggleSortOrder= () =>{
 }
 
     //declearing
-    const  totalOrderPrice = orderData.map((element) => {
-        const price = (element.movies).map((p) => {
+    const  totalOrderPrice = orderData?.map((element) => {
+        const price = (element.movies)?.map((p) => {
             return p.amount
         })
         const total = price.reduce((acc, cv) => acc + cv)
         return total
     })
-
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip"  {...props}>
@@ -95,8 +93,8 @@ const downloadFile = () =>{
                         </div>
                     </div>
                     {                      
-                        totalOrderPrice.map((x) => (
-                            orderData.map((element) => (
+                        totalOrderPrice?.map((x) => (
+                            orderData?.map((element) => (
                                 <div key={element._id} className="mb-4">
                                     <div className="d-flex mx-3  flex-row justify-content-between align-items-center my-2 ">
                                         <div className="fs-6 fw-bold">Order ID : {element._id}</div>

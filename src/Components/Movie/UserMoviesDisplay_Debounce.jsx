@@ -12,6 +12,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ToastContainer, toast } from 'react-toastify';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Rating from '@mui/material/Rating';
+
 
 const UserMovies = ({mode}) => {
 const navigate = useNavigate()
@@ -103,6 +106,28 @@ const getCartData=async()=>{
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
 
+
+const getwishMovieData=async()=>{
+    let res = await axios.get(`${url}/add-my-wish-list`,config)
+    console.log("getWishMovieData",res)
+    // if(res.data && res.data.getwishMovieData){
+    //     dispatch(removeItem())
+    //     res.data.cartData.map((element)=>dispatch(addItem(element)))
+    // }
+}
+
+const handleAddWishList = async(wishItem)=>{
+    console.log("wishItem",wishItem)
+    let res = await axios.post(`${url}/add-my-wish-list`,config)
+    console.log("res",res.data.message)
+    if(res.data.message == "Movie has been added successfully to wish List!"){
+        successNotify()
+    } else {
+        return   errorNotify()
+    }
+    getwishMovieData()
+}
+
 const handleAdditem=async(movieItem)=>{
     // console.log("movieItem,",movieItem)
     // >> api call for updating the backend >> saving to the DB  
@@ -122,7 +147,6 @@ const handleAdditem=async(movieItem)=>{
     }}
 
     return (
-    // <div>UserMovies</div>
     <Box 
     display="flex"
     flexDirection={"column"}
@@ -130,14 +154,11 @@ const handleAdditem=async(movieItem)=>{
       justifyContent={"end"}
       margin={2}
       >
-        <Grid  container  className=" border-4"
-        // style={displayStyle} 
-        >
+        <Grid  container  className=" border-4">
         <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
         {/* Search*/}
 
        <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
-
             <Button variant="secondary" onClick={()=>navigate('/allmovies')} className="text-nowrap me-3"><IoChevronBackOutline className="fs-4"/>Back to All Movies</Button>
 
             {/* Search Box */}
@@ -148,11 +169,10 @@ const handleAdditem=async(movieItem)=>{
        </Grid>
 
         </Grid>
-        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}
-   >
+        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
         {
           filterMovieData?.map((element,index)=>(
-                <MovieCard {...element} key={index} setUserMovieData={setUserMovieData} userMovieData={userMovieData} element={element} mode={mode} 
+       <MovieCard {...element} key={index} setUserMovieData={setUserMovieData} userMovieData={userMovieData} element={element} mode={mode} 
 
      // Delete Button
     deleteBtn={
@@ -181,7 +201,51 @@ const handleAdditem=async(movieItem)=>{
         pauseOnHover
         theme="light" />
         </>
-                  }
+        }
+
+    
+    //add to wish list 
+    wishBtn={
+        <>
+        <IconButton className="reduxIcon" 
+        onClick={()=>{handleAdditem(element)}}  >
+           <ShoppingCartIcon />
+        </IconButton>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" />
+        </>
+    }
+
+    // wishBtn = {
+    //     <>
+    // <IconButton className="reduxIcon" 
+    //     onClick={()=>{handleAdditem(element)}}  >
+    //        {/* <ShoppingCartIcon /> */}
+    //        A
+    //     </IconButton>
+    //     <ToastContainer
+    //     position="top-right"
+    //     autoClose={5000}
+    //     hideProgressBar={false}
+    //     newestOnTop={false}
+    //     closeOnClick={false}
+    //     rtl={false}
+    //     pauseOnFocusLoss
+    //     draggable
+    //     pauseOnHover
+    //     theme="light" />
+    //     </>
+    // }
+
      /> 
    ))}
    </Grid>

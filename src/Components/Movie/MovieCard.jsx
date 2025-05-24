@@ -18,13 +18,23 @@ import { createTheme} from '@mui/material/styles';
 import { useEffect } from 'react';
 import ModeIcon from '@mui/icons-material/Mode';
 import { ToastContainer, toast } from 'react-toastify';
-import FavoriteIcon from '@mui/icons-material/Favorite';import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Rating from '@mui/material/Rating';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,reduxAddcartBtn, movieData}) {
+export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,WishBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
-// console.log(mode)
+//  console.log("wishBtn",wishBtn)
+//  console.log("deleteBtn",deleteBtn)
+//  console.log("reduxAddcartBtn",reduxAddcartBtn)
+
+  const [isHovered, setIsHovered] = useState(false);
+
+  const divStyle = {
+    color: !isHovered ? ' rgba(163, 162, 162, 0.648)' : 'white',
+    cursor: 'pointer'
+  };
 
   const theme = createTheme({
     palette: {
@@ -67,10 +77,10 @@ const userId=sessionStorage.getItem('userId')
 //Comparison operator
 //movieData is all movie datas that were added in the website
 const isMovieOwner = userId === element?.owner; // true || false
-console.log("isMovieOwner",isMovieOwner)
-console.log("userId",userId)
-console.log("token",token)
-console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
+// console.log("isMovieOwner",isMovieOwner)
+// console.log("userId",userId)
+// console.log("token",token)
+// console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
 // SPECIFIC
 const getSpecificMovieData = async () =>{
   // console.log("Specific Movie Data is called....")
@@ -98,6 +108,34 @@ const starNum = ratNum.rating / 2
 // console.log(Math.round(4.1)) //4
 const rating1 = {rating}
 
+ const addWishNotify = () => toast.success('Added to Wish List!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+      });
+
+     const handleAddWishitem=async(movieItem)=>{
+        // console.log("movieItem,",movieItem)
+        // >> api call for updating the backend >> saving to the DB  
+        // "=" << Assignment operator
+        // "==" << condition comparison operator
+        if (token == null){
+                navigate(`/signin`) 
+        } else {
+            let res=await axios.post(`${url}/add-wish-list`, movieItem,config)
+            console.log("res",res.data.message)
+            if(res.data.message == "Wish Item has been added successfully!"){
+                addWishNotify()
+            }else{
+                console.log("This movie is already added to wish list")
+            }
+        }}
+
    return (
   <>
     <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
@@ -107,37 +145,51 @@ const rating1 = {rating}
          <CardHeader className="py-2 fw-bold"
 
       avatar={
-          <Avatar sx={{ color:"white",backgroundColor:"rgba(246, 90, 23, 0.64)"}} aria-label="movietitle">
+          <Avatar sx={{ color:"white",backgroundColor:"rgba(205, 26, 26, 0.48)"}} aria-label="movietitle">
             {moviename.substring(0,1)}
           </Avatar>
           }
 
           action={
-            
             token && isMovieOwner ?
           <>
-       <span className=' d-flex flex-row align-items-center justify-content-center gap-1' style={{ position:"absolute",right:"3px",top:"28px"}}>
+       <span className=' d-flex flex-row align-items-center justify-content-center ' style={{ position:"absolute",right:"3px",top:"28px"}}>
 
           {/* EDIT */}
           <Tooltip title="Edit">
-          <ModeIcon onClick={()=>navigate(`/editmovie/${_id}`)} className='editBtn fs-5'/>
+          <ModeIcon onClick={()=>navigate(`/editmovie/${_id}`)} className='editBtn me-1 fs-4'/>
           </Tooltip>
 
           {/* Delete Icon */}
-           {deleteBtn}
+          {deleteBtn}
 
-        {/* Add to Wish List */}
-        <Tooltip title="Add to Wish List">
-        <FavoriteIcon onClick={()=>{navigate(`/movietrailer/${_id}`)}}
-        className='addmyListIcon fs-5' />
-        </Tooltip>
-
+          {/* ADDTOWISH */}
+            <>
+               <Tooltip title="Add to Wish List">
+               <FavoriteIcon
+               onClick={()=>{handleAddWishitem(element)}} 
+                   style={divStyle}
+                onMouseOver={() => setIsHovered(true)}
+                onMouseOut={() => setIsHovered(false)}
+                className=""/>
+              </Tooltip>
+              <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick={false}
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light" 
+                  />
+              </>
+          
            {/* See More */}
         <Tooltip title="See More">
-            {/* <IconButton className=' p-1'
-            aria-label="settings" 
-            onClick={()=>{navigate(`/movietrailer/${_id}`)}}> */}
-              <MoreVertIcon 
+          <MoreVertIcon 
                onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
             {/* </IconButton> */}
         </Tooltip>
@@ -146,22 +198,15 @@ const rating1 = {rating}
           :
         token ?
           <>
-        <span className=' d-flex flex-row align-items-center justify-content-center gap-1' style={{ position:"absolute",right:"3px",top:"28px"}}>
+        <span className=' d-flex flex-row align-items-center justify-content-center' style={{ position:"absolute",right:"3px",top:"28px"}}>
 
-            {/* Add to Wish List */}
-        <Tooltip title="Add to Wish List">
-        <FavoriteIcon onClick={()=>{navigate(`/movietrailer/${_id}`)}}
-        className='addmyListIcon fs-5' />
-        </Tooltip>
+          {/* ADDTOWISH */}
+         {WishBtn}
       
-               {/* See More */}
-            <Tooltip title="See More">
-            {/* <IconButton className=' p-1'
-            aria-label="settings" 
-            onClick={()=>{navigate(`/movietrailer/${_id}`)}}> */}
-              <MoreVertIcon 
+       {/* See More */}
+      <Tooltip title="See More">
+        <MoreVertIcon 
                onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
-            {/* </IconButton> */}
         </Tooltip>
         </span>
             </>

@@ -36,6 +36,7 @@ function SignIn({setIsAuthenticated}) {
     console.log("res.data",res.data)
     sessionStorage.setItem('token',res.data.token)
     sessionStorage.setItem('userId',res.data.user._id)
+    sessionStorage.setItem('name',res.data.user.name)
     console.log('userId')
     // setAccessAddMovie(res.data.token)
     if(res.data.token){

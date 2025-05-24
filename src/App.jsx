@@ -1,7 +1,6 @@
 import './App.css'
 import AboutUs_Section from './Components/AboutUs_page/AboutUs_Section';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MovieDisplay from './Components/Movie/MovieDisplay';
 import NavBar from './Components/HomeSreen/NavBar';
 import Service_Section from './Components/Service_page/Service_Section';
 import ContactUs_Section from './Components/Enquiries/ContactUs_Section';
@@ -28,6 +27,8 @@ import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
+import WishMovieDisplay_Debounce from './Components/Movie/WishMovieDisplay_Debounce';
+
 
 function App() {
   const [movieData,setMovieData] = useState([])
@@ -91,6 +92,7 @@ const [userData,setUserData]=useState([])
        <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
+       <Route path="/mywishlist" mode={mode} element={<WishMovieDisplay_Debounce/>}/>
        <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
        </>

@@ -13,13 +13,13 @@ const [enquiryData,  setEnquiryData] = useState([])
 const token = sessionStorage.getItem('token')
 console.log('token',token)
 
-// const firstname = sessionStorage.getItem('name')
+ const firstname = sessionStorage.getItem('name')
 // console.log('firstname',firstname)
 
-// const lastname = sessionStorage.getItem('lastname')
+ const lastname = sessionStorage.getItem('lastname')
 // console.log('lastname',lastname)
 
-// const email = sessionStorage.getItem('email')
+ const email = sessionStorage.getItem('email')
 // console.log('email',email)
 
 // const phone_number = sessionStorage.getItem('phone_number')
