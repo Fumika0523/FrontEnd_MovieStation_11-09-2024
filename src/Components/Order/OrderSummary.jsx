@@ -33,14 +33,13 @@ function OrderSummary({ mode }) {
         const res = await axios.get(`${url}/order?sortBy=${sortBy}`,config)
         console.log(`${url}/order?sortBy=${sortBy}`)
         setOrderData(res.data.orderData)
-        console.log("res.data",res.data.orderData)
+        console.log("res.data.orderData",res.data.orderData)
     }
     catch(error){
         console.log("Error fetching orders:",error);
     }
     setLoading(false)
 }
-
 useEffect(()=>{
     fetchOrders(sortedData)
 },[])
@@ -63,17 +62,39 @@ const toggleSortOrder= () =>{
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip"  {...props}>
-            Download As PDF
+            Download as PDF
         </Tooltip>
     );
+    const clientname = sessionStorage.getItem('name')
 
-const downloadFile = () =>{
-    const el = document.createElement("a");
-    el.href = WebStories.pdf;
-    el.download = "OrderSummary.pdf";
-    document.body.appendChile(el);
-    el.click()    
+    const handleDownload=async(singleOrder)=>{
+        console.log("Button is pressed",clientname)
+        console.log(`=${clientname}`)
+        console.log("singleOrder",singleOrder)
+        console.log("orderId",singleOrder.element._id)
+
+        let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}`
+        console.log(url1)
+        const result = await fetch(`${url1}`) // when you using fetch >> conver to json. but when u using axios, you dont need.
+        const response = await result.json()
+        console.log("response",response)
+
+        if(!response.status==200 && !response.ok && !response.statusText=="OK"){
+        throw new Error("Failed to download PDF")
+        }
+        const blob = await response.blob()
+        const url = window.URL.createObjectURL(blob)
+        console.log("url",url)
+
+        // const link = document.createElement("a")
+        // link.href=url
+        // link.download="order-summary-pdf"
+        // document.body.append(link)
+        // link.click()
+        // document.body.removeChild(link)
+        // window.URL.revokeObjectURL(url)
 }
+
     return (
         <>
             <div className="row mx-auto">
@@ -103,7 +124,7 @@ const downloadFile = () =>{
                                             delay={{ show: 250, hide: 400 }}
                                             overlay={renderTooltip} >
                                             <Button variant="none"
-                                            onClick={downloadFile}>
+                                            onClick={()=>handleDownload({element})}>
                                                 <MdDownloading className="fs-2"
                                                 style={{color:"rgb(251, 181, 4)"}} />
                                             </Button>
