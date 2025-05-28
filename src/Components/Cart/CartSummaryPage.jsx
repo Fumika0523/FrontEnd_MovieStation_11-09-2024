@@ -48,6 +48,7 @@ console.log(cartItems)
           dispatch(removeItem())
           navigate(`/ordersummary`) 
         }}
+        
         const formatDate = (dateString) =>{
           // console.log(dateString)
           const date = new Date (dateString)

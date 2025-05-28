@@ -67,17 +67,41 @@ const toggleSortOrder= () =>{
     );
     const clientname = sessionStorage.getItem('name')
 
-    const handleDownload=async(singleOrder)=>{
+      const formatDate = (dateString) =>{
+          const date = new Date (dateString)
+          return date.toLocaleDateString('en-US',{
+              year:"numeric",
+              month:"short",
+              day:"numeric"
+          })
+         }
+
+         const handleDownload=async(singleOrder,x)=>{
+        console.log("singleOrder",singleOrder)
+        console.log(singleOrder.x)
         console.log("Button is pressed",clientname)
-        console.log(`=${clientname}`)
         console.log("singleOrder",singleOrder)
         console.log("orderId",singleOrder.element._id)
+        let orderdate = formatDate(singleOrder.element.updatedAt)
+        console.log("orderDate",orderdate)
+        // const response = await fetch(`http://localhost:8002/getinvoice?orderid=${orderId}`, {
+//   method: "GET",
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// });
+let moviename = singleOrder.element.movies.map((element) => element.moviename).join(","); //method in JavaScript is used to convert an array into a single string, with each element separated by a comma.
+console.log("moviename",moviename)
+let totalprice = singleOrder.x
+console.log(totalprice)
+let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}&moviename=${moviename}&orderdate=${orderdate}&totalprice=${totalprice}`;
 
-        let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}`
-        console.log(url1)
-        const result = await fetch(`${url1}`) // when you using fetch >> conver to json. but when u using axios, you dont need.
-        const response = await result.json()
-        console.log("response",response)
+console.log(url1)
+const response = await fetch(`${url1}`, {
+headers: {
+    Authorization: `Bearer ${token}`
+  }
+}) // when you using fetch >> conver to json. but when u using axios, you dont need.
 
         if(!response.status==200 && !response.ok && !response.statusText=="OK"){
         throw new Error("Failed to download PDF")
@@ -86,13 +110,13 @@ const toggleSortOrder= () =>{
         const url = window.URL.createObjectURL(blob)
         console.log("url",url)
 
-        // const link = document.createElement("a")
-        // link.href=url
-        // link.download="order-summary-pdf"
-        // document.body.append(link)
-        // link.click()
-        // document.body.removeChild(link)
-        // window.URL.revokeObjectURL(url)
+        const link = document.createElement("a")
+        link.href=url
+        link.download="order-summary-pdf"
+        document.body.append(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(url)
 }
 
     return (
@@ -115,7 +139,7 @@ const toggleSortOrder= () =>{
                     </div>
                     {                      
                         totalOrderPrice?.map((x) => (
-                            orderData?.map((element) => (
+                        orderData?.map((element) => (
                                 <div key={element._id} className="mb-4">
                                     <div className="d-flex mx-3  flex-row justify-content-between align-items-center my-2 ">
                                         <div className="fs-6 fw-bold">Order ID : {element._id}</div>
@@ -124,7 +148,7 @@ const toggleSortOrder= () =>{
                                             delay={{ show: 250, hide: 400 }}
                                             overlay={renderTooltip} >
                                             <Button variant="none"
-                                            onClick={()=>handleDownload({element})}>
+                                            onClick={()=>handleDownload({element,x})}>
                                                 <MdDownloading className="fs-2"
                                                 style={{color:"rgb(251, 181, 4)"}} />
                                             </Button>
