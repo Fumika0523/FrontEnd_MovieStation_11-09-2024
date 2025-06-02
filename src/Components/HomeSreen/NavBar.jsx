@@ -25,6 +25,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { TbLetterMSmall } from "react-icons/tb";
 import { TbLetterS } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 
 function NavBar({ mode, setMode }) {
@@ -130,8 +131,8 @@ function NavBar({ mode, setMode }) {
                  >Movies</span> 
                   </Dropdown.Toggle>
                   <Dropdown.Menu 
-                  className=" dropdownMenu px-2 " 
-                  style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray" }}>
+                  className="dropdownMenu px-2 " 
+                  style={{ backgroundColor: mode == "light" ? "white" : "#121212" }}>
                    <Dropdown.Item href="#" 
                       className="border-bottom d-flex justify-content-start align-items-center flex-row"
                       onClick={() => navigate('/allmovies')}     
@@ -209,8 +210,33 @@ function NavBar({ mode, setMode }) {
                     >
                   <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                   </Badge>
-                  <span className="fs-5"
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span>
+                  {/* <span className="fs-5"
+                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
+                </Button>
+              </Nav.Link>
+
+             {/* Wish list */}
+              <Nav.Link href="#" className=" p-0">
+                <Button  className="d-flex  justify-content-center align-items-end"
+                  variant="none"
+                  onClick={() => navigate('/mywishlist')}>
+                  <Badge variant="text"
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        fontSize: "0.7rem", // Reduce font size
+                        minWidth: "10px",   // Adjust width to fit smaller content
+                        height: "16px",     // Adjust height
+                        right: 3,
+                        top: -2,
+                      },
+                    }}
+                    color="primary" badgeContent={cartItems.length}
+                    // style={{ color: mode == "light" ? greyColor : amberColor, }}
+                    >
+                  <FaHeart className="fs-4 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
+                  </Badge>
+                  {/* <span className="fs-5"
+                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
                 </Button>
               </Nav.Link>
             </Nav>
@@ -222,50 +248,49 @@ function NavBar({ mode, setMode }) {
           <Nav className=" d-flex text-nowrap justify-content-center align-item-center align-item- flex-row position-absolute "
           style={{right:"3px",top:"10px"}}
           >
-            {token ?
+          {  token ?
               <>
-                {/* USERNAME */}
-                <Dropdown className="dropdownMenu ">
-                  <Dropdown.Toggle variant="none" id="dropdown-basic" 
-                  className=" d-flex text-nowrap px-1 justify-content-center align-items-center"
-                  style={{ color: mode == "light" ? "black" : "white" }}
-                  >
-                  <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"40px",height:"37px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 me-1" >{name[0].toUpperCase()}</span>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu 
-                  className="dropdownMenu border px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>
-                    {/* MY ACCOUNT */}
-                   <Dropdown.Item 
-                    className="d-flex justify-content-start align-items-center border-bottom"
-                     href="/profile"
-                      >
-                    <FaUser className="me-1 fs-4 text-warning" />
-                    <span className="fs-6" 
-                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>
-                    My Account</span></Dropdown.Item>
+          {/* USERNAME */}
+          <Dropdown  style={{width:"65px"}} 
+          className="dropdownMenu border border-0 d-flex align-items-center">
+          <Dropdown.Toggle variant="none" id="dropdown-basic" 
+          className="border-0 border
+           mx-auto d-flex text-nowrap px-1 justify-content-center align-items-center"
+          style={{ color: mode == "light" ? "black" : "white" }}>
+          <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"33px",height:"33px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-5 " >{name[0].toUpperCase()}</span>
+          </Dropdown.Toggle>
+          <Dropdown.Menu 
+          className="dropdownMenu  px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>
+          
+          {/* MY ACCOUNT */}
+          <Dropdown.Item className="d-flex justify-content-start align-items-center border-bottom" href="/profile" >
+          <FaUser className="me-1 fs-4 text-warning" />
+          <span className="fs-6" style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>
+          My Account</span></Dropdown.Item>
 
-                    {/* MY ORDER */}
-                    <Dropdown.Item 
-                    className="d-flex  justify-content-start align-items-center"
-                      href="/ordersummary">
-                    <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6" 
-                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>My Order</span>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-
-                {/* Power Off */}
-                <Nav.Link href="#" className="px-0">
-                  <Button variant="none"
-                    type="submit" className=""
+          {/* MY ORDER */}
+          <Dropdown.Item className="d-flex  justify-content-start align-items-center" href="/ordersummary">
+          <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6" 
+          style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>My Order</span>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+          </Dropdown>
+ 
+      {/* Power Off */}
+      <Nav.Link href="#" className="d-flex align-items-center justify-content-center "
+       onClick={() => handleSignOut()}>
+        <FaPowerOff className="fs-4" style={{ color: "rgba(250, 27, 27, 0.58)" }} />
+       {/* <Button variant="none"
+                    type="submit" className="border border-0 outline-none mx-auto"
                     onClick={() => handleSignOut()}>
                     <FaPowerOff className="fs-4" style={{ color: "rgba(250, 27, 27, 0.58)" }} />
-                  </Button>
-                </Nav.Link>
+                  </Button> */}
+      </Nav.Link>
 
-                {/* Dark / Light Mode */}
-                <Nav.Link href="#" className="px-0">
-                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
+      {/* Dark / Light Mode */}
+      {/* <Nav.Link href="#" style={{width:"55px"}} className=" px-0">
+      <Button variant="none" className=" border border-0 outline-none
+                  mx-auto d-flex text-nowrap justify-content-center align-items-center"
                     style={{ color: mode == "light" ? greyColor : amberColor }}
                     onClick={() => {
                       //setMode("light")
@@ -274,18 +299,34 @@ function NavBar({ mode, setMode }) {
                       // console.log(mode)
                     }}>
                     {mode === "light" ? 
+                    <DarkModeIcon className="fs-4"/> : <LightModeIcon className="fs-4" />}
+     </Button>
+      </Nav.Link> */}
+         <Nav.Link href="#" className="d-flex align-items-center justify-content-center"
+                    style={{ color: mode == "light" ? greyColor : amberColor }}
+                    onClick={() => {
+                      //setMode("light")
+                      //true?"truedata":"falsedata"
+                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                      // console.log(mode)
+                    }}
+                   
+                   >
+                    {mode === "light" ? 
                     <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
-                  </Button>
+                  {/* </Button> */}
                 </Nav.Link>
-              </>
+      </>
               :
               <>
                {/* Sign in */}
-                <Nav.Link href="#" className="px-0 me-1 ">
-                <OverlayTrigger placement="bottom"
+                <Nav.Link href="/signin" className="d-flex align-items-center justify-content-center " >
+                {/* <OverlayTrigger placement="bottom"
                   overlay={<Tooltip id="button-tooltip-2">Sign In</Tooltip>} 
-                  >
-                {({ ref, ...triggerHandler }) => (
+                  > */}
+                        <PiSignInFill 
+                          className="fs-4" style={{ color: mode == "light" ? "black" : "white" }} />
+                {/* {({ ref, ...triggerHandler }) => (
                  <Button
                      variant="none"
                           ref={ref}
@@ -296,30 +337,42 @@ function NavBar({ mode, setMode }) {
                         <PiSignInFill 
                           className="fs-4" style={{ color: mode == "light" ? "black" : "white" }} />
                         </Button>
-                      )}
-                 </OverlayTrigger>
+                      )} */}
+                 {/* </OverlayTrigger> */}
                  </Nav.Link>
 
                 {/* Sign up */}
-                <Nav.Link href="#" className="px-0  me-1">
+                <Nav.Link href="/signup" className="d-flex align-items-center justify-content-center "
+                 >
+                {/* {({ ref, ...triggerHandler }) => (
+                <Nav.Link href="#" style={{width:"55px"}} className="px-0 border mx-auto"
+                  ref={ref}
+                          {...triggerHandler}
+                  onClick={() => { navigate('/signup') }}>
                 <OverlayTrigger placement="bottom"
-                      overlay={<Tooltip id="button-tooltip-2">Sign Up</Tooltip>}
-                    >
-                      {({ ref, ...triggerHandler }) => (
+                overlay={<Tooltip id="button-tooltip-2" >Sign Up</Tooltip>}
+                  > */}
+                      <FaUser
+                          class="fs-5 mx-auto" style={{ color: mode == "light" ? "black" : "white" }}
+                          />
+     
+                      {/* {({ ref, ...triggerHandler }) => (
                         <Button
                           variant="none"
                           ref={ref}
                           {...triggerHandler}
-                          className="d-inline-flex align-items-center"
+                          className="d-flex align-items-center border mx-auto justify-content-center "
                           onClick={() => { navigate('/signup') }}
                         >
                           <FaUser
                           class="fs-5" style={{ color: mode == "light" ? "black" : "white" }}
                           />
                         </Button>
-                      )}
-                 </OverlayTrigger>
+                      )} */}
+                 {/* </OverlayTrigger> */}
                  </Nav.Link>
+                 {/* )}  */}
+
 
                  {/* LIGHT DARK MODE */}
                  {/* <Nav.Link href="#" className="px-0 me-1 ">
@@ -335,18 +388,27 @@ function NavBar({ mode, setMode }) {
                   </Button>
                 </Nav.Link> */}
                    {/* Dark / Light Mode */}
-                   <Nav.Link href="#" className="px-0">
-                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
+                   <Nav.Link href="#" className="d-flex align-items-center justify-content-center"
                     style={{ color: mode == "light" ? greyColor : amberColor }}
                     onClick={() => {
                       //setMode("light")
                       //true?"truedata":"falsedata"
                       setMode(mode == "light" ? "dark" : "light")//setMode(light)
                       // console.log(mode)
-                    }}>
+                    }}
+                   
+                   >
+                  {/* <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
+                    style={{ color: mode == "light" ? greyColor : amberColor }}
+                    onClick={() => {
+                      //setMode("light")
+                      //true?"truedata":"falsedata"
+                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
+                      // console.log(mode)
+                    }}> */}
                     {mode === "light" ? 
                     <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
-                  </Button>
+                  {/* </Button> */}
                 </Nav.Link>
               </>
             }

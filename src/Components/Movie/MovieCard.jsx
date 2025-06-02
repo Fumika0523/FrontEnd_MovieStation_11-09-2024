@@ -139,13 +139,14 @@ const rating1 = {rating}
    return (
   <>
     <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
-      <Card     
-       className="movieCard" 
+      <Card className="movieCard" 
       style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 8px 0"}}>
-         <CardHeader className="py-2 fw-bold"
+      <CardHeader className="py-2 fw-bold"
 
       avatar={
-          <Avatar sx={{ color:"white",backgroundColor:"rgba(205, 26, 26, 0.48)"}} aria-label="movietitle">
+          <Avatar 
+          style={{ color: "white", backgroundColor: mode == "light"?" rgb(154, 19, 19)":"rgb(154, 19, 19)"}}      
+           aria-label="movietitle">
             {moviename.substring(0,1)}
           </Avatar>
           }
@@ -191,7 +192,6 @@ const rating1 = {rating}
         <Tooltip title="See More">
           <MoreVertIcon 
                onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
-            {/* </IconButton> */}
         </Tooltip>
             </span>
           </>         
@@ -200,8 +200,30 @@ const rating1 = {rating}
           <>
         <span className=' d-flex flex-row align-items-center justify-content-center' style={{ position:"absolute",right:"3px",top:"28px"}}>
 
-          {/* ADDTOWISH */}
-         {WishBtn}
+           {/* ADDTOWISH */}
+            <>
+               <Tooltip title="Add to Wish List">
+               <FavoriteIcon
+               onClick={()=>{handleAddWishitem(element)}} 
+                   style={divStyle}
+                onMouseOver={() => setIsHovered(true)}
+                onMouseOut={() => setIsHovered(false)}
+                className=""/>
+              </Tooltip>
+              <ToastContainer
+                  position="top-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick={false}
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light" 
+                  />
+              </>
+          
       
        {/* See More */}
       <Tooltip title="See More">

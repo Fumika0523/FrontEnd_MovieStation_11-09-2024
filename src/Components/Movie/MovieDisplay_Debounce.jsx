@@ -8,7 +8,6 @@ import { Button} from "react-bootstrap"
 import {  useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,19 +15,15 @@ import { FaHeart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
 
-
 // cart item is added to the card >> green
 //this movie is already purchased, please check the order history >> error
 function MovieDisplay_Debounce({mode,movieData,setMovieData}) 
 {
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  const divStyle = {
+const [isHovered, setIsHovered] = useState(false);
+const divStyle = {
     color: !isHovered ? ' rgba(163, 162, 162, 0.648)' : 'white',
     cursor: 'pointer'
-  };
-
+  }
 
 //conditionally done.
 const successNotify = () => toast.success('Added to the cart!', {
@@ -53,7 +48,7 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
         progress: undefined,
         theme: "light",
         // transition: Bounce,
-        });      
+});      
 
 const navigate = useNavigate()
 const dispatch= useDispatch()
@@ -145,7 +140,6 @@ const getWishData = async()=>{
     let res = await axios.get(`${url}/add-wish-list`,config)
     console.log("getWishData",getWishData)
     // if(res.data && res.data.wishData){
-    
     // }
 }
 
@@ -233,12 +227,12 @@ return (
     </>
     }
     <>
-        {/* Debounce Search*/}
-        <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"180px",color:"white"}}
-        className="form-control  border-0  ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
-            onChange={(e) => {
-            console.log(e.target.value)
-        setSearchTearm(e.target.value)}}/>
+    {/* Debounce Search*/}
+    <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"180px",color:"white"}}
+    className="form-control  border-0  ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+    onChange={(e) => {
+    console.log(e.target.value)
+    setSearchTearm(e.target.value)}}/>
     </>
   </div>
 </Grid>
@@ -248,7 +242,6 @@ return (
 { 
  filterMovieData?.length === 0?
  <>
-
  <div className="position-relative mt-2 border-4" 
  style={{maxHeight:"390px", width:"100%"}} >
      <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
@@ -293,7 +286,6 @@ return (
     theme="light" />
     </>
     }
-
 
     // WishBtn={
     // <>

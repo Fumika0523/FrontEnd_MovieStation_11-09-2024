@@ -14,6 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
+import { IoIosFilm } from "react-icons/io";
 
 
 function WishMovieDisplay_Debounce({mode}) 
@@ -184,133 +185,129 @@ const handleAdditem=async(movieItem)=>{
 return (
 <>
 <div>
-<Box 
-    display="flex"
-    flexDirection={"column"}
-    alignItems="center"
-    justifyContent={"center"}
-    margin={2} >
-    <Grid  container  className="mx-auto d-flex justify-content-end flex-row align-items-center">
-    {/* Search*/}
-    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+    <Box display="flex" flexDirection={"column"} 
+        alignItems="center" justifyContent={"center"}
+        margin={2} >
+        <Grid container className=" mx-auto d-flex justify-content-between flex-row align-items-center">
+        <div className="text-start d-flex align-items-center ms-2 fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</div>
+        {/* Search*/}
+        <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+      
+        {
+            token &&
+        <>
+        {/* All Movie */}
+        <Button variant="none" onClick={()=>navigate('/allmovies')} className="movieDisplayBtn"
+        >
+        <IoIosFilm className="fs-4 movieIcon" />
+        <span className="d-md-block d-none">All Movies</span>
+        </Button>
 
-    {
-        token &&
-    <>
-    {/* Wish List */}
-    <Button variant="none" onClick={()=>navigate('/mywishlist')} className="movieDisplayBtn">
-    <FaHeart className="fs-5 iconHeart me-1" /><span className="d-md-block d-none">    
-    My Wish List
-    </span>
-    </Button>
-
-    {/* ADD MOVIE */}
-    <Button variant="none" className="movieDisplayBtn" onClick={()=>navigate('/addmovie')}
-  
-    >
-     <FaPlusCircle className="fs-5 me-1 addIcon" 
-         /><span className="d-md-block d-none">Add Movie</span></Button>
-    
-    {/* My MOVIES */}
-    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
-    <FaBookmark className="fs-5 me-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> </Button>
-    </>
-    }
-    <>
+        {/* ADD MOVIE */}
+        {/* <Button variant="none" className="movieDisplayBtn" onClick={()=>navigate('/addmovie')} >
+        <FaPlusCircle className="fs-5 me-1 addIcon"/>
+        <span className="d-md-block d-none">Add Movie</span></Button>
+         */}
+        {/* My MOVIES */}
+        {/* <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
+        <FaBookmark className="fs-5 me-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> </Button> */}
+        </>
+        }
+        <>
+        
         {/* Debounce Search*/}
         <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"180px",color:"white"}}
         className="form-control  border-0  ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
-            onChange={(e) => {
-            console.log(e.target.value)
+        onChange={(e) => {
+        // console.log(e.target.value)
         setSearchTearm(e.target.value)}}/>
+        </>
+    </div>
+    </Grid>
+        {/* each movie card */}
+        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
+
+    { 
+        filterMovieData?.length === 0?
+    <>
+
+    <div className="position-relative mt-2 border-4" 
+    style={{maxHeight:"390px", width:"100%"}} >
+        <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
+        <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
+        <span className="text-warning">The Movie is Not Found. </span><br />
+        Explore other movies,and please check next week for "inception"</h4>
+    </div>
+
     </>
-  </div>
-</Grid>
-    {/* each movie card */}
-    <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
-
-{ 
- filterMovieData?.length === 0?
- <>
-
- <div className="position-relative mt-2 border-4" 
- style={{maxHeight:"390px", width:"100%"}} >
-     <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
-     <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
-     <span className="text-warning">The Movie is Not Found. </span><br />
-     Explore other movies,and please check next week for "inception"</h4>
- </div>
-
- </>
-    :
-<>
-{filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
-                        
-    // Delete Button
-    deleteBtn={
-    <Tooltip title="Delete">
-        <DeleteIcon style={{cursor:"pointer"}}
-           onClick={()=> deleteMovie(element._id)}
-           className="me-1 deleteBtn  fs-4"/>
-    </Tooltip>
-}
-
-    // Redux
-    reduxAddcartBtn={
-    <>    
-    <Tooltip title="Add to Cart">
-       <ShoppingCartIcon className="reduxIcon fs-3"
-       onClick={()=>{handleAdditem(element)}} 
-       />
-    </Tooltip>
-    <ToastContainer
-    position="top-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick={false}
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="light" />
-    </>
+        :
+    <>
+    {filterMovieData?.map((element, index) => (
+        <MovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
+                            
+        // Delete Button
+        deleteBtn={
+        <Tooltip title="Delete">
+            <DeleteIcon style={{cursor:"pointer"}}
+            onClick={()=> deleteMovie(element._id)}
+            className="me-1 deleteBtn  fs-4"/>
+        </Tooltip>
     }
 
+        // Redux
+        reduxAddcartBtn={
+        <>    
+        <Tooltip title="Add to Cart">
+        <ShoppingCartIcon className="reduxIcon fs-3"
+        onClick={()=>{handleAdditem(element)}} />
+        </Tooltip>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" />
+        </>
+        }
 
-    // WishBtn={
-    // <>
-    //  <Tooltip title="Add to Wish List">
-    //  <FavoriteIcon
-    //  onClick={()=>{handleAddWishitem(element)}} 
-    //      style={divStyle}
-    //   onMouseOver={() => setIsHovered(true)}
-    //   onMouseOut={() => setIsHovered(false)}
 
-    //   className=""/>
-    // </Tooltip>
-    // <ToastContainer
-    //     position="top-right"
-    //     autoClose={5000}
-    //     hideProgressBar={false}
-    //     newestOnTop={false}
-    //     closeOnClick={false}
-    //     rtl={false}
-    //     pauseOnFocusLoss
-    //     draggable
-    //     pauseOnHover
-    //     theme="light" 
-    //     />
-    // </>
-    // }
-    
-        /> 
-    )) }
-</>
-}
-</Grid>
-</Box>
+        // WishBtn={
+        // <>
+        //  <Tooltip title="Add to Wish List">
+        //  <FavoriteIcon
+        //  onClick={()=>{handleAddWishitem(element)}} 
+        //      style={divStyle}
+        //   onMouseOver={() => setIsHovered(true)}
+        //   onMouseOut={() => setIsHovered(false)}
+
+        //   className=""/>
+        // </Tooltip>
+        // <ToastContainer
+        //     position="top-right"
+        //     autoClose={5000}
+        //     hideProgressBar={false}
+        //     newestOnTop={false}
+        //     closeOnClick={false}
+        //     rtl={false}
+        //     pauseOnFocusLoss
+        //     draggable
+        //     pauseOnHover
+        //     theme="light" 
+        //     />
+        // </>
+        // }
+        
+            /> 
+        )) }
+    </>
+    }
+    </Grid>
+    </Box>
 </div>
  </>
  )}

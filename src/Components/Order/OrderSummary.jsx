@@ -77,46 +77,57 @@ const toggleSortOrder= () =>{
          }
 
          const handleDownload=async(singleOrder,x)=>{
-        console.log("singleOrder",singleOrder)
-        console.log(singleOrder.x)
-        console.log("Button is pressed",clientname)
-        console.log("singleOrder",singleOrder)
-        console.log("orderId",singleOrder.element._id)
+        // console.log("singleOrder",singleOrder)
+        // console.log(singleOrder.x)
+        // console.log("Button is pressed",clientname)
+        // console.log("singleOrder",singleOrder)
+        // console.log("orderId",singleOrder.element._id)
         let orderdate = formatDate(singleOrder.element.updatedAt)
-        console.log("orderDate",orderdate)
+        //console.log("orderDate",orderdate)
         // const response = await fetch(`http://localhost:8002/getinvoice?orderid=${orderId}`, {
 //   method: "GET",
 //   headers: {
 //     Authorization: `Bearer ${token}`,
 //   },
 // });
-let moviename = singleOrder.element.movies.map((element) => element.moviename).join(","); //method in JavaScript is used to convert an array into a single string, with each element separated by a comma.
-console.log("moviename",moviename)
+// let moviename = singleOrder.element.movies.map((element) => element.moviename).join(","); //method in JavaScript is used to convert an array into a single string, with each element separated by a comma.
+// console.log("moviename",moviename)
+
+console.log(singleOrder.element.movies)
+
 let totalprice = singleOrder.x
 console.log(totalprice)
-let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}&moviename=${moviename}&orderdate=${orderdate}&totalprice=${totalprice}`;
+
+let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}&orderdate=${orderdate}&totalprice=${totalprice}`;
 
 console.log(url1)
 const response = await fetch(`${url1}`, {
+method:'POST',
 headers: {
-    Authorization: `Bearer ${token}`
-  }
+    Authorization: `Bearer ${token}`,
+    'Content-Type':'application/json'
+  },
+  //req.body
+  body: JSON.stringify({
+    name: 'God Father',
+    price: 150
+  })
 }) // when you using fetch >> conver to json. but when u using axios, you dont need.
 
-        if(!response.status==200 && !response.ok && !response.statusText=="OK"){
-        throw new Error("Failed to download PDF")
-        }
-        const blob = await response.blob()
-        const url = window.URL.createObjectURL(blob)
-        console.log("url",url)
+    if(!response.status==200 && !response.ok && !response.statusText=="OK"){
+    throw new Error("Failed to download PDF")
+    }
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    console.log("url",url)
 
-        const link = document.createElement("a")
-        link.href=url
-        link.download="order-summary-pdf"
-        document.body.append(link)
-        link.click()
-        document.body.removeChild(link)
-        window.URL.revokeObjectURL(url)
+    const link = document.createElement("a")
+    link.href=url
+    link.download="order-summary-pdf"
+    document.body.append(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
 }
 
     return (

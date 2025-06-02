@@ -32,7 +32,7 @@ function SignIn({setIsAuthenticated}) {
 
   const postSignInUser=async(loginuser)=>{
     console.log(loginuser)
-    const res=await axios.post(`${url}/signin`,loginuser)
+    const res=await axios.post(`${url}/signin`,loginuser) //loginuser is data
     console.log("res.data",res.data)
     sessionStorage.setItem('token',res.data.token)
     sessionStorage.setItem('userId',res.data.user._id)

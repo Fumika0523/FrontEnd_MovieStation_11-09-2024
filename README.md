@@ -69,3 +69,47 @@ search >> if a user tries found a movie(if a movie is not found explore other mo
 >> developer should add that movie and trigger email to be sent out
 
 From wish 
+
+//////////
+axios is a package >> build up for fetch
+pdf doesnt accept the axios >> so need to use fetch
+
+fetch('https://example.com/api', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'John',
+    age: 30
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+
+
+------------------------------------
+
+async function sendData() {
+  try {
+    const response = await fetch('https://example.com/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Alice',
+        age: 25
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Response:', result);
+  } catch (error) {
+    console.error('Error:', e)
+    }
+}
