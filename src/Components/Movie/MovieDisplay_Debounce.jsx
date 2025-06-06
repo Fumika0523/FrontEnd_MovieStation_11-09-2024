@@ -193,15 +193,16 @@ const handleAdditem=async(movieItem)=>{
 
 return (
 <>
-<div>
+<div >
 <Box 
     display="flex"
     flexDirection={"column"}
     alignItems="center"
     justifyContent={"center"}
     margin={2} >
-    <Grid  container  className="mx-auto d-flex justify-content-end flex-row align-items-center">
+    <Grid  container  className="mx-auto mb-3 d-flex justify-content-end flex-row align-items-center">
     {/* Search*/}
+    
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
     {
@@ -228,11 +229,12 @@ return (
     }
     <>
     {/* Debounce Search*/}
-    <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"180px",color:"white"}}
-    className="form-control  border-0  ps-4 me-2" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+    <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"200px",color:"white",margin:"0px 10px"}}
+    className="form-control  border-0  ps-4 " type="search" aria-label="Search" name="" id="" placeholder="Search movie"
     onChange={(e) => {
     console.log(e.target.value)
-    setSearchTearm(e.target.value)}}/>
+    setSearchTearm(e.target.value)}}
+   />
     </>
   </div>
 </Grid>

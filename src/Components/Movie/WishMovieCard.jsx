@@ -9,7 +9,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import LikeCard from '../Movie/LikeCard';
+import LikeCard from './LikeCard';
 import { useNavigate } from "react-router-dom";
 import {url} from '../../utils/constant'
 import axios from 'axios';
@@ -23,7 +23,7 @@ import Rating from '@mui/material/Rating';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
-export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,WishBtn,reduxAddcartBtn, movieData}) {
+export default function WishMovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,WishBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
 //  console.log("wishBtn",wishBtn)
 //  console.log("deleteBtn",deleteBtn)
@@ -142,7 +142,6 @@ const rating1 = {rating}
       <Card className="movieCard" 
       style={{maxWidth:"96%",display:"flex",justifyContent:"center",flexDirection:"column",margin:"auto",padding:"0 0 8px 0"}}>
       <CardHeader className="py-2 fw-bold"
-
       avatar={
           <Avatar 
           style={{ color: "white", backgroundColor: mode == "light"?" rgb(154, 19, 19)":"rgb(154, 19, 19)"}}      
@@ -164,7 +163,7 @@ const rating1 = {rating}
           {/* Delete Icon */}
           {deleteBtn}
 
-          {/* ADDTOWISH */}
+          {/* ADDTOWISH
             <>
                <Tooltip title="Add to Wish List">
                <FavoriteIcon
@@ -186,7 +185,7 @@ const rating1 = {rating}
                   pauseOnHover
                   theme="light" 
                   />
-              </>
+              </> */}
           
            {/* See More */}
         <Tooltip title="See More">
@@ -228,7 +227,7 @@ const rating1 = {rating}
        {/* See More */}
       <Tooltip title="See More">
         <MoreVertIcon 
-               onClick={()=>{navigate(`/movietrailer/${_id}`)}}className='seeMoreIcon fs-4'/>
+               onClick={()=>{navigate(`/movietrailer/${_id}`)}} className='seeMoreIcon fs-4'  />
         </Tooltip>
         </span>
             </>
@@ -270,7 +269,7 @@ const rating1 = {rating}
 
     {/* CAST & SUMMARY  */}
     <CardContent className=''>
-     <div className='overlay px-3' style={{fontSize:"13px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"rgba(163, 162, 162, 0.648);"}}>
+     <div className='overlay px-3' style={{fontSize:"13px",textAlign:"justify",backgroundColor:mode == "light" ? "white" :"#161718",color:mode == "light"?"black":"#bdbfc2"}}>
 
     <span className='movieCast d-flex align-items-center' style={{paddingTop:"1px"}} 
     >

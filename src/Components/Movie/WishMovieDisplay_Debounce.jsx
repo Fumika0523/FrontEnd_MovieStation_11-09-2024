@@ -15,6 +15,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
 import { IoIosFilm } from "react-icons/io";
+import WishMovieCard from "./WishMovieCard"
 
 
 function WishMovieDisplay_Debounce({mode}) 
@@ -243,7 +244,7 @@ return (
         :
     <>
     {filterMovieData?.map((element, index) => (
-        <MovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
+        <WishMovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
                             
         // Delete Button
         deleteBtn={

@@ -12,11 +12,14 @@ import { FaStar } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { RxSlash } from "react-icons/rx";
 import { FaHeart } from "react-icons/fa";
-
+import ModeIcon from '@mui/icons-material/Mode';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function MovieTrailer({mode,reduxAddcartBtn}) {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState();
+  const userId=sessionStorage.getItem('userId')
+  const isMovieOwner = userId === movieInfo?.owner; 
 
   const navigate = useNavigate()
 
@@ -28,6 +31,14 @@ function MovieTrailer({mode,reduxAddcartBtn}) {
       Authorization: `Bearer ${token}`
     }
   }
+
+  const deleteMovie=async(_id)=>{
+    console.log("Movie Deleted from the DB..")
+    let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
+    if(res){
+    navigate(`/allmovies`)
+    } 
+}
 
   const getTrailerData = async () => {
     console.log("Trailer data is called....")
@@ -69,16 +80,17 @@ function MovieTrailer({mode,reduxAddcartBtn}) {
           <Col className='col-12'>
           <div className='video-container'>
           <iframe src={movieInfo?.trailer }  
-           showinfo="0" allow="allowfullscreen" frameborder="0" width="500" height="315"></iframe>
+           showinfo="0" allow="allowfullscreen" frameborder="0" ></iframe>
           </div>
           </Col>
         </Row>
 
             {/* TITLE */}
-            <Row className='border mx-auto border-primary d-flex flex-row align-items-end justify-content-' >
-            <Col className="col-lg-8 mb-1 d-flex flex-row  border-1 border-danger justify-content-center align-items-center col-md-6 col-sm-8 text-nowrap fs-4 col-12 border">
+            <Row className='border mx-auto border-primary d-flex flex-row align-items-end justify-content-center' >
+            <Col className="col-lg-8 mb-1 d-flex flex-row  border-1 border-danger justify-content-start align-items-center col-md-6 col-sm-8 text-nowrap fs-4 col-12 border">
            {movieInfo.moviename}
-            <span className='ms-1 border-4 ms-2 fs-6'     style={{color:"#b9bdcc"}}>
+            <span className='ms-1 border-4 ms-2 fs-6'     
+            style={{color:"#b9bdcc"}}>
             ({movieInfo.publishYear})
             </span>
             </Col>
@@ -108,8 +120,26 @@ function MovieTrailer({mode,reduxAddcartBtn}) {
             </Col>
 
             {/* RIGHT */}
-            <Col className='col-lg-5 d-flex flex-column ps-3 pt-2 justify-content-center col-sm-11  col-12 mx-auto mb-md-1 align-items-center mb-2'
+            <Col className='col-lg-5 border d-flex flex-column justify-content-start col-sm-11  col-12 mx-auto mb-md-1 align-items-start mb-2'
             style={{ color: mode === "light" ? "rgb(248, 248, 245)": "rgb(128, 129, 130)" }}>
+                 
+                 {token && isMovieOwner ?
+                 <>
+              <div className=''>
+              <Button onClick={()=>navigate(`/editmovie/${movieInfo?._id}`)} >
+              <ModeIcon className='editBtn me-1 fs-4'/>
+                </Button>
+                <Button     onClick={()=> deleteMovie(movieInfo?._id)} >
+                    <DeleteIcon style={{cursor:"pointer"}} className="me-1 deleteBtn  fs-4"/>
+                </Button>
+            </div>
+                 </>
+                 :
+                 <>
+                 </>
+                 
+                }
+    
             <div className='mb-3' style={{textAlign:"justify"}}>{movieInfo.summary}</div>
             <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fontColorTrailerFont'>CAST</span>{movieInfo.cast}</div>
             <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fontColorTrailerFont'>GENRES</span>{movieInfo.genres}</div>

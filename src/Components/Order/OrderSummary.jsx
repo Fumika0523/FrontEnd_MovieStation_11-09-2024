@@ -59,6 +59,8 @@ const toggleSortOrder= () =>{
         const total = price.reduce((acc, cv) => acc + cv)
         return total
     })
+    console.log("totalOrderPrice",totalOrderPrice)
+     console.log("orderData",orderData)
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip"  {...props}>
@@ -83,6 +85,8 @@ const toggleSortOrder= () =>{
         // console.log("singleOrder",singleOrder)
         // console.log("orderId",singleOrder.element._id)
         let orderdate = formatDate(singleOrder.element.updatedAt)
+        const totalprice = singleOrder.element.movies.length*250
+        const movies = singleOrder.element.movies // array of {moviename.price}
         //console.log("orderDate",orderdate)
         // const response = await fetch(`http://localhost:8002/getinvoice?orderid=${orderId}`, {
 //   method: "GET",
@@ -95,12 +99,13 @@ const toggleSortOrder= () =>{
 
 console.log(singleOrder.element.movies)
 
-let totalprice = singleOrder.x
-console.log(totalprice)
+// let totalprice = singleOrder.x
+// console.log(totalprice)
 
 let url1 = `http://localhost:8002/getinvoice?orderid=${singleOrder.element._id}&orderdate=${orderdate}&totalprice=${totalprice}`;
 
 console.log(url1)
+
 const response = await fetch(`${url1}`, {
 method:'POST',
 headers: {
@@ -109,8 +114,10 @@ headers: {
   },
   //req.body
   body: JSON.stringify({
-    name: 'God Father',
-    price: 150
+    orderid:singleOrder.element._id,
+    orderdate,
+    totalprice,
+    movies
   })
 }) // when you using fetch >> conver to json. but when u using axios, you dont need.
 
@@ -123,7 +130,7 @@ headers: {
 
     const link = document.createElement("a")
     link.href=url
-    link.download="order-summary-pdf"
+    link.download=`order-summary-${singleOrder.element._id}.pdf`
     document.body.append(link)
     link.click()
     document.body.removeChild(link)
@@ -133,7 +140,7 @@ headers: {
     return (
         <>
             <div className="row mx-auto">
-                <div className="mx-auto col-lg-8 col-md-10 col-11 border rounded border-secondary-50  mx-auto my-4 px-sm-5 py-3" >
+                <div className="mx-auto col-lg-8 col-md-11 col-11 border rounded border-secondary-50 my-4 px-sm-5 py-3" >
                     <div className="fs-2 justify-content-between mx-2 align-items-center pb-3 d-flex flex-row">
                         <div className="d-flex flex-row ">
                             <div>

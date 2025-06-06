@@ -192,7 +192,7 @@ function NavBar({ mode, setMode }) {
 
               {/* Redux  -->> Badge*/}
               <Nav.Link href="#" className=" p-0">
-                <Button  className="d-flex  justify-content-center align-items-end"
+                <Button  className="d-flex border  justify-content-center align-items-end"
                   variant="none"
                   onClick={() => navigate('/cartpage')}>
                   <Badge variant="text"
@@ -216,8 +216,8 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
              {/* Wish list */}
-              <Nav.Link href="#" className=" p-0">
-                <Button  className="d-flex  justify-content-center align-items-end"
+                <Nav.Link href="#" className=" p-0">
+                <Button  className="d-flex border  justify-content-center align-items-end"
                   variant="none"
                   onClick={() => navigate('/mywishlist')}>
                   <Badge variant="text"
@@ -233,7 +233,7 @@ function NavBar({ mode, setMode }) {
                     color="primary" badgeContent={cartItems.length}
                     // style={{ color: mode == "light" ? greyColor : amberColor, }}
                     >
-                  <FaHeart className="fs-4 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
+                  <FaHeart className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
                   </Badge>
                   {/* <span className="fs-5"
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
