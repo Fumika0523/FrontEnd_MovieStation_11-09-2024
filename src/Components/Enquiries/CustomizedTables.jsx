@@ -152,7 +152,7 @@ console.log('userId',userId)
                    {/* READMORE */}
                    {
                    (element.description.length) >= 200 ?
-                   <div className='position-absolute translate-middle ' style={{right:"8%",marginTop:"-0.6%"}} >
+                   <div className='text-end' style={{marginTop:"-3%"}} >
                    <Button className='py-0 px-1'
                    onClick={()=>handleDescriptionClick(element)}
                  variant="contained" style={{fontSize:"9px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>

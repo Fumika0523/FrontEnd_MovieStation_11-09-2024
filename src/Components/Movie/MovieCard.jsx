@@ -21,7 +21,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Rating from '@mui/material/Rating';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import { FaRegHeart } from "react-icons/fa";
+import Button from 'react-bootstrap/Button';
+import { useSelector } from "react-redux";
 
 export default function MovieCard({mode, movieposter,moviename,rating,summary,cast,_id,element,disLikeNum,likeNum,deleteBtn,WishBtn,reduxAddcartBtn, movieData}) {
 const [specificMovieData,setSpecificMovieData] = useState([])
@@ -29,12 +31,13 @@ const [specificMovieData,setSpecificMovieData] = useState([])
 //  console.log("deleteBtn",deleteBtn)
 //  console.log("reduxAddcartBtn",reduxAddcartBtn)
 
-  const [isHovered, setIsHovered] = useState(false);
+  const [isCliked, setIsClicked] = useState(false);
 
-  const divStyle = {
-    color: !isHovered ? ' rgba(163, 162, 162, 0.648)' : 'white',
-    cursor: 'pointer'
-  };
+
+  // const divStyle = {
+  //   color: !isHovered ? ' rgba(163, 162, 162, 0.648)' : 'white',
+  //   cursor: 'pointer'
+  // };
 
   const theme = createTheme({
     palette: {
@@ -167,12 +170,13 @@ const rating1 = {rating}
           {/* ADDTOWISH */}
             <>
                <Tooltip title="Add to Wish List">
-               <FavoriteIcon
+               {/* <FavoriteIcon
                onClick={()=>{handleAddWishitem(element)}} 
-                   style={divStyle}
-                onMouseOver={() => setIsHovered(true)}
-                onMouseOut={() => setIsHovered(false)}
-                className=""/>
+                  //  style={divStyle}
+                // onMouseOver={() => setIsHovered(true)}
+                // onMouseOut={() => setIsHovered(false)
+                className="wishBtn"/> */}
+                <FaRegHeart className="text-danger"/>
               </Tooltip>
               <ToastContainer
                   position="top-right"
@@ -202,13 +206,20 @@ const rating1 = {rating}
 
            {/* ADDTOWISH */}
             <>
-               <Tooltip title="Add to Wish List">
-               <FavoriteIcon
+               <Tooltip title="Add to Wish List">      
+             <Button variant="none" className="d-flex align-items-center mb-1 p-0"
+                onClick={()=>{
+                  setIsClicked(isCliked=="false"?"true":"false")
+                }}>
+                  {
+                    isCliked === "false"?
+              <FavoriteIcon
                onClick={()=>{handleAddWishitem(element)}} 
-                   style={divStyle}
-                onMouseOver={() => setIsHovered(true)}
-                onMouseOut={() => setIsHovered(false)}
-                className=""/>
+                className="text-danger fs-2"/>
+                :
+            <FaRegHeart className="text-danger fs-3"/>
+                  }
+               </Button>
               </Tooltip>
               <ToastContainer
                   position="top-right"
@@ -238,7 +249,7 @@ const rating1 = {rating}
           }
  
       titleTypographyProps={{fontSize:"20x",paddingBottom:"0px",marginBottom:"0px" }}
-        title={moviename}
+       title=  {moviename.length >= 25 ? moviename.substring(0, 25) + "..." : moviename}
         subheaderTypographyProps={{display:"flex",flexDirection:"row",justifyContent:"start",alignItems:"center",gap:"5px",fontSize:"13px"}}
        subheader={
         <>

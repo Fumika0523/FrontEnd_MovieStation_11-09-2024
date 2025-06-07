@@ -58,8 +58,8 @@ function NavBar({ mode, setMode }) {
   console.log(shouldRenderHeader)
 
   //subscribing to the store
-  const cartItems = useSelector(store => store.cart.items)
-  console.log(cartItems.length)
+  // const cartItems = useSelector(store => store.cart.items)
+  // console.log(cartItems.length)
 
  
   return (
@@ -191,7 +191,7 @@ function NavBar({ mode, setMode }) {
               </Nav.Link>
 
               {/* Redux  -->> Badge*/}
-              <Nav.Link href="#" className=" p-0">
+              {/* <Nav.Link href="#" className=" p-0">
                 <Button  className="d-flex border  justify-content-center align-items-end"
                   variant="none"
                   onClick={() => navigate('/cartpage')}>
@@ -212,10 +212,10 @@ function NavBar({ mode, setMode }) {
                   </Badge>
                   {/* <span className="fs-5"
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
-                </Button>
-              </Nav.Link>
+                {/* </Button>
+              </Nav.Link> */} 
 
-             {/* Wish list */}
+             {/* Wish list
                 <Nav.Link href="#" className=" p-0">
                 <Button  className="d-flex border  justify-content-center align-items-end"
                   variant="none"
@@ -237,8 +237,8 @@ function NavBar({ mode, setMode }) {
                   </Badge>
                   {/* <span className="fs-5"
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
-                </Button>
-              </Nav.Link>
+                {/* </Button>
+              </Nav.Link> */} 
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -257,7 +257,7 @@ function NavBar({ mode, setMode }) {
           className="border-0 border
            mx-auto d-flex text-nowrap px-1 justify-content-center align-items-center"
           style={{ color: mode == "light" ? "black" : "white" }}>
-          <span style={{ color: "rgb(255, 225, 0)",backgroundColor:"rgba(233, 15, 229, 0.62)",width:"33px",height:"33px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-5 " >{name[0].toUpperCase()}</span>
+          <span style={{ color: "rgb(248, 220, 6)",backgroundColor:"rgb(148, 5, 5)",width:"33px",height:"33px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-5 " >{name[0].toUpperCase()}</span>
           </Dropdown.Toggle>
           <Dropdown.Menu 
           className="dropdownMenu  px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>

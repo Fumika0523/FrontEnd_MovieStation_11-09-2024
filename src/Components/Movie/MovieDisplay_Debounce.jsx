@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import MovieCard from "./MovieCard"
 import axios from "axios"
 import { url } from "../../utils/constant"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import {addItem,removeItem} from "../../utils/cartSlice"
 import { Button} from "react-bootstrap"
 import {  useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
 import { FaPlusCircle } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
@@ -28,11 +29,11 @@ const divStyle = {
 //conditionally done.
 const successNotify = () => toast.success('Added to the cart!', {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: true,
-    draggable: true,
+    draggable: false,
     progress: undefined,
     theme: "light",
     // transition: Bounce,
@@ -190,6 +191,15 @@ const handleAdditem=async(movieItem)=>{
             }
             getCartData()
         }}
+const styles = {
+  color: mode === "light" ? "red" : "rgba(209, 209, 213, 0.63)",
+  "&:hover": {
+    color: mode === "light" ? "pink" : "red",
+  },
+};
+
+const cartItems = useSelector(store => store.cart.items)
+console.log(cartItems.length)
 
 return (
 <>
@@ -205,32 +215,70 @@ return (
     
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
-    {
-        token &&
-    <>
+    {/* Add to Cart */}
+    <Button variant="none" onClick={()=>navigate('/cartpage')} className="movieDisplayBtn"
+    style={{
+    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",
+    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+  }}>
+
+      <Badge variant="text"
+        sx={{
+            "& .MuiBadge-badge": {
+            fontSize: "0.7rem", // Reduce font size
+            minWidth: "10px",   // Adjust width to fit smaller content
+            height: "16px",     // Adjust height
+            right: 5,
+             top: -2,
+        },
+         }}
+      color="primary" badgeContent={cartItems.length}
+                        // style={{ color: mode == "light" ? greyColor : amberColor, }}
+                        >
+      <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
+      </Badge>
+        <span className="d-md-block d-none">My Cart</span> 
+    </Button>
+
     {/* Wish List */}
-    <Button variant="none" onClick={()=>navigate('/mywishlist')} className="movieDisplayBtn">
-    <FaHeart className="fs-5 iconHeart me-1" /><span className="d-md-block d-none">    
+    <Button variant="none" onClick={()=>navigate('/mywishlist')} className="movieDisplayBtn"
+    style={{
+    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+  }}>
+    <FaHeart className="fs-5 iconHeart me-md-1" /><span className="d-md-block d-none">    
     My Wish List
     </span>
     </Button>
 
+    {
+        token &&
+    <>
+
     {/* ADD MOVIE */}
-    <Button variant="none" className="movieDisplayBtn" onClick={()=>navigate('/addmovie')}
-  
+    <Button variant="none" className="movieDisplayBtn " onClick={()=>navigate('/addmovie')}
+        style={{
+    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+  }}
     >
-     <FaPlusCircle className="fs-5 me-1 addIcon" 
+     <FaPlusCircle className="fs-5 me-md-1 addIcon"
          /><span className="d-md-block d-none">Add Movie</span></Button>
     
     {/* My MOVIES */}
-    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
-    <FaBookmark className="fs-5 me-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> </Button>
+    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn"
+    style={{
+    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",
+    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+  }}>
+    <FaBookmark className="fs-5 me-md-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> 
+    </Button>
     </>
     }
     <>
     {/* Debounce Search*/}
-    <input style={{backgroundColor:"rgba(45, 45, 47, 0.52)",width:"200px",color:"white",margin:"0px 10px"}}
-    className="form-control  border-0  ps-4 " type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+    <input style={{backgroundColor:mode==="light"? "white":"rgba(45, 45, 47, 0.52)",
+    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",
+    width:"200px",margin:"0px 10px"}}
+    className="form-control  ps-4 " type="search" aria-label="Search" name="" id="" placeholder="Search movie"
     onChange={(e) => {
     console.log(e.target.value)
     setSearchTearm(e.target.value)}}

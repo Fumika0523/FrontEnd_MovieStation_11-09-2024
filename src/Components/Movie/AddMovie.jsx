@@ -17,18 +17,32 @@ const navigate = useNavigate();
 const amberColor = amber[500];
 
 // 
+// const formSchema = Yup.object().shape({
+//   moviename:Yup.string().required(),
+//   movieposter:Yup.string().required().min(5,"Too Short"),
+//   rating:Yup.number().required().positive(),
+//   category:Yup.string().required(),
+//   cast:Yup.string().required(),
+//   publishYear:Yup.string().required(),
+//   likeNum:Yup.string().required(),
+//   disLikeNum:Yup.string().required(),
+//   genres:Yup.string(),
+//   trailer:Yup.string().required().min(5,"Too Short"),
+//   summary:Yup.string().min(200,"Too Short").required(),
+// })
+
 const formSchema = Yup.object().shape({
-  moviename:Yup.string().required(),
-  movieposter:Yup.string().required().min(5,"Too Short"),
-  rating:Yup.number().required().positive(),
-  category:Yup.string().required(),
-  cast:Yup.string().required(),
-  publishYear:Yup.string().required(),
-  likeNum:Yup.string().required(),
-  disLikeNum:Yup.string().required(),
-  genres:Yup.string(),
-  trailer:Yup.string().required().min(5,"Too Short"),
-  summary:Yup.string().min(200,"Too Short").required(),
+  moviename: Yup.string().required("Movie name is required"),
+  movieposter: Yup.string().required("Movie poster URL is required").min(5, "URL too short"),
+  rating: Yup.number().required("Rating is required").positive("Rating must be positive"),
+  category: Yup.string().required("Category is required"),
+  cast: Yup.string().required("Cast information is required"),
+  publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number"),
+  likeNum: Yup.number().required("Likes count is required").integer("Must be a whole number"),
+  disLikeNum: Yup.number().required("Dislikes count is required").integer("Must be a whole number"),
+  genres: Yup.array().of(Yup.string()).optional(),
+  trailer: Yup.string().required("Trailer URL is required").min(5, "URL too short"),
+  summary: Yup.string().required("Summary is required").min(200, "Summary must be at least 200 characters"),
 })
 
 const formik=useFormik({
@@ -78,9 +92,7 @@ if(res){
     let res = await fetch(`${url}/movie`, config) //API call to get all movie data
     let data = await res.json()
     console.log(data)
-    setMovieData()
-
-   
+    setMovieData()  
   }
 
   // if(token == null){

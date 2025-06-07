@@ -14,30 +14,33 @@ const navigate = useNavigate()
    borderColor:"black",
    color:"white",
   }
-  const formSchema=Yup.object().shape({
-    name:Yup.string().min(5,"Too Short"),
-    lastname:Yup.string(),
-    gender:Yup.string(),
-    phone_number:Yup.number().required(),
-    password:Yup.string().required(),
-    email:Yup.string().required(),
-})
 
-const formik=useFormik({
-  initialValues:{
-      name:"",
-      lastname:"",
-      gender:"",
-      phone_number:"",
-      email:"",
-      password:"",
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  lastname: Yup.string().required("Last name is required"),
+  gender: Yup.string().required("Gender is required"),
+  phone_number: Yup.string()
+    .matches(/^\d{10}$/, "Phone number must be 10 digits")
+    .required("Phone number is required"),
+  email: Yup.string().email("Invalid email format").required("Email is required"),
+  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+});
+
+const formik = useFormik({
+  initialValues: {
+    name: "",
+    lastname: "",
+    gender: "",
+    phone_number: "",
+    email: "",
+    password: "",
   },
-  validationSchema:formSchema,
-  onSubmit:(values)=>{
-      console.log(values) 
-      postSignUpUser(values)
-  }   
-})
+  validationSchema, // Attach the validation schema here
+  onSubmit: (values) => {
+    console.log(values);
+    postSignUpUser(values)
+  },
+});
 
 // posting the usersignup details to the server dv
 const postSignUpUser=async(newUser)=>{

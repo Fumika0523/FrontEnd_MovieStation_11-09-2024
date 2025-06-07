@@ -22,9 +22,9 @@ function LikeCard({likeNum,disLikeNum,mode,setMode}){
     
     return(
         <>
-        <div className="d-flex justify-content-center align-items-center flex-row">
-        <div className="d-flex align-items-center justify-content-center">
-        {/* <span className="bg-primary d-flex align-items-center justify-content-center rounded-circle" style={{width:"28px",height:"28px"}}> */}
+        <div className="d-flex justify-content-center align-items-center flex-row text-white">
+        <div className="d-flex align-items-center justify-content-center  ">
+
         <FaThumbsUp className=" fs-6" style={{color:"white"}} 
            onClick={()=>{
             setLike(parseInt(like)+1) //converting to number 
