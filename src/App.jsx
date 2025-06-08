@@ -93,16 +93,13 @@ const [userData,setUserData]=useState([])
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        <Route path="/mywishlist" mode={mode} element={<WishMovieDisplay_Debounce/>}/>
-       <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
+    
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
        </>
 
     }
+       <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
       <Route path="/" element={<Homepage mode={mode} movieData={movieData}/>}/>
-     {/* <NavBar mode={mode} setMode={setMode} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> */}
-      {/* Search with a submit Button */}
-      {/* <Route path='/allmovies' element={<MovieDisplay mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> */}
-      {/* Debounce */}
       <Route path='/allmovies' element={<MovieDisplay_Debounce mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> 
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
       <Route path='/services'  element={<Service_Section mode={mode}/>}/>

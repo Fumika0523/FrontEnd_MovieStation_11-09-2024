@@ -7,8 +7,20 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import { removeItem } from "../../utils/cartSlice";
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function CartSummaryPage() {
+  const infoNotify = () => toast.success('Signin page is loading', {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    // transition: Bounce,
+    });
     const navigate=useNavigate()
 
     const dispatch = useDispatch()
@@ -33,21 +45,27 @@ console.log(cartItems)
         }
       }
 
-      const handleAddOder=async()=>{
-        console.log("OrderPage")
-        console.log(cartItems)
-        //console.log(movieItem) //the data you going to send to the add order
-        // api call for updating the backend >> saving to the DB
-        // Buy now >> Order Page || Sumary page
-        let res = await axios.post(`${url}/addorder`,{movies:cartItems},config)
-        console.log(res)
+      const handleAddOder= async () => {
+        if (!token) {
+          infoNotify() 
+          navigate("/signin"); // Redirect to signin if no token
+          return;
+        }
+        console.log("OrderPage");
+        console.log(cartItems);
 
-        if(res.status == 200){//success responses
-          await axios.delete(`${url}/clearcart`,config); // delete api call
-          // clear the redux store
-          dispatch(removeItem())
-          navigate(`/ordersummary`) 
-        }}
+        try {
+          let res = await axios.post(`${url}/addorder`, { movies: cartItems }, config);
+          console.log(res);
+          if (res.status === 200) { // Success response
+            await axios.delete(`${url}/clearcart`, config); // Clear cart in DB
+            dispatch(removeItem()); // Clear Redux store
+            navigate(`/ordersummary`);
+          }
+        } catch (error) {
+          console.error("Error processing order:", error);
+        }
+      };
         
         const formatDate = (dateString) =>{
           // console.log(dateString)

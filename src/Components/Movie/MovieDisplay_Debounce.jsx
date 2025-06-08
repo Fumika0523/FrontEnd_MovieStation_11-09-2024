@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import MovieCard from "./MovieCard"
+import MovieCard from './MovieCard'
 import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch, useSelector } from "react-redux"
@@ -149,10 +149,7 @@ const handleAdditem=async(movieItem)=>{
     // >> api call for updating the backend >> saving to the DB  
     // "=" << Assignment operator
     // "==" << condition comparison operator
-    if (token == null){
-            navigate(`/signin`) 
-    } else {
-        let res=await axios.post(`${url}/addcart`, movieItem,config)
+        let res=await axios.post(`${url}/addcart`, movieItem)
         console.log("res",res.data.message)
         if(res.data.message == "Cart has been added successfully!"){
             successNotify()
@@ -160,7 +157,7 @@ const handleAdditem=async(movieItem)=>{
             return   errorNotify()
         }
         getCartData()
-    }}
+    }
 
       const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
@@ -311,7 +308,7 @@ return (
     <Tooltip title="Delete">
         <DeleteIcon style={{cursor:"pointer"}}
            onClick={()=> deleteMovie(element._id)}
-           className="me-1 deleteBtn  fs-4"/>
+           className="deleteBtn  border-sucess fs-3"/>
     </Tooltip>
 }
 
