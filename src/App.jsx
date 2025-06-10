@@ -27,7 +27,7 @@ import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
-import WishMovieDisplay_Debounce from './Components/Movie/WishMovieDisplay_Debounce';
+import WishMovieDisplay_Debounce from './Components/Movie/MyWishList/WishMovieDisplay_Debounce';
 
 
 function App() {
@@ -93,7 +93,6 @@ const [userData,setUserData]=useState([])
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
        <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
        <Route path="/mywishlist" mode={mode} element={<WishMovieDisplay_Debounce/>}/>
-    
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
        </>
 

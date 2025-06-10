@@ -355,7 +355,6 @@ text-shadow: none;
 
 .movieDisplayBtn{
   /* background-color: rgba(45, 45, 47, 0.52); */
-
   flex-wrap: nowrap;
   margin-right: 10px;
   display: flex;
@@ -371,6 +370,10 @@ text-shadow: none;
 
 .movieDisplayBtn:hover .iconHeart{
   color: rgb(158, 3, 3) !important;
+}
+
+.movieDisplayBtn:hover .movieIcon {
+   color: rgb(3, 156, 158) !important;
 }
 
 .wishBtn:hover{

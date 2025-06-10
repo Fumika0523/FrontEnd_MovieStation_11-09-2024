@@ -8,28 +8,13 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import { Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
-import PageNotFound from '../../Components/HomeSreen/PageNotFound'
+import { IoChevronBackOutline } from "react-icons/io5";
 import NavBar from "../HomeSreen/NavBar";
 import { Button } from "react-bootstrap";
 
-export default function AddMovie({setMovieData}) {
+export default function AddMovie({setMovieData,mode}) {
 const navigate = useNavigate();
 const amberColor = amber[500];
-
-// 
-// const formSchema = Yup.object().shape({
-//   moviename:Yup.string().required(),
-//   movieposter:Yup.string().required().min(5,"Too Short"),
-//   rating:Yup.number().required().positive(),
-//   category:Yup.string().required(),
-//   cast:Yup.string().required(),
-//   publishYear:Yup.string().required(),
-//   likeNum:Yup.string().required(),
-//   disLikeNum:Yup.string().required(),
-//   genres:Yup.string(),
-//   trailer:Yup.string().required().min(5,"Too Short"),
-//   summary:Yup.string().min(200,"Too Short").required(),
-// })
 
 const formSchema = Yup.object().shape({
   moviename: Yup.string().required("Movie name is required"),
@@ -125,18 +110,21 @@ if(res){
       onSubmit = {formik.handleSubmit}  >
 
       {/* Buttons */}
-      <Grid container  marginBottom={3} >
-      <Grid  xs={6} item textAlign={"start"}>
-      {/* Back */}
-      <Button variant="secondary" className='fs-6' 
-    onClick={()=>{navigate('/allmovies')}} ><i class="fa-solid fa-circle-left me-1 "></i>Back</Button>
-      </Grid>
-      <Grid xs={6} item textAlign={"end"}>
+      <Grid container className=" d-flex justify-content-between" marginBottom={3} >
 
+      {/* Back */}
+<Button
+  variant="secondary"
+  onClick={() => navigate('/allmovies')}
+  className="text-nowrap d-flex align-items-center me-3"
+>
+  <IoChevronBackOutline className="fs-4 me-1" />
+  Back to All Movies
+</Button>
+  
+   
       {/* ADD MOVIE */}
-        <Button type="warning"
-          variant="success"  className='fs-6 text-nowrap'  ><i class="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
-      </Grid>
+        <Button  variant="success"  className='fs-6 text-nowrap'  ><i class="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
 
       </Grid>
       <Grid container spacing={3} >
@@ -154,6 +142,7 @@ if(res){
         {formik.errors.moviename && formik.touched.moviename? (
           <div style={{color:"red"}}>{formik.errors.moviename}</div>
         ) : null }
+
         </Grid>
 
         {/* MOVIE POSTER */}

@@ -12,8 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { ToastContainer, toast } from 'react-toastify';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import Rating from '@mui/material/Rating';
+import Tooltip from '@mui/material/Tooltip';
 
 
 const UserMovies = ({mode}) => {
@@ -154,97 +153,94 @@ const handleAdditem=async(movieItem)=>{
       justifyContent={"end"}
       margin={2}
       >
-        <Grid  container  className=" border-4">
-        <Grid className=" border-4 me-2" justifyContent={"end"} display={"flex"} marginLeft={"auto"}  >
-        {/* Search*/}
+       <Grid container className=" d-flex justify-content-end" marginBottom={3} >
 
-       <div className="iput-icons  justify-content-end d-flex flex-row gap-3 border-4 border-danger">
-            <Button variant="secondary" onClick={()=>navigate('/allmovies')} className="text-nowrap me-3"><IoChevronBackOutline className="fs-4"/>Back to All Movies</Button>
+        {/* Back*/}
+        <Button 
+        style={{
+        backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+        }}
+            variant="none" onClick={()=>navigate('/allmovies')} className="text-nowrap  d-flex align-items-center me-3"><IoChevronBackOutline className="fs-4 me-1"/>Back to All Movies</Button>
 
-            {/* Search Box */}
-           <input  className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
-            onChange={(e) => {
-            setSearchTearm(e.target.value)}} />
-       </div>
-       </Grid>
-
-        </Grid>
+        {/* Search Box */}
+        <input
+        style={{
+        backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)",
+        width:"200px",margin:"0px 10px"}}
+        className="form-control   ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
+        onChange={(e) => {setSearchTearm(e.target.value)}} />
+    </Grid>
+    
         <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
         {
           filterMovieData?.map((element,index)=>(
        <MovieCard {...element} key={index} setUserMovieData={setUserMovieData} userMovieData={userMovieData} element={element} mode={mode} 
 
      // Delete Button
-    deleteBtn={
-        <IconButton variant="none" className="movieDeleteBtn"
-        onClick={()=> deleteMovie(element._id)}>
-            <DeleteIcon />
-        </IconButton>
-    }
+     deleteBtn={
+    <Tooltip title="Delete">
+      <DeleteIcon style={{cursor:"pointer"}}
+      onClick={()=> deleteMovie(element._id)}
+      className="deleteBtn  border-sucess fs-3"/>
+    </Tooltip>
+  }
 
-    // Redux
-    reduxAddcartBtn={
-        <>
-        <IconButton className="reduxIcon" 
-        onClick={()=>{handleAdditem(element)}}  >
-           <ShoppingCartIcon />
-        </IconButton>
-        <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light" />
-        </>
-        }
+  // Redux
+     reduxAddcartBtn={
+     <>    
+     <Tooltip title="Add to Cart">
+        <ShoppingCartIcon className="reduxIcon fs-3"
+        onClick={()=>{handleAdditem(element)}} />
+     </Tooltip>
+     <ToastContainer
+     position="top-right"
+     autoClose={5000}
+     hideProgressBar={false}
+     newestOnTop={false}
+     closeOnClick={false}
+     rtl={false}
+     pauseOnFocusLoss
+     draggable
+     pauseOnHover
+     theme="light" />
+     </>
+     }
+ 
+     WishBtn={
+     <>
+       <Tooltip title="Add to Wish List">
+         <span className="d-flex align-items-center" onClick={handleWishlistClick}>
+           {isInWishlist ? (
+             <FavoriteIcon
+               className="text-danger border-primary"
+               style={{ fontSize: "25px", margin: "1.5px" }}
+             />
+           ) : (
+             <FaRegHeart
+               className="text-danger border-warning p-0"
+               style={{ fontSize: "28px" }}
+             />
+           )}
+         </span>
+       </Tooltip>
+ 
+     <ToastContainer
+         position="top-right"
+         autoClose={5000}
+         hideProgressBar={false}
+         newestOnTop={false}
+         closeOnClick={false}
+         rtl={false}
+         pauseOnFocusLoss
+         draggable
+         pauseOnHover
+         theme="light" 
+         />
+     </>
+     }
+     
 
-    
-    //add to wish list 
-    wishBtn={
-        <>
-        <IconButton className="reduxIcon" 
-        onClick={()=>{handleAdditem(element)}}  >
-           <ShoppingCartIcon />
-        </IconButton>
-        <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light" />
-        </>
-    }
 
-    // wishBtn = {
-    //     <>
-    // <IconButton className="reduxIcon" 
-    //     onClick={()=>{handleAdditem(element)}}  >
-    //        {/* <ShoppingCartIcon /> */}
-    //        A
-    //     </IconButton>
-    //     <ToastContainer
-    //     position="top-right"
-    //     autoClose={5000}
-    //     hideProgressBar={false}
-    //     newestOnTop={false}
-    //     closeOnClick={false}
-    //     rtl={false}
-    //     pauseOnFocusLoss
-    //     draggable
-    //     pauseOnHover
-    //     theme="light" />
-    //     </>
-    // }
 
      /> 
    ))}

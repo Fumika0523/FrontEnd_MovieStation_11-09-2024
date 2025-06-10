@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import MovieCard from "./MovieCard"
+import MovieCard from "../MovieCard"
 import axios from "axios"
-import { url } from "../../utils/constant"
+import { url } from "../../../utils/constant"
 import { useDispatch } from "react-redux"
-import {addItem,removeItem} from "../../utils/cartSlice"
+import {addItem,removeItem} from "../../../utils/cartSlice"
 import { Button} from "react-bootstrap"
 import {  useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
@@ -198,9 +198,12 @@ return (
             token &&
         <>
         {/* All Movie */}
-        <Button variant="none" onClick={()=>navigate('/allmovies')} className="movieDisplayBtn"
+        <Button variant="none" onClick={()=>navigate('/allmovies')} className="movieDisplayBtn d-flex"
+        style={{
+    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+  }}
         >
-        <IoIosFilm className="fs-4 movieIcon" />
+        <IoIosFilm className="fs-4 movieIcon me-1" />
         <span className="d-md-block d-none">All Movies</span>
         </Button>
 

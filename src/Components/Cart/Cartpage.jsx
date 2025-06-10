@@ -8,8 +8,6 @@ import { Button, Image } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoChevronBackOutline } from "react-icons/io5";
 
-
-
 function Cartpage() {
     const cartItems = useSelector(store => store.cart.items)
     console.log(cartItems)

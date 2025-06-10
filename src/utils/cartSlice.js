@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice=createSlice({
     name:"cart",
     initialState:{
-        items:[]//kept as a empty
+        cartItems:[],//kept as a empty
     },
     //GROUP
     reducers:{
@@ -16,7 +16,7 @@ const cartSlice=createSlice({
         //action.payload >> actual data
         //data something to empty array? >> push method
         state.items.push(action.payload)   //add some data > action.payload
-        console.log(action.payload)
+        console.log(action.payload,"store")
        },
         //actionItem : reducer function
        removeItem:(state,action)=>{

@@ -15,6 +15,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
+import { FaRegHeart } from "react-icons/fa";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import {wishAddItem,wishRemoveItem} from "../../utils/WishCartSlice"
+import { useCallback } from "react"
 
 // cart item is added to the card >> green
 //this movie is already purchased, please check the order history >> error
@@ -80,12 +84,12 @@ const fetchData = (searchTerm)=>{
     }
     return filterData(searchTerm,movieData)
   }
-console.log("filterMovieData",filterMovieData)
+// console.log("filterMovieData",filterMovieData)
 
 const token = sessionStorage.getItem('token')
 const userId = sessionStorage.getItem
 ('userId')
-console.log(userId)
+// console.log(userId)
 // console.log("token",token)
 let config = {
     headers: {
@@ -108,8 +112,8 @@ return()=>{
     clearTimeout(timeoutId)
 }
 }, [searchTerm,movieData])
-console.log("filtermoviedata",filterMovieData)
-console.log("moviedata",movieData)
+// console.log("filtermoviedata",filterMovieData)
+// console.log("moviedata",movieData)
 
 useEffect(()=>{
     if(movieData){
@@ -121,7 +125,7 @@ useEffect(()=>{
 },[movieData])
 
 const deleteMovie=async(_id)=>{
-    console.log("Movie Deleted from the DB..")
+    // console.log("Movie Deleted from the DB..")
     let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
     if(res){
     getMovieData()
@@ -130,36 +134,39 @@ const deleteMovie=async(_id)=>{
 }
    
 const getCartData=async()=>{
-    let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
-    console.log("getCartData",res)
+    let res = await axios.get(`${url}/cart`)//response in res.data >> moviedata
+    // console.log("getCartData",res)
     if(res.data && res.data.cartData){
     dispatch(removeItem());//clearing existing cart items from store
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
 
+  const [isCliked, setIsClicked] = useState(false);
+
+
 const getWishData = async()=>{
     let res = await axios.get(`${url}/add-wish-list`,config)
-    console.log("getWishData",getWishData)
+    console.log("getWishData",res)
     // if(res.data && res.data.wishData){
     // }
 }
 
 const handleAdditem=async(movieItem)=>{
-     console.log("movieItem,",movieItem)
+    console.log("movieItem,",movieItem)
     // >> api call for updating the backend >> saving to the DB  
     // "=" << Assignment operator
     // "==" << condition comparison operator
-        let res=await axios.post(`${url}/addcart`, movieItem)
-        console.log("res",res.data.message)
-        if(res.data.message == "Cart has been added successfully!"){
-            successNotify()
-        } else {
-            return   errorNotify()
-        }
-        getCartData()
+    // let res=await axios.post(`${url}/addcart`, movieItem)
+    // console.log("res",res.data.message)
+    // if(res.data.message == "Cart has been added successfully!"){
+    // successNotify()
+    // } else {
+    //     return   errorNotify()
+    // }
+    getCartData()
     }
 
-      const addWishNotify = () => toast.success('Added to Wish List!', {
+    const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -169,80 +176,96 @@ const handleAdditem=async(movieItem)=>{
     progress: undefined,
     theme: "light",
       });
-
       
-          const handleAddWishitem=async(movieItem)=>{
-        // console.log("movieItem,",movieItem)
-        // >> api call for updating the backend >> saving to the DB  
-        // "=" << Assignment operator
-        // "==" << condition comparison operator
-        if (token == null){
-                navigate(`/signin`) 
-        } else {
-            let res=await axios.post(`${url}/add-wish-list`, movieItem,config)
-            console.log("res",res.data.message)
-            if(res.data.message == "Wish Item has been added successfully!"){
-                addWishNotify()
-            }else{
-                console.log("This movie is already added to wish list")
-            }
-            getCartData()
-        }}
 const styles = {
   color: mode === "light" ? "red" : "rgba(209, 209, 213, 0.63)",
   "&:hover": {
     color: mode === "light" ? "pink" : "red",
   },
 };
+const wishlist = useSelector(store => store.wishlist.wishItems); 
+console.log("wishlist",wishlist) 
 
-const cartItems = useSelector(store => store.cart.items)
-console.log(cartItems.length)
+// const isInWishlist = Array.isArray(wishlist) 
+const [isInWishlist, setIsInWishlist] = useState(false)
+
+//&& wishlist.some(item => item.id === element.id);
+console.log("Redux Store:", useSelector(store => store.wishlist));
+
+const handleAddWishItem = useCallback((element) => {
+  setIsInWishlist(!isInWishlist)
+  dispatch(wishAddItem(element));
+    console.log("element:", element);
+}, [dispatch]);
+
+
+
+  const handleRemoveWishItem = async(element)=>{
+    dispatch(wishRemoveItem(element))
+  }
 
 return (
 <>
 <div >
-<Box 
-    display="flex"
+<Box display="flex"
     flexDirection={"column"}
     alignItems="center"
     justifyContent={"center"}
     margin={2} >
+
     <Grid  container  className="mx-auto mb-3 d-flex justify-content-end flex-row align-items-center">
-    {/* Search*/}
     
+    {/* Search*/}
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
     {/* Add to Cart */}
     <Button variant="none" onClick={()=>navigate('/cartpage')} className="movieDisplayBtn"
-    style={{
-    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",
-    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
-  }}>
+    style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)" }}>
 
       <Badge variant="text"
         sx={{
-            "& .MuiBadge-badge": {
+            "& .MuiBadge-badge":
+            { 
             fontSize: "0.7rem", // Reduce font size
             minWidth: "10px",   // Adjust width to fit smaller content
             height: "16px",     // Adjust height
             right: 5,
              top: -2,
-        },
+        }
          }}
-      color="primary" badgeContent={cartItems.length}
-                        // style={{ color: mode == "light" ? greyColor : amberColor, }}
-                        >
+      color="primary" badgeContent={2} >
       <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
       </Badge>
         <span className="d-md-block d-none">My Cart</span> 
     </Button>
 
     {/* Wish List */}
-    <Button variant="none" onClick={()=>navigate('/mywishlist')} className="movieDisplayBtn"
+    <Button variant="none" onClick={() => {
+  if (token) {
+    navigate('/mywishlist');
+  } else {
+    console.log('No token found!');
+    navigate('/signin')
+  }
+}} className="movieDisplayBtn"
     style={{
     backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
   }}>
-    <FaHeart className="fs-5 iconHeart me-md-1" /><span className="d-md-block d-none">    
+        <Badge variant="text"
+        sx={{
+            "& .MuiBadge-badge": {
+            fontSize: "0.7rem", // Reduce font size
+            minWidth: "10px",   // Adjust width to fit smaller content
+            height: "16px",     // Adjust height
+            right: 0,
+             top: -2,
+        },
+         }}
+      color="success"
+       badgeContent={wishlist.length}
+    >
+   <FaHeart className="fs-5 iconHeart me-md-1" />      </Badge>
+ <span className="d-md-block d-none">    
     My Wish List
     </span>
     </Button>
@@ -250,11 +273,9 @@ return (
     {
         token &&
     <>
-
     {/* ADD MOVIE */}
     <Button variant="none" className="movieDisplayBtn " onClick={()=>navigate('/addmovie')}
-        style={{
-    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+        style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
   }}
     >
      <FaPlusCircle className="fs-5 me-md-1 addIcon"
@@ -262,9 +283,7 @@ return (
     
     {/* My MOVIES */}
     <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn"
-    style={{
-    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",
-    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
+ style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
   }}>
     <FaBookmark className="fs-5 me-md-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> 
     </Button>
@@ -272,8 +291,8 @@ return (
     }
     <>
     {/* Debounce Search*/}
-    <input style={{backgroundColor:mode==="light"? "white":"rgba(45, 45, 47, 0.52)",
-    border:mode === "light"? "1px solid rgba(240, 240, 247, 0.52)"  : " none",
+    <input style={{
+  backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)",
     width:"200px",margin:"0px 10px"}}
     className="form-control  ps-4 " type="search" aria-label="Search" name="" id="" placeholder="Search movie"
     onChange={(e) => {
@@ -283,41 +302,40 @@ return (
     </>
   </div>
 </Grid>
-    {/* each movie card */}
+  
+  {/* each movie card */}
     <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
 
 { 
- filterMovieData?.length === 0?
- <>
- <div className="position-relative mt-2 border-4" 
+    filterMovieData?.length === 0?
+  <>
+    <div className="position-relative mt-2 border-4" 
  style={{maxHeight:"390px", width:"100%"}} >
      <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
      <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
      <span className="text-warning">The Movie is Not Found. </span><br />
      Explore other movies,and please check next week for "inception"</h4>
- </div>
-
- </>
+    </div>
+  </>
     :
-<>
-{filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index} setMovieData={setMovieData} movieData={movieData} element={element} mode={mode} 
-                        
+  <>
+  {
+    filterMovieData?.map((element, index) => (
+    <MovieCard {...element} key={index}  setMovieData={setMovieData} movieData={movieData} element={element} mode={mode}                     
     // Delete Button
     deleteBtn={
     <Tooltip title="Delete">
-        <DeleteIcon style={{cursor:"pointer"}}
-           onClick={()=> deleteMovie(element._id)}
-           className="deleteBtn  border-sucess fs-3"/>
+      <DeleteIcon style={{cursor:"pointer"}}
+      onClick={()=> deleteMovie(element._id)}
+      className="deleteBtn  border-sucess fs-3"/>
     </Tooltip>
-}
+  }
 
     // Redux
     reduxAddcartBtn={
     <>    
     <Tooltip title="Add to Cart">
        <ShoppingCartIcon className="reduxIcon fs-3"
-       onClick={()=>{handleAdditem(element)}} 
        />
     </Tooltip>
     <ToastContainer
@@ -334,34 +352,41 @@ return (
     </>
     }
 
-    // WishBtn={
-    // <>
-    //  <Tooltip title="Add to Wish List">
-    //  <FavoriteIcon
-    //  onClick={()=>{handleAddWishitem(element)}} 
-    //      style={divStyle}
-    //   onMouseOver={() => setIsHovered(true)}
-    //   onMouseOut={() => setIsHovered(false)}
+    WishBtn={
+    <>
+      <Tooltip title="Add to Wish List">
+        <span className="d-flex align-items-center"
+             onClick={()=>{handleAddWishItem(element)}}  >
+          {isInWishlist ? (
+            <FavoriteIcon
+              className="text-danger border-primary"
+              style={{ fontSize: "25px", margin: "1.5px" }}
+            />
+          ) : (
+            <FaRegHeart
+              className="text-danger border-warning p-0"
+              style={{ fontSize: "28px" }}
+            />
+          )}
+        </span>
+      </Tooltip>
 
-    //   className=""/>
-    // </Tooltip>
-    // <ToastContainer
-    //     position="top-right"
-    //     autoClose={5000}
-    //     hideProgressBar={false}
-    //     newestOnTop={false}
-    //     closeOnClick={false}
-    //     rtl={false}
-    //     pauseOnFocusLoss
-    //     draggable
-    //     pauseOnHover
-    //     theme="light" 
-    //     />
-    // </>
-    // }
-    
-        /> 
-    )) }
+     <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light" 
+      />
+    </>
+ }
+ /> ))
+  }
 </>
 }
 </Grid>

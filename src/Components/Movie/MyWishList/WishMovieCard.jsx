@@ -9,9 +9,9 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import LikeCard from './LikeCard';
+import LikeCard from '../LikeCard';
 import { useNavigate } from "react-router-dom";
-import {url} from '../../utils/constant'
+import {url} from '../../../utils/constant'
 import axios from 'axios';
 import { useState } from 'react';
 import { createTheme} from '@mui/material/styles';
