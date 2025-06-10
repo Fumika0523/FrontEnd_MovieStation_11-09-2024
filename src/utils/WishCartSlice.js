@@ -7,10 +7,16 @@ const wishCartSlice = createSlice({
   },     
   reducers: {
     // Add an item to the wishlist
+    // wishAddItem: (state, action) => {
+    //     state.wishItems.push(action.payload);
+    //     console.log(action.payload) //selected moviedata
+    //   },
     wishAddItem: (state, action) => {
+      const exists = state.wishItems.find(item => item._id === action.payload._id);
+      if (!exists) {
         state.wishItems.push(action.payload);
-        console.log(action.payload) //selected moviedata
-      },
+      }
+    },
     
     // Remove a specific item from the wishlist
     // wishRemoveItem: (state, action) => {
