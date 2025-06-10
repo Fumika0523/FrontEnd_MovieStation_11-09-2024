@@ -2,6 +2,9 @@ import React from 'react'
 import { url } from '../utils/constant';
 import axios from 'axios';
 
+
+
+
 const WishlistDisplay = () => {
   const addWishItemToServer = async (element) => {
     try {
