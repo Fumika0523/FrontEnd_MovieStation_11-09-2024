@@ -187,18 +187,26 @@ console.log("wishlist",wishlist)
 
 console.log("Redux Store:", useSelector(store => store.wishlist));
 
+//useCallback, store the function
 const handleAddWishItem = useCallback((element) => {
   const updated = {...isInWishlist} // creating a copy of wish item, spread operator
-  console.log("updated",updated[element._id] != isInWishlist[element._id])
-  updated[element._id] != isInWishlist[element._id]
+  console.log("updated",updated[element._id] =! isInWishlist[element._id])
+  updated[element._id] =! isInWishlist[element._id] //
   setIsInWishlist(updated)
   dispatch(wishAddItem(element));
     console.log("element:", element);
-}, [dispatch]);
-
-  const handleRemoveWishItem = async(element)=>{
-    dispatch(wishRemoveItem(element))
+const isAlreadyWished = wishlist.find(item => item._id === element._id);
+if (isAlreadyWished) {
+    dispatch(wishRemoveItem(element));
+ console.log("Removed from Wishlist!");
+  } else {
+    dispatch(wishAddItem(element));
+    console.log("Added to Wishlist!");
   }
+
+}, [dispatch,isInWishlist]); //
+console.log(isInWishlist) // true/false of movie _id
+
 
 return (
 <>
@@ -353,7 +361,8 @@ return (
       <Tooltip title="Add to Wish List">
         <span className="d-flex align-items-center"
              onClick={()=>{handleAddWishItem(element)}}  >
-          {isInWishlist == element._id ? (
+              {/* is there is a data in isInWishlist */}
+          {isInWishlist[element._id] ? (
             <FavoriteIcon
               className="text-danger border-primary"
               style={{ fontSize: "25px", margin: "1.5px" }}
