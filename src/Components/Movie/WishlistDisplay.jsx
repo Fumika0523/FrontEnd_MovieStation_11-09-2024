@@ -1,11 +1,17 @@
 import React from 'react'
-import { url } from '../utils/constant';
+import { url } from '../../utils/constant';
 import axios from 'axios';
+import MovieActionButtons from './MovieActionButtons';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 
+const WishlistDisplay = ({mode}) => {
+const wishlist = useSelector(store => store.wishlist.wishItems); 
+console.log("wishlist",wishlist) 
+const navigate = useNavigate();
 
-const WishlistDisplay = () => {
   const addWishItemToServer = async (element) => {
     try {
       const token = sessionStorage.getItem('token');
@@ -45,7 +51,17 @@ const WishlistDisplay = () => {
   
   
   return (
-    <div>WishlstDisplay</div>
+    <div>WishlstDisplay
+
+      <MovieActionButtons
+    mode={mode}
+    navigate={navigate}
+    wishlistCount={wishlist.length}
+/>
+
+
+      
+    </div>
   )
 }
 
