@@ -240,7 +240,7 @@ return (
     </>
         :
     <> */}
-    {wishlist?.map((element, index) => (
+    {filterMovieData?.map((element, index) => (
         <WishMovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
                             
         // Delete Button
