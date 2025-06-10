@@ -202,7 +202,7 @@ console.log("wishlist",wishlist)
 console.log("Redux Store:", useSelector(store => store.wishlist));
 
 
-
+// content changed
 
 
 //useCallback, store the function
