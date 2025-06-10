@@ -207,12 +207,6 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
 
 //useCallback, store the function
 const handleAddWishItem = useCallback((element) => {
-  const token = sessionStorage.getItem('token');
-  if (!token) {
-    navigate('/signin', { state: { from: location.pathname } });
-    return;
-  }
-
   const alreadyInWishlist = isInWishlist[element._id] ?? false;
   const updated = {
     ...isInWishlist,
@@ -222,13 +216,14 @@ const handleAddWishItem = useCallback((element) => {
 
   if (alreadyInWishlist) {
     dispatch(wishRemoveItem(element));
-    console.log("Removed from Wishlist (local only)");
+    console.log("Removed from Wishlist (local)");
   } else {
     dispatch(wishAddItem(element));
-    console.log("Added to Wishlist (local only)");
+    console.log("Added to Wishlist (local)");
     addWishNotify();
   }
 }, [dispatch, isInWishlist]);
+
 
 
 
@@ -272,10 +267,12 @@ return (
     {/* Wish List */}
     <Button variant="none" 
     onClick={() => {
+    const token = sessionStorage.getItem('token');
     if (token) {
       navigate('/mywishlist');
     } else {
-      navigate('/signin', { state: { from: '/mywishlist' } });
+      console.log('No token found!');
+      navigate('/signin', { state: { from: '/mywishlist' } }); // so we can redirect back later
     }
   }}
     className="movieDisplayBtn"
