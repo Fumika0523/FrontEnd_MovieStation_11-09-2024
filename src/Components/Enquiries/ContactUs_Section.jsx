@@ -117,7 +117,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
   {/* ALL ENQUIRIES BUTTON */}
 <div className=" my-4 col-sm-10 col-lg-8 ms-auto" >
   <Button variant="secondary" className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
-      onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i class="fa-solid fa-circle-question"></i></Button> 
+      onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i className="fa-solid fa-circle-question"></i></Button> 
 </div>
 
 

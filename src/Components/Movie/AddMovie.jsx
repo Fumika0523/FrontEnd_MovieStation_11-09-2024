@@ -124,7 +124,7 @@ if(res){
   
    
       {/* ADD MOVIE */}
-        <Button  variant="success"  className='fs-6 text-nowrap'  ><i class="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
+        <Button  variant="success"  className='fs-6 text-nowrap'  ><i className="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
 
       </Grid>
       <Grid container spacing={3} >

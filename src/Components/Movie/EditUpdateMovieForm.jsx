@@ -108,13 +108,13 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
             <Grid xs={6} item textAlign={"start"}>
               {/* Back */}
               <Button variant="secondary" className='fs-6'
-                onClick={() => { navigate('/allmovies') }} ><i class="fa-solid fa-circle-left me-1 "></i>Back</Button>
+                onClick={() => { navigate('/allmovies') }} ><i className="fa-solid fa-circle-left me-1 "></i>Back</Button>
             </Grid>
 
             {/* UPDATE MOVIE */}
             <Grid xs={6} item textAlign={"end"}>
               <Button variant="warning" className='text-nowrap fs-6' type="submit"
-              ><i class="fa-solid fa-circle-plus me-1" ></i>Update Movie</Button>
+              ><i className="fa-solid fa-circle-plus me-1" ></i>Update Movie</Button>
             </Grid>
           </Grid>
 

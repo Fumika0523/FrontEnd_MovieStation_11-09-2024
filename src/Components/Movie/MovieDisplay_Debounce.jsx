@@ -189,23 +189,25 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
 
 //useCallback, store the function
 const handleAddWishItem = useCallback((element) => {
-  const updated = {...isInWishlist} // creating a copy of wish item, spread operator
-  console.log("updated",updated[element._id] =! isInWishlist[element._id])
-  updated[element._id] =! isInWishlist[element._id] //
-  setIsInWishlist(updated)
-  dispatch(wishAddItem(element));
-    console.log("element:", element);
-const isAlreadyWished = wishlist.find(item => item._id === element._id);
-if (isAlreadyWished) {
+  const alreadyInWishlist = isInWishlist[element._id];
+
+  const updated = {
+    ...isInWishlist,
+    [element._id]: !alreadyInWishlist,
+  };
+  setIsInWishlist(updated);
+
+  if (alreadyInWishlist) {
     dispatch(wishRemoveItem(element));
- console.log("Removed from Wishlist!");
+    console.log("Removed from Wishlist!");
   } else {
     dispatch(wishAddItem(element));
     console.log("Added to Wishlist!");
+    addWishNotify();
   }
 
-}, [dispatch,isInWishlist]); //
-console.log(isInWishlist) // true/false of movie _id
+}, [dispatch, isInWishlist]);
+
 
 
 return (

@@ -3,22 +3,29 @@ import { createSlice } from "@reduxjs/toolkit";
 const wishCartSlice = createSlice({
   name: "wishlist",
   initialState:  {
-  wishItems:[],
+       wishItems:[],
   },     
   reducers: {
     // Add an item to the wishlist
     wishAddItem: (state, action) => {
         state.wishItems.push(action.payload);
         console.log(action.payload) //selected moviedata
-      }
-    },
+      },
+    
     // Remove a specific item from the wishlist
+    // wishRemoveItem: (state, action) => {
+    //   return state.filter(item => item.id !== action.payload.id);
+    // },
     wishRemoveItem: (state, action) => {
-      return state.filter(item => item.id !== action.payload.id);
-    },
+  state.wishItems = state.wishItems.filter(item => item._id !== action.payload._id);
+}
+  
+
+}
 });
 
-
+// issue > remove Item
+// opening closing {} not closed at proper place
 
 
 export const {wishAddItem,wishRemoveItem} = wishCartSlice.actions

@@ -353,7 +353,7 @@ function NavBar({ mode, setMode }) {
                 overlay={<Tooltip id="button-tooltip-2" >Sign Up</Tooltip>}
                   > */}
                       <FaUser
-                          class="fs-5 mx-auto" style={{ color: mode == "light" ? "black" : "white" }}
+                          className="fs-5 mx-auto" style={{ color: mode == "light" ? "black" : "white" }}
                           />
      
                       {/* {({ ref, ...triggerHandler }) => (
@@ -365,7 +365,7 @@ function NavBar({ mode, setMode }) {
                           onClick={() => { navigate('/signup') }}
                         >
                           <FaUser
-                          class="fs-5" style={{ color: mode == "light" ? "black" : "white" }}
+                          className="fs-5" style={{ color: mode == "light" ? "black" : "white" }}
                           />
                         </Button>
                       )} */}
