@@ -6,9 +6,11 @@ import * as Yup from "yup";
 import {url} from '../../utils/constant'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 
 function SignIn({setIsAuthenticated}) {
+
   const navigate = useNavigate()
   const formSchema=Yup.object().shape({
     password:Yup.string().required(),
@@ -22,7 +24,7 @@ function SignIn({setIsAuthenticated}) {
       password:"",
       phone_number:""
     },
-    validationSchema:formSchema,
+    // validationSchema:formSchema,
     onSubmit:(values)=>{
      // console.log(values) // req.body
       //update the value >> signin data
@@ -30,21 +32,46 @@ function SignIn({setIsAuthenticated}) {
     }
   })
 
-  const postSignInUser=async(loginuser)=>{
-    console.log(loginuser)
-    const res=await axios.post(`${url}/signin`,loginuser) //loginuser is data
-    console.log("res.data",res.data)
-    sessionStorage.setItem('token',res.data.token)
-    sessionStorage.setItem('userId',res.data.user._id)
-    sessionStorage.setItem('name',res.data.user.name)
-    console.log('userId')
-    // setAccessAddMovie(res.data.token)
-    if(res.data.token){
-      setIsAuthenticated(true)
-    }  
-    navigate('/') 
-    console.log("Signin")
+  // const postSignInUser=async(loginuser)=>{
+  //   console.log(loginuser)
+  //   const res=await axios.post(`${url}/signin`,loginuser) //loginuser is data
+  //   console.log("res.data",res.data)
+  //   sessionStorage.setItem('token',res.data.token)
+  //   sessionStorage.setItem('userId',res.data.user._id)
+  //   sessionStorage.setItem('name',res.data.user.name)
+  //   console.log('userId')
+  //   // setAccessAddMovie(res.data.token)
+  //   if(res.data.token){
+  //     setIsAuthenticated(true);
+  //     navigate(fromPath); // ✅ Redirect to original path
+  //   }  
+  //   navigate('/') 
+  //   console.log("Signin")
+  // }
+
+
+const location = useLocation();
+
+const fromPath = location.state?.from || '/';
+
+const postSignInUser = async (loginuser) => {
+  try {
+    const res = await axios.post(`${url}/signin`, loginuser);
+
+    if (res.data.token) {
+      sessionStorage.setItem('token', res.data.token);
+      sessionStorage.setItem('userId', res.data.user._id);
+      sessionStorage.setItem('name', res.data.user.name);
+      setIsAuthenticated(true);
+      
+      // ✅ Redirect to original page
+      navigate(fromPath);
+    }
+  } catch (error) {
+    console.error("Login failed", error);
   }
+};
+
 
 
 

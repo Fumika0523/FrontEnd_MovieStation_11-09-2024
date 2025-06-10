@@ -67,7 +67,8 @@ const getMovieData = async () => {
     console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
     // res.data. {object} 
-    // console.log(res.data.movieData)
+    console.log(res)
+
     // // console.log(res.data.movieData._id);
     setMovieData(res.data.movieData);
     };
@@ -187,10 +188,19 @@ console.log("wishlist",wishlist)
 
 console.log("Redux Store:", useSelector(store => store.wishlist));
 
+
+
+
+
 //useCallback, store the function
 const handleAddWishItem = useCallback((element) => {
-  const alreadyInWishlist = isInWishlist[element._id];
+  const token = sessionStorage.getItem('token');
+  if (!token) {
+    navigate('/signin', { state: { from: location.pathname } });
+    return;
+  }
 
+  const alreadyInWishlist = isInWishlist[element._id] ?? false;
   const updated = {
     ...isInWishlist,
     [element._id]: !alreadyInWishlist,
@@ -199,14 +209,15 @@ const handleAddWishItem = useCallback((element) => {
 
   if (alreadyInWishlist) {
     dispatch(wishRemoveItem(element));
-    console.log("Removed from Wishlist!");
+    console.log("Removed from Wishlist (local only)");
   } else {
     dispatch(wishAddItem(element));
-    console.log("Added to Wishlist!");
+    console.log("Added to Wishlist (local only)");
     addWishNotify();
   }
-
 }, [dispatch, isInWishlist]);
+
+
 
 
 
@@ -246,14 +257,15 @@ return (
     </Button>
 
     {/* Wish List */}
-    <Button variant="none" onClick={() => {
-  if (token) {
-    navigate('/mywishlist');
-  } else {
-    console.log('No token found!');
-    navigate('/signin')
-  }
-}} className="movieDisplayBtn"
+    <Button variant="none" 
+    onClick={() => {
+    if (token) {
+      navigate('/mywishlist');
+    } else {
+      navigate('/signin', { state: { from: '/mywishlist' } });
+    }
+  }}
+    className="movieDisplayBtn"
     style={{
     backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
   }}>
