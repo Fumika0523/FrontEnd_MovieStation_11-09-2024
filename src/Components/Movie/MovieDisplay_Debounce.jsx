@@ -57,6 +57,7 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
 
 const navigate = useNavigate()
 const dispatch= useDispatch()
+const [isInWishlist, setIsInWishlist] = useState({}) //object
 // STate valiable
 // const [movieData, setMovieData] = useState([])
 const [searchTerm, setSearchTearm] = useState("")//initial value
@@ -141,8 +142,6 @@ const getCartData=async()=>{
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
 
-  const [isCliked, setIsClicked] = useState(false);
-
 
 const getWishData = async()=>{
     let res = await axios.get(`${url}/add-wish-list`,config)
@@ -186,19 +185,16 @@ const styles = {
 const wishlist = useSelector(store => store.wishlist.wishItems); 
 console.log("wishlist",wishlist) 
 
-// const isInWishlist = Array.isArray(wishlist) 
-const [isInWishlist, setIsInWishlist] = useState(false)
-
-//&& wishlist.some(item => item.id === element.id);
 console.log("Redux Store:", useSelector(store => store.wishlist));
 
 const handleAddWishItem = useCallback((element) => {
-  setIsInWishlist(!isInWishlist)
+  const updated = {...isInWishlist} // creating a copy of wish item, spread operator
+  console.log("updated",updated[element._id] != isInWishlist[element._id])
+  updated[element._id] != isInWishlist[element._id]
+  setIsInWishlist(updated)
   dispatch(wishAddItem(element));
     console.log("element:", element);
 }, [dispatch]);
-
-
 
   const handleRemoveWishItem = async(element)=>{
     dispatch(wishRemoveItem(element))
@@ -321,7 +317,7 @@ return (
   <>
   {
     filterMovieData?.map((element, index) => (
-    <MovieCard {...element} key={index}  setMovieData={setMovieData} movieData={movieData} element={element} mode={mode}                     
+    <MovieCard {...element} key={index}  setMovieData={setMovieData} movieData={movieData} element={element} mode={mode}                 
     // Delete Button
     deleteBtn={
     <Tooltip title="Delete">
@@ -357,7 +353,7 @@ return (
       <Tooltip title="Add to Wish List">
         <span className="d-flex align-items-center"
              onClick={()=>{handleAddWishItem(element)}}  >
-          {isInWishlist ? (
+          {isInWishlist == element._id ? (
             <FavoriteIcon
               className="text-danger border-primary"
               style={{ fontSize: "25px", margin: "1.5px" }}

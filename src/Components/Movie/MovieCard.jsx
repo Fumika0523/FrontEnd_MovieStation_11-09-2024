@@ -26,7 +26,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux"
 
 
-export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn, reduxAddcartBtn, movieData }) {
+export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn, reduxAddcartBtn }) {
   const [specificMovieData, setSpecificMovieData] = useState([])
   //  console.log("wishBtn",wishBtn)
   //  console.log("deleteBtn",deleteBtn)
