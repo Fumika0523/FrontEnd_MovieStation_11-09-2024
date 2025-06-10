@@ -16,7 +16,7 @@ import { FaBookmark } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
 import { IoIosFilm } from "react-icons/io";
 import WishMovieCard from "./WishMovieCard"
-
+import { useSelector } from "react-redux"
 
 function WishMovieDisplay_Debounce({mode}) 
 {
@@ -183,12 +183,15 @@ const handleAdditem=async(movieItem)=>{
     getWishData()
        },[]) 
 
+const wishlist = useSelector(store => store.wishlist.wishItems); 
+console.log("wishlist",wishlist) 
+
 return (
 <>
 <div>
     <Box display="flex" flexDirection={"column"} 
         alignItems="center" justifyContent={"center"}
-        margin={2} >
+        margin={2} border={2} >
         <Grid container className=" mx-auto d-flex justify-content-between flex-row align-items-center">
         <div className="text-start d-flex align-items-center ms-2 fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</div>
         {/* Search*/}
@@ -206,15 +209,6 @@ return (
         <IoIosFilm className="fs-4 movieIcon me-1" />
         <span className="d-md-block d-none">All Movies</span>
         </Button>
-
-        {/* ADD MOVIE */}
-        {/* <Button variant="none" className="movieDisplayBtn" onClick={()=>navigate('/addmovie')} >
-        <FaPlusCircle className="fs-5 me-1 addIcon"/>
-        <span className="d-md-block d-none">Add Movie</span></Button>
-         */}
-        {/* My MOVIES */}
-        {/* <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn">
-        <FaBookmark className="fs-5 me-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> </Button> */}
         </>
         }
         <>
@@ -229,23 +223,23 @@ return (
     </div>
     </Grid>
         {/* each movie card */}
-        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
+        <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2} border={2}>
 
-    { 
+    {/* { 
         filterMovieData?.length === 0?
     <>
 
     <div className="position-relative mt-2 border-4" 
-    style={{maxHeight:"390px", width:"100%"}} >
-        <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover"}} />
-        <h4 className="text-white opacity-75 border-4 border-danger  text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"0%"}}>
-        <span className="text-warning">The Movie is Not Found. </span><br />
-        Explore other movies,and please check next week for "inception"</h4>
+    style={{width:"100%"}} >
+        <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover",maxHeight:"430px", width:"100%"}} />
+        <h4 className="text-white opacity-75 border-4 border-danger text-center  col-7 col-md-5 mx-auto" style={{position:"absolute",right:"5%",bottom:"10%"}}>
+        <span className="text-warning">Your Wishlist is Empty </span><br />
+        </h4>
     </div>
 
     </>
         :
-    <>
+    <> */}
     {filterMovieData?.map((element, index) => (
         <WishMovieCard {...element} key={index} setWishMovieData={setWishMovieData} wishMovieData={wishMovieData} element={element} mode={mode} 
                             
@@ -308,8 +302,8 @@ return (
         
             /> 
         )) }
-    </>
-    }
+    {/* </> 
+  } */}
     </Grid>
     </Box>
 </div>

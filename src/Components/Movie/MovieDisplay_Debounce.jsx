@@ -168,7 +168,7 @@ const handleAdditem=async(movieItem)=>{
 
     const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: false,
@@ -176,6 +176,18 @@ const handleAdditem=async(movieItem)=>{
     progress: undefined,
     theme: "light",
       });
+
+    const removeWishNotify=()=> toast.error('Removed from Wish list', {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+
       
 const styles = {
   color: mode === "light" ? "red" : "rgba(209, 209, 213, 0.63)",
@@ -183,6 +195,7 @@ const styles = {
     color: mode === "light" ? "pink" : "red",
   },
 };
+
 const wishlist = useSelector(store => store.wishlist.wishItems); 
 console.log("wishlist",wishlist) 
 
