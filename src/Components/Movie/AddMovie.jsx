@@ -44,7 +44,7 @@ const formik=useFormik({
       // genres:"",
       category:"",
   },
-  validationSchema:formSchema,
+  // validationSchema:formSchema,
   onSubmit:(values)=>{ 
   console.log(values) 
   postMovies(values)
