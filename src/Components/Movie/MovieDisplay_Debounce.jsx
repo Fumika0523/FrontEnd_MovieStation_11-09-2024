@@ -208,11 +208,12 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
 
 
 //useCallback, store the function
+
 const handleAddWishItem = useCallback((element) => {
   const alreadyInWishlist = isInWishlist[element._id] ?? false;
   const updated = {
     ...isInWishlist,
-    [element._id]: !alreadyInWishlist,
+    [element._id]: !alreadyInWishlist, // updating the changes
   };
   setIsInWishlist(updated);
 
@@ -246,9 +247,9 @@ return (
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
     <MovieActionButtons
-  mode={mode}
+    mode={mode}
     navigate={navigate}
-  wishlistCount={wishlist.length}
+    wishlistCount={wishlist.length}
 />
 
 {/* Conditionally rendered buttons for logged-in users */}
@@ -268,19 +269,7 @@ return (
             <span className="d-md-block d-none">Add Movie</span>
           </Button>
 
-          <Button
-            variant="none"
-            onClick={() => navigate('/usermovies')}
-            className="movieDisplayBtn"
-            style={{
-              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
-              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-            }}
-          >
-            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
-            <span className="d-md-block d-none">My Movies</span>
-          </Button>
+         
         </>
       )}
 

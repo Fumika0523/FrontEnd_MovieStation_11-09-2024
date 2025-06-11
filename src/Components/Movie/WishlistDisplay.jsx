@@ -12,6 +12,7 @@ const wishlist = useSelector(store => store.wishlist.wishItems);
 console.log("wishlist",wishlist) 
 const navigate = useNavigate();
 
+// Api calls
   const addWishItemToServer = async (element) => {
     try {
       const token = sessionStorage.getItem('token');
@@ -53,7 +54,7 @@ const navigate = useNavigate();
   return (
     <div>WishlstDisplay
 
-      <MovieActionButtons
+    <MovieActionButtons
     mode={mode}
     navigate={navigate}
     wishlistCount={wishlist.length}

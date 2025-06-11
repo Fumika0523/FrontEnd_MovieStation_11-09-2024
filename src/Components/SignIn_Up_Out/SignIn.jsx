@@ -42,8 +42,7 @@ function SignIn({setIsAuthenticated}) {
   //   console.log('userId')
   //   // setAccessAddMovie(res.data.token)
   //   if(res.data.token){
-  //     setIsAuthenticated(true);
-  //     navigate(fromPath); // ✅ Redirect to original path
+  //     setIsAuthenticated(true);  //    
   //   }  
   //   navigate('/') 
   //   console.log("Signin")
@@ -51,6 +50,7 @@ function SignIn({setIsAuthenticated}) {
 
 
 const location = useLocation();
+console.log(location)
 
 const fromPath = location.state?.from || '/';
 

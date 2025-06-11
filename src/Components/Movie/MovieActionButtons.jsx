@@ -4,8 +4,9 @@ import { FaHeart, FaPlusCircle, FaBookmark } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
-  const token = sessionStorage.getItem('token');
-
+// mode >> theme
+// navigation
+// wishlistCount >>store
   return (
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
@@ -76,7 +77,19 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
         <span className="d-md-block d-none">My Wish List</span>
       </Button>
 
-      
+       <Button
+            variant="none"
+            onClick={() => navigate('/usermovies')}
+            className="movieDisplayBtn"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+            }}
+          >
+            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
+            <span className="d-md-block d-none">My Movies</span>
+        </Button>
     </div>
   );
 };
