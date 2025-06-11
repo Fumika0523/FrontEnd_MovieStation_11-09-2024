@@ -35,7 +35,7 @@ const successNotify = () => toast.success('Added to the cart!', {
     position: "top-right",
     autoClose: 3000,
     hideProgressBar: false,
-    closeOnClick: false,
+    closeOnClick: true,
     pauseOnHover: true,
     draggable: false,
     progress: undefined,
@@ -170,7 +170,7 @@ const handleAdditem=async(movieItem)=>{
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
-    closeOnClick: false,
+    closeOnClick: true,
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
@@ -181,7 +181,7 @@ const handleAdditem=async(movieItem)=>{
     position: "top-right",
     autoClose: 2000,
     hideProgressBar: false,
-    closeOnClick: false,
+    closeOnClick: true,
     pauseOnHover: false,
     draggable: false,
     progress: undefined,
@@ -204,7 +204,6 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
 
 // content changed
 
-
 //useCallback, store the function
 const handleAddWishItem = useCallback((element) => {
   const alreadyInWishlist = isInWishlist[element._id] ?? false;
@@ -223,11 +222,6 @@ const handleAddWishItem = useCallback((element) => {
     addWishNotify();
   }
 }, [dispatch, isInWishlist]);
-
-
-
-
-
 
 return (
 <>
