@@ -18,10 +18,12 @@ import Tooltip from '@mui/material/Tooltip';
 import { IoIosFilm } from "react-icons/io";
 import WishMovieCard from "./WishMovieCard"
 import { useSelector } from "react-redux"
-
+import { useNavigate } from "react-router-dom"
 
 const WishlistDisplay = ({mode}) => {
+  const navigate=useNavigate()
     const token = sessionStorage.getItem('token');
+    console.log(token,"from wish")
     const wishlist = useSelector(store => store.wishlist.wishItems); 
     console.log("wishlist",wishlist) 
 
