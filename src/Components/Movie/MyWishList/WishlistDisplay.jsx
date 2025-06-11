@@ -18,7 +18,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { IoIosFilm } from "react-icons/io";
 import WishMovieCard from "./WishMovieCard"
 import { useSelector } from "react-redux"
-
+import MovieActionButtons from '../MovieActionButtons'
 
 const WishlistDisplay = ({mode}) => {
     const token = sessionStorage.getItem('token');
@@ -65,6 +65,12 @@ const WishlistDisplay = ({mode}) => {
   
   return (
     <Container fluid className="border border-4 border-warning">
+    <MovieActionButtons
+    mode={mode}
+    navigate={navigate}
+    wishlistCount={wishlist.length}
+/>
+
       <Row  className="border mx-auto d-flex justify-content-between flex-row align-items-center">
         <Col md={6} className="border mb-3 mb-md-0 text-start d-flex align-items-center fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</Col>
         {/* Search*/}

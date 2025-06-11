@@ -22,15 +22,8 @@ import { useCallback } from "react"
 import MovieActionButtons from './MovieActionButtons'; // path as per your structure
 
 
-// cart item is added to the card >> green
-//this movie is already purchased, please check the order history >> error
 function MovieDisplay_Debounce({mode,movieData,setMovieData}) 
 {
-const [isHovered, setIsHovered] = useState(false);
-const divStyle = {
-    color: !isHovered ? ' rgba(163, 162, 162, 0.648)' : 'white',
-    cursor: 'pointer'
-  }
 
 //conditionally done.
 const successNotify = () => toast.success('Added to the cart!', {
@@ -49,7 +42,7 @@ const errorNotify = () => toast.error('This movie is already purchased, please c
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: false,
+        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
@@ -61,7 +54,7 @@ const navigate = useNavigate()
 const dispatch= useDispatch()
 const [isInWishlist, setIsInWishlist] = useState({}) //object
 // STate valiable
-// const [movieData, setMovieData] = useState([])
+
 const [searchTerm, setSearchTearm] = useState("")//initial value
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
 
@@ -93,8 +86,7 @@ const fetchData = (searchTerm)=>{
 const token = sessionStorage.getItem('token')
 const userId = sessionStorage.getItem
 ('userId')
-// console.log(userId)
-// console.log("token",token)
+
 let config = {
     headers: {
     Authorization: `Bearer ${token}`
@@ -170,7 +162,7 @@ const handleAdditem=async(movieItem)=>{
 
     const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: false,
@@ -205,24 +197,64 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
 
 
 // content changed
-
+// Api calls
+  const addWishItemToServer = async (element) => {
+    try {
+      const token = sessionStorage.getItem('token');
+      console.log("server",token)
+      const response = await axios.post(
+        `${url}/add-wish-list`,
+        element,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('Added to Wishlist DB:', response.data);
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+    }
+  };
+  
+  const removeWishItemFromServer = async (element) => {
+    try {
+      const token = sessionStorage.getItem('token');
+      const response = await axios.delete(
+        `${url}/delete-wish-item/${element._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('Removed from Wishlist:', response.data);
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+    }
+  };
+  
 //useCallback, store the function
+
 const handleAddWishItem = useCallback((element) => {
   const alreadyInWishlist = isInWishlist[element._id] ?? false;
   const updated = {
     ...isInWishlist,
-    [element._id]: !alreadyInWishlist,
+    [element._id]: !alreadyInWishlist, // updating the changes
   };
   setIsInWishlist(updated);
 
   if (alreadyInWishlist) {
     dispatch(wishRemoveItem(element));
     console.log("Removed from Wishlist (local)");
+    removeWishNotify()
   } else {
     dispatch(wishAddItem(element));
     console.log("Added to Wishlist (local)");
     addWishNotify();
+    addWishItemToServer(element)
   }
+
 }, [dispatch, isInWishlist]);
 
 return (
@@ -240,9 +272,9 @@ return (
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
     <MovieActionButtons
-  mode={mode}
+    mode={mode}
     navigate={navigate}
-  wishlistCount={wishlist.length}
+    wishlistCount={wishlist.length}
 />
 
 {/* Conditionally rendered buttons for logged-in users */}
@@ -262,19 +294,7 @@ return (
             <span className="d-md-block d-none">Add Movie</span>
           </Button>
 
-          <Button
-            variant="none"
-            onClick={() => navigate('/usermovies')}
-            className="movieDisplayBtn"
-            style={{
-              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
-              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-            }}
-          >
-            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
-            <span className="d-md-block d-none">My Movies</span>
-          </Button>
+         
         </>
       )}
 
