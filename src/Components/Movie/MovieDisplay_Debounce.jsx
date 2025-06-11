@@ -19,6 +19,8 @@ import { FaRegHeart } from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {wishAddItem,wishRemoveItem} from "../../utils/WishCartSlice"
 import { useCallback } from "react"
+import MovieActionButtons from './MovieActionButtons'; // path as per your structure
+
 
 // cart item is added to the card >> green
 //this movie is already purchased, please check the order history >> error
@@ -237,80 +239,45 @@ return (
     {/* Search*/}
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 
-    {/* Add to Cart */}
-    <Button variant="none" onClick={()=>navigate('/cartpage')} className="movieDisplayBtn"
-    style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)" }}>
+    <MovieActionButtons
+  mode={mode}
+    navigate={navigate}
+  wishlistCount={wishlist.length}
+/>
 
-      <Badge variant="text"
-        sx={{
-            "& .MuiBadge-badge":
-            { 
-            fontSize: "0.7rem", // Reduce font size
-            minWidth: "10px",   // Adjust width to fit smaller content
-            height: "16px",     // Adjust height
-            right: 5,
-             top: -2,
-        }
-         }}
-      color="primary" badgeContent={2} >
-      <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
-      </Badge>
-        <span className="d-md-block d-none">My Cart</span> 
-    </Button>
+{/* Conditionally rendered buttons for logged-in users */}
+      {token && (
+        <>
+          <Button
+            variant="none"
+            className="movieDisplayBtn"
+            onClick={() => navigate('/addmovie')}
+            style={{
+              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+            }}
+          >
+            <FaPlusCircle className="fs-5 me-md-1 addIcon" />
+            <span className="d-md-block d-none">Add Movie</span>
+          </Button>
 
-    {/* Wish List */}
-    <Button variant="none" 
-    onClick={() => {
-    const token = sessionStorage.getItem('token');
-    if (token) {
-      navigate('/mywishlist');
-    } else {
-      console.log('No token found!');
-      navigate('/signin', { state: { from: '/mywishlist' } }); // so we can redirect back later
-    }
-  }}
-    className="movieDisplayBtn"
-    style={{
-    backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",  color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
-  }}>
-        <Badge variant="text"
-        sx={{
-            "& .MuiBadge-badge": {
-            fontSize: "0.7rem", // Reduce font size
-            minWidth: "10px",   // Adjust width to fit smaller content
-            height: "16px",     // Adjust height
-            right: 0,
-             top: -2,
-        },
-         }}
-      color="success"
-       badgeContent={wishlist.length}
-    >
-   <FaHeart className="fs-5 iconHeart me-md-1" />      </Badge>
- <span className="d-md-block d-none">    
-    My Wish List
-    </span>
-    </Button>
+          <Button
+            variant="none"
+            onClick={() => navigate('/usermovies')}
+            className="movieDisplayBtn"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+            }}
+          >
+            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
+            <span className="d-md-block d-none">My Movies</span>
+          </Button>
+        </>
+      )}
 
-    {
-        token &&
-    <>
-    {/* ADD MOVIE */}
-    <Button variant="none" className="movieDisplayBtn " onClick={()=>navigate('/addmovie')}
-        style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
-  }}
-    >
-     <FaPlusCircle className="fs-5 me-md-1 addIcon"
-         /><span className="d-md-block d-none">Add Movie</span></Button>
-    
-    {/* My MOVIES */}
-    <Button variant="none" onClick={()=>navigate('/usermovies')} className="movieDisplayBtn"
- style={{backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",border:mode === "light"? "1px solid rgba(199, 199, 203, 0.52)"  : " none",color:mode==="light"? "black":"rgba(209, 209, 213, 0.63)"
-  }}>
-    <FaBookmark className="fs-5 me-md-1 myMovieIcon" /><span className="d-md-block d-none">My Movies</span> 
-    </Button>
-    </>
-    }
     <>
     {/* Debounce Search*/}
     <input style={{
