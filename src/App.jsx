@@ -28,7 +28,7 @@ import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
 import WishMovieDisplay_Debounce from './Components/Movie/MyWishList/WishMovieDisplay_Debounce';
-import WishlistDisplay from './Components/Movie/WishlistDisplay';
+import WishlistDisplay from './Components/Movie/Movie/MyWishList/WishlistDisplay';
 
 
 function App() {
