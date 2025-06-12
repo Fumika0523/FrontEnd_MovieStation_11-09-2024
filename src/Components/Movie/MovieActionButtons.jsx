@@ -8,7 +8,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
 // navigation
 // wishlistCount >>store
   return (
-    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 my-4 mx-md-4 border-danger">
 
       {/* My Cart */}
       <Button

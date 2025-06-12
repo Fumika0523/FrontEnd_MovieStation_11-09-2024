@@ -138,13 +138,6 @@ const getCartData=async()=>{
 }}
 
 
-const getWishData = async()=>{
-    let res = await axios.get(`${url}/add-wish-list`,config)
-    console.log("getWishData",res)
-    // if(res.data && res.data.wishData){
-    // }
-}
-
 const handleAdditem=async(movieItem)=>{
     console.log("movieItem,",movieItem)
     // >> api call for updating the backend >> saving to the DB  
@@ -183,18 +176,10 @@ const handleAdditem=async(movieItem)=>{
     });
 
       
-const styles = {
-  color: mode === "light" ? "red" : "rgba(209, 209, 213, 0.63)",
-  "&:hover": {
-    color: mode === "light" ? "pink" : "red",
-  },
-};
-
 const wishlist = useSelector(store => store.wishlist.wishItems); 
 console.log("wishlist",wishlist) 
 
 console.log("Redux Store:", useSelector(store => store.wishlist));
-
 
 // content changed
 // Api calls
@@ -212,6 +197,7 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
         }
       );
       console.log('Added to Wishlist DB:', response.data);
+      return response.data
     } catch (error) {
       console.error('Error adding to wishlist:', error);
     }
@@ -236,26 +222,32 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
   
 //useCallback, store the function
 
-const handleAddWishItem = useCallback((element) => {
+const handleAddWishItem = useCallback (async(element) => {
   const alreadyInWishlist = isInWishlist[element._id] ?? false;
   const updated = {
     ...isInWishlist,
     [element._id]: !alreadyInWishlist, // updating the changes
   };
   setIsInWishlist(updated);
-
   if (alreadyInWishlist) {
     dispatch(wishRemoveItem(element));
     console.log("Removed from Wishlist (local)");
     removeWishNotify()
   } else {
-    dispatch(wishAddItem(element));
+    if(token){
+      let res = await addWishItemToServer(element) // store to server, return in a function >> async & await, to resolve a promise
+      console.log("wishlist response",res)
+      dispatch(wishAddItem(res.wishData)); 
+      addWishNotify();
+      return // it stopping 
+    }
+    dispatch(wishAddItem(element)); // user is not logged in yet, it will happen in store
     console.log("Added to Wishlist (local)");
     addWishNotify();
-    addWishItemToServer(element)
+    //error handling for duplicated key 
   }
-
 }, [dispatch, isInWishlist]);
+
 
 return (
 <>

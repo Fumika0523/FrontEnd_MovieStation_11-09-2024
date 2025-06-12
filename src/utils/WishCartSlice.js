@@ -4,7 +4,8 @@ const wishCartSlice = createSlice({
   name: "wishlist",
   initialState:  {
        wishItems:[],
-  },     
+  },  
+     
   reducers: {
     // Add an item to the wishlist
     // wishAddItem: (state, action) => {
