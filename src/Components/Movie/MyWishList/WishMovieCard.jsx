@@ -7,7 +7,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 
-function WishMovieCard({ movieposter, moviename,rating,_id,}) {
+function WishMovieCard({ movieposter, moviename,rating,deleteBtn,}) {
   const navigate = useNavigate()
 const ratNum = { rating }
   const starNum = ratNum.rating / 2
@@ -30,10 +30,11 @@ const ratNum = { rating }
                     
             {/* Delete */}
             <div className="text-start   gap-5 col-lg-5  col-md-4 col-sm-5  d-flex flex-row pe-md-5  justify-content-end align-items-center ">
-            <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}
+            {/* <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}
              onClick={() => navigate(`/movietrailer/${_id}`)}>
             <IoEyeSharp style={{color:"rgb(87, 164, 98)"}} className="fs-3 "/>
-            </Button>
+            </Button> */}
+            {deleteBtn}
 
             {/* Delete */}
             <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}>

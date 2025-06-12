@@ -25,7 +25,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
           variant="text"
           sx={{
             "& .MuiBadge-badge": {
-              fontSize: "0.7rem",
+              fontSize: "0.75rem",
               minWidth: "10px",
               height: "16px",
               right: 5,
@@ -62,14 +62,17 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
           variant="text"
           sx={{
             "& .MuiBadge-badge": {
-              fontSize: "0.7rem",
+              fontSize: "0.75rem",
               minWidth: "10px",
               height: "16px",
               right: 0,
               top: -2,
+              backgroundColor: "#FF8300", // Apply the pink color
+              color: "#000", // Adjust text color for contrast
+
             },
           }}
-          color="success"
+    
           badgeContent={wishlistCount}
         >
           <FaHeart className="fs-5 iconHeart me-md-1" />
