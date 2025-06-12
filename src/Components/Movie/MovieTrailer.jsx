@@ -56,9 +56,11 @@ const [show, setShow] = useState(false);
         <div
           className='mx-auto'>
             <div className='d-flex flex-row justify-content-end align-items-center'>
-                <MovieActionButtons     mode={mode}
-                navigate={navigate}
-                wishlistCount={wishlist.length}/>
+                  <MovieActionButtons
+                  mode={mode}
+                  navigate={navigate}
+                  wishlistCount={wishlist[0]?.length}
+                  cartCount={cart[0]?.length} />
             <span >
              <Button variant="" className="text-nowrap text-white  me-5" style={{backgroundColor:"rgb(0, 65, 87)"}} onClick={() => navigate('/allmovies')}> 
                     <IoChevronBackOutline className="fs-4  me-1"/>

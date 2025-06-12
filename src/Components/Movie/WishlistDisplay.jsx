@@ -25,24 +25,24 @@ const navigate = useNavigate();
     console.log(token,"from wish")
 
 // Api calls
-  const addWishItemToServer = async (element) => {
-    try {
-      const token = sessionStorage.getItem('token');
-      console.log("server",token)
-      const response = await axios.post(
-        `${url}/add-wish-list`,
-        element,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log('Added to Wishlist:', response.data);
-    } catch (error) {
-      console.error('Error adding to wishlist:', error);
-    }
-  };
+  // const addWishItemToServer = async (element) => {
+  //   try {
+  //     const token = sessionStorage.getItem('token');
+  //     console.log("server",token)
+  //     const response = await axios.post(
+  //       `${url}/add-wish-list`,
+  //       element,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log('Added to Wishlist:', response.data);
+  //   } catch (error) {
+  //     console.error('Error adding to wishlist:', error);
+  //   }
+  // };
   
   const removeWishItemFromServer = async (element) => {
     
@@ -67,7 +67,6 @@ const navigate = useNavigate();
     Authorization: `Bearer ${token}`
 }}
 
-  const [wishData,setWishData]=useState([])
   const dispatch = useDispatch()
 
 const getWishData = async()=>{
@@ -84,15 +83,17 @@ useEffect(()=>{
   return (
     <>
      <Container fluid className="">
-      <Row  className="my-4 mx-auto d-flex  px-md-5 justify-content-between flex-row align-items-center">
-        <Col xs={6} className="text-start d-flex align-items-center text-nowrap fs-4"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</Col>
+      <Row className="my-4 mx-auto d-flex  px-md-5 justify-content-between flex-row align-items-center">
+        <Col xs={6} className="text-start d-flex align-items-center text-nowrap fs-4"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist
+        </Col>
         <Col xs={6} >
-          <MovieActionButtons
+        <MovieActionButtons
           mode={mode}
           navigate={navigate}
-          wishlistCount={wishlist[0]?.length}/>
+          wishlistCount={wishlist[0]?.length}
+          />
         </Col>
-         </Row>
+      </Row>
 
     { 
         wishlist[0]?.length === 0?
@@ -109,7 +110,7 @@ useEffect(()=>{
     </>
         :
     <>
-    {wishlist[0]?.map((element, index) => (
+    { wishlist[0]?.map((element, index) => (
         <WishMovieCard {...element} key={index} element={element} mode={mode} 
                             
         // Delete Button

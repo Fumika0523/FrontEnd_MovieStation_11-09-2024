@@ -25,25 +25,10 @@ import MovieActionButtons from './MovieActionButtons'; // path as per your struc
 function MovieDisplay_Debounce({mode,movieData,setMovieData}) 
 {
 
-const navigate = useNavigate()
-const dispatch= useDispatch()
-
-// STate valiable
-const [searchTerm, setSearchTearm] = useState("")//initial value
-const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
-const token = sessionStorage.getItem('token')
-const userId = sessionStorage.getItem
-('userId')
-
-let config = {
-    headers: {
-    Authorization: `Bearer ${token}`
-}}
-
 //conditionally done.
-const successCartNotify = () => toast.success('Added to the cart!', {
+const successNotify = () => toast.success('Added to the cart!', {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -53,9 +38,9 @@ const successCartNotify = () => toast.success('Added to the cart!', {
     // transition: Bounce,
     });
 
-const errorCartNotify = () => toast.error('This movie is already purchased, please check the order history', {
+const errorNotify = () => toast.error('This movie is already purchased, please check the order history', {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -65,25 +50,26 @@ const errorCartNotify = () => toast.error('This movie is already purchased, plea
         // transition: Bounce,
 });      
 
+const navigate = useNavigate()
+const dispatch= useDispatch()
+const [isInWishlist, setIsInWishlist] = useState({}) //object
+// STate valiable
+
+const [searchTerm, setSearchTearm] = useState("")//initial value
+const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
+
 const getMovieData = async () => {
     console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
     // res.data. {object} 
     console.log(res)
+
+    // // console.log(res.data.movieData._id);
     setMovieData(res.data.movieData);
     };
     useEffect(()=>{
         getMovieData()
     },[])
-
-    useEffect(()=>{
-    if(movieData){
-        setFilterMovieData(movieData)
-        // getSpecificMovieData()
-    }
-    // getMovieData()
-    // console.log("MovieDisplay")
-},[movieData])
 
 const fetchData = (searchTerm)=>{
     console.log("searchTerm",searchTerm)
@@ -96,6 +82,15 @@ const fetchData = (searchTerm)=>{
     return filterData(searchTerm,movieData)
   }
 // console.log("filterMovieData",filterMovieData)
+
+const token = sessionStorage.getItem('token')
+const userId = sessionStorage.getItem
+('userId')
+
+let config = {
+    headers: {
+    Authorization: `Bearer ${token}`
+}}
 
    // ALL
     useEffect(() => {
@@ -116,6 +111,15 @@ return()=>{
 // console.log("filtermoviedata",filterMovieData)
 // console.log("moviedata",movieData)
 
+useEffect(()=>{
+    if(movieData){
+        setFilterMovieData(movieData)
+        // getSpecificMovieData()
+    }
+    // getMovieData()
+    // console.log("MovieDisplay")
+},[movieData])
+
 const deleteMovie=async(_id)=>{
     // console.log("Movie Deleted from the DB..")
     let res = await axios.delete(`${url}/deletemovie/${_id}`,config)
@@ -133,14 +137,42 @@ const getCartData=async()=>{
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
 
-// WISH
-  const [wishData,setWishData]=useState([])
 
+const handleAdditem=async(movieItem)=>{
+    console.log("movieItem,",movieItem)
+
+    getCartData()
+    }
+
+    const addWishNotify = () => toast.success('Added to Wish List!', {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+      });
+
+    const removeWishNotify=()=> toast.error('Removed from Wish list', {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "light",
+    });
+
+      
 const wishlist = useSelector(store => store.wishlist.wishItems); 
 console.log("wishlist",wishlist) 
-console.log("length",wishlist[0]?.length) 
 
+console.log("Redux Store:", useSelector(store => store.wishlist));
 
+// content changed
 // Api calls
   const addWishItemToServer = async (element) => {
     try {
@@ -155,14 +187,14 @@ console.log("length",wishlist[0]?.length)
           },
         }
       );
-      console.log('Added to Wishlist:', response.data);
+      console.log('Added to Wishlist DB:', response.data);
+      return response.data
     } catch (error) {
       console.error('Error adding to wishlist:', error);
     }
   };
   
   const removeWishItemFromServer = async (element) => {
-    
     try {
       const token = sessionStorage.getItem('token');
       const response = await axios.delete(
@@ -178,8 +210,34 @@ console.log("length",wishlist[0]?.length)
       console.error('Error removing from wishlist:', error);
     }
   };
+  
+//useCallback, store the function
 
-  const [isInWishlist, setIsInWishlist] = useState({}) 
+const handleAddWishItem = useCallback (async(element) => {
+  const alreadyInWishlist = isInWishlist[element._id] ?? false;
+  const updated = {
+    ...isInWishlist,
+    [element._id]: !alreadyInWishlist, // updating the changes
+  };
+  setIsInWishlist(updated);
+  if (alreadyInWishlist) {
+    dispatch(wishRemoveItem(element));
+    console.log("Removed from Wishlist (local)");
+    removeWishNotify()
+  } else {
+    if(token){
+      let res = await addWishItemToServer(element) // store to server, return in a function >> async & await, to resolve a promise
+      console.log("wishlist response",res)
+      dispatch(wishAddItem(res.wishData)); 
+      addWishNotify();
+      return // it stopping 
+    }
+    dispatch(wishAddItem(element)); // user is not logged in yet, it will happen in store
+    console.log("Added to Wishlist (local)");
+    addWishNotify();
+    //error handling for duplicated key 
+  }
+}, [dispatch, isInWishlist]);
 
 const getWishData = async()=>{
     let res = await axios.get(`${url}/wish-list`,config)
@@ -190,12 +248,6 @@ const getWishData = async()=>{
 useEffect(()=>{
   getWishData()
 },[])
-
-
-// CART
-const cart = useSelector(store => store.cart.cartItems); 
-console.log("Cart",cart[0]?.length) 
-console.log("Redux Store from Cart:", useSelector(store => store.cart));
 
 return (
 <>

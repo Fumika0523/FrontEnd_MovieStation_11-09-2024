@@ -3,7 +3,7 @@ import { Badge } from "@mui/material";
 import { FaHeart, FaPlusCircle, FaBookmark } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
+const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
 // mode >> theme
 // navigation
 // wishlistCount >>store
@@ -33,7 +33,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
             },
           }}
           color="primary"
-          badgeContent={2}
+          badgeContent={cartCount}
         >
           <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
         </Badge>
