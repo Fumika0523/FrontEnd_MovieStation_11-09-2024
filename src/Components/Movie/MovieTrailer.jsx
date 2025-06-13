@@ -55,14 +55,15 @@ const [show, setShow] = useState(false);
         
         <div
           className='mx-auto'>
-            <div className='d-flex flex-row justify-content-end align-items-center'>
+            <div className='d-flex flex-row  my-3 justify-content-end align-items-center'>
                   <MovieActionButtons
                   mode={mode}
                   navigate={navigate}
                   wishlistCount={wishlist[0]?.length}
-                  cartCount={cart[0]?.length} />
+                  // cartCount={cart[0]?.length} 
+                  />
             <span >
-             <Button variant="" className="text-nowrap text-white  me-5" style={{backgroundColor:"rgb(0, 65, 87)"}} onClick={() => navigate('/allmovies')}> 
+             <Button variant="" className="text-nowrap text-white  me-5" style={{backgroundColor:"rgb(33, 34, 40)"}} onClick={() => navigate('/allmovies')}> 
                     <IoChevronBackOutline className="fs-4  me-1"/>
                      Back to All Movies</Button>
             </span>
@@ -71,22 +72,10 @@ const [show, setShow] = useState(false);
             {/* Top */}
             <Row className='mx-auto mx-md-5 mb-3 d-flex align-items-center' >
               {/* Moviename */}
-            <Col className="col-lg-6  border-4 gap-3 col-md-6 col-sm-6 col-6  d-flex flex-row align-items-center justify-content-start">
+            <Col className="  border-4 gap-3  d-flex flex-row align-items-center justify-content-start">
             <div className='border-4  fs-2'>{movieInfo.moviename}</div>
             <div className='border-4  fs-4' >({movieInfo.publishYear})</div>
             <div><Button onClick={handleShow}  variant="warning"> ▶ Watch Trailer</Button></div>
-            </Col>
-            <Col className="border-4  col-lg-6  col-md-6 col-sm-6 col-6 d-flex align-items-end flex-row justify-content-start">
-            <div>
-            <div  className='border-4  fw-bold text-secondary ' style={{fontSize:"14px"}}>RATING</div>
-            <div className="border-4 d-flex flex-row justify-content-center align-items-center">
-              <FaStar className='text-warning fs-4'/>
-              <span className="fw-bold mx-1" style={{fontSize:"20px"}}>{movieInfo.rating}</span>
-              <span className='text-secondary'> /10</span> 
-            </div>
-            </div>
-            <div>
-            </div>
             </Col>
             </Row>
 
@@ -103,21 +92,21 @@ const [show, setShow] = useState(false);
           </Modal.Header>
              <Modal.Body style={{    backgroundColor: mode === "light" ? "light" : "#1e1e1e", }}>
               <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-      <iframe
-        title="YouTube video"
-        src={movieInfo?.trailer}
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-        }}
-      />
-              </div>
+              <iframe
+                title="YouTube video"
+                src={movieInfo?.trailer}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </div>
           </Modal.Body>
             </Modal>
             
@@ -144,12 +133,24 @@ const [show, setShow] = useState(false);
               <Row className='align-items-center mx-auto d-flex justify-content-evenly '>
               {/* List */}
               <Col className="col-md-6 col-6 col-sm-6 col-lg-12">
-                <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
+                {/* <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
                   style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
                     color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
                     borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
-                  > <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button>
+                  > <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button> */}
+           <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
+                  style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                    color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
+                  >
+            <div className="border-4 d-flex flex-row justify-content-center align-items-center">
+              <FaStar className='text-warning fs-5'/>
+              <span className="fw-bold mx-1" style={{fontSize:"18px"}}>{movieInfo.rating}</span>
+              <span> /10</span> 
+            </div>
+            </Button>
                 </Col>
+
               <Col className='col-md-6 col-sm-6 col-lg-12'>
                   {/* Seen all */}
                 <Button variant="outline-none" className="py-3 text-nowrap trailerBtn w-100 d-flex mb-3"
@@ -179,8 +180,6 @@ const [show, setShow] = useState(false);
         </div>
       }
 
-      {/* Carousel */}
-      {/* <div> */}
       <Carousel  className='border-4   d-none d-md-block row -4 mx-auto border-warning my-5'>
         <Carousel.Item variant="warning"  className=' '>
           <div className='d-flex flex-row justify-content-between mx-auto col-11'>

@@ -37,7 +37,7 @@ function NavBar({ mode, setMode }) {
 
   const token = sessionStorage.getItem('token')
   const name = sessionStorage.getItem('name')
-  console.log("token", token)
+  //console.log("token", token)
 
   const handleSignOut = () => {
     // sessionStorage.removeItem('token')
@@ -48,14 +48,14 @@ function NavBar({ mode, setMode }) {
 
   const navigate = useNavigate()
   const location = useLocation();
-  console.log(location)
+  //console.log(location)
 
 
   //paths where header should be excpluded
   const includedPaths = ["/", "/allmovies", "/about", "/services", "/contact", "/signup", "/signin"] //2nd option, rount you wanted you mention the all pages that you want to show
   //Check if current path is in the excludedPaths array
   const shouldRenderHeader = includedPaths.includes(location.pathname)
-  console.log(shouldRenderHeader)
+  //console.log(shouldRenderHeader)
 
   //subscribing to the store
   // const cartItems = useSelector(store => store.cart.items)
@@ -257,7 +257,7 @@ function NavBar({ mode, setMode }) {
           className="border-0 border
            mx-auto d-flex text-nowrap px-1 justify-content-center align-items-center"
           style={{ color: mode == "light" ? "black" : "white" }}>
-          <span style={{ color: "rgb(248, 220, 6)",backgroundColor:"rgb(148, 5, 5)",width:"33px",height:"33px"}} className="d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-5 " >{name[0].toUpperCase()}</span>
+          <span style={{ color: "rgb(246, 217, 98)",backgroundColor:"rgb(148, 72, 2)",width:"36px",height:"34px"}} className="fw-bold d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 " >{name[0].toUpperCase()}</span>
           </Dropdown.Toggle>
           <Dropdown.Menu 
           className="dropdownMenu  px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>
@@ -279,12 +279,7 @@ function NavBar({ mode, setMode }) {
       {/* Power Off */}
       <Nav.Link href="#" className="d-flex align-items-center justify-content-center "
        onClick={() => handleSignOut()}>
-        <FaPowerOff className="fs-4" style={{ color: "rgba(250, 27, 27, 0.58)" }} />
-       {/* <Button variant="none"
-                    type="submit" className="border border-0 outline-none mx-auto"
-                    onClick={() => handleSignOut()}>
-                    <FaPowerOff className="fs-4" style={{ color: "rgba(250, 27, 27, 0.58)" }} />
-                  </Button> */}
+        <FaPowerOff className="fs-4" style={{color: "rgb(161, 1, 1)"}} />
       </Nav.Link>
 
       {/* Dark / Light Mode */}
@@ -321,72 +316,19 @@ function NavBar({ mode, setMode }) {
               <>
                {/* Sign in */}
                 <Nav.Link href="/signin" className="d-flex align-items-center justify-content-center " >
-                {/* <OverlayTrigger placement="bottom"
-                  overlay={<Tooltip id="button-tooltip-2">Sign In</Tooltip>} 
-                  > */}
-                        <PiSignInFill 
+                    <PiSignInFill 
                           className="fs-4" style={{ color: mode == "light" ? "black" : "white" }} />
-                {/* {({ ref, ...triggerHandler }) => (
-                 <Button
-                     variant="none"
-                          ref={ref}
-                          {...triggerHandler}
-                          className="d-inline-flex align-items-center"
-                          onClick={() => { navigate('/signin') }}
-                        >
-                        <PiSignInFill 
-                          className="fs-4" style={{ color: mode == "light" ? "black" : "white" }} />
-                        </Button>
-                      )} */}
-                 {/* </OverlayTrigger> */}
                  </Nav.Link>
 
                 {/* Sign up */}
                 <Nav.Link href="/signup" className="d-flex align-items-center justify-content-center "
                  >
-                {/* {({ ref, ...triggerHandler }) => (
-                <Nav.Link href="#" style={{width:"55px"}} className="px-0 border mx-auto"
-                  ref={ref}
-                          {...triggerHandler}
-                  onClick={() => { navigate('/signup') }}>
-                <OverlayTrigger placement="bottom"
-                overlay={<Tooltip id="button-tooltip-2" >Sign Up</Tooltip>}
-                  > */}
-                      <FaUser
-                          className="fs-5 mx-auto" style={{ color: mode == "light" ? "black" : "white" }}
+                  <FaUser
+                    className="fs-5 mx-auto" style={{ color: mode == "light" ? "black" : "white" }}
                           />
-     
-                      {/* {({ ref, ...triggerHandler }) => (
-                        <Button
-                          variant="none"
-                          ref={ref}
-                          {...triggerHandler}
-                          className="d-flex align-items-center border mx-auto justify-content-center "
-                          onClick={() => { navigate('/signup') }}
-                        >
-                          <FaUser
-                          className="fs-5" style={{ color: mode == "light" ? "black" : "white" }}
-                          />
-                        </Button>
-                      )} */}
-                 {/* </OverlayTrigger> */}
+
                  </Nav.Link>
-                 {/* )}  */}
-
-
-                 {/* LIGHT DARK MODE */}
-                 {/* <Nav.Link href="#" className="px-0 me-1 ">
-                  <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center "
-                    style={{ color: mode == "light" ? greyColor : amberColor }}
-                    onClick={() => {
-                      //setMode("light")
-                      //true?"truedata":"falsedata"
-                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
-                      // console.log(mode)
-                    }}>
-                    {mode === "light" ? <DarkModeIcon className="fs-4" /> : <LightModeIcon className="fs-4" />}
-                  </Button>
-                </Nav.Link> */}
+           
                    {/* Dark / Light Mode */}
                    <Nav.Link href="#" className="d-flex align-items-center justify-content-center"
                     style={{ color: mode == "light" ? greyColor : amberColor }}
@@ -395,17 +337,9 @@ function NavBar({ mode, setMode }) {
                       //true?"truedata":"falsedata"
                       setMode(mode == "light" ? "dark" : "light")//setMode(light)
                       // console.log(mode)
-                    }}
-                   
+                    }}              
                    >
-                  {/* <Button variant="none" className="d-flex text-nowrap justify-content-center align-items-center"
-                    style={{ color: mode == "light" ? greyColor : amberColor }}
-                    onClick={() => {
-                      //setMode("light")
-                      //true?"truedata":"falsedata"
-                      setMode(mode == "light" ? "dark" : "light")//setMode(light)
-                      // console.log(mode)
-                    }}> */}
+
                     {mode === "light" ? 
                     <DarkModeIcon className="fs-3"/> : <LightModeIcon className="fs-3" />}
                   {/* </Button> */}

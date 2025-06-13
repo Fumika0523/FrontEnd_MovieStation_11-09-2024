@@ -136,13 +136,16 @@ const getCartData=async()=>{
     dispatch(removeItem());//clearing existing cart items from store
     res.data.cartData.map((element)=>dispatch(addItem(element)))
 }}
+const [isInCart, setIsInCart] = useState({}) //object
 
-
-const handleAdditem=async(movieItem)=>{
-    console.log("movieItem,",movieItem)
-
-    getCartData()
-    }
+const handleAddItem = useCallback (async(element)=>{ 
+  const alreadyInCart = isInCart[element._id] ?? false;
+   const updated = {
+    ...isInCart,
+    [element._id]: !alreadyInCart, // updating the changes
+   }
+   setIsInCart(updated)
+})
 
     const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
@@ -168,9 +171,12 @@ const handleAdditem=async(movieItem)=>{
 
       
 const wishlist = useSelector(store => store.wishlist.wishItems); 
-console.log("wishlist",wishlist) 
-
+// console.log("wishlist",wishlist) 
 console.log("Redux Store:", useSelector(store => store.wishlist));
+
+const cart = useSelector(store => store.cart.cartItems); 
+console.log("cart",cart) 
+console.log("Redux Store from Cart:", useSelector(store => store.cart));
 
 // content changed
 // Api calls
@@ -210,7 +216,8 @@ console.log("Redux Store:", useSelector(store => store.wishlist));
       console.error('Error removing from wishlist:', error);
     }
   };
-  
+
+
 //useCallback, store the function
 
 const handleAddWishItem = useCallback (async(element) => {
@@ -249,6 +256,10 @@ useEffect(()=>{
   getWishData()
 },[])
 
+const isMatched = filterMovieData?.map(item =>  wishlist[0]?.some(element => element._id === item._id));
+console.log(isMatched)
+
+
 return (
 <>
 <div >
@@ -258,15 +269,16 @@ return (
     justifyContent={"center"}
     margin={2} >
 
-    <Grid  container  className="mx-auto mb-3 d-flex justify-content-end flex-row align-items-center">
+    <Grid  container  className=" my-3 mx-auto mb-3 d-flex justify-content-end flex-row align-items-center">
     
     {/* Search*/}
-    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+    <div className=" flex-wrap justify-content-end d-flex flex-row  border-4 border-danger">
 
     <MovieActionButtons
     mode={mode}
     navigate={navigate}
     wishlistCount={wishlist[0]?.length}
+     cartCount={cart[0]?.length}
 />
 
 {/* Conditionally rendered buttons for logged-in users */}
@@ -285,8 +297,6 @@ return (
             <FaPlusCircle className="fs-5 me-md-1 addIcon" />
             <span className="d-md-block d-none">Add Movie</span>
           </Button>
-
-         
         </>
       )}
 
@@ -337,11 +347,12 @@ return (
     <>    
     <Tooltip title="Add to Cart">
        <ShoppingCartIcon className="reduxIcon fs-3"
+          onClick={()=>{handleAddItem(element)}} 
        />
     </Tooltip>
     <ToastContainer
     position="top-right"
-    autoClose={5000}
+    autoClose={2000}
     hideProgressBar={false}
     newestOnTop={false}
     closeOnClick={false}
@@ -359,17 +370,22 @@ return (
         <span className="d-flex align-items-center"
              onClick={()=>{handleAddWishItem(element)}}  >
               {/* is there is a data in isInWishlist */}
-          {isInWishlist[element._id] ? (
-            <FavoriteIcon
-              className="text-danger border-primary"
-              style={{ fontSize: "25px", margin: "1.5px" }}
-            />
-          ) : (
-            <FaRegHeart
-              className="text-danger border-warning p-0"
-              style={{ fontSize: "28px" }}
-            />
-          )}
+      { 
+          wishlist[0]  ? 
+          (
+    <FavoriteIcon 
+      // key={movie._id} 
+      className="text-danger border-primary" 
+      style={{ fontSize: "25px", margin: "1.5px" }} 
+    />
+  ) : (
+    <FaRegHeart 
+      // key={movie._id} 
+      className="text-danger border-warning p-0" 
+      style={{ fontSize: "28px" }} 
+    />
+  )
+}
         </span>
       </Tooltip>
 

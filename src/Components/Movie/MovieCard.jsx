@@ -75,11 +75,12 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
   //loginUser Id === movie owner(userId)  >> Edit || Delete
   //Comparison operator
   //movieData is all movie datas that were added in the website
-  const isMovieOwner = userId === element?.owner; // true || false
+  const isMovieOwner = userId === element?.owner; // true || false]
+  //console.log("isOwner",isMovieOwner)
   // console.log("isMovieOwner",isMovieOwner)
-  // console.log("userId",userId)
+  //console.log("userId",userId)
   // console.log("token",token)
-  // console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
+  //console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
   // SPECIFIC
   const getSpecificMovieData = async () => {
     // console.log("Specific Movie Data is called....")
@@ -109,7 +110,7 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
 
   const addWishNotify = () => toast.success('Added to Wish List!', {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: false,
@@ -207,22 +208,17 @@ action={
       </Tooltip>
     </span>
   </>
-  
- 
-
-}
-
-
+  }
             titleTypographyProps={{ fontSize: "20x", paddingBottom: "0px", marginBottom: "0px" }}
             title={moviename.length >= 25 ? moviename.substring(0, 25) + "..." : moviename}
             subheaderTypographyProps={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", gap: "5px", fontSize: "13px" }}
             subheader={
               <>
-                {rating} /10
+                {/* {rating} /10
                 <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5} style={{
                   paddingBottom: "5px",
                   color: "rgb(242, 154, 3)"
-                }} />
+                }} /> */}
               </>
             }
           />

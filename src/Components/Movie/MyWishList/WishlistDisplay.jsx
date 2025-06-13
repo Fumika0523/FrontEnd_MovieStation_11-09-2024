@@ -75,7 +75,8 @@ const WishlistDisplay = ({mode}) => {
        mode={mode}
        navigate={navigate}
        wishlistCount={wishlist[0]?.length}
-       cartCount={cart[0]?.length}  />
+      //  cartCount={cart[0]?.length}
+         />
 
       <Row  className="border mx-auto d-flex justify-content-between flex-row align-items-center">
         <Col md={6} className="border mb-3 mb-md-0 text-start d-flex align-items-center fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</Col>
@@ -127,7 +128,7 @@ const WishlistDisplay = ({mode}) => {
     </>
         :
     <> */}
-    {wishlist?.map((element, index) => (
+    {wishlist[0]?.map((element, index) => (
         <WishMovieCard {...element} key={index} element={element} mode={mode} 
                             
         // Delete Button

@@ -83,8 +83,8 @@ useEffect(()=>{
   return (
     <>
      <Container fluid className="">
-      <Row className="my-4 mx-auto d-flex  px-md-5 justify-content-between flex-row align-items-center">
-        <Col xs={6} className="text-start d-flex align-items-center text-nowrap fs-4"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist
+      <Row className="mt-5 mb-3 mx-auto   d-flex  px-md-5 justify-content-between flex-row align-items-center">
+        <Col xs={6} className="text-start d-flex align-items-center text-nowrap fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist
         </Col>
         <Col xs={6} >
         <MovieActionButtons
@@ -94,11 +94,9 @@ useEffect(()=>{
           />
         </Col>
       </Row>
-
     { 
         wishlist[0]?.length === 0?
     <>
-
     <div className="position-relative mt-2 border-4" 
     style={{width:"100%"}} >
         <img src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg" alt="" className=" border-primary  border-4 w-100" style={{filter:"brightness(50%)",objectFit:"cover",maxHeight:"430px", width:"100%"}} />
@@ -106,7 +104,6 @@ useEffect(()=>{
         <span className="text-warning">Your Wishlist is Empty </span><br />
         </h4>
     </div>
-
     </>
         :
     <>
