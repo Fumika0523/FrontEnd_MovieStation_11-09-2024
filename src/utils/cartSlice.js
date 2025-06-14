@@ -10,7 +10,6 @@ const cartSlice=createSlice({
         //actionItem : reducer function
         //actionItemName:()=>{}
         // cart > add to cart, remove from cart, clear the cart
-       // >>>> LET ME WORK ON this
         //actionItem : reducer function >> arrow function
        addItem:(state,action)=>{
         //action.payload >> actual data

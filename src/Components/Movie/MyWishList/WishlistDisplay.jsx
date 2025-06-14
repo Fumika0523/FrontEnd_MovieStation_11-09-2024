@@ -5,7 +5,6 @@ import MovieCard from "../MovieCard"
 import axios from "axios"
 import { url } from "../../../utils/constant"
 import Container from 'react-bootstrap/Container';
-
 import { Button, Col, Row} from "react-bootstrap"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
