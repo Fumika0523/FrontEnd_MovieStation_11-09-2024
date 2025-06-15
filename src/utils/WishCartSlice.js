@@ -4,7 +4,8 @@ const wishCartSlice = createSlice({
   name: "wishlist",
   initialState:  {
        wishItems:[],
-  },     
+  },  
+     
   reducers: {
     // Add an item to the wishlist
     // wishAddItem: (state, action) => {
@@ -16,8 +17,7 @@ const wishCartSlice = createSlice({
       if (!exists) {
         state.wishItems.push(action.payload);
       }
-    },
-    
+    },  
     // Remove a specific item from the wishlist
     // wishRemoveItem: (state, action) => {
     //   return state.filter(item => item.id !== action.payload.id);

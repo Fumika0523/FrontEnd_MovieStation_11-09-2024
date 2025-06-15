@@ -7,7 +7,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
   const token = sessionStorage.getItem('token');
   console.log(wishlistCount)
   return (
-    <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+    <div className="flex-wrap justify-content-end d-flex  flex-row gap-3 border-4 mx-md-4 border-danger">
 
       {/* My Cart */}
       <Button
@@ -24,7 +24,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
           variant="text"
           sx={{
             "& .MuiBadge-badge": {
-              fontSize: "0.7rem",
+              fontSize: "0.75rem",
               minWidth: "10px",
               height: "16px",
               right: 5,
@@ -32,7 +32,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
             },
           }}
           color="primary"
-          badgeContent={2}
+          badgeContent={cartCount}
         >
           <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
         </Badge>
@@ -61,14 +61,17 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
           variant="text"
           sx={{
             "& .MuiBadge-badge": {
-              fontSize: "0.7rem",
+              fontSize: "0.75rem",
               minWidth: "10px",
               height: "16px",
               right: 0,
               top: -2,
+              backgroundColor: "#FF8300", // Apply the pink color
+              color: "#000", // Adjust text color for contrast
+
             },
           }}
-          color="success"
+    
           badgeContent={wishlistCount}
         >
           <FaHeart className="fs-5 iconHeart me-md-1" />
@@ -76,7 +79,19 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
         <span className="d-md-block d-none">My Wish List</span>
       </Button>
 
-      
+       <Button
+            variant="none"
+            onClick={() => navigate('/usermovies')}
+            className="movieDisplayBtn"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+            }}
+          >
+            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
+            <span className="d-md-block d-none">My Movies</span>
+        </Button>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { IoChevronBackOutline } from "react-icons/io5";
 
 function Cartpage() {
     const cartItems = useSelector(store => store.cart.items)
-    console.log(cartItems)
+    console.log("cartItems",cartItems)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -61,9 +61,11 @@ useEffect(()=>{
         
                 {/* Back */}
                 {
-                    cartItems.length === 0 ?
-                    <div className="d-flex justify-content-end align-items-center"> <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}> 
-                    <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button> </div>
+                    cartItems?.length === 0 ?
+                    <div className="d-flex justify-content-end align-items-center"> 
+                    <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}> 
+                    <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button>
+                     </div>
                        
                             :
                         <div  className="mb-2 d-flex align-items-center justify-content-end flex-row gap-3"> 
@@ -109,7 +111,7 @@ useEffect(()=>{
                 } */}
             <div className="mx-auto  border-danger d-flex flex-column justify-content-center ">
                 {
-                    cartItems.length === 0 ?
+                    cartItems?.length === 0 ?
                     <>
                 <div className="fs-1 fw-bold text-center">Your Cart is Empty !!</div>
                 <Image className="mx-auto"

@@ -196,7 +196,7 @@ return (
 
         <div className="text-start d-flex align-items-center ms-2 fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</div>
         {/* Search*/}
-        <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+        <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 ">
       
         {
             token &&

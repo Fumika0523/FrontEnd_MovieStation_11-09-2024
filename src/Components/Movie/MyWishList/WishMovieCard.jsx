@@ -12,6 +12,7 @@ function WishMovieCard({ movieposter, moviename,rating,_id,}) {
   const navigate = useNavigate()
 const ratNum = { rating }
   const starNum = ratNum.rating / 2
+
     return (
         <>
             <div className="d-flex  px-md-3 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">
@@ -28,25 +29,23 @@ const ratNum = { rating }
                     paddingBottom: "5px",color: "rgb(242, 154, 3)"}} />
                  </div>
 
-                    
-            {/* Delete */}
+            {/* Trailer */}
             <div className="text-start   gap-5 col-lg-5  col-md-4 col-sm-5  d-flex flex-row pe-md-5  justify-content-end align-items-center ">
             <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}
              onClick={() => navigate(`/movietrailer/${_id}`)}>
-            <IoEyeSharp style={{color:"rgb(87, 164, 98)"}} className="fs-3 "/>
+            <IoEyeSharp style={{color:"rgb(124, 164, 87)"}} className="fs-3 "/>
             </Button>
-
+      
             {/* Delete */}
             <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}>
-            <DeleteIcon style={{color:"rgb(204, 188, 188)"}} className="fs-3" />
+            <DeleteIcon style={{color:"rgb(181, 180, 183)"}} className="fs-3" />
             </Button>               
 
             {/* Add Cart */}
-                <Button variant="" className="d-flex gap-1 align-items-center" style={{backgroundColor:"rgb(238, 161, 7)"}}>
-                    <span className="d-none d-md-block">Move to Cart</span><ShoppingCartIcon className="fs-3"
-                    style={{color:"rgb(0, 0, 0)"}}/></Button>               
+            <Button variant="" className="d-flex gap-1 align-items-center" style={{backgroundColor:"rgb(238, 161, 7)"}}>
+                <span className="d-none d-lg-block">Move to Cart</span><ShoppingCartIcon className="fs-3"
+                style={{color:"rgb(0, 0, 0)"}}/></Button>               
             </div>            
-               
             </div>
         </div>
         </>

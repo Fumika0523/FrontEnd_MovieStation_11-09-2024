@@ -5,7 +5,6 @@ import MovieCard from "../MovieCard"
 import axios from "axios"
 import { url } from "../../../utils/constant"
 import Container from 'react-bootstrap/Container';
-
 import { Button, Col, Row} from "react-bootstrap"
 import { Box, Grid } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,10 +17,16 @@ import Tooltip from '@mui/material/Tooltip';
 import { IoIosFilm } from "react-icons/io";
 import WishMovieCard from "./WishMovieCard"
 import { useSelector } from "react-redux"
+<<<<<<< HEAD
 import MovieActionButtons from '../MovieActionButtons'
+=======
+import { useNavigate } from "react-router-dom"
+>>>>>>> 984410270d797ed2f487e02e3c9af3a5ffb1cb28
 
 const WishlistDisplay = ({mode}) => {
+  const navigate=useNavigate()
     const token = sessionStorage.getItem('token');
+    console.log(token,"from wish")
     const wishlist = useSelector(store => store.wishlist.wishItems); 
     console.log("wishlist",wishlist) 
 
@@ -65,11 +70,12 @@ const WishlistDisplay = ({mode}) => {
   
   return (
     <Container fluid className="border border-4 border-warning">
-    <MovieActionButtons
-    mode={mode}
-    navigate={navigate}
-    wishlistCount={wishlist.length}
-/>
+      <MovieActionButtons
+       mode={mode}
+       navigate={navigate}
+       wishlistCount={wishlist[0]?.length}
+      //  cartCount={cart[0]?.length}
+         />
 
       <Row  className="border mx-auto d-flex justify-content-between flex-row align-items-center">
         <Col md={6} className="border mb-3 mb-md-0 text-start d-flex align-items-center fs-3"><FaHeart className="me-1 text-danger fs-2"/>My Wishlist</Col>
@@ -121,7 +127,7 @@ const WishlistDisplay = ({mode}) => {
     </>
         :
     <> */}
-    {wishlist?.map((element, index) => (
+    {wishlist[0]?.map((element, index) => (
         <WishMovieCard {...element} key={index} element={element} mode={mode} 
                             
         // Delete Button
