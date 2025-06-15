@@ -32,7 +32,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
             },
           }}
           color="primary"
-          badgeContent={cartCount}
+          badgeContent={2}
         >
           <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
         </Badge>
