@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function WishMovieCard({ movieposter, moviename,rating,_id,}) {
+    console.log(movieposter, moviename,rating,_id)
   const navigate = useNavigate()
 const ratNum = { rating }
   const starNum = ratNum.rating / 2

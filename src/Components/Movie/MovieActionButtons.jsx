@@ -5,7 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
   const token = sessionStorage.getItem('token');
-
+  console.log(wishlistCount)
   return (
     <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
 

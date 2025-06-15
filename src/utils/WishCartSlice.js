@@ -24,8 +24,11 @@ const wishCartSlice = createSlice({
     // },
     wishRemoveItem: (state, action) => {
   state.wishItems = state.wishItems.filter(item => item._id !== action.payload._id);
-}
-  
+},
+  //Set entire wishlist (on initial fetch from server)
+    setWishlist: (state, action) => {
+      state.wishItems = action.payload;
+    }
 
 }
 });
@@ -34,6 +37,6 @@ const wishCartSlice = createSlice({
 // opening closing {} not closed at proper place
 
 
-export const {wishAddItem,wishRemoveItem} = wishCartSlice.actions
+export const {wishAddItem,wishRemoveItem,setWishlist} = wishCartSlice.actions
 export default wishCartSlice.reducer
 
