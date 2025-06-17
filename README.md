@@ -130,3 +130,5 @@ MovieDisplay_Debounce:
 >- This is checking before dispatching actions, determining whether the item should be removed or added.
 >his check happens outside Redux and helps decide whether to dispatch wishRemoveItem or wishAddItem.
 
+- wishlist?.some(...) → Looks through the wishlist array.
+- item => item._id === element._id → Checks if any item in wishlist has the same _id as element._id.

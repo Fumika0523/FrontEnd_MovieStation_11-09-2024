@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { removeItem, removeLastItem, removeFirstItem } from "../../utils/cartSlice"
+import { removeAllItems,cartAddItem } from "../../utils/cartSlice"
 import { useNavigate } from "react-router-dom"
 import CartSummaryPage from "./CartSummaryPage";
 import axios from "axios";
@@ -26,23 +26,23 @@ function Cartpage() {
         let res = await axios.delete(`${url}/clearcart`)
         console.log(res)
         if (res.data) {
-            dispatch(removeItem())
+            dispatch(removeAllItems())
         }
     }
 
-    const handleRemoveLastItem = () => {
-        dispatch(removeLastItem())
-    }
-    const handleRemoveFirstItem = () => {
-        dispatch(removeFirstItem())
-    }
+    // const handleRemoveLastItem = () => {
+    //     dispatch(removeLastItem())
+    // }
+    // const handleRemoveFirstItem = () => {
+    //     dispatch(removeFirstItem())
+    // }
 
     const getCartData=async()=>{
         let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
         console.log("getCartData",res);
         if(res.data && res.data.cartData){
         dispatch(removeItem());//clearing existing cart items from store
-        res.data.cartData.map((element)=>dispatch(addItem(element)))
+        res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
     }
 useEffect(()=>{
     getCartData()

@@ -76,12 +76,12 @@ const WishlistDisplay = ({ mode }) => {
           </div>
         ) : (
           wishlist?.map((element, index) => (
-            <WishMovieCard {...element}
-              key={index}
-              element={element}
-              mode={mode}
-              isWished={true}
-            />
+            <WishMovieCard 
+            {...element} //display data
+            key={index}
+            element={element} //1 element
+            mode={mode}
+            isWished={true} />
           ))
         )}
       </Container>

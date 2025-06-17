@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard"
 import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
-import {addItem,removeItem} from "../../utils/cartSlice"
+import {cartAddItem,cartRemoveItem} from "../../utils/cartSlice"
 import { Button } from "react-bootstrap"
 import { Navigate, useNavigate } from "react-router-dom"
 import { Box, Grid } from "@mui/material"
@@ -108,8 +108,8 @@ const getCartData=async()=>{
     let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
     console.log("getCartData",res)
     if(res.data && res.data.cartData){
-    dispatch(removeItem());//clearing existing cart items from store
-    res.data.cartData.map((element)=>dispatch(addItem(element)))
+    dispatch(removeAllItems());//clearing existing cart items from store
+    res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
 }}
 
 const handleAdditem=async(movieItem)=>{

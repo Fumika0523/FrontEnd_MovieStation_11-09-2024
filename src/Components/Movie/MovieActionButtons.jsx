@@ -3,9 +3,9 @@ import { Badge } from "@mui/material";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const MovieActionButtons = ({ mode, navigate, wishlistCount,  }) => {
+const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
   const token = sessionStorage.getItem('token');
-  console.log("wishlistCount",wishlistCount)
+//  console.log("wishlistCount",wishlistCount)
 
   return (
     <div className="flex-wrap justify-content-end d-flex  flex-row gap-3 border-4 mx-md-4 border-danger">
@@ -33,7 +33,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,  }) => {
             },
           }}
           color="primary"
-          badgeContent={2}
+          badgeContent={cartCount}
         >
           <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
         </Badge>

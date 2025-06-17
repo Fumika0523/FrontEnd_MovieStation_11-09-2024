@@ -5,7 +5,7 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { url } from "../../utils/constant";
-import { removeItem } from "../../utils/cartSlice";
+import { removeAllItems } from "../../utils/cartSlice";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
@@ -59,7 +59,7 @@ console.log(cartItems)
           console.log(res);
           if (res.status === 200) { // Success response
             await axios.delete(`${url}/clearcart`, config); // Clear cart in DB
-            dispatch(removeItem()); // Clear Redux store
+            dispatch(removeAllItems()); // Clear Redux store
             navigate(`/ordersummary`);
           }
         } catch (error) {

@@ -3,7 +3,7 @@ import MovieCard from './MovieCard';
 import axios from "axios";
 import { url } from "../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../../utils/cartSlice";
+import { cartAddItem, cartRemoveItem,setCart } from "../../utils/cartSlice";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Box, Grid } from "@mui/material";
@@ -22,14 +22,13 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const [searchTerm, setSearchTearm] = useState("");
   const [filterMovieData, setFilterMovieData] = useState([]);
   const wishlist = useSelector(store => store.wishlist.wishItems);
-
+  const cart = useSelector(store =>store.cart.cartItems)
 
   /// when you not login, wish goes to store >> when you login from store to db
   //when you login >> Db >> Store <<<< If you store to store first, the data will be gone after the refreshing
  // useState > within 1 component, need to be passed to use in other components
  //Store is to store temporary in Browser, useSelector to use again again
  //
-
 
   const token = sessionStorage.getItem('token');
   const config = {
@@ -43,26 +42,23 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const getMovieData = async () => {
     const res = await axios.get(`${url}/movie`);
-    setMovieData(res.data.movieData);
+   setMovieData(res.data.movieData);
   };
 
   const getCartData = async () => {
-    const res = await axios.get(`${url}/cart`);
+    const res = await axios.get(`${url}/cart`,config);
     if (res.data?.cartData) {
-      dispatch(removeItem());
-      res.data.cartData.forEach(item => dispatch(addItem(item)));
+      dispatch(cartRemoveItem(item));
+      res.data.cartData.forEach(item => dispatch(cartAddItem(item)));
     }
   };
 
   const getWishData = async () => {
     const res = await axios.get(`${url}/wish-list`, config);
-    // dispatch(wishAddItem(res.data.wishData));
-    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
-
-    // why not wishAddItem ?
-
+    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data
   };
-
+    
+  // ADD TO Wish
   const addWishItemToServer = async (element) => {
     try {
       await axios.post(`${url}/add-wish-list`, element, config);
@@ -71,6 +67,16 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   };
 
+  // ADD TO CART
+  const addCartItemToServer = async(element)=>{
+    try{
+         await axios.post(`${url}/addcart`, element, config);
+    }catch(error){
+      console.error('Error adding to wishlist:', error);
+    }
+  }
+
+  // WISH LIST 
   const removeWishItemFromServer = async (element) => {
     try {
       await axios.delete(`${url}/delete-wish-item/${element._id}`, config);
@@ -79,6 +85,29 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   };
 
+  //CART
+  const removeCartItemFromServer = async(element)=>{
+    try{
+    await axios.delete(`${url}/delete-cart-item/${element._id}`, config);
+    }catch(error){
+      console.error('Error removing from Cart:', error);
+    }
+  }
+
+  //CART Server
+  const handleAddCartItem = useCallback(async(element)=>{
+    const isInCartlist = cart?.some(item => item._id === element._id);
+    if(isInCartlist){
+      errorNotify()
+    }else{
+      dispatch(cartAddItem(element))
+      successNotify()
+      await addCartItemToServer(element)
+    }
+    await getCartData()
+  },[dispatch,cart])
+
+  //Wish Server
   const handleAddWishItem = useCallback(async (element) => {
     const isInWishlist = wishlist?.some(item => item._id === element._id);
     if (isInWishlist) {
@@ -98,7 +127,6 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
       movie.moviename.toLowerCase().includes(term.toLowerCase())
     );
   };
-
   useEffect(() => {
     getMovieData();
   }, []);
@@ -130,6 +158,10 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     getMovieData();
     navigate(`/allmovies`);
   };
+  //
+  //
+  //
+
 
   return (
     <>
@@ -141,6 +173,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
               navigate={navigate}
               wishlistCount={wishlist?.length || 0}
               wishlist={wishlist}
+              cartCount={cart?.length || 0}
+              cart={cart}
             />
             {token && (
               <Button
@@ -153,7 +187,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                   color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
                 }}
               >
-                <FaPlusCircle className="fs-5 me-md-1 addIcon" />
+              <FaPlusCircle className="fs-5 me-md-1 addIcon" />
                 <span className="d-md-block d-none">Add Movie</span>
               </Button>
             )}
@@ -173,6 +207,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
         </Grid>
 
         <Grid container display="flex" flexWrap="wrap" justifyContent="start" marginTop={2}>
+          
           {filterMovieData?.length === 0 ? (
             <div className="position-relative mt-2 border-4" style={{ maxHeight: "390px", width: "100%" }}>
               <img
@@ -182,13 +217,13 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                 style={{ filter: "brightness(50%)", objectFit: "cover" }}
               />
               <h4 className="text-white opacity-75 border-4 border-danger text-center col-7 col-md-5 mx-auto"
-                style={{ position: "absolute", right: "5%", bottom: "0%" }}>
-                <span className="text-warning">The Movie is Not Found. </span><br />
-                Explore other movies,and please check next week for "Inception"
+              style={{ position: "absolute", right: "5%", bottom: "0%" }}>
+              <span className="text-warning">The Movie is Not Found. </span><br />
+              Explore other movies,and please check next week for "Inception"
               </h4>
             </div>
           ) : (
-            filterMovieData.map((element, index) => (
+            filterMovieData?.map((element, index) => (
               <MovieCard
                 {...element}
                 key={index}
@@ -197,15 +232,16 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                 element={element}
                 mode={mode}
                 deleteBtn={
-                  <Tooltip title="Delete">
-                    <DeleteIcon style={{ cursor: "pointer" }}
-                      onClick={() => deleteMovie(element._id)}
-                      className="deleteBtn border-sucess fs-3"
+                <Tooltip title="Delete">
+                  <DeleteIcon style={{ cursor: "pointer" }}
+                  onClick={() => deleteMovie(element._id)}
+                  className="deleteBtn border-sucess fs-3"
                     />
                   </Tooltip>
                 }
                 reduxAddcartBtn={
-                  <Tooltip title="Add to Cart">
+                  <Tooltip title="Add to Cart"
+                  onClick={()=>handleAddCartItem(element)}>
                     <ShoppingCartIcon className="reduxIcon fs-3" />
                   </Tooltip>
                 }
@@ -213,17 +249,17 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                   <>
                     <Tooltip title="Add to Wish List">
                       <span className="d-flex align-items-center" onClick={() => handleAddWishItem(element)}>
-                        {/* searches for element._id in the wishlist array. */}
+                      {/* searches for element._id in the wishlist array. >> True/false item._id > wishlist, element._id > movie._id*/}
                         {wishlist?.some(item => item._id === element._id) ? (
-                          <FavoriteIcon
-                            className="text-danger border-primary"
-                            style={{ fontSize: "25px", margin: "1.5px" }}
-                          />
+                        <FavoriteIcon
+                        className="text-danger border-primary"
+                        style={{ fontSize: "25px", margin: "1.5px" }}
+                        />
                         ) : (
-                          <FaRegHeart
-                            className="text-danger border-warning p-0"
-                            style={{ fontSize: "28px" }}
-                          />
+                        <FaRegHeart
+                        className="text-danger border-warning p-0"
+                        style={{ fontSize: "28px" }}
+                        />
                         )}
                       </span>
                     </Tooltip>

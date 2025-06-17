@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard"
 import axios from "axios"
 import { url } from "../../utils/constant"
 import { useDispatch } from "react-redux"
-import {addItem,removeItem} from "../../utils/cartSlice"
+import {cartAddItem,removeAllItems} from "../../utils/cartSlice"
 import { Button } from "react-bootstrap"
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Navigate, useNavigate } from "react-router-dom"
@@ -102,7 +102,7 @@ const getCartData=async()=>{
     console.log("getCartData",res)
     if(res.data && res.data.cartData){
     dispatch(removeItem());//clearing existing cart items from store
-    res.data.cartData.map((element)=>dispatch(addItem(element)))
+    res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
 }}
 
 
@@ -133,7 +133,7 @@ const handleAdditem=async(movieItem)=>{
     // "=" << Assignment operator
     // "==" << condition comparison operator
     if (token == null){
-            navigate(`/signin`) 
+        navigate(`/signin`) 
     } else {
         let res=await axios.post(`${url}/addcart`, movieItem,config)
         console.log("res",res.data.message)
