@@ -10,7 +10,6 @@ import axios from "axios";
 import { url } from "../../../utils/constant";
 import { IoEyeSharp } from "react-icons/io5";
 
-
 function WishMovieCard({ movieposter, moviename,rating,_id,element}) {
 const dispatch = useDispatch();
 console.log(movieposter, moviename,rating,_id,element)
@@ -33,9 +32,6 @@ const ratNum = { rating }
     const res = await axios.get(`${url}/wish-list`, config);
     // dispatch(wishAddItem(res.data.wishData));
     dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
-
-    // why not wishAddItem ?
-
   };
 
 const handleRemoveWishItem = async(element)=>{
