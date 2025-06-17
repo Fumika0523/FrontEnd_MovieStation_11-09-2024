@@ -23,6 +23,14 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const [filterMovieData, setFilterMovieData] = useState([]);
   const wishlist = useSelector(store => store.wishlist.wishItems);
 
+
+  /// when you not login, wish goes to store >> when you login from store to db
+  //when you login >> Db >> Store <<<< If you store to store first, the data will be gone after the refreshing
+ // useState > within 1 component, need to be passed to use in other components
+ //Store is to store temporary in Browser, useSelector to use again again
+ //
+
+
   const token = sessionStorage.getItem('token');
   const config = {
     headers: { Authorization: `Bearer ${token}` }
@@ -49,7 +57,10 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const getWishData = async () => {
     const res = await axios.get(`${url}/wish-list`, config);
     // dispatch(wishAddItem(res.data.wishData));
-    dispatch(setWishlist(res.data.wishData))
+    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
+
+    // why not wishAddItem ?
+
   };
 
   const addWishItemToServer = async (element) => {
@@ -71,9 +82,9 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const handleAddWishItem = useCallback(async (element) => {
     const isInWishlist = wishlist?.some(item => item._id === element._id);
     if (isInWishlist) {
-      dispatch(wishRemoveItem(element));
-      removeWishNotify();
-      await removeWishItemFromServer(element);
+      dispatch(wishRemoveItem(element)); // Remove from Redux store - Dispatches an action to remove the item from Redux.
+      removeWishNotify(); 
+      await removeWishItemFromServer(element); // Remove from server
     } else {
       dispatch(wishAddItem(element));
       addWishNotify();
@@ -129,6 +140,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
               mode={mode}
               navigate={navigate}
               wishlistCount={wishlist?.length || 0}
+              wishlist={wishlist}
             />
             {token && (
               <Button
@@ -201,6 +213,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                   <>
                     <Tooltip title="Add to Wish List">
                       <span className="d-flex align-items-center" onClick={() => handleAddWishItem(element)}>
+                        {/* searches for element._id in the wishlist array. */}
                         {wishlist?.some(item => item._id === element._id) ? (
                           <FavoriteIcon
                             className="text-danger border-primary"

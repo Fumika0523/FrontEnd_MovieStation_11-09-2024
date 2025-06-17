@@ -27,8 +27,7 @@ import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
-
-import WishlistDisplay from './Components/Movie/WishlistDisplay';
+import WishlistDisplay from './Components/Movie/MyWishList/WishlistDisplay';
 
 
 function App() {

@@ -1,11 +1,12 @@
 import { Button } from "react-bootstrap";
 import { Badge } from "@mui/material";
-import { FaHeart, FaPlusCircle, FaBookmark } from "react-icons/fa";
+import { FaHeart, FaBookmark } from "react-icons/fa";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
+const MovieActionButtons = ({ mode, navigate, wishlistCount,  }) => {
   const token = sessionStorage.getItem('token');
-  console.log(wishlistCount)
+  console.log("wishlistCount",wishlistCount)
+
   return (
     <div className="flex-wrap justify-content-end d-flex  flex-row gap-3 border-4 mx-md-4 border-danger">
 
@@ -74,7 +75,15 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount }) => {
     
           badgeContent={wishlistCount}
         >
-          <FaHeart className="fs-5 iconHeart me-md-1" />
+          {
+            wishlistCount == 0 ?(
+            <FaHeart className="fs-5  me-md-1" style={{color:"rgba(209, 209, 213, 0.63)"}}/> )
+            :
+            (
+            <FaHeart className="fs-5  me-md-1" style={{color:"red"}} />
+            )
+          }
+   
         </Badge>
         <span className="d-md-block d-none">My Wish List</span>
       </Button>

@@ -113,3 +113,20 @@ async function sendData() {
     console.error('Error:', e)
     }
 }
+
+
+
+----
+in wish cart silice, also checking if item is already in wishlist,
+wishCartSlice: 
+ wishAddItem: (state, action) => {
+      const exists = state.wishItems.find(item => item._id === action.payload._id); }
+> - This check prevents duplicate items from being added inside the Redux reducer.
+> - It ensures the wishlist remains clean at the state level.
+
+
+MovieDisplay_Debounce:
+ const isInWishlist = wishlist?.some(item => item._id === element._id);"   ?
+>- This is checking before dispatching actions, determining whether the item should be removed or added.
+>his check happens outside Redux and helps decide whether to dispatch wishRemoveItem or wishAddItem.
+

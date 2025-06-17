@@ -3,15 +3,54 @@ import { Button } from "react-bootstrap";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Rating from '@mui/material/Rating';
-import { IoEyeSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { wishRemoveItem,setWishlist } from "../../../utils/WishCartSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { url } from "../../../utils/constant";
 
-
-function WishMovieCard({ movieposter, moviename,rating,_id,}) {
-    console.log(movieposter, moviename,rating,_id)
+function WishMovieCard({ movieposter, moviename,rating,_id,element}) {
+const dispatch = useDispatch();
+console.log(movieposter, moviename,rating,_id)
+  const token = sessionStorage.getItem('token');
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
   const navigate = useNavigate()
 const ratNum = { rating }
   const starNum = ratNum.rating / 2
+  const removeWishItemFromServer = async (element) => {
+    try {
+      await axios.delete(`${url}/delete-wish-item/${element._id}`, config);
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+    }
+  };
+
+ const getWishData = async () => {
+    const res = await axios.get(`${url}/wish-list`, config);
+    // dispatch(wishAddItem(res.data.wishData));
+    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
+
+    // why not wishAddItem ?
+
+  };
+
+const handleRemoveWishItem = async(element)=>{
+      if (!element) {
+    console.error("Element is undefined! Ensure it's passed correctly.");
+    return;
+  }
+
+
+    try{
+        dispatch(wishRemoveItem(element))
+        await removeWishItemFromServer(element)
+        await getWishData()
+    }catch(error){
+        console.error("Error Removing wish Item:",error)
+    }
+}
 
     return (
         <>
@@ -31,13 +70,9 @@ const ratNum = { rating }
 
             {/* Trailer */}
             <div className="text-start   gap-5 col-lg-5  col-md-4 col-sm-5  d-flex flex-row pe-md-5  justify-content-end align-items-center ">
-            <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}
-             onClick={() => navigate(`/movietrailer/${_id}`)}>
-            <IoEyeSharp style={{color:"rgb(124, 164, 87)"}} className="fs-3 "/>
-            </Button>
       
             {/* Delete */}
-            <Button variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}>
+            <Button key={_id} variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}  onClick={() => handleRemoveWishItem(element)}>
             <DeleteIcon style={{color:"rgb(181, 180, 183)"}} className="fs-3" />
             </Button>               
 
