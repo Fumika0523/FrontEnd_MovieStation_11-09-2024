@@ -23,6 +23,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const [filterMovieData, setFilterMovieData] = useState([]);
   const wishlist = useSelector(store => store.wishlist.wishItems);
   const cart = useSelector(store =>store.cart.cartItems)
+  console.log("cart",cart)
+  console.log(cart?.length)
 
   /// when you not login, wish goes to store >> when you login from store to db
   //when you login >> Db >> Store <<<< If you store to store first, the data will be gone after the refreshing
@@ -36,7 +38,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   };
 
   const successNotify = () => toast.success('Added to the cart!', { autoClose: 3000 });
-  const errorNotify = () => toast.error('Already purchased. Check order history.', { autoClose: 3000 });
+  const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 3000 });
   const addWishNotify = () => toast.success('Added to Wishlist!', { autoClose: 1000 });
   const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 2000 });
 
@@ -47,15 +49,13 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const getCartData = async () => {
     const res = await axios.get(`${url}/cart`,config);
-    if (res.data?.cartData) {
-      dispatch(cartRemoveItem(item));
-      res.data.cartData.forEach(item => dispatch(cartAddItem(item)));
-    }
+    console.log(res.data.cartData)
+     dispatch(setCart(res.data.cartData)) 
   };
 
   const getWishData = async () => {
     const res = await axios.get(`${url}/wish-list`, config);
-    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data
+    dispatch(setWishlist(res.data.wishData)) //
   };
     
   // ADD TO Wish
@@ -68,9 +68,9 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   };
 
   // ADD TO CART
-  const addCartItemToServer = async(element)=>{
+  const addCartItemToServer = async (element)=>{
     try{
-         await axios.post(`${url}/addcart`, element, config);
+      await axios.post(`${url}/addcart`, element, config);
     }catch(error){
       console.error('Error adding to wishlist:', error);
     }
@@ -96,8 +96,9 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   //CART Server
   const handleAddCartItem = useCallback(async(element)=>{
-    const isInCartlist = cart?.some(item => item._id === element._id);
+    const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
     if(isInCartlist){
+      console.log("ErrorNotify")
       errorNotify()
     }else{
       dispatch(cartAddItem(element))
@@ -158,10 +159,6 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     getMovieData();
     navigate(`/allmovies`);
   };
-  //
-  //
-  //
-
 
   return (
     <>
@@ -240,10 +237,10 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                   </Tooltip>
                 }
                 reduxAddcartBtn={
-                  <Tooltip title="Add to Cart"
-                  onClick={()=>handleAddCartItem(element)}>
-                    <ShoppingCartIcon className="reduxIcon fs-3" />
-                  </Tooltip>
+        <Tooltip title="Add to Cart">
+          <ShoppingCartIcon 
+          onClick={()=>handleAddCartItem(element)} className="reduxIcon fs-3" />
+          </Tooltip>
                 }
                 WishBtn={
                   <>

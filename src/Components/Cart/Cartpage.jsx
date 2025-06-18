@@ -22,13 +22,13 @@ function Cartpage() {
             Authorization: `Bearer ${token}`
         }
     }
-    const handleClearitem = async () => {
-        let res = await axios.delete(`${url}/clearcart`)
-        console.log(res)
-        if (res.data) {
-            dispatch(removeAllItems())
-        }
-    }
+    // const handleClearitem = async () => {
+    //     let res = await axios.delete(`${url}/clearcart`)
+    //     console.log(res)
+    //     if (res.data) {
+    //         dispatch(removeAllItems())
+    //     }
+    // }
 
     // const handleRemoveLastItem = () => {
     //     dispatch(removeLastItem())
@@ -40,10 +40,11 @@ function Cartpage() {
     const getCartData=async()=>{
         let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
         console.log("getCartData",res);
-        if(res.data && res.data.cartData){
-        dispatch(removeItem());//clearing existing cart items from store
-        res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
-    }
+        // if(res.data && res.data.cartData){
+        // dispatch(removeItem());
+        //clearing existing cart items from store
+        // res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
+    //}
 useEffect(()=>{
     getCartData()
 })}
@@ -74,56 +75,28 @@ useEffect(()=>{
                                 handleClearitem()
                          }} >Clear Cart</Button>
                         {/* BACK */}
-                        <Button variant="secondary"   onClick={() => navigate('/allmovies')}> Back to All Movies</Button>                        </div>  
+                        <Button variant="secondary"   onClick={() => navigate('/allmovies')}> Back to All Movies</Button>                   </div>  
                 }
     
-                {/* Clear Cart */}
-                {/* {
-                    cartItems.length === 0 ?
-                        <></> :
-                        <>
-                        <div className="mb-2 border-3 mx-auto" style={{width:"75%"}}>
-                        <Button onClick={() => {
-                                handleClearitem()
-                            }} className="btn btn-primary">Clear Cart</Button>
-                        </div>
-                        </>
-                } */}
-
-                {/*Remove 1 item from last  */}
-
-                {/* {
-                    cartItems.length === 0 ?
-                        <></> :
-                        <Button className="btn btn-secondary" onClick={() => {
-                            handleRemoveLastItem()
-                        }} >Remove 1 item from last</Button>
-                } */}
-
-                {/* Remove 1 item from beginning */}
-
-                {/* {
-                    cartItems.length === 0 ?
-                        <></> :
-                        <Button className="btn btn-secondary" onClick={() => {
-                            handleRemoveFirstItem()
-                        }}>Remove 1 item from beginning</Button>
-                } */}
+        
             <div className="mx-auto  border-danger d-flex flex-column justify-content-center ">
                 {
-                    cartItems?.length === 0 ?
-                    <>
+                    cartItems?.length === 0 ? (
+                               <>
                 <div className="fs-1 fw-bold text-center">Your Cart is Empty !!</div>
                 <Image className="mx-auto"
-                         src={"https://images-prod.dazeddigital.com/1280/azure/dazed-prod/1100/3/1103540.jpg"} 
-                         style={{objectFit:"cover",width:"100%", height:"auto"}}
-
-                        />
-                </> :
-                        <>
-                            <CartSummaryPage/>
-                        </>
-                
+                src={"https://images-prod.dazeddigital.com/1280/azure/dazed-prod/1100/3/1103540.jpg"} 
+                style={{objectFit:"cover",width:"100%", height:"auto"}} />
+                </> 
+                    )
+    
+                :
+                (
+                <>
+                    <CartSummaryPage/>
+                </>
+                )
+           
                 }
                 </div>
                 </div>

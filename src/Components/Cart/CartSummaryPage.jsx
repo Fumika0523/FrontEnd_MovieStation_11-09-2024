@@ -26,7 +26,7 @@ function CartSummaryPage() {
     const dispatch = useDispatch()
 
     const [sum,setSum]=useState(0)
-    const cartItems=useSelector(store=>store.cart.items)
+    const cartItems=useSelector(store=>store.cart.cartItems)
 console.log(cartItems)
     
     useEffect(()=>{
@@ -79,9 +79,9 @@ console.log(cartItems)
          }
 
         const currentDate = new Date ()
-         console.log("Today' Date", currentDate)
+       //  console.log("Today' Date", currentDate)
          const Today = formatDate(currentDate)
-         console.log(Today)
+      //   console.log(Today)
         
       return (
         <>

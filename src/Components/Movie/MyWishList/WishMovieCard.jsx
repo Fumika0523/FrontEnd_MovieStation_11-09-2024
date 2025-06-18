@@ -18,7 +18,7 @@ console.log(movieposter, moviename,rating,_id,element)
     headers: { Authorization: `Bearer ${token}` }
   };
   const navigate = useNavigate()
-const ratNum = { rating }
+  const ratNum = { rating }
   const starNum = ratNum.rating / 2
   const removeWishItemFromServer = async (element) => {
     try {
@@ -34,13 +34,11 @@ const ratNum = { rating }
     dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
   };
 
-const handleRemoveWishItem = async(element)=>{
+  const handleRemoveWishItem = async(element)=>{
       if (!element) {
     console.error("Element is undefined! Ensure it's passed correctly.");
     return;
   }
-
-
     try{
         dispatch(wishRemoveItem(element))
         await removeWishItemFromServer(element)
@@ -50,11 +48,9 @@ const handleRemoveWishItem = async(element)=>{
     }
 }
 
-//  trailer
-
-    return (
-        <>
-        <div className="d-flex  px-md-3 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">
+   return (
+    <>
+      <div className="d-flex  px-md-3 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">
           <div className="row mx-auto  d-flex align-items-center justify-content-center">
                 {/* Movie Poster */}
             <div className="col-12  col-lg-3 col-md-3 col-sm-10 mx-auto ps-md-4 mb-sm-3">
@@ -86,8 +82,8 @@ const handleRemoveWishItem = async(element)=>{
                 style={{color:"rgb(0, 0, 0)"}}/></Button>               
             </div>            
             </div>
-        </div>
-        </>
+      </div>
+    </>
     )
 }
 export default WishMovieCard

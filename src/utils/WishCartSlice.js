@@ -13,7 +13,8 @@ const wishCartSlice = createSlice({
     //     console.log(action.payload) //selected moviedata
     //   },
     wishAddItem: (state, action) => {
-      const exists = state.wishItems.find(item => item._id === action.payload._id); //- action.payload is expected to be the item you want to add.
+      const exists = state.wishItems.find(item => item._id === action.payload._id)
+       //- action.payload is expected to be the item you want to add.
       //- checks whether the item is already in the wishlist by comparing IDs.
       //- state refers to the current Redux state slice for the wishlist.
       //- wishItems is the array of items added to the wishlist.
