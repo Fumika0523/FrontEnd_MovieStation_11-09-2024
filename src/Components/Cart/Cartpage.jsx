@@ -22,13 +22,15 @@ function Cartpage() {
             Authorization: `Bearer ${token}`
         }
     }
-    // const handleClearitem = async () => {
-    //     let res = await axios.delete(`${url}/clearcart`)
-    //     console.log(res)
-    //     if (res.data) {
-    //         dispatch(removeAllItems())
-    //     }
-    // }
+
+    const handleClearitem = async () => {
+        let res = await axios.delete(`${url}/clearcart`,config)
+        console.log(res)
+        if (res.data) {
+            console.log("Clear cart call")
+            dispatch(removeAllItems())
+        }
+    }
 
     // const handleRemoveLastItem = () => {
     //     dispatch(removeLastItem())

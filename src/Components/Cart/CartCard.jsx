@@ -1,7 +1,32 @@
 import React from "react";
+import {cartRemoveItem} from "../../utils/cartSlice"
+import { useDispatch } from "react-redux";
+import {url} from "../../utils/constant"
+import axios from "axios";
 
 
-function CartCard({ movieposter, moviename, amount }) {
+
+function CartCard({ movieposter, moviename, amount,element }) {
+      const token=sessionStorage.getItem('token')
+  
+      let config={
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+
+    const dispatch = useDispatch()
+    const handleRemoveItem = async(movie)=>{
+    console.log("HandleRemoveItem",movie._id)
+    
+    
+    let res = await axios.delete(`${url}/delete-cart-item/${movie._id}`,config) //inside movie
+    console.log(res)
+    if(res.data){
+       dispatch(cartRemoveItem(movie))
+    }
+}
+
     return (
         <>
         {/* <div className="d-flex row mx-auto border border-4 border-danger "> */}
@@ -13,6 +38,9 @@ function CartCard({ movieposter, moviename, amount }) {
             <div> */}
                 <div className="text-start col-lg-8 col-12  d-flex flex-row justify-content-between align-items-center col-sm-7 ">
                     <div className="fs-5">{moviename}</div> 
+                    <button onClick={()=>{handleRemoveItem(element)}}>Delete</button>
+
+                    <button>Moving to wishlist</button>
                     <div className="fs-6 text-end text-secondary">${amount}</div>                  
                 </div>
 

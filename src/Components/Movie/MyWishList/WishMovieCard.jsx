@@ -72,16 +72,16 @@ console.log(movieposter, moviename,rating,_id,element)
             </Button>
       
             {/* Delete */}
-            <Button key={_id} variant="" style={{backgroundColor:"rgb(42, 40, 49)"}}  onClick={() => handleRemoveWishItem(element)}>
-            <DeleteIcon style={{color:"rgb(181, 180, 183)"}} className="fs-3" />
+            <Button variant="none" >
+            <DeleteIcon style={{color:"rgb(226, 11, 11)"}}  onClick={() => handleRemoveWishItem(element)}className="fs-3" />
             </Button>               
 
             {/* Add Cart */}
-            <Button variant="" className="d-flex gap-1 align-items-center" style={{backgroundColor:"rgb(238, 161, 7)"}}>
-                <span className="d-none d-lg-block">Move to Cart</span><ShoppingCartIcon className="fs-3"
+            <Button variant="none" className="d-flex gap-1 align-items-center" style={{backgroundColor:"rgb(238, 161, 7)"}}>
+              <span className="d-none d-lg-block">Move to Cart</span><ShoppingCartIcon className="fs-3"
                 style={{color:"rgb(0, 0, 0)"}}/></Button>               
             </div>            
-            </div>
+          </div>
       </div>
     </>
     )

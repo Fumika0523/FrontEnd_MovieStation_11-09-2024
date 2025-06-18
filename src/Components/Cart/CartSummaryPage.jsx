@@ -91,7 +91,7 @@ console.log(cartItems)
                 <div className="border-top border-secondary">
                     {
                         cartItems?.map((element,index) =>
-                           <CartCard {...element} key={element._id} />)
+                        <CartCard {...element} key={element._id} element={element}  />)
                     }
                     <div style={{width:"40%"}} className="ms-auto  mb-4 mt-3  ">
                     {/* Dotted underline */}

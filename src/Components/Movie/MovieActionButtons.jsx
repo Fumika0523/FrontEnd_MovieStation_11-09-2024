@@ -35,7 +35,16 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
           color="primary"
           badgeContent={cartCount}
         >
-          <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
+          { cartCount == 0?(
+             <ShoppingCartIcon className="fs-4 me-md-1 "
+             style={{color:"rgba(209, 209, 213, 0.63)"}} />
+          )
+          :
+          (
+            <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
+          )               
+          }
+      
         </Badge>
         <span className="d-md-block d-none">My Cart</span>
       </Button>
@@ -80,7 +89,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
             <FaHeart className="fs-5  me-md-1" style={{color:"rgba(209, 209, 213, 0.63)"}}/> )
             :
             (
-            <FaHeart className="fs-5  me-md-1" style={{color:"red"}} />
+            <FaHeart className="fs-5  me-md-1 text-danger"  />
             )
           }
    

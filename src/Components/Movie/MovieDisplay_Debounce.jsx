@@ -15,6 +15,10 @@ import Tooltip from '@mui/material/Tooltip';
 import { ToastContainer, toast } from 'react-toastify';
 import { wishAddItem, wishRemoveItem,setWishlist } from "../../utils/WishCartSlice";
 import MovieActionButtons from './MovieActionButtons';
+import { MdRemoveShoppingCart } from "react-icons/md";
+
+//once movie is added to the cart, change icon to <MdRemoveShoppingCart/>
+//MdRemoveShoppingCart
 
 function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const dispatch = useDispatch();
@@ -236,11 +240,23 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                     />
                   </Tooltip>
                 }
+                
                 reduxAddcartBtn={
-        <Tooltip title="Add to Cart">
-          <ShoppingCartIcon 
-          onClick={()=>handleAddCartItem(element)} className="reduxIcon fs-3" />
-          </Tooltip>
+          <Tooltip title="Add to Cart">
+            <span onClick={()=>handleAddCartItem(element)} >
+            {
+              cart?.some(cartItem => cartItem._id === element._id) ?
+              (
+                <MdRemoveShoppingCart className="fs-3 reduxIcon"/>
+              )
+              :
+              (
+                <ShoppingCartIcon 
+            className="reduxIcon fs-3" />
+              )
+            }
+            </span>
+            </Tooltip>
                 }
                 WishBtn={
                   <>

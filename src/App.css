@@ -407,7 +407,7 @@ text-shadow: none;
   color: rgb(255, 208, 0)!important;
 }
 
-.movieDisplayBtn:hover .myCartIcon{
+ .myCartIcon{
   color: rgb(255, 208, 0)!important;
 }
 

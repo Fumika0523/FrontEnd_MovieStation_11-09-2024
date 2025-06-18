@@ -132,3 +132,11 @@ MovieDisplay_Debounce:
 
 - wishlist?.some(...) → Looks through the wishlist array.
 - item => item._id === element._id → Checks if any item in wishlist has the same _id as element._id.
+
+----------------------
+1.design for delete & movin to wishlist button
+2.moving to wishlist function in 
+3.moving to the cart in wishlist page
+4.moviection button in cartpage
+5.sorting part
+6.when cart item is empty, the empty banner should show
