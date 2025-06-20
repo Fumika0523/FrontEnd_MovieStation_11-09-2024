@@ -26,12 +26,12 @@ function CartSummaryPage() {
     const dispatch = useDispatch()
 
     const [sum,setSum]=useState(0)
-    const cartItems=useSelector(store=>store.cart.cartItems)
-console.log(cartItems)
+    const cart=useSelector(store=>store.cart.cartItems)
+console.log(cart)
     
     useEffect(()=>{
-        if(cartItems){
-          const total=cartItems.reduce((acc,cv)=>acc+cv.amount,0)
+        if(cart){
+          const total=cart.reduce((acc,cv)=>acc+cv.amount,0)
           console.log(total)
           setSum(total)
         }
@@ -90,7 +90,7 @@ console.log(cartItems)
                 <div className="text-start  border-primary py-1 fs-5 text-secondary">Date: <span className="text-white">{Today}</span></div>
                 <div className="border-top border-secondary">
                     {
-                        cartItems?.map((element,index) =>
+                        cart?.map((element,index) =>
                         <CartCard {...element} key={element._id} element={element}  />)
                     }
                     <div style={{width:"40%"}} className="ms-auto  mb-4 mt-3  ">

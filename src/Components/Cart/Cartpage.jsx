@@ -12,11 +12,10 @@ import { useEffect } from "react";
 import { setWishlist } from '../../utils/WishCartSlice';
 
 function Cartpage({mode}) {
-    const cartItems = useSelector(store => store.cart.items)
-    console.log("cartItems",cartItems)
+    const cart = useSelector(store => store.cart.cartItems || [])
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() 
 
     const token = sessionStorage.getItem('token')
     const wishlist = useSelector(store => store.wishlist.wishItems || []);
@@ -85,14 +84,13 @@ useEffect(()=>{
 
     return (
         <>
-            <div className="row mx-auto  border-primary border border-3 pt-4">
+            <div className="row mx-auto px-4 border-primary  border-3 pt-4">
                 <MovieActionButtons
                     mode={mode}
                     navigate={navigate}
                     wishlistCount={wishlist?.length || 0}
-                    // wishlist={wishlist}
-                    cartCount={cartItems?.length || 0}
-                    // cart={cart}
+                    cartCount={cart?.length || 0}
+
                     />
                 <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
                 >
@@ -103,7 +101,7 @@ useEffect(()=>{
         
                 {/* Back */}
                 {
-                    cartItems?.length === 0 ?
+                    cart?.length === 0 ?
                     <div className="d-flex justify-content-end align-items-center"> 
                     <Button variant="none"
                     style={{
@@ -132,7 +130,7 @@ useEffect(()=>{
         
             <div className="mx-auto  border-danger d-flex flex-column justify-content-center ">
                 {
-                    cartItems?.length === 0 ? (
+                    cart?.length === 0 ? (
                                <>
                 <div className="fs-1 fw-bold text-center">Your Cart is Empty !!</div>
                 <Image className="mx-auto"

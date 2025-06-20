@@ -139,6 +139,6 @@ MovieDisplay_Debounce:
 3.moving to the cart in wishlist page
 4.moviection button in cartpage
 5.sorting part
-6.when cart item is empty, the empty banner should show
+6.when cart item is empty, the empty banner should show ---> DONE
 7.pdf order invoice , add stroke on each item
 8. price is static or not, change the price in DB and see
