@@ -7,8 +7,11 @@ import { url } from "../../utils/constant";
 import { Button, Image } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoChevronBackOutline } from "react-icons/io5";
+import MovieActionButtons from "../Movie/MovieActionButtons"
+import { useEffect } from "react";
+import { setWishlist } from '../../utils/WishCartSlice';
 
-function Cartpage() {
+function Cartpage({mode}) {
     const cartItems = useSelector(store => store.cart.items)
     console.log("cartItems",cartItems)
 
@@ -16,7 +19,7 @@ function Cartpage() {
     const dispatch = useDispatch()
 
     const token = sessionStorage.getItem('token')
-
+    const wishlist = useSelector(store => store.wishlist.wishItems || []);
     let config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -31,6 +34,34 @@ function Cartpage() {
             dispatch(removeAllItems())
         }
     }
+
+  console.log("1213",wishlist)
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get(`${url}/wish-list`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        console.log(response.data.wishData)
+
+        if (response.data.wishData) {
+          dispatch(setWishlist(response.data.wishData)); 
+          console.log("Wishlist:", response.data);
+        } else {
+          dispatch(setWishlist([])); // wrap empty
+        }
+      } catch (error) {
+        console.error("Failed to load wishlist", error);
+        dispatch(setWishlist([]));
+      }
+    };
+
+    if (token) {
+      fetchWishlist();
+    }
+  }, [dispatch, token]);
+
 
     // const handleRemoveLastItem = () => {
     //     dispatch(removeLastItem())
@@ -54,10 +85,18 @@ useEffect(()=>{
 
     return (
         <>
-        {/* <div className="container-fluid border border-4 border-warning">  */}
-            <div className="row mx-auto  border-primary border-3" >
-                <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-5 rounded" style={{ border: "2px solid #3b3b3b" }}>
-                <div className="justify-content-center my-3  mx-auto fs-2  d-flex flex-row ">
+            <div className="row mx-auto  border-primary border border-3 pt-4">
+                <MovieActionButtons
+                    mode={mode}
+                    navigate={navigate}
+                    wishlistCount={wishlist?.length || 0}
+                    // wishlist={wishlist}
+                    cartCount={cartItems?.length || 0}
+                    // cart={cart}
+                    />
+                <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
+                >
+                <div className="justify-content-start my-3  mx-auto fs-2  d-flex flex-row ">
                     <FaShoppingCart className="text-warning fs-1 me-1"/>
                     <div className="fs-3">Your Shopping Cart</div>
                 </div>
@@ -66,7 +105,11 @@ useEffect(()=>{
                 {
                     cartItems?.length === 0 ?
                     <div className="d-flex justify-content-end align-items-center"> 
-                    <Button variant="secondary" className="text-nowrap" onClick={() => navigate('/allmovies')}> 
+                    <Button variant="none"
+                    style={{
+                    backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+                    color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+                    }}className="text-nowrap" onClick={() => navigate('/allmovies')}> 
                     <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button>
                      </div>
                        
@@ -76,8 +119,14 @@ useEffect(()=>{
                           <Button variant="danger" onClick={() => {
                                 handleClearitem()
                          }} >Clear Cart</Button>
+
                         {/* BACK */}
-                        <Button variant="secondary"   onClick={() => navigate('/allmovies')}> Back to All Movies</Button>                   </div>  
+                        <Button variant="none"
+                           style={{
+          backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47)",
+          color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+        }}
+          onClick={() => navigate('/allmovies')}> <IoChevronBackOutline className="fs-4 me-1"/>  Back to All Movies</Button>                   </div>  
                 }
     
         

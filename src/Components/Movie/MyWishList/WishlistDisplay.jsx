@@ -44,8 +44,6 @@ const WishlistDisplay = ({ mode }) => {
     }
   }, [dispatch, token]);
 
-  
-
   return (
     <>
       <Container fluid>
