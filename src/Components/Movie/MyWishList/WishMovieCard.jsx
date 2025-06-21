@@ -48,6 +48,10 @@ console.log(movieposter, moviename,rating,_id,element)
     }
 }
 
+const handleAddCart = async()=>{
+  console.log("HandleAddCart")
+}
+
    return (
     <>
       <div className="d-flex  px-md-3 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">

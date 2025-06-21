@@ -59,8 +59,8 @@ const toggleSortOrder= () =>{
         const total = price.reduce((acc, cv) => acc + cv)
         return total
     })
-    console.log("totalOrderPrice",totalOrderPrice)
-     console.log("orderData",orderData)
+    console.log("totalOrderPrice12",totalOrderPrice)  
+    console.log("orderData",orderData)
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip"  {...props}>
@@ -82,9 +82,10 @@ const toggleSortOrder= () =>{
         // console.log("singleOrder",singleOrder)
         // console.log(singleOrder.x)
         // console.log("Button is pressed",clientname)
-        // console.log("singleOrder",singleOrder)
+        console.log("singleOrder",singleOrder)
         // console.log("orderId",singleOrder.element._id)
         let orderdate = formatDate(singleOrder.element.updatedAt)
+        //static price >> 
         const totalprice = singleOrder.element.movies.length*250
         const movies = singleOrder.element.movies // array of {moviename.price}
         //console.log("orderDate",orderdate)
@@ -155,8 +156,9 @@ headers: {
                             onClick={()=>{toggleSortOrder()}} />
                         </div>
                     </div>
+                 <>
                     {                      
-                        totalOrderPrice?.map((x) => (
+                        // totalOrderPrice?.map((x) => (
                         orderData?.map((element) => (
                                 <div key={element._id} className="mb-4">
                                     <div className="d-flex mx-3  flex-row justify-content-between align-items-center my-2 ">
@@ -166,7 +168,8 @@ headers: {
                                             delay={{ show: 250, hide: 400 }}
                                             overlay={renderTooltip} >
                                             <Button variant="none"
-                                            onClick={()=>handleDownload({element,x})}>
+                                            // onClick={()=>handleDownload({element,x})}
+                                            >
                                                 <MdDownloading className="fs-2"
                                                 style={{color:"rgb(251, 181, 4)"}} />
                                             </Button>
@@ -175,19 +178,19 @@ headers: {
                                     {
                                         element.movies.map((movie) => (
                                             <OrderSummaryCard key={movie._id} {...movie} updatedAt={element.updatedAt} />
-                                        ))}
-
-                                    {
-                                        <div className="text-end fw-bold fs-4 mx-2">Total Price :
-                                            <span className="fw-bold ms-1 fs-4">${x}</span> 
-                                        </div>
-                                    }
-                                    <hr />
-                                </div>
-                            ))
+                                        ))}   
+                        {(() => {
+            const total = element.movies?.map(p => p.amount).reduce((acc, cv) => acc + cv, 0);
+            return  <div className="text-end fw-bold fs-4 mx-2"> Total Price :
+                            <span className="fw-bold ms-1 fs-4">${total}</span>  
+                            </div> 
+            })()}
+             <hr />
+              </div>
                         ))
                     }
 
+                 </>                  
                 </div>
             </div>
         </>

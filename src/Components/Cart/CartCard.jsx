@@ -1,16 +1,18 @@
 import React from "react";
 import {cartRemoveItem} from "../../utils/cartSlice"
-import { useDispatch } from "react-redux";
 import {url} from "../../utils/constant"
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from "react-bootstrap";
-
+import { FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useCallback } from "react";
+import {wishAddItem} from "../../utils/WishCartSlice"
 
 function CartCard({ movieposter, moviename, amount,element }) {
       const token=sessionStorage.getItem('token')
-  
+    const wishlist = useSelector(store => store.wishlist.wishItems);
       let config={
         headers:{
           Authorization:`Bearer ${token}`
@@ -21,13 +23,47 @@ function CartCard({ movieposter, moviename, amount,element }) {
     const handleRemoveItem = async(movie)=>{
     console.log("HandleRemoveItem",movie._id)
     
-    
     let res = await axios.delete(`${url}/delete-cart-item/${movie._id}`,config) //inside movie
     console.log(res)
     if(res.data){
        dispatch(cartRemoveItem(movie))
     }
 }
+
+    const handleAddWishItem = async(movie)=>{
+    console.log("HandleAddWishItem",movie._id)
+      let res = await axios.post(`${url}/add-wish-list`, element, config);
+      console.log(res)
+      if(res.data){
+       dispatch(cartRemoveItem(movie))
+      }{
+        return console.log("error")
+      }
+         dispatch(wishAddItem(element));
+    }
+
+   // ADD TO Wish
+  // const addWishItemToServer = async (element) => {
+  //   try {
+  //     await axios.post(`${url}/add-wish-list`, element, config);
+  //   } catch (error) {
+  //     console.error('Error adding to wishlist:', error);
+  //   }
+  // };
+
+  //Wish Server
+  // const handleAddWishItem = useCallback(async (element) => {
+  //   const isInWishlist = wishlist?.some(item => item._id === element._id);
+  //   if (isInWishlist) {
+  //     console.log()
+  //   } else {
+  //     dispatch(wishAddItem(element));
+  //     addWishNotify();
+  //     await addWishItemToServer(element);
+  //   }
+  //   await getWishData(); // Refresh to sync
+  // }, [dispatch, wishlist]);
+ 
 
     return (
         <>
@@ -38,16 +74,18 @@ function CartCard({ movieposter, moviename, amount,element }) {
         
                 <div className="text-start col-lg-8 col-12  d-flex flex-row justify-content-between mb-3 mb-md-0 align-items-center col-sm-11">
                 {/* MOVIE NAME*/}
-                <div className="fs-5">{moviename}</div> 
+                <div className="fs-5" style={{width:"200px"}}>{moviename}</div> 
 
                 {/* DELETE */}
-                <Button variant="none" className="p-1" nClick={()=>{handleRemoveItem(element)}}>
+                <Button variant="none" className="p-1" onClick={()=>{handleRemoveItem(element)}}>
                 <DeleteIcon className="text-danger fs-3 "/>
                 </Button>
               
-              {/* MOVETOCART */}
-                <ShoppingCartIcon className="text-warning"
-                style={{cursor:"pointer"}} />
+              {/* Move to WIsh */}
+                <FaHeart className="text-"
+                style={{cursor:"pointer"}} 
+                onClick={()=>(handleAddWishItem(element))}
+                />
 
                 <div className="fs-6 text-end text-secondary">${amount}</div>                  
                 </div>

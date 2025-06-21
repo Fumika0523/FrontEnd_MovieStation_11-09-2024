@@ -135,10 +135,12 @@ MovieDisplay_Debounce:
 
 ----------------------
 1.design for delete & movin to wishlist button ----->> DONE
-2.moving to wishlist function in --->>> DONE
-3.moving to the cart in wishlist page
-4.moviection button in cartpage
+2.moving to wishlist function in <<WORK>>
+3.moving to the cart in wishlist page <<WORK>>
+4.moviection button in cartpage --> DONE
 5.sorting part
 6.when cart item is empty, the empty banner should show ---> DONE
 7.pdf order invoice , add stroke on each item
-8. price is static or not, change the price in DB and see
+8. price is static or not, change the price in DB and see  ---> DONE
+9. Download Invoice
+10. Refresh cartpage <<WORK>>

@@ -33,8 +33,8 @@ function Cartpage({mode}) {
             dispatch(removeAllItems())
         }
     }
-
-  console.log("1213",wishlist)
+  console.log("1213wishlist",wishlist)
+  
   useEffect(() => {
     const fetchWishlist = async () => {
       try {

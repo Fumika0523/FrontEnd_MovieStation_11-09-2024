@@ -100,6 +100,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   //CART Server
   const handleAddCartItem = useCallback(async(element)=>{
+    console.log("1234567",element)
     const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
     if(isInCartlist){
       console.log("ErrorNotify")

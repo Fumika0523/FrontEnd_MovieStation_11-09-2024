@@ -22,12 +22,10 @@ function CartSummaryPage() {
     // transition: Bounce,
     });
     const navigate=useNavigate()
-
     const dispatch = useDispatch()
-
     const [sum,setSum]=useState(0)
-    const cart=useSelector(store=>store.cart.cartItems)
-console.log(cart)
+    const cart = useSelector(store=>store.cart.cartItems)
+    console.log(cart)
     
     useEffect(()=>{
         if(cart){
@@ -52,10 +50,10 @@ console.log(cart)
           return;
         }
         console.log("OrderPage");
-        console.log(cartItems);
+        console.log(cart);
 
         try {
-          let res = await axios.post(`${url}/addorder`, { movies: cartItems }, config);
+          let res = await axios.post(`${url}/addorder`, { movies: cart }, config);
           console.log(res);
           if (res.status === 200) { // Success response
             await axios.delete(`${url}/clearcart`, config); // Clear cart in DB
@@ -104,7 +102,8 @@ console.log(cart)
                         </div>
                         
                         <div className="d-flex justify-content-end align-items-center">
-                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap my-3"  onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-3 me-1"/><span className="fs-6">Order Now</span> </Button>       
+                        <Button variant="warning" className="d-flex justify-content-cente align-items-center text-nowrap my-3" 
+                         onClick={() => {handleAddOder()}} ><BsFillCartCheckFill className=" fs-3 me-1"/><span className="fs-6">Order Now</span> </Button>       
                 </div>
                 </div>
                 </div>
