@@ -144,3 +144,4 @@ MovieDisplay_Debounce:
 8. price is static or not, change the price in DB and see  ---> DONE
 9. Download Invoice
 10. Refresh cartpage <<WORK>>
+11. Without Login

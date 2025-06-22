@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Rating from '@mui/material/Rating';
 import { useNavigate } from "react-router-dom";
 import { wishRemoveItem,setWishlist } from "../../../utils/WishCartSlice";
+import { cartAddItem,setCart } from "../../../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { url } from "../../../utils/constant";
@@ -20,18 +21,14 @@ console.log(movieposter, moviename,rating,_id,element)
   const navigate = useNavigate()
   const ratNum = { rating }
   const starNum = ratNum.rating / 2
+
+  // REMOVE　WISH Item
   const removeWishItemFromServer = async (element) => {
     try {
       await axios.delete(`${url}/delete-wish-item/${element._id}`, config);
     } catch (error) {
       console.error('Error removing from wishlist:', error);
     }
-  };
-
- const getWishData = async () => {
-    const res = await axios.get(`${url}/wish-list`, config);
-    // dispatch(wishAddItem(res.data.wishData));
-    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
   };
 
   const handleRemoveWishItem = async(element)=>{
@@ -47,10 +44,41 @@ console.log(movieposter, moviename,rating,_id,element)
         console.error("Error Removing wish Item:",error)
     }
 }
+  
+// ADD TO CART
+  const addCartItemToServer = async (element)=>{
+    try{
+      await axios.post(`${url}/addcart`, element, config);
+    }catch(error){
+      console.error('Error adding to wishlist:', error);
+    }
+  }
 
-const handleAddCart = async()=>{
-  console.log("HandleAddCart")
+  const handleAddCart = async(element)=>{
+  console.log("HandleAddCart",element)
+  try{
+    if(element){
+      dispatch(cartAddItem(element))
+      await addCartItemToServer(element)
+        dispatch(wishRemoveItem(element))
+        await removeWishItemFromServer(element)
+        await getWishData()
+    }else
+    {
+      console.log("Element is undefined")
+    }
+  }catch(error){
+    console.log("Error Moving to Cart",error)
+  }
 }
+
+ const getWishData = async () => {
+    const res = await axios.get(`${url}/wish-list`, config);
+    // dispatch(wishAddItem(res.data.wishData));
+    dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
+  };
+
+
 
    return (
     <>
@@ -76,14 +104,18 @@ const handleAddCart = async()=>{
             </Button>
       
             {/* Delete */}
-            <Button variant="none" >
-            <DeleteIcon style={{color:"rgb(226, 11, 11)"}}  onClick={() => handleRemoveWishItem(element)}className="fs-3" />
+            <Button variant="none"
+            onClick={() => handleRemoveWishItem(element)} >
+            <DeleteIcon style={{color:"rgb(226, 11, 11)"}}  
+            className="fs-3" />
             </Button>               
 
             {/* Add Cart */}
-            <Button variant="none" className="d-flex gap-1 align-items-center" style={{backgroundColor:"rgb(238, 161, 7)"}}>
-              <span className="d-none d-lg-block">Move to Cart</span><ShoppingCartIcon className="fs-3"
-                style={{color:"rgb(0, 0, 0)"}}/></Button>               
+            <Button variant="none"    
+            onClick={()=>handleAddCart(element)}>
+             <ShoppingCartIcon className="fs-3"
+                style={{color:"rgb(238, 161, 7)"}}/>
+                </Button>               
             </div>            
           </div>
       </div>

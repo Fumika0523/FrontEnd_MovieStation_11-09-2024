@@ -22,7 +22,6 @@ function CartCard({ movieposter, moviename, amount,element }) {
     const dispatch = useDispatch()
     const handleRemoveItem = async(movie)=>{
     console.log("HandleRemoveItem",movie._id)
-    
     let res = await axios.delete(`${url}/delete-cart-item/${movie._id}`,config) //inside movie
     console.log(res)
     if(res.data){
@@ -30,40 +29,31 @@ function CartCard({ movieposter, moviename, amount,element }) {
     }
 }
 
-    const handleAddWishItem = async(movie)=>{
-    console.log("HandleAddWishItem",movie._id)
-      let res = await axios.post(`${url}/add-wish-list`, element, config);
-      console.log(res)
-      if(res.data){
-       dispatch(cartRemoveItem(movie))
-      }{
-        return console.log("error")
-      }
-         dispatch(wishAddItem(element));
+  const addWishItemToServer = async (element) => {
+    try {
+      await axios.post(`${url}/add-wish-list`, element, config);
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
     }
+  };
 
-   // ADD TO Wish
-  // const addWishItemToServer = async (element) => {
-  //   try {
-  //     await axios.post(`${url}/add-wish-list`, element, config);
-  //   } catch (error) {
-  //     console.error('Error adding to wishlist:', error);
-  //   }
-  // };
 
-  //Wish Server
-  // const handleAddWishItem = useCallback(async (element) => {
-  //   const isInWishlist = wishlist?.some(item => item._id === element._id);
-  //   if (isInWishlist) {
-  //     console.log()
-  //   } else {
-  //     dispatch(wishAddItem(element));
-  //     addWishNotify();
-  //     await addWishItemToServer(element);
-  //   }
-  //   await getWishData(); // Refresh to sync
-  // }, [dispatch, wishlist]);
- 
+  const handleAddWishItem = async(element)=>{
+  console.log("handleAddWishItem",element)
+  try{
+    if(element){
+      dispatch(wishAddItem(element))
+      await addWishItemToServer(element)
+        await handleRemoveItem(element)
+        await getWishData()
+    }else
+    {
+      console.log("Element is undefined")
+    }
+  }catch(error){
+    console.log("Error Moving to Cart",error)
+  }
+}
 
     return (
         <>
