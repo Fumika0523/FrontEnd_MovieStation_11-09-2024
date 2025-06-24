@@ -54,6 +54,12 @@ console.log(movieposter, moviename,rating,_id,element)
     }
   }
 
+    const getCartData = async () => {
+      const res = await axios.get(`${url}/cart`,config);
+      console.log(res.data.cartData)
+       dispatch(setCart(res.data.cartData)) 
+    };
+    
   const handleAddCart = async(element)=>{
   console.log("HandleAddCart",element)
   try{
@@ -67,6 +73,7 @@ console.log(movieposter, moviename,rating,_id,element)
     {
       console.log("Element is undefined")
     }
+        await getCartData()
   }catch(error){
     console.log("Error Moving to Cart",error)
   }
@@ -77,8 +84,6 @@ console.log(movieposter, moviename,rating,_id,element)
     // dispatch(wishAddItem(res.data.wishData));
     dispatch(setWishlist(res.data.wishData)) //- dispatch(setWishlist(res.data.wishData)) sends the data to Redux, replacing the existing wishlist with the new data.
   };
-
-
 
    return (
     <>

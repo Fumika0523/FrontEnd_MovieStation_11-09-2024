@@ -134,7 +134,6 @@ const dispatch= useDispatch()
       <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
         <Card className="movieCard"
           style={{ maxWidth: "96%", display: "flex", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "0 0 8px 0" }}>
-          
           <CardHeader className="py-2 fw-bold"
 
             avatar={
@@ -153,7 +152,7 @@ action={
       style={{
         position: "absolute",
         right: "3px",
-        top: "30px",
+        top: "25px",
         height: "28px",
         width: isMovieOwner ? "105px" : "57px",
       }}
@@ -193,7 +192,7 @@ action={
         position: "absolute",
         right: "3px",
         top: "15px",
-        height: "28px",
+        height: "25px",
       }}>
 
 

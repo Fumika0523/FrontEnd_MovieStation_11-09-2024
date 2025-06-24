@@ -17,13 +17,15 @@ const cartSlice=createSlice({
         state.cartItems = state.cartItems.filter(cartItems => cartItems._id !== action.payload._id);
     },
 
+    removeAllItems:(state,action)=>{
+        state.cartItems=[] //item empty
+    },
+
     setCart:(state, action) =>{
         state.cartItems = action.payload;
     },
 
-    removeAllItems:(state,action)=>{
-    state.cartItems=[] //item empty
-    },
+   
 }})
 export const {cartAddItem,cartRemoveItem,setCart,removeAllItems} = cartSlice.actions
 export default cartSlice.reducer

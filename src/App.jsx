@@ -22,12 +22,12 @@ import AllEnquiries from './Components/Enquiries/AllEnquiries';
 import Table from './Components/Enquiries/CustomizedTables'
 import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
-import UserMovies from './Components/Movie/UserMoviesDisplay_Debounce';
 import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
 import WishlistDisplay from './Components/Movie/MyWishList/WishlistDisplay';
+import MyMoviesDisplay_Debounce from './Components/Movie/MyMovies/MyMoviesDisplay_Debounce';
 
 
 function App() {
@@ -91,7 +91,7 @@ const [userData,setUserData]=useState([])
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
        <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
-       <Route path="/usermovies" element={<UserMovies mode={mode}/>}/>
+       <Route path="/usermovies" element={<MyMoviesDisplay_Debounce mode={mode} />}/>
        {/* <Route path="/mywishlist" mode={mode} element={<WishMovieDisplay_Debounce/>}/> */}
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
      

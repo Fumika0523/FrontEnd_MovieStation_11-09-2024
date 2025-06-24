@@ -10,23 +10,24 @@ import { ToastContainer } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { Col, Row } from "react-bootstrap";
 import WishMovieCard from "./WishMovieCard";
-import { wishAddItem, wishRemoveItem } from "../../../utils/WishCartSlice"
+
 
 const WishlistDisplay = ({ mode }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector(store => store.wishlist.wishItems || []);
+  const cart = useSelector(store =>store.cart.cartItems)
+  console.log(cart,"wishdisplay")
   const navigate = useNavigate();
   const token = sessionStorage.getItem('token');
   console.log("1213",wishlist)
   useEffect(() => {
+
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(`${url}/wish-list`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-
         console.log(response.data.wishData)
-
         if (response.data.wishData) {
           dispatch(setWishlist(response.data.wishData)); 
           console.log("Wishlist:", response.data);
@@ -44,6 +45,32 @@ const WishlistDisplay = ({ mode }) => {
     }
   }, [dispatch, token]);
 
+    useEffect(()=>{
+    const getCartData=async()=>{
+      try{
+        let response = await axios.get(`${url}/cart`,{
+        headers:{Authorization:`Bearer ${token}`}
+        })
+        console.log(response.data.cartData)
+        if(response.data.cartData){
+          dispatch(setCart(response.data.cartData))
+          console.log("cart",response.data)
+        } else{
+          dispatch(setCart([]))
+        }
+      }catch(error){
+        console.error("Failed to load Cart",error);
+        dispatch(setCart([]))
+      }
+    }
+
+    if(token){
+      getCartData()
+    }
+  },[dispatch,token])
+
+
+
   return (
     <>
       <Container fluid>
@@ -56,6 +83,7 @@ const WishlistDisplay = ({ mode }) => {
               mode={mode}
               navigate={navigate}
               wishlistCount={wishlist?.length}
+              cartCount={cart?.length}
             />
           </Col>
         </Row>

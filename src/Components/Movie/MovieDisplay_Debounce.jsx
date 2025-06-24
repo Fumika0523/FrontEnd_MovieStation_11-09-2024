@@ -53,7 +53,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const getCartData = async () => {
     const res = await axios.get(`${url}/cart`,config);
-    console.log(res.data.cartData)
+    console.log("cartData",res.data.cartData)
      dispatch(setCart(res.data.cartData)) 
   };
 
@@ -89,15 +89,6 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   };
 
-  //CART
-  const removeCartItemFromServer = async(element)=>{
-    try{
-    await axios.delete(`${url}/delete-cart-item/${element._id}`, config);
-    }catch(error){
-      console.error('Error removing from Cart:', error);
-    }
-  }
-
   //CART Server
   const handleAddCartItem = useCallback(async(element)=>{
     console.log("1234567",element)
@@ -111,7 +102,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
       await addCartItemToServer(element)
     }
     await getCartData()
-  },[dispatch,cart])
+  },[dispatch, cart])
 
   //Wish Server
   const handleAddWishItem = useCallback(async (element) => {
@@ -164,6 +155,31 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     getMovieData();
     navigate(`/allmovies`);
   };
+
+      useEffect(()=>{
+    const getCartData=async()=>{
+      try{
+        let response = await axios.get(`${url}/cart`,{
+        headers:{Authorization:`Bearer ${token}`}
+        })
+        console.log(response.data.cartData)
+        if(response.data.cartData){
+          dispatch(setCart(response.data.cartData))
+          console.log("cart",response.data)
+        } else{
+          dispatch(setCart([]))
+        }
+      }catch(error){
+        console.error("Failed to load Cart",error);
+        dispatch(setCart([]))
+      }
+    }
+
+    if(token){
+      getCartData()
+    }
+  },[dispatch,token])
+
 
   return (
     <>

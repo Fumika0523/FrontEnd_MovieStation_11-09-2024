@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { removeAllItems,cartAddItem } from "../../utils/cartSlice"
+import { removeAllItems,cartAddItem,setCart } from "../../utils/cartSlice"
 import { useNavigate } from "react-router-dom"
 import CartSummaryPage from "./CartSummaryPage";
 import axios from "axios";
@@ -11,12 +11,11 @@ import MovieActionButtons from "../Movie/MovieActionButtons"
 import { useEffect } from "react";
 import { setWishlist } from '../../utils/WishCartSlice';
 
+
 function Cartpage({mode}) {
     const cart = useSelector(store => store.cart.cartItems || [])
-
     const navigate = useNavigate()
     const dispatch = useDispatch() 
-
     const token = sessionStorage.getItem('token')
     const wishlist = useSelector(store => store.wishlist.wishItems || []);
     let config = {
@@ -67,19 +66,40 @@ function Cartpage({mode}) {
     // }
     // const handleRemoveFirstItem = () => {
     //     dispatch(removeFirstItem())
-    // }
+    // }  
 
+    useEffect(()=>{
     const getCartData=async()=>{
-        let res = await axios.get(`${url}/cart`,config)//response in res.data >> moviedata
-        console.log("getCartData",res);
+      try{
+        let response = await axios.get(`${url}/cart`,{
+        headers:{Authorization:`Bearer ${token}`}
+        })
+        console.log(response.data.cartData)
+        if(response.data.cartData){
+          dispatch(setCart(response.data.cartData))
+          console.log("cart",response.data)
+        } else{
+          dispatch(setCart([]))
+        }
+      }catch(error){
+        console.error("Failed to load Cart",error);
+        dispatch(setCart([]))
+      }
+    }
+
+    if(token){
+      getCartData()
+    }
+  },[dispatch,token])
+
+        // //response in res.data >> moviedata
+        // console.log("getCartData",res);
         // if(res.data && res.data.cartData){
         // dispatch(removeItem());
         //clearing existing cart items from store
         // res.data.cartData.map((element)=>dispatch(cartAddItem(element)))
     //}
-useEffect(()=>{
-    getCartData()
-})}
+
     
 
     return (
