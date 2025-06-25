@@ -10,18 +10,18 @@ import { ToastContainer } from 'react-toastify';
 import { FaHeart } from "react-icons/fa";
 import { Col, Row } from "react-bootstrap";
 import WishMovieCard from "./WishMovieCard";
-
+import {setCart} from '../../../utils/cartSlice'
 
 const WishlistDisplay = ({ mode }) => {
   const dispatch = useDispatch();
-  const wishlist = useSelector(store => store.wishlist.wishItems || []);
+  const wishlist = useSelector(store => store.wishlist.wishItems);
   const cart = useSelector(store =>store.cart.cartItems)
   console.log(cart,"wishdisplay")
   const navigate = useNavigate();
   const token = sessionStorage.getItem('token');
   console.log("1213",wishlist)
+  
   useEffect(() => {
-
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(`${url}/wish-list`, {

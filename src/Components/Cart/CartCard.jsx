@@ -58,7 +58,7 @@ function CartCard({ movieposter, moviename, amount,element }) {
     return (
         <>
             <div className="d-flex  border-4 row mx-auto align-items-center justify-content-center pt-4 pb-2 ">
-                <div className="col-sm-11 col-12 mb-3 mx-auto col-lg-4 col-md-4">
+                <div className="col-12 mb-3 mx-auto col-lg-4 col-md-11 col-md-4">
                 <img src={movieposter} className="rounded w-100" style={{minHeight:"160px"}} alt=""  />
                 </div>
         
@@ -68,24 +68,18 @@ function CartCard({ movieposter, moviename, amount,element }) {
 
                 {/* DELETE */}
                 <Button variant="none" className="p-1" onClick={()=>{handleRemoveItem(element)}}>
-                <DeleteIcon className="text-danger fs-3 "/>
+                <DeleteIcon className="text-secondary fs-3 "/>
                 </Button>
               
               {/* Move to WIsh */}
-                <FaHeart className="text-"
-                style={{cursor:"pointer"}} 
-                onClick={()=>(handleAddWishItem(element))}
-                />
-
+                <Button variant="none" className="p-1"
+                onClick={()=>(handleAddWishItem(element))}>
+                <FaHeart className="fs-3 text-danger" />
+                </Button>
                 <div className="fs-6 text-end text-secondary">${amount}</div>                  
                 </div>
-
-                {/* Price & Qty */}
-                {/* <div className=" col-4 col-lg-2 border"> */}
-                    
-                {/* </div> */}
             </div>
-            {/* </div> */}
+     
         </>
     )
 }

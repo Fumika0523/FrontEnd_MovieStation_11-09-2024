@@ -29,7 +29,10 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const cart = useSelector(store =>store.cart.cartItems)
   console.log("cart",cart)
   console.log(cart?.length)
-
+  const [orderData, setOrderData] = useState([])
+  const [sortedData, setSortedData] =useState("createdAt:desc") //default
+  console.log("sortedData",sortedData)
+  console.log("orderData",orderData)
   /// when you not login, wish goes to store >> when you login from store to db
   //when you login >> Db >> Store <<<< If you store to store first, the data will be gone after the refreshing
  // useState > within 1 component, need to be passed to use in other components
@@ -180,7 +183,16 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   },[dispatch,token])
 
-
+  const getOrderData = async()=>{
+        // /order?sortBy=createdAt:asc
+        const res = await axios.get(`${url}/order`,config)
+        console.log(`res`,res)
+        // setOrderData(res.data.orderData)
+        // console.log("orderData from my movie",res.data.orderData)
+      useEffect(() => {
+      getOrderData();
+      }, [])};
+        
   return (
     <>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" margin={2}>
@@ -194,20 +206,24 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
               cartCount={cart?.length || 0}
               cart={cart}
             />
+              <div className="flex-wrap justify-content-end d-flex mt-3 flex-row gap-3 border-4 border-danger">
             {token && (
+            
               <Button
                 variant="none"
                 className="movieDisplayBtn"
-                onClick={() => navigate('/addmovie')}
-                style={{
-                  backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-                  border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
-                  color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-                }}
-              >
-              <FaPlusCircle className="fs-5 me-md-1 addIcon" />
-                <span className="d-md-block d-none">Add Movie</span>
-              </Button>
+                  onClick={() => navigate('/addmovie')}
+                            style={{
+                              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+                              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+                              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+                            }}
+                          >
+                
+                               <FaPlusCircle className="fs-5 me-md-1 text-success" />
+                            <span className="d-md-block d-none">Add Movie</span>
+             </Button>
+
             )}
             <input
               style={{
@@ -221,11 +237,11 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
               placeholder="Search movie"
               onChange={(e) => setSearchTearm(e.target.value)}
             />
+            </div>
           </div>
         </Grid>
 
         <Grid container display="flex" flexWrap="wrap" justifyContent="start" marginTop={2}>
-          
           {filterMovieData?.length === 0 ? (
             <div className="position-relative mt-2 border-4" style={{ maxHeight: "390px", width: "100%" }}>
               <img

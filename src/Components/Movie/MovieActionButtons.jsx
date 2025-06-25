@@ -8,7 +8,7 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
 //  console.log("wishlistCount",wishlistCount)
 
   return (
-    <div className="flex-wrap justify-content-end d-flex  flex-row gap-3 border-4 mx-md-4 border-danger">
+    <div className="flex-wrap justify-content-end d-flex mt-3 flex-row gap-3 border-4 me-4 border-danger">
 
       {/* My Cart */}
       <Button
@@ -76,9 +76,8 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
               height: "16px",
               right: 0,
               top: -2,
-              backgroundColor: "#FF8300", // Apply the pink color
-              color: "#000", // Adjust text color for contrast
-
+              backgroundColor: "rgb(252, 140, 220)", // Apply the pink color
+              color: "black", // Adjust text color for contrast
             },
           }}
     
@@ -92,14 +91,13 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
             <FaHeart className="fs-5  me-md-1 text-danger"  />
             )
           }
-   
         </Badge>
         <span className="d-md-block d-none">My Wish List</span>
       </Button>
 
        <Button
             variant="none"
-            onClick={() => navigate('/usermovies')}
+            onClick={() => navigate('/my-movie')}
             className="movieDisplayBtn"
             style={{
               backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
@@ -108,7 +106,22 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount,cartCount}) => {
             }}
           >
             <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
-            <span className="d-md-block d-none">My Movies</span>
+          <span className="d-md-block d-none">My Movies</span>
+        </Button>
+            {/* My Purchase */}
+          <Button
+            variant="none"
+            onClick={() => navigate('/my-purchase')}
+            className="movieDisplayBtn"
+            style={{
+              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+            }}
+          >
+
+            <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
+            <span className="d-md-block d-none">My Purchase</span>
         </Button>
     </div>
   );

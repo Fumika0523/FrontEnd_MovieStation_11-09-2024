@@ -56,7 +56,7 @@ console.log(movieposter, moviename,rating,_id,element)
 
     const getCartData = async () => {
       const res = await axios.get(`${url}/cart`,config);
-      console.log(res.data.cartData)
+      console.log("cartData from Wishmovie",res.data.cartData)
        dispatch(setCart(res.data.cartData)) 
     };
     

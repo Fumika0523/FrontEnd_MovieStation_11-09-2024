@@ -151,7 +151,7 @@ return (
     <Button variant="success" className="text-nowrap me-1 d-flex align-items-center gap-1" onClick={()=>navigate('/addmovie')} >
      <FaPlusCircle className="fs-5 " /><span className="d-sm-block d-none">Add Movie</span></Button>
     
-    <Button variant="warning" onClick={()=>navigate('/usermovies')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
+    <Button variant="warning" onClick={()=>navigate('/my-movie')} className=" text-nowrap me-1 d-flex align-items-center gap-1">
     <FaHeart className="fs-5" style={{ color: "red"}}/><span className="d-md-block d-none"  >My Movies</span> </Button>
     </>
     }

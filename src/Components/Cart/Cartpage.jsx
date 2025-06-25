@@ -108,9 +108,8 @@ function Cartpage({mode}) {
                 <MovieActionButtons
                     mode={mode}
                     navigate={navigate}
-                    wishlistCount={wishlist?.length || 0}
-                    cartCount={cart?.length || 0}
-
+                    wishlistCount={wishlist?.length}
+                    cartCount={cart?.length }
                     />
                 <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
                 >
@@ -127,7 +126,7 @@ function Cartpage({mode}) {
                     style={{
                     backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
                     color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-                    }}className="text-nowrap" onClick={() => navigate('/allmovies')}> 
+                    }} className="text-nowrap" onClick={() => navigate('/allmovies')}> 
                     <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button>
                      </div>
                        

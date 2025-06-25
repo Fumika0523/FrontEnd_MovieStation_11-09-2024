@@ -138,12 +138,13 @@ MovieDisplay_Debounce:
 2.moving to wishlist function in  --> DONE
 3.moving to the cart in wishlist page ---> DONE
 4.moviection button in cartpage --> DONE
-5.sorting part <WOrk>
+5.sorting part
 6.when cart item is empty, the empty banner should show ---> DONE
 7.pdf order invoice , add stroke on each item 
 8. price is static or not, change the price in DB and see  ---> DONE
 9. Download Invoice
 10. Refresh cartpage --> DONE
 11. Without Login
-12.check my movies <WOrk>
-13. My purchase >> Trailer, when you click the button just instantly 
+12. check my movies <WOrk> >> Trailer, when you click the button just instantly 
+13.Duplicated order
+14. My Purchase & My movie (lists that you added)  <WOrk>

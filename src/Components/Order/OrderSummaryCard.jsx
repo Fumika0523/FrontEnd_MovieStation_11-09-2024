@@ -58,14 +58,13 @@ function OrderSummaryCard({movieposter,moviename,amount,updatedAt}){
    //4. Double-click > Desc
    //5. url should be passed from front-end, toggle
 
-
-
     return(
     <>
         <div className="d-flex flex-row mb-5 row mx-auto" 
             style={{}} >
             <div className=" d-flex justify-content-center align-items-center col-md-5 mb-2 col-12">
-                <img src={movieposter} alt="" style={{width:"100%"}}/></div>
+                <img src={movieposter} alt="" style={{width:"100%"}}/>
+            </div>
             <div className=" col-md-7 col-12">
                 {/* WHen you click today, >>  */}  
             <div className="justify-content-between fs-5 mb-3 d-flex flex-row text-secondary align-items-center">

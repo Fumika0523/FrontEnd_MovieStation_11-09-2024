@@ -1,6 +1,7 @@
 import axios from "axios"
 import { url } from "../../utils/constant";
-import * as React from 'react';
+import { setWishlist } from '../../utils/WishCartSlice'
+import {cartAddItem,setCart} from "../../utils/cartSlice"
 import { useEffect } from "react";
 import { useState } from "react";
 import OrderSummaryCard from "./OrderSummaryCard";
@@ -10,15 +11,20 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { MdDownloading } from "react-icons/md";
 import { BiSort } from "react-icons/bi";
 import Button from 'react-bootstrap/Button';
+import MovieActionButtons from "../Movie/MovieActionButtons";
+import { useDispatch, useSelector } from "react-redux"
+import { Navigate, useNavigate } from "react-router-dom"
 
 function OrderSummary({ mode }) {
+    const cart = useSelector(store => store.cart.cartItems || [])
+    const wishlist = useSelector(store => store.wishlist.wishItems || []);
+    const navigate = useNavigate()
     const [orderData, setOrderData] = useState([])
     const [sortedData, setSortedData] =useState("createdAt:desc") //default
-
     console.log("sortedData",sortedData)
     console.log("orderData",orderData)
     const [loading,setLoading] = useState(false)
-
+    const dispatch = useDispatch() 
     const token = sessionStorage.getItem('token')
     let config = {
         headers: {
@@ -59,7 +65,7 @@ const toggleSortOrder= () =>{
         const total = price.reduce((acc, cv) => acc + cv)
         return total
     })
-    console.log("totalOrderPrice12",totalOrderPrice)  
+    //console.log("totalOrderPrice12",totalOrderPrice)  
     console.log("orderData",orderData)
 
     const renderTooltip = (props) => (
@@ -121,7 +127,6 @@ headers: {
     movies
   })
 }) // when you using fetch >> conver to json. but when u using axios, you dont need.
-
     if(!response.status==200 && !response.ok && !response.statusText=="OK"){
     throw new Error("Failed to download PDF")
     }
@@ -138,9 +143,62 @@ headers: {
     window.URL.revokeObjectURL(url)
 }
 
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get(`${url}/wish-list`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log(response.data.wishData)
+        if (response.data.wishData) {
+          dispatch(setWishlist(response.data.wishData)); 
+          //console.log("Wishlist:", response.data);
+        } else {
+          dispatch(setWishlist([])); // wrap empty
+        }
+      } catch (error) {
+        console.error("Failed to load wishlist", error);
+        dispatch(setWishlist([]));
+      }
+    };
+
+    if (token) {
+      fetchWishlist();
+    }
+  }, [dispatch, token]);
+
+    useEffect(()=>{
+    const getCartData=async()=>{
+      try{
+        let response = await axios.get(`${url}/cart`,{
+        headers:{Authorization:`Bearer ${token}`}
+        })
+        console.log(response.data.cartData)
+        if(response.data.cartData){
+          dispatch(setCart(response.data.cartData))
+          //console.log("cart",response.data)
+        } else{
+          dispatch(setCart([]))
+        }
+      }catch(error){
+        //console.error("Failed to load Cart",error);
+        dispatch(setCart([]))
+      }
+    }
+    if(token){
+      getCartData()
+    }
+  },[dispatch,token])
+
     return (
-        <>
-            <div className="row mx-auto">
+    <>
+        <div className="row mx-auto">
+             <MovieActionButtons 
+            mode={mode}
+            navigate={navigate}
+            wishlistCount={wishlist?.length || 0}
+            cartCount={cart?.length || 0}
+            />
                 <div className="mx-auto col-lg-8 col-md-11 col-11 border rounded border-secondary-50 my-4 px-sm-5 py-3" >
                     <div className="fs-2 justify-content-between mx-2 align-items-center pb-3 d-flex flex-row">
                         <div className="d-flex flex-row ">
@@ -158,7 +216,6 @@ headers: {
                     </div>
                  <>
                     {                      
-                        // totalOrderPrice?.map((x) => (
                         orderData?.map((element) => (
                                 <div key={element._id} className="mb-4">
                                     <div className="d-flex mx-3  flex-row justify-content-between align-items-center my-2 ">
@@ -192,8 +249,8 @@ headers: {
 
                  </>                  
                 </div>
-            </div>
-        </>
+        </div>
+    </>
     )
 }
 export default OrderSummary

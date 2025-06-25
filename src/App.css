@@ -395,8 +395,8 @@ text-shadow: none;
   color: rgb(1, 96, 28) !important;
 }
 
-.movieDisplayBtn:hover .myMovieIcon{
-  color: rgb(2, 100, 191) !important;
+.myMovieIcon{
+  color: rgb(4, 110, 209) !important;
 }
 
 .movieImg:hover .content{

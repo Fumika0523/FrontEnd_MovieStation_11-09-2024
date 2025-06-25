@@ -27,7 +27,8 @@ import EditEnquiry from './Components/Enquiries/EditEnquiry';
 import ProfileEdit from './Components/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
 import WishlistDisplay from './Components/Movie/MyWishList/WishlistDisplay';
-import MyMoviesDisplay_Debounce from './Components/Movie/MyMovies/MyMoviesDisplay_Debounce';
+import MyMoviesDisplay from './Components/Movie/MyMovie/MyMovieDisplay';
+import MyPurchaseDisplay_Debounce from './Components/Movie/MyPurchaseMovies/MyPurchaseDisplay_Debounce';
 
 
 function App() {
@@ -91,10 +92,10 @@ const [userData,setUserData]=useState([])
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
        <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
-       <Route path="/usermovies" element={<MyMoviesDisplay_Debounce mode={mode} />}/>
-       {/* <Route path="/mywishlist" mode={mode} element={<WishMovieDisplay_Debounce/>}/> */}
+
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
-     
+        <Route path="/my-purchase" mode={mode} element={<MyPurchaseDisplay_Debounce/>}/>
+         <Route path="/my-movie" mode={mode} element={<MyMoviesDisplay/>}/>
        </>
 
     }
