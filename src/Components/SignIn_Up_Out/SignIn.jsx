@@ -10,12 +10,12 @@ import { useLocation } from 'react-router-dom';
 
 
 function SignIn({setIsAuthenticated}) {
-
   const navigate = useNavigate()
-  const formSchema=Yup.object().shape({
-    password:Yup.string().required(),
-    email:Yup.string().required(),
-    phone_number:Yup.number().required()
+
+  const validationSchema=Yup.object().shape({
+    password:Yup.string().required("Password is required!"),
+    email:Yup.string().required("Email is required !"),
+    phone_number:Yup.number().required("Phone No. is required!")
 })
 
   const formik=useFormik({
@@ -24,7 +24,7 @@ function SignIn({setIsAuthenticated}) {
       password:"",
       phone_number:""
     },
-    // validationSchema:formSchema,
+    validationSchema,
     onSubmit:(values)=>{
      // console.log(values) // req.body
       //update the value >> signin data
@@ -63,8 +63,6 @@ const postSignInUser = async (loginuser) => {
       sessionStorage.setItem('userId', res.data.user._id);
       sessionStorage.setItem('name', res.data.user.name);
       setIsAuthenticated(true);
-      
-      // ✅ Redirect to original page
       navigate(fromPath);
     }
   } catch (error) {
@@ -72,36 +70,47 @@ const postSignInUser = async (loginuser) => {
   }
 };
 
-
-
-
   return (
     <>
     <div className="container-fluid border-4 border-primary d-flex justify-content-center align-items-center">
     <Form 
     onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-lg-5 col-sm-9 col-12 px-4 py-5 px-sm-5 " style={{marginTop:"5%"}} >
+      {/* Title */}
        <h1 className="mb-3 text-center ">Sign in</h1>
+       {/* Email */}
      <Form.Group className="mb-3  " controlId="formBasicEmail">
        <Form.Label className="m-0">Email address</Form.Label>
         <Form.Control  type="email" placeholder=""
          name="email"
          value={formik.values.email}
          onChange={formik.handleChange} />
+        {formik.errors.email && formik.touched.email? (
+        <div style={{color:"red"}}>{formik.errors.email}</div>
+        ) : null }
       </Form.Group>
       
+      {/* Phone NO. */}
       <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
         <Form.Label className="m-0">Phone No.</Form.Label>
         <Form.Control type="phone_number" placeholder=""
-         name="phone_number"
-         value={formik.values.phone_number}
-         onChange={formik.handleChange}  />
+        name="phone_number"
+        value={formik.values.phone_number}
+        onChange={formik.handleChange}  />
+        {formik.errors.phone_number && formik.touched.phone_number? (
+        <div style={{color:"red"}}>{formik.errors.phone_number}</div>
+        ) : null }
       </Form.Group>
+
+      {/* Password */}
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label className="m-0">Password</Form.Label>
         <Form.Control type="password" placeholder=""
          name="password"
          value={formik.values.password}
          onChange={formik.handleChange} /> 
+         {formik.errors.password && formik.touched.password? (
+        <div style={{color:"red"}}>{formik.errors.password}</div>
+        ) : null }
       </Form.Group>
 
       <div className="row px-3 py-3 d-flex flex-row justify-content-between">

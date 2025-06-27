@@ -9,19 +9,12 @@ import Button from 'react-bootstrap/Button';
 
 function SignUp() {
 const navigate = useNavigate()
-  const inputDesign={
-  backgroundColor:"#1B1C23",
-   borderColor:"black",
-   color:"white",
-  }
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   lastname: Yup.string().required("Last name is required"),
   gender: Yup.string().required("Gender is required"),
-  phone_number: Yup.string()
-    .matches(/^\d{10}$/, "Phone number must be 10 digits")
-    .required("Phone number is required"),
+  phone_number: Yup.string().required("Phone number is required"),
   email: Yup.string().email("Invalid email format").required("Email is required"),
   password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 });
@@ -59,6 +52,8 @@ const postSignUpUser=async(newUser)=>{
      <Form onSubmit={formik.handleSubmit} className="sign_up_in_container col-md-8 col-sm-10 col-lg-7 col-12 px-4 py-4 px-sm-5 " style={{marginTop:"5%"}} >
     <div className=' text-center fw-bold my-3 fs-1'>Sign Up</div>
         <div className="row mb-1 ">
+
+          {/* Firstname */}
           <Form.Group className="col-md-6 mb-1">
             <Form.Label htmlFor="name" className="form-label m-0">First name</Form.Label>
             <Form.Control 
@@ -67,9 +62,13 @@ const postSignUpUser=async(newUser)=>{
             name="name"
             value={formik.values.name}
             onChange={formik.handleChange}  
-            style={inputDesign}/>
+            />
+            {formik.errors.name && formik.touched.name? (
+        <div style={{color:"red"}}>{formik.errors.name}</div>
+        ) : null }
           </Form.Group>
 
+          {/* lastname */}
           <Form.Group className="col-md-6 mb-1">
             <Form.Label htmlFor="lastname" className="form-label m-0">Last name</Form.Label>
             <Form.Control 
@@ -78,21 +77,13 @@ const postSignUpUser=async(newUser)=>{
             name="lastname"
             value={formik.values.lastname}
             onChange={formik.handleChange}  
-            style={inputDesign}/>
-          </Form.Group>
-
-          {/* AGE
-          <Form.Group className="col-md-6 mb-1">
-            <Form.Label htmlFor="age" className="form-label m-1">Age</Form.Label>
-            <Form.Control type="text" className="sign_up_input form-control" 
-             id="age"
-             name="age"
-             value={formik.values.age}
-             onChange={formik.handleChange}  
-             style={inputDesign}
             />
-          </Form.Group> */}
+          {formik.errors.lastname && formik.touched.lastname? (
+         <div style={{color:"red"}}>{formik.errors.lastname}</div>
+         ) : null }
+          </Form.Group>
           </div>
+
           <div className="mb-1 row ">
           {/* Gender */}
          <div className="col-md-6 d-flex flex-column justify-content-start align-items-start">
@@ -105,6 +96,9 @@ const postSignUpUser=async(newUser)=>{
           value="female"
           onChange={formik.handleChange}/>
         </div>
+        {formik.errors.gender && formik.touched.gender? (
+        <div style={{color:"red"}}>{formik.errors.gender}</div>
+        ) : null }
         </div>
 
         {/* Phone */}
@@ -115,7 +109,10 @@ const postSignUpUser=async(newUser)=>{
          name="phone_number"
          value={formik.values.phone_number}
          onChange={formik.handleChange} 
-         style={inputDesign} />
+          />
+      {formik.errors.phone_number && formik.touched.phone_number? (
+        <div style={{color:"red"}}>{formik.errors.email}</div>
+        ) : null }
           </Form.Group>
         </div>
 
@@ -127,9 +124,10 @@ const postSignUpUser=async(newUser)=>{
              id="email"
              name="email"
              value={formik.values.email}
-             onChange={formik.handleChange} 
-             style={inputDesign} 
-            />
+             onChange={formik.handleChange}   />
+            {formik.errors.email && formik.touched.email? (
+          <div style={{color:"red"}}>{formik.errors.email}</div>
+          ) : null }
           </Form.Group>
 
          {/* Password */}
@@ -140,8 +138,10 @@ const postSignUpUser=async(newUser)=>{
              name="password"
              value={formik.values.password}
              onChange={formik.handleChange} 
-             style={inputDesign} 
             />
+          {formik.errors.password && formik.touched.password? (
+          <div style={{color:"red"}}>{formik.errors.password}</div>
+          ) : null }
           </Form.Group>
         </div>
         <div className="row mb-1 px-3 py-2 d-flex flex-row justify-content-between">

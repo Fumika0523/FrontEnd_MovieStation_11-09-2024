@@ -6,7 +6,6 @@ import axios from "axios";
 import { url } from "../../utils/constant";
 import { Button, Image } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
-import { IoChevronBackOutline } from "react-icons/io5";
 import MovieActionButtons from "../Movie/MovieActionButtons"
 import { useEffect } from "react";
 import { setWishlist } from '../../utils/WishCartSlice';
@@ -104,14 +103,15 @@ function Cartpage({mode}) {
 
     return (
         <>
-            <div className="row mx-auto px-4 border-primary  border-3 pt-4">
+          <div className="row mx-auto px-4 border-primary  border-3 pt-4">
                 <MovieActionButtons
                     mode={mode}
                     navigate={navigate}
                     wishlistCount={wishlist?.length}
                     cartCount={cart?.length }
                     />
-                <div className="col-lg-7 col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
+    
+                <div className="col-lg-7 border col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
                 >
                 <div className="justify-content-start my-3  mx-auto fs-2  d-flex flex-row ">
                     <FaShoppingCart className="text-warning fs-1 me-1"/>
@@ -122,12 +122,7 @@ function Cartpage({mode}) {
                 {
                     cart?.length === 0 ?
                     <div className="d-flex justify-content-end align-items-center"> 
-                    <Button variant="none"
-                    style={{
-                    backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-                    color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-                    }} className="text-nowrap" onClick={() => navigate('/allmovies')}> 
-                    <IoChevronBackOutline className="fs-4 me-1"/> Back to All Movies</Button>
+                
                      </div>
                        
                             :

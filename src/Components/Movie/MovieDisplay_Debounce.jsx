@@ -196,8 +196,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   return (
     <>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" margin={2}>
-        <Grid container className="mx-auto mb-3 d-flex justify-content-end flex-row align-items-center">
-          <div className="iput-icons flex-wrap justify-content-end d-flex flex-row gap-3 border-4 border-danger">
+        <div className="mx-auto  mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
+          {/* <div className="border  border-4 border-danger"> */}
             <MovieActionButtons
               mode={mode}
               navigate={navigate}
@@ -206,40 +206,24 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
               cartCount={cart?.length || 0}
               cart={cart}
             />
-              <div className="flex-wrap justify-content-end d-flex mt-3 flex-row gap-3 border-4 border-danger">
-            {token && (
-            
-              <Button
-                variant="none"
-                className="movieDisplayBtn"
-                  onClick={() => navigate('/addmovie')}
-                            style={{
-                              backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-                              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
-                              color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-                            }}
-                          >
-                
-                               <FaPlusCircle className="fs-5 me-md-1 text-success" />
-                            <span className="d-md-block d-none">Add Movie</span>
-             </Button>
-
-            )}
-            <input
+              {/* </div> */}
+              {/* Search */}
+              <div className="flex-wrap justify-content-end  d-flex pt-3 flex-row  border-4 border-danger">
+               <input 
               style={{
                 backgroundColor: mode === "light" ? "white" : " rgba(45, 45, 47, 0.52)",
                 border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
                 color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
-                width: "200px", margin: "0px 10px"
+                width: "190px", margin: "0px 10px"
               }}
-              className="form-control ps-4"
+              className="form-control  ps-3"
               type="search"
               placeholder="Search movie"
               onChange={(e) => setSearchTearm(e.target.value)}
             />
             </div>
-          </div>
-        </Grid>
+      
+        </div>
 
         <Grid container display="flex" flexWrap="wrap" justifyContent="start" marginTop={2}>
           {filterMovieData?.length === 0 ? (

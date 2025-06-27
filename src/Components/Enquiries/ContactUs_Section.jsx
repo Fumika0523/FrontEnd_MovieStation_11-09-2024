@@ -45,7 +45,7 @@ const formik = useFormik({
     phone_number:(token) ? userData.phone_number : "",
     subject:"",
     description:"",
-    owner:(token)? userData._id : "",
+    //owner:(token)? userData._id : "",
   },
   enableReinitialize:true,
   //if there is any updates in my initial Value, please make it update (re-initialize value) >> enable:true
@@ -59,7 +59,7 @@ const formik = useFormik({
   //   subject:"",
   //   description:"",
   // },
-  validationSchema:formSchema,
+  //validationSchema:formSchema,
   onSubmit:(values)=>{
     console.log("postEnquiryDetail",values)
     postEnquiryDetail(values)

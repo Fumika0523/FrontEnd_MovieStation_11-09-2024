@@ -148,3 +148,48 @@ MovieDisplay_Debounce:
 12. check my movies <WOrk> >> Trailer, when you click the button just instantly 
 13.Duplicated order
 14. My Purchase & My movie (lists that you added)  <WOrk>
+15. Check signup validation
+
+
+------------
+README FILE:
+AUTHENTICATION:
+SIGININ /SIGNUP /LOGOUT FUNCTIONLITY                    -DONE
+ValidationSchema + Errors -FORM                         -PENDING(ERRORS) (COMMON SCHEMA) >> DONE
+
+WITHOUT AUTHENTICATION
+ALL MOVIES -GET REQUEST                                  -DONE
+NO EDIT/DELETE/UPDATE ACCESS                             -DONE
+SEARCH FUNCTIONALITY                                     -DONE
+SEE ALL ENQUIRES                                         -DONE
+ALL NAVIGATION                                           -DONE
+
+CONTACT FORM SUBMISSION + TABLE (ADDED+VIEW)             -PENDING(ERRORS) ->> DONE
+CARTPAGE ACCESSIBLITY(TOKEN)                             -PENDING(ERRORS) ->> DONE
+MYMOVIES/MYPURCHASE   PAGE+ICON ACCESSIBLITY + DONT SHOW -PENDING(NOT DONE)-FUMIKA ->> DONE
+CART/WISHLIST FUNCTIONLITY                               -PENDING(NOT DONE)-POONAM-MONDAY
+
+WITH AUTHENTICATION
+ALL MOVIES -GET REQUEST                                 -DONE
+NO EDIT/DELETE/UPDATE ACCESS                            -DONE
+SEARCH FUNCTIONALITY                                    -DONE
+SEE ALL ENQUIRES                                        -DONE
+ALL NAVIGATION                                          -DONE
+ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD)
+EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD)
+UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD)
+DELETE MOVIE                                            -DONE(ADD AMOUNT AS FEILD)
+ADD|REMOVE -WISHCART                                    -DONE
+ADD - CART                                              -DONE
+WISHLIST NAVIGATION                                     -DONE
+
+
+WISHLIST DISPLAY
+CART DISPLAY
+REFRESH
+ORDERPAGE
+ORDER SUMMARY
+PDF DOWNLOAD
+DB AT EVERY INSTANCE
+SORTING ORDERS
+REDUCE THE COMPONENT LENGTH  >> CUSTOM HOOKS
