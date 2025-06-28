@@ -24,7 +24,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
     publishYear: Yup.string().required(),
     likeNum: Yup.string().required(),
     disLikeNum: Yup.string().required(),
-    genres: Yup.number().required(),
+    amount: Yup.number().required(),
     category: Yup.string().required(),
   })
 
@@ -39,7 +39,7 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
       publishYear: singleMovie.publishYear,
       likeNum: singleMovie.likeNum,
       disLikeNum: singleMovie.disLikeNum,
-      genres: singleMovie.genres,
+      amount: singleMovie.amount,
       category: singleMovie.category,
     },
     // validationSchema:formSchema,
@@ -213,13 +213,13 @@ function EditUpdateMovieForm({ singleMovie, id,setMovieData }) {
               name="disLikeNum" id="disLikeNum" onChange={formik.handleChange} value={formik.values.disLikeNum} />
             </Grid>
 
-            {/* MOVIE GEnres */}
+            {/* MOVIE Amount */}
             <Grid xs={12} sm={6} md={4} item >
             <TextField
             fullWidth
               required
-              label="Movie Genres"
-              name='genres' id="genres" onChange={formik.handleChange} value={formik.values.genres} />
+              label="Price"
+              name='amount' id="amount" onChange={formik.handleChange} value={formik.values.amount} />
              </Grid>
 
             {/* MOVIE TRAILER */}

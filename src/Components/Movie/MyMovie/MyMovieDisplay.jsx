@@ -15,6 +15,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import Tooltip from '@mui/material/Tooltip';
 import MovieActionButtons from "../MovieActionButtons"
 import { useSelector } from "react-redux";
+import {  FaRegHeart } from "react-icons/fa";
+
 
 const MyMovieDisplay = ({ mode }) => {
   const navigate = useNavigate()
@@ -58,8 +60,8 @@ const MyMovieDisplay = ({ mode }) => {
 
   const getUserMovieData = async () => {
     let res = await axios.get(`${url}/specificmovie`, config)
-    console.log("userdata", res.data)
-    // setUserMovieData(res.data.movieData)
+    console.log("userdata",res.data.getAddedMovie)
+    setUserMovieData(res.data.getAddedMovie)
   }
   useEffect(() => {
     getUserMovieData()
@@ -88,8 +90,8 @@ const MyMovieDisplay = ({ mode }) => {
   // },[searchTerm,userMovieData])
   // useEffect(()=>{
   //     setFilterMovieData(userMovieData)
-  //     // getMovieData()
-  // },[userMovieData])
+   //getMovieData()
+// },[userMovieData])
 
   // const deleteMovie=async(_id)=>{
   //     console.log("Movie Deleted from the DB...")
@@ -158,7 +160,7 @@ const MyMovieDisplay = ({ mode }) => {
       margin={2}
     >
       <Grid container className=" d-flex justify-content-end" marginBottom={3} >
-        <div className="mx-auto  mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
+      <div className="mx-auto  row mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
 
           <MovieActionButtons
             mode={mode}
@@ -168,7 +170,7 @@ const MyMovieDisplay = ({ mode }) => {
             cartCount={cart?.length || 0}
             cart={cart}
           />
-          {/* </div> */}
+  
           {/* Search */}
           <div className="flex-wrap justify-content-end  d-flex pt-3 flex-row  border-4 border-danger">
             <input
@@ -189,73 +191,52 @@ const MyMovieDisplay = ({ mode }) => {
       </Grid>
       <Grid container display={"flex"} flexWrap={"wrap"} justifyContent={"start"} marginTop={2}>
         {
-          filterMovieData?.map((element, index) => (
+          userMovieData?.map((element, index) => (
             <MovieCard {...element} key={index} setUserMovieData={setUserMovieData} userMovieData={userMovieData} element={element} mode={mode}
-
-              // Delete Button
-              deleteBtn={
-                <Tooltip title="Delete">
-                  <DeleteIcon style={{ cursor: "pointer" }}
-                    onClick={() => deleteMovie(element._id)}
-                    className="deleteBtn  border-sucess fs-3" />
-                </Tooltip>
-              }
-
-              // Redux
-              reduxAddcartBtn={
-                <>
-                  <Tooltip title="Add to Cart">
-                    <ShoppingCartIcon className="reduxIcon fs-3"
-                      onClick={() => { handleAdditem(element) }} />
-                  </Tooltip>
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light" />
-                </>
-              }
-
-              WishBtn={
-                <>
-                  <Tooltip title="Add to Wish List">
-                    <span className="d-flex align-items-center" onClick={handleWishlistClick}>
-                      {isInWishlist ? (
-                        <FavoriteIcon
-                          className="text-danger border-primary"
-                          style={{ fontSize: "25px", margin: "1.5px" }}
-                        />
-                      ) : (
-                        <FaRegHeart
-                          className="text-danger border-warning p-0"
-                          style={{ fontSize: "28px" }}
-                        />
-                      )}
-                    </span>
-                  </Tooltip>
-
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                  />
-                </>
-              }
-
-
+            deleteBtn={
+            <Tooltip title="Delete">
+            <DeleteIcon style={{ cursor: "pointer" }}
+            onClick={() => deleteMovie(element._id)}
+            className="deleteBtn border-sucess fs-3 ms-2"
+            />
+             </Tooltip>
+             }
+             reduxAddcartBtn={
+             <Tooltip title="Add to Cart">
+              <span onClick={()=>handleAddCartItem(element)} >
+               {
+                cart?.some(cartItem => cartItem._id === element._id) ?
+                 (
+                 <MdRemoveShoppingCart className="fs-3 reduxIcon"/>
+                )
+                :
+                (
+                <ShoppingCartIcon 
+                className="reduxIcon fs-2" />
+                )}
+             </span>
+             </Tooltip>
+               }
+            WishBtn={
+            <>
+           <Tooltip title="Add to Wish List">
+            <span className="d-flex align-items-center" onClick={() => handleAddWishItem(element)}>
+            {/* searches for element._id in the wishlist array. >> True/false item._id > wishlist, element._id > movie._id*/}
+            {wishlist?.some(item => item._id === element._id) ? (
+             <FavoriteIcon
+             className="text-danger border-primary"
+             style={{ fontSize: "25px", margin: "1.5px" }}
+             />
+             ) : (
+             <FaRegHeart
+             className="text-danger border-warning p-0 ms-2"
+            style={{ fontSize: "25px" }} />
+            )}
+             </span>
+             </Tooltip>
+           <ToastContainer />
+            </>
+            }
             />
           ))}
       </Grid>

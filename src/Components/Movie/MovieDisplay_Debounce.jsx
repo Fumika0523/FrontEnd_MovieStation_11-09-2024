@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Grid } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { FaPlusCircle, FaRegHeart } from "react-icons/fa";
+import {  FaRegHeart } from "react-icons/fa";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip from '@mui/material/Tooltip';
 import { ToastContainer, toast } from 'react-toastify';
@@ -196,7 +196,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   return (
     <>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" margin={2}>
-        <div className="mx-auto  mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
+        <div className="mx-auto  row mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
           {/* <div className="border  border-4 border-danger"> */}
             <MovieActionButtons
               mode={mode}
@@ -249,16 +249,17 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                 movieData={movieData}
                 element={element}
                 mode={mode}
+                
                 deleteBtn={
                 <Tooltip title="Delete">
                   <DeleteIcon style={{ cursor: "pointer" }}
                   onClick={() => deleteMovie(element._id)}
-                  className="deleteBtn border-sucess fs-3"
+                  className="deleteBtn border-sucess fs-3 ms-2"
                     />
                   </Tooltip>
                 }
                 
-                reduxAddcartBtn={
+          reduxAddcartBtn={
           <Tooltip title="Add to Cart">
             <span onClick={()=>handleAddCartItem(element)} >
             {
@@ -287,8 +288,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                         />
                         ) : (
                         <FaRegHeart
-                        className="text-danger border-warning p-0"
-                        style={{ fontSize: "28px" }}
+                        className="text-danger border-warning p-0 ms-2"
+                        style={{ fontSize: "25px" }}
                         />
                         )}
                       </span>

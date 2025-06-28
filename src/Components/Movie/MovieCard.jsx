@@ -134,13 +134,12 @@ const dispatch= useDispatch()
       <Grid lg={4} md={6} sm={6} xs={12} xl={3} item marginBottom={2} >
         <Card className="movieCard"
           style={{ maxWidth: "96%", display: "flex", justifyContent: "center", flexDirection: "column", margin: "auto", padding: "0 0 8px 0" }}>
-          <CardHeader className="py-2 fw-bold"
-
+          <CardHeader className=" py-2 fw-bold"
             avatar={
-              <Avatar
-                style={{ color: "white", backgroundColor: mode == "light" ? " rgb(154, 19, 19)" : "rgb(154, 19, 19)" }}
-                aria-label="movietitle">
-                {moviename.substring(0, 1)}
+            <Avatar
+             style={{ color: "white", backgroundColor: mode == "light" ? " rgb(154, 19, 19)" : "rgb(154, 19, 19)" }}
+             aria-label="movietitle">
+             {moviename.substring(0, 1)}
               </Avatar>
             }
 
@@ -150,11 +149,12 @@ action={
     <span
       className="d-flex flex-row justify-content-center align-items-center "
       style={{
+        // border:"2px solid red",
         position: "absolute",
-        right: "3px",
+        right: "0px",
         top: "25px",
         height: "28px",
-        width: isMovieOwner ? "105px" : "57px",
+        width: isMovieOwner ? "140px" : "70px",
       }}
     >
       {isMovieOwner && (
@@ -173,7 +173,6 @@ action={
       </>
       {/* Toast Notification */}
       <ToastContainer position="top-right" autoClose={5000} theme="light" />
-
       {/* See More */}
       <Tooltip title="See More">
         <MoreVertIcon
@@ -184,40 +183,18 @@ action={
     </span>
   ) :   
   <>
-
-   {/* Add to Wish List */}
-   <span
-    className="d-flex  flex-row justify-content-center align-items-center "
-      style={{
-        position: "absolute",
-        right: "3px",
-        top: "15px",
-        height: "25px",
-      }}>
-
-
-      {WishBtn}
-
-         {/* See More */}
-      <Tooltip title="See More">
-        <MoreVertIcon
-          onClick={() => navigate(`/movietrailer/${_id}`)}
-          className="seeMoreIcon border-danger fs-2"
-        />
-      </Tooltip>
-    </span>
   </>
   }
-            titleTypographyProps={{ fontSize: "20x", paddingBottom: "0px", marginBottom: "0px" }}
+       titleTypographyProps={{ fontSize: "20x", paddingBottom: "0px", marginBottom: "0px" }}
             title={moviename.length >= 25 ? moviename.substring(0, 25) + "..." : moviename}
             subheaderTypographyProps={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", gap: "5px", fontSize: "13px" }}
             subheader={
               <>
-                {/* {rating} /10
+                {rating} /10
                 <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5} style={{
                   paddingBottom: "5px",
                   color: "rgb(242, 154, 3)"
-                }} /> */}
+                }} />
               </>
             }
           />

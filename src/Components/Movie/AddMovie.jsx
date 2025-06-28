@@ -25,7 +25,7 @@ const formSchema = Yup.object().shape({
   publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number"),
   likeNum: Yup.number().required("Likes count is required").integer("Must be a whole number"),
   disLikeNum: Yup.number().required("Dislikes count is required").integer("Must be a whole number"),
-  genres: Yup.array().of(Yup.string()).optional(),
+  amount: Yup.number().required("Price is required"),
   trailer: Yup.string().required("Trailer URL is required").min(5, "URL too short"),
   summary: Yup.string().required("Summary is required").min(200, "Summary must be at least 200 characters"),
 })
@@ -41,10 +41,10 @@ const formik=useFormik({
       publishYear:"",
       likeNum:"",
       disLikeNum:"",
-      // genres:"",
+      amount:"",
       category:"",
   },
-  // validationSchema:formSchema,
+  validationSchema:formSchema,
   onSubmit:(values)=>{ 
   console.log(values) 
   postMovies(values)
@@ -157,7 +157,7 @@ if(res){
           defaultValue={formik.values.movieposter}
         />
         {formik.errors.movieposter && formik.touched.movieposter? (
-          <div style={{color:"red"}}>{formik.errors.moviename}</div>
+          <div style={{color:"red"}}>{formik.errors.movieposter}</div>
         ) : null }
         </Grid>
 
@@ -214,7 +214,7 @@ if(res){
           </Grid>
 
         {/* Like Num */}
-        <Grid xs={12} sm={6} md={4} item >
+        <Grid xs={6} sm={4} item >
           <TextField
           fullWidth
           required
@@ -226,7 +226,7 @@ if(res){
           </Grid>
 
         {/* DISLIKE NUM */}
-        <Grid xs={12} sm={6} md={4} item >
+        <Grid xs={6} sm={4} item >
           <TextField
           fullWidth
           required
@@ -238,23 +238,23 @@ if(res){
         </Grid>
 
         {/* MOVIE GEnres */}
-        {/* <Grid xs={12} sm={6} md={4} item >
+        <Grid xs={12} sm={4}  item >
           <TextField
           fullWidth
           required
-          label="Movie Genres"
-          name='genres' id="genres"  onChange={formik.handleChange} value={formik.values.genres} /> 
-          {formik.errors.genres && formik.touched.genres? (
-          <div style={{color:"red"}}>{formik.errors.genres}</div>
+          label="Price"
+          name='amount' id="amount"  onChange={formik.handleChange} value={formik.values.amount} /> 
+          {formik.errors.amount && formik.touched.amount? (
+          <div style={{color:"red"}}>{formik.errors.amount}</div>
         ) : null }
-          </Grid> */}
+          </Grid>
 
            {/* MOVIE TRAILER */}
            <Grid xs={12} sm={12} md={4} item >
            <TextField
            fullWidth
           required
-          label="Movie Trailer"
+          label="Trailer"
           name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer}  /> 
             {formik.errors.trailer && formik.touched.trailer? (
           <div style={{color:"red"}}>{formik.errors.trailer}</div>

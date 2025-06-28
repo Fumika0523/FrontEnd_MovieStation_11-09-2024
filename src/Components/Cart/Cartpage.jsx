@@ -9,7 +9,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import MovieActionButtons from "../Movie/MovieActionButtons"
 import { useEffect } from "react";
 import { setWishlist } from '../../utils/WishCartSlice';
-
+import { IoChevronBackOutline } from "react-icons/io5";
 
 function Cartpage({mode}) {
     const cart = useSelector(store => store.cart.cartItems || [])
@@ -126,19 +126,20 @@ function Cartpage({mode}) {
                      </div>
                        
                             :
-                        <div  className="mb-2 d-flex align-items-center justify-content-end flex-row gap-3"> 
+                        <div  className="mb-2 d-flex align-items-center justify-content-end flex-row me-2"> 
                         {/* CLEAR CART */}
                           <Button variant="danger" onClick={() => {
                                 handleClearitem()
                          }} >Clear Cart</Button>
 
-                        {/* BACK */}
-                        <Button variant="none"
+           {/* BACK
+          <Button variant="none"
                            style={{
           backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47)",
           color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
         }}
-          onClick={() => navigate('/allmovies')}> <IoChevronBackOutline className="fs-4 me-1"/>  Back to All Movies</Button>                   </div>  
+          onClick={() => navigate('/allmovies')}> <IoChevronBackOutline className="fs-4 me-1"/>  Back to All Movies</Button>  */}
+          </div>  
                 }
     
         

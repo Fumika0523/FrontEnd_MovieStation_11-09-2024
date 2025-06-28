@@ -87,12 +87,12 @@ const getMovieData = async () => {
 //console.log(searchTerm)
 
 // SPECIFIC
-const getSpecificMovieData = async () =>{
-    console.log("Specific Movie Data is called....")
-    let res = await axios.get(`${url}/specificmovie`,config)
-    console.log(res.data.movieData)
-    setSpecificMovieData(res.data.movieData)
-}
+// const getSpecificMovieData = async () =>{
+//     console.log("Specific Movie Data is called....")
+//     let res = await axios.get(`${url}/specificmovie`,config)
+//     console.log(res.data.movieData)
+//     setSpecificMovieData(res.data.movieData)
+// }
 // console.log("Specific Movie Data",specificMovieData)
 // console.log("Specific ID",specificMovieData._id)
 // console.log("movieData",movieData)
