@@ -28,13 +28,9 @@ import { useDispatch, useSelector } from "react-redux"
 
 export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn, reduxAddcartBtn }) {
   const [specificMovieData, setSpecificMovieData] = useState([])
-  //  console.log("wishBtn",wishBtn)
-  //  console.log("deleteBtn",deleteBtn)
-  //  console.log("reduxAddcartBtn",reduxAddcartBtn)
+
 
   const [isCliked, setIsClicked] = useState(false);
-
-
   const theme = createTheme({
     palette: {
       mode: mode,
@@ -77,9 +73,6 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
   //movieData is all movie datas that were added in the website
   const isMovieOwner = userId === element?.owner; // true || false]
   //console.log("isOwner",isMovieOwner)
-  // console.log("isMovieOwner",isMovieOwner)
-  //console.log("userId",userId)
-  // console.log("token",token)
   //console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
   // SPECIFIC
   const getSpecificMovieData = async () => {
@@ -108,26 +101,27 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
   // console.log(Math.round(4.1)) //4
   const rating1 = { rating }
 
-  const addWishNotify = () => toast.success('Added to Wish List!', {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: false,
-    progress: undefined,
-    theme: "light",
-  });
+  // const addWishNotify = () => toast.success('Added to Wish List!', {
+  //   position: "top-right",
+  //   autoClose: 2000,
+  //   hideProgressBar: false,
+  //   closeOnClick: false,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "light",
+  //   transition: Bounce,
+  // });
 
-  const handleAddWishItem = async (movieItem) => {
-      let res = await axios.post(`${url}/add-wish-list`, movieItem)
-      console.log("res", res.data.message)
-      if (res.data.message == "Wish Item has been added successfully!") {
-        addWishNotify()
-      } else {
-        console.log("This movie is already added to wish list")
-    }
-  }
+  // const handleAddWishItem = async (movieItem) => {
+  //     let res = await axios.post(`${url}/add-wish-list`, movieItem)
+  //     console.log("res", res.data.message)
+  //     if (res.data.message == "Wish Item has been added successfully!") {
+  //       addWishNotify()
+  //     } else {
+  //       console.log("This movie is already added to wish list")
+  //   }
+  // }
 const dispatch= useDispatch()
   return (
     <>
@@ -142,10 +136,8 @@ const dispatch= useDispatch()
              {moviename.substring(0, 1)}
               </Avatar>
             }
-
-action={
-  
-  token ? (
+    action={
+    token ? (
     <span
       className="d-flex flex-row justify-content-center align-items-center "
       style={{
@@ -172,7 +164,17 @@ action={
         {WishBtn}
       </>
       {/* Toast Notification */}
-      <ToastContainer position="top-right" autoClose={5000} theme="light" />
+      {/* <ToastContainer position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce} /> */}
       {/* See More */}
       <Tooltip title="See More">
         <MoreVertIcon
@@ -214,7 +216,7 @@ action={
           {/* Bottom Card ICONS */}
           <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{ bottom: "45px", left: "0px" }}>
 
-            <LikeCard likeNum={likeNum} disLikeNum={disLikeNum} mode={mode} />
+          <LikeCard likeNum={likeNum} disLikeNum={disLikeNum} mode={mode} />
           </CardActions>
 
           {/* CAST & SUMMARY  */}
@@ -225,8 +227,7 @@ action={
               textAlign: "justify",
               backgroundColor: mode === "light" ? "white" : "#161718",
               color: mode === "light" ? "black" : "rgba(163, 162, 162, 0.648)",
-            }}
->
+            }}>
 
               <span className='movieCast d-flex align-items-center' style={{ paddingTop: "1px" }}
               >

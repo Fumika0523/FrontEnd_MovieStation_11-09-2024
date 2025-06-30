@@ -9,13 +9,11 @@ import { url } from "../../utils/constant";
 import { Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { IoChevronBackOutline } from "react-icons/io5";
-import NavBar from "../HomeSreen/NavBar";
 import { Button } from "react-bootstrap";
 
 export default function AddMovie({setMovieData,mode}) {
 const navigate = useNavigate();
 const amberColor = amber[500];
-
 const formSchema = Yup.object().shape({
   moviename: Yup.string().required("Movie name is required"),
   movieposter: Yup.string().required("Movie poster URL is required").min(5, "URL too short"),
@@ -27,7 +25,7 @@ const formSchema = Yup.object().shape({
   disLikeNum: Yup.number().required("Dislikes count is required").integer("Must be a whole number"),
   amount: Yup.number().required("Price is required"),
   trailer: Yup.string().required("Trailer URL is required").min(5, "URL too short"),
-  summary: Yup.string().required("Summary is required").min(200, "Summary must be at least 200 characters"),
+  summary: Yup.string().required("Summary is required").min(200, "Summary must be at least 100 characters"),
 })
 
 const formik=useFormik({
@@ -110,22 +108,26 @@ if(res){
       onSubmit = {formik.handleSubmit}  >
 
       {/* Buttons */}
-      <Grid container className=" d-flex justify-content-between" marginBottom={3} >
+        <Grid container className=" d-flex justify-content-between " marginBottom={3} >
+        <Button
+          variant="success"
+          onClick={() => navigate('/allmovies')}
+          className="text-nowrap d-flex align-items-center me-3"
+          style={{
+          backgroundColor: mode === "light" ? "white" : "rgba(114, 114, 116, 0.52)",
+          border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+          color: mode === "light" ? "black" : "white",
+        }}
+        >
+          <IoChevronBackOutline className="fs-4 me-1" />
+          Cancel
+        </Button>
 
-      {/* Back */}
-<Button
-  variant="secondary"
-  onClick={() => navigate('/allmovies')}
-  className="text-nowrap d-flex align-items-center me-3"
->
-  <IoChevronBackOutline className="fs-4 me-1" />
-  Back to All Movies
-</Button>
-  
-      {/* ADD MOVIE */}
-        <Button  variant="success"  className='fs-6 text-nowrap' type="submit" >
-          <i className="fs-6 fa-solid fa-circle-plus me-1"></i>Add Movie</Button>
-
+            {/* UPDATE MOVIE */}
+          <Button variant="success" type="submit" className="d-flex text-nowrap align-items-center border-0 border "><i class="fa-solid fs-5 fa-circle-plus me-1" 
+          style={{
+          color: mode === "light" ? "black" : amberColor,
+        }}></i>Add Movie</Button>   
       </Grid>
       <Grid container spacing={3} >
         {/* MOVIE NAME */}

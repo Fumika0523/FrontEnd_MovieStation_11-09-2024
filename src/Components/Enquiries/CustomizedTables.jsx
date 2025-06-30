@@ -32,7 +32,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover.grey,
     height: "55px",
@@ -49,8 +50,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function CustomizedTables({enquiryData,setEnquiryData}) {
-
+export default function CustomizedTables({enquiryData,setEnquiryData,mode}) {
+const userId = sessionStorage.getItem('userId')
+console.log(enquiryData)
 const [singleEnquiry,setSingleEnquiry] = useState(null)
 const [specificEnquiryData,setSpecificEnquiryData ] = useState([])
 const [show, setShow] = useState(false);
@@ -64,31 +66,22 @@ const handleDescriptionClick = (element) =>{
 const handleEditClick = (element) => {
   setShowEditModal(true);
   setSingleEnquiry(element);
-};
-
+}
 const token = sessionStorage.getItem('token')
-// console.log("token",token)
 let config = {
   headers:{
   Authorization:`Bearer ${token}`
   }
 }
 
-const getSpecificEnquiryData = async()=>{
-  console.log("Specific Enquiry Data is calledd...")
-  let res = await axios.get(`${url}/specificenquiry`,config)
-  console.log("getSpecificEnquiryData",res.data.getEnquiry)
-  setSpecificEnquiryData(res.data.getEnquiry)
+  const getSpecificEnquiryData = async()=>{
+  let res = await axios.get(`${url}/specific-enquiry`,config)
+  console.log("getSpecificEnquiryData",res.data)
+  // setSpecificEnquiryData(res.data.getEnquiry)
 }
 useEffect(()=>{
   getSpecificEnquiryData()
 },[])
-console.log("getSpecificEnquiryData",specificEnquiryData)
-const userId = sessionStorage.getItem('userId')
-console.log('userId',userId)
-// console.log(element.owner)
-
-
 
  return (
   <>
@@ -96,13 +89,13 @@ console.log('userId',userId)
       <Table aria-label="customized table">
         <TableHead>
           <TableRow >
-            <StyledTableCell noWrap="false" align="center" style={{width:"3%"}}>No.</StyledTableCell>
-            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>First Name</StyledTableCell>
-            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>Last Name</StyledTableCell>
-            <StyledTableCell noWrap="false" align="center" style={{width:"15%"}}>Email</StyledTableCell>
-            <StyledTableCell noWrap="false" align="center" style={{width:"10%"}}>Phone No.</StyledTableCell>
-            <StyledTableCell style={{width:"12%"}} noWrap="false" align="center">Subject</StyledTableCell>
-            <StyledTableCell style={{width:"40%"}} noWrap="false" align="center">Description</StyledTableCell>
+            <StyledTableCell align="center" style={{width:"3%"}}>No.</StyledTableCell>
+            <StyledTableCell  align="center" style={{width:"10%"}}>First Name</StyledTableCell>
+            <StyledTableCell  align="center" style={{width:"10%"}}>Last Name</StyledTableCell>
+            <StyledTableCell  align="center" style={{width:"15%"}}>Email</StyledTableCell>
+            <StyledTableCell  align="center" style={{width:"10%"}}>Phone No.</StyledTableCell>
+            <StyledTableCell style={{width:"12%"}}  align="center">Subject</StyledTableCell>
+            <StyledTableCell style={{width:"40%"}}  align="center">Description</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody  style={{fontWeight:"light"}}>
@@ -120,9 +113,14 @@ console.log('userId',userId)
                <StyledTableCell align="center" style={{width:"15%"}}>{element.email}</StyledTableCell>
                <StyledTableCell align="center" style={{width:"10%"}}>{element.phone_number}</StyledTableCell>
                <StyledTableCell style={{width:"12%"}} align="center">{element.subject}</StyledTableCell>
-              <StyledTableCell style={{width:"40%",padding:"5px 35px 5px 16px"}} align="center">
+              
+              <StyledTableCell className="position-relative" 
+              style={{
+          padding:"5px 35px 5px 15px"
+            }} 
+              align="center">
               <>
-              <div className=' d-flex flex-row  position-relative align-items-start' style={{textAlign:"justify"}}>
+              <div className=' d-flex flex-row align-items-start' style={{textAlign:"justify"}}>
                 {/* Description */}
                     {
                     (element.description.length) >=200 ?
@@ -132,13 +130,13 @@ console.log('userId',userId)
                         :
                         <>
                          {element.description}
+                         
                         </>
                       }
-                     
-                     {/* EDIT Btn*/}
-                     {
-                      element.owner == userId  && token   ?
-                     <div className='position-absolute translate-middle' style={{right:"-43px",marginTop:'2.5%'}} >
+               {/* EDIT Btn*/}
+                      {
+                      element?.owner === userId  && token   ?
+                     <div className='position-absolute translate-middle' style={{right:"-10px",marginTop:'2.5%'}} >
                      <button className=' hover-edit rounded-circle btn btn-success d-flex justify-content-center p-0 align-items-center'
                      style={{height:"24px",width:"24px",right:"60px"}}
                      onClick={() => handleEditClick(element)}>
@@ -147,12 +145,12 @@ console.log('userId',userId)
                      </div>
                      :
                      null
-}
-                   </div>           
+                }
+                   {/* </div>            */}
                    {/* READMORE */}
                    {
                    (element.description.length) >= 200 ?
-                   <div className='text-end' style={{marginTop:"-3%"}} >
+                   <div className='text-end' style={{position:"absolute",right:"110px",bottom:"5px"}} >
                    <Button className='py-0 px-1'
                    onClick={()=>handleDescriptionClick(element)}
                  variant="contained" style={{fontSize:"9px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
@@ -160,9 +158,10 @@ console.log('userId',userId)
                    :
                    null
                   }
+                  </div> 
                    </>
                  </ StyledTableCell >
-                 </StyledTableRow >
+              </StyledTableRow >
           ))}
         </TableBody>
       </Table>
@@ -185,6 +184,7 @@ console.log('userId',userId)
       singleEnquiry={singleEnquiry} 
       setSingleEnquiry={setSingleEnquiry}
       setEnquiryData ={setEnquiryData}
+      mode={mode}
       />
     )}
   </>

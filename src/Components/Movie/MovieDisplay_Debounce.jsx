@@ -16,6 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { wishAddItem, wishRemoveItem,setWishlist } from "../../utils/WishCartSlice";
 import MovieActionButtons from './MovieActionButtons';
 import { MdRemoveShoppingCart } from "react-icons/md";
+import { Bounce } from 'react-toastify';
 
 //once movie is added to the cart, change icon to <MdRemoveShoppingCart/>
 //MdRemoveShoppingCart
@@ -46,7 +47,16 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const successNotify = () => toast.success('Added to the cart!', { autoClose: 3000 });
   const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 3000 });
-  const addWishNotify = () => toast.success('Added to Wishlist!', { autoClose: 1000 });
+  const addWishNotify = () => { toast.success('Added to Wishlist!', { 
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  })};
   const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 2000 });
 
   const getMovieData = async () => {
@@ -115,11 +125,12 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
       removeWishNotify(); 
       await removeWishItemFromServer(element); // Remove from server
     } else {
-      dispatch(wishAddItem(element));
-      addWishNotify();
-      await addWishItemToServer(element);
+         dispatch(wishAddItem(element));
+          addWishNotify();
+          console.log("addwishnotify")
+         await addWishItemToServer(element);
     }
-    await getWishData(); // Refresh to sync
+    //await getWishData(); // Refresh to sync
   }, [dispatch, wishlist]);
 
   const fetchData = (term) => {
@@ -294,7 +305,18 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                         )}
                       </span>
                     </Tooltip>
-                    <ToastContainer />
+                    <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    transition={Bounce} />
                   </>
                 }
               />

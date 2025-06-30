@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 
-function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEnquiryData }) {
+function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEnquiryData,mode }) {
   console.log("singleEnquiry _ID", singleEnquiry._id)
   console.log("singleEnquiry", singleEnquiry)
   const navigate = useNavigate()
@@ -19,6 +19,15 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
   }
   const token = sessionStorage.getItem('token')
   // console.log('token',token)
+    const getEnquiryData = async () =>{
+    console.log("EnquiryData is called..")
+    let res = await axios.get(`${url}/allenquiry`)
+    console.log("res.data.allEnquiry",res.data.allEnquiry)
+    setEnquiryData(res.data.allEnquiry )
+    }
+    useEffect(()=>{
+    getEnquiryData()
+    },[])
 
   const [userData, setUserData] = useState([])
   const getUserData = async () => {
@@ -51,9 +60,10 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
       description: singleEnquiry.description,
     },
     enableReinitialize: true,
-    validationSchema: formSchema,
+    //validationSchema: formSchema,
     onSubmit: (values) => {
     updateEnquiry(values)
+ 
     }
   })
 
@@ -73,6 +83,7 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
         // console.log("res",updateEnquiry)
         setEnquiryData(res.data.enquiryData)
         handleClose()
+        getEnquiryData()
       }
     }catch(e){
       console.error('Error Editing Student:',e)
@@ -80,9 +91,9 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
     
   return (
     <>
-      <Modal className=' sign_up_in_container '
+      <Modal  mode={mode}
         show={showEditModal} onHide={handleClose} size='lg'
-        style={{ margin: "12% 0" }}>
+        style={{ margin: "12% 0", backgroundColor:mode === "light" ? "white": "black" }}>
         <Modal.Header className='px-5 fs-5 text-black'
           closeButton>
           Edit Enquiry Information

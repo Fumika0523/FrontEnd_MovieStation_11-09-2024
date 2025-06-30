@@ -13,28 +13,16 @@ const [enquiryData,  setEnquiryData] = useState([])
 const token = sessionStorage.getItem('token')
 console.log('token',token)
 
- const firstname = sessionStorage.getItem('name')
-// console.log('firstname',firstname)
-
- const lastname = sessionStorage.getItem('lastname')
-// console.log('lastname',lastname)
-
- const email = sessionStorage.getItem('email')
-// console.log('email',email)
-
-// const phone_number = sessionStorage.getItem('phone_number')
-// console.log('phone_number',phone_number)
-
 const [userData,setUserData]=useState([])
 //without sessionStorage 
 
 const formSchema=Yup.object().shape({
-  firstname:Yup.string().required(),
-  lastname:Yup.string().required(),
-  email:Yup.string().required(),
-  phone_number:Yup.number().required(),
-  subject:Yup.string().required(),
-  description:Yup.string().required(),
+  firstname:Yup.string().required("First Name is required"),
+  lastname:Yup.string().required("Last Name is required"),
+  email:Yup.string().required("Email is required"),
+  phone_number:Yup.number().required("Phone No. is required"),
+  subject:Yup.string().required("Subject is required"),
+  description:Yup.string().required("Description is required"),
 })
 
 const formik = useFormik({
@@ -45,21 +33,12 @@ const formik = useFormik({
     phone_number:(token) ? userData.phone_number : "",
     subject:"",
     description:"",
-    //owner:(token)? userData._id : "",
+    owner:(token)? userData._id : "",
   },
   enableReinitialize:true,
   //if there is any updates in my initial Value, please make it update (re-initialize value) >> enable:true
-  
-  //IF you are using sessionStorage, please refer below:
-  // initialValues:{
-  //   firstname: (token) ? firstname: "",
-  //   lastname:(token) ? lastname: "",
-  //   email:(token) ? email: "",
-  //   phone_number:(token) ? phone_number: "",
-  //   subject:"",
-  //   description:"",
-  // },
-  //validationSchema:formSchema,
+
+  validationSchema:formSchema,
   onSubmit:(values)=>{
     console.log("postEnquiryDetail",values)
     postEnquiryDetail(values)
@@ -79,15 +58,13 @@ console.log("getUserData",res.data.userDetail)
 setUserData(res.data.userDetail)
 }
 console.log("userData",userData)
-// console.log("firstname",userData.name)
 useEffect(()=>{
 getUserData()
 },[])
 
 const postEnquiryDetail=async(newEnquiry)=>{
    console.log("NEW Enquiry",newEnquiry)
-  
-   let res = await axios.post(`${url}/contact`,newEnquiry) 
+    let res = await axios.post(`${url}/contact`,newEnquiry) 
    console.log(res.data.enquiryDetail)
    setEnquiryData(res.data.enquiryDetail)
   if(res.status == 200){
@@ -112,16 +89,14 @@ const postEnquiryDetail=async(newEnquiry)=>{
  className="border border-secondary  rounded shadow col-md-10 col-sm-10 col-lg-6 col-12 px-4 pt-4 pb-5 px-sm-5 " >
 
  <div className="  d-flex justify-content-center align-items-center ">
-  <h1 className="text-nowrap">Submit a request</h1>
+  <h1 className="text-nowrap">Submit a Request</h1>
 </div>
   {/* ALL ENQUIRIES BUTTON */}
 <div className=" my-4 col-sm-10 col-lg-8 ms-auto" >
   <Button variant="secondary" className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i className="fa-solid fa-circle-question"></i></Button> 
 </div>
-
-
-        <div className="row  text-secondary justify-content-center">
+       <div className="row  text-secondary justify-content-center">
         {/* First Name */}
         <Form.Group  className="col-6 col-sm-6 col-lg-6  mb-1">
         <Form.Label htmlFor="firstname" className="f m-0">First Name</Form.Label>
@@ -132,6 +107,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
          value={formik.values.firstname}
          onChange={formik.handleChange}
          />
+          {formik.errors.firstname && formik.touched.firstname? (
+        <div style={{color:"red"}}>{formik.errors.firstname}</div>
+        ) : null }
         </Form.Group >
 
       {/* Last Name */}
@@ -143,6 +121,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
          value={formik.values.lastname}
          onChange={formik.handleChange}
          />
+          {formik.errors.lastname && formik.touched.lastname? (
+        <div style={{color:"red"}}>{formik.errors.lastname}</div>
+        ) : null }
         </Form.Group>
         </div>
 
@@ -155,6 +136,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
           value={formik.values.email}
           onChange={formik.handleChange}
           />
+           {formik.errors.email && formik.touched.email? (
+        <div style={{color:"red"}}>{formik.errors.email}</div>
+        ) : null }
         </Form.Group>
 
         <Form.Group className="col-6 col-sm-6 col-lg-6 mb-1">
@@ -164,6 +148,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
           value={formik.values.phone_number}
           onChange={formik.handleChange}
           />
+           {formik.errors.phone_number && formik.touched.phone_number? (
+        <div style={{color:"red"}}>{formik.errors.phone_number}</div>
+        ) : null }
         </Form.Group>
         </div>
 
@@ -175,6 +162,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
          value={formik.values.subject}
           onChange={formik.handleChange}
      />
+      {formik.errors.subject && formik.touched.subject? (
+        <div style={{color:"red"}}>{formik.errors.subject}</div>
+        ) : null }
   </div>
   <Form.Group className="col-8 col-sm-12 col-12">
     <Form.Label htmlFor="description" className="m-0">Description</Form.Label>
@@ -182,8 +172,10 @@ const postEnquiryDetail=async(newEnquiry)=>{
      name="description"
      value={formik.values.description}
      onChange={formik.handleChange}
-       
      ></textarea>
+      {formik.errors.description && formik.touched.description? (
+        <div style={{color:"red"}}>{formik.errors.description}</div>
+        ) : null }
     
     <p className="text-secondary col-12 text-start my-2" >Please enter the details of your request. <br />
     A member of our support staff will respond as soon as possible.</p>

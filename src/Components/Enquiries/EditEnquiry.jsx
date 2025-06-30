@@ -4,7 +4,7 @@ import { useParams } from "react-router"
 import { url } from "../../utils/constant";
 import EditEnquiryForm from "./EditEnquiryForm";
 
-const EditEnquiry = () => {
+const EditEnquiry = ({mode}) => {
 const [singleEnquiry,setSingleEnquiry] = useState()
  const {id} =useParams()
 const navigate = useNavigate()
@@ -32,7 +32,7 @@ useEffect(()=>{
   return (
     <>
 
-        <EditEnquiryForm singleEnquiry={singleEnquiry} id={id}/>
+        <EditEnquiryForm singleEnquiry={singleEnquiry} id={id} mode={mode}/>
   
     </>
   )

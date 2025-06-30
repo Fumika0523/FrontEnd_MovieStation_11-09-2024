@@ -5,12 +5,20 @@ import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
 import { useNavigate } from "react-router-dom"
 import { Button } from "react-bootstrap";
 import CustomizedTables from "./CustomizedTables"
+import MovieActionButtons from "../Movie/MovieActionButtons"
 
 
 function AllEnquiries({mode}) {
+
 const token = sessionStorage.getItem('token')
 const navigate = useNavigate()
 const [enquiryData, setEnquiryData] = useState([]) 
+let config = {
+  headers:{
+  Authorization:`Bearer ${token}`
+  }
+}
+
 
 // ALL
     const getEnquiryData = async () =>{
@@ -23,19 +31,15 @@ const [enquiryData, setEnquiryData] = useState([])
     getEnquiryData()
     },[])
          // API call has to be made inside UseEffect () only
-        
+
     return (
-        <>
+    <>
         <div className="my-3 row mx-auto border-4  border-warning " >
+        <span className="mb-3 me-5  row"> <MovieActionButtons /></span>
+       
         {/* Back */}
         <div className="border-4 d-flex  flex-column col-11  mx-auto">
-        <div className="d-flex mb-3 justify-content-end">
-        <Button variant="secondary d-flex flex-row gap-1 my-2  justify-content-center align-items-center"
-        onClick={()=>navigate('/contact')}>
-        <i className="fa-solid fa-angles-left fs-6"></i>
-        <div className="fs-6">Back</div>
-        </Button>
-        </div>
+     
         
         {
         enquiryData?.length === 0 ?
@@ -47,7 +51,7 @@ const [enquiryData, setEnquiryData] = useState([])
             </>
             :
             <>
-            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData} />
+            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData} mode={mode}/>
          
              </>
         } 
