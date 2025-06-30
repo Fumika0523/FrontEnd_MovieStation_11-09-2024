@@ -16,7 +16,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MovieActionButtons from "../MovieActionButtons"
 import { useSelector } from "react-redux";
 import {  FaRegHeart } from "react-icons/fa";
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { GiFilmSpool } from "react-icons/gi";
 
 const MyMovieDisplay = ({ mode }) => {
   const navigate = useNavigate()
@@ -159,7 +160,9 @@ const MyMovieDisplay = ({ mode }) => {
       justifyContent={"end"}
       margin={2}
     >
+       <h2 className="text-start d-flex flex-row align-items-center gap-1 me-auto ms-3 ">Movie Added by Me<GiFilmSpool className="text-primary fs-1"/></h2>
       <Grid container className=" d-flex justify-content-end" marginBottom={3} >
+       
       <div className="mx-auto  row mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
 
           <MovieActionButtons
