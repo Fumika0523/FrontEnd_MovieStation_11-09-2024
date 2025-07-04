@@ -92,15 +92,16 @@ const [userData,setUserData]=useState([])
        <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
        <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
        <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
-
+       <Route path="/mywishlist"  element={<WishlistDisplay mode={mode}/>}/>
+       <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
        <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
         <Route path="/my-purchase" mode={mode} element={<MyPurchaseDisplay_Debounce/>}/>
          <Route path="/my-movie" mode={mode} element={<MyMoviesDisplay/>}/>
        </>
-
     }
-      <Route path="/mywishlist"  element={<WishlistDisplay mode={mode}/>}/>
-       <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
+    {/* whenever you access to the page which need token, then signin component shows */}
+      <Route path="*" element={<SignIn isAuthenticated = {isAuthenticated} mode={mode}  setIsAuthenticated={setIsAuthenticated} />}/>
+      {/* From here public pages will be easily accessible when there is no token*/}
       <Route path="/" element={<Homepage mode={mode} movieData={movieData}/>}/>
       <Route path='/allmovies' element={<MovieDisplay_Debounce mode={mode} setMode={setMode} movieData={movieData} setMovieData={setMovieData}/>}/> 
       <Route path='/about' element={<AboutUs_Section mode={mode} setMode={setMode}/>}/>
@@ -112,10 +113,8 @@ const [userData,setUserData]=useState([])
     }/>
       <Route path="/signup" mode={mode} element={<SignUp/>}/>
       {/* <Route path="/signout" element={<SignOut/>}></Route> <<< check*/} 
-     
       <Route path="/table" mode={mode} element={<Table/>}/> 
       <Route path="/pagenotfound" mode={mode} element={<PageNotFound mode={mode}/>}/> 
-     
     </Routes>
     <Footer />
     </Provider>

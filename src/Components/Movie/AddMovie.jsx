@@ -10,17 +10,18 @@ import { Grid} from '@mui/material';
 import { grey,amber,red,pink,blueGrey} from '@mui/material/colors';
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Button } from "react-bootstrap";
+import { useEffect } from "react";
 
 export default function AddMovie({setMovieData,mode}) {
 const navigate = useNavigate();
 const amberColor = amber[500];
 const formSchema = Yup.object().shape({
-  moviename: Yup.string().required("Movie name is required"),
+  moviename: Yup.string().required("Movie name is required").min(3,"Movie name must be at least 3 characters"),
   movieposter: Yup.string().required("Movie poster URL is required").min(5, "URL too short"),
   rating: Yup.number().required("Rating is required").positive("Rating must be positive"),
-  category: Yup.string().required("Category is required"),
-  cast: Yup.string().required("Cast information is required"),
-  publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number"),
+  category: Yup.string().required("Category is required").min(3,"Category must be at least 3 characters"),
+  cast: Yup.string().required("Cast information is required").min(10,"Category must be at least 10 characters"),
+  publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number").min(4,"Category must be at least 4 characters"),
   likeNum: Yup.number().required("Likes count is required").integer("Must be a whole number"),
   disLikeNum: Yup.number().required("Dislikes count is required").integer("Must be a whole number"),
   amount: Yup.number().required("Price is required"),
@@ -44,12 +45,14 @@ const formik=useFormik({
   },
   validationSchema:formSchema,
   onSubmit:(values)=>{ 
-  console.log(values) 
+  //console.log(values) 
   postMovies(values)
+  getMovieData()
+
   }   
 })
 const token = sessionStorage.getItem('token')
-console.log(token)
+//console.log(token)
 
 let config = {
   headers:{
@@ -58,34 +61,30 @@ let config = {
 }
 
 const postMovies=async(newMovie)=>{
-   console.log("Movie Posted to the DB..")
   console.log("NEW MOVIE:",newMovie)
-let res = await axios.post(`${url}/addmovie`,newMovie,config)
-console.log(res)
-if(res){
-  getMovieData()
-  navigate(`/allmovies`)
+  let res = await axios.post(`${url}/addmovie`,newMovie,config)
+  console.log(res)
+    if(res.status === 200){
+      navigate('/allmovies')
+        // setMovieData(res);
+    }
 }
-
-}
-
 //updating a data toer
   const getMovieData = async () => {
     console.log("Movie data is called.....")
-    let res = await fetch(`${url}/movie`, config) //API call to get all movie data
+    let res = await fetch(`${url}/movie`) //API call to get all movie data
+    console.log(res)
     let data = await res.json()
     console.log(data)
-    setMovieData()  
   }
+  useEffect(() => {
+  getMovieData();
+}, []);
 
-  // if(token == null){
-  //  console.log("NO TOKEN")
-  // }
-  // else{
-  //  console.log("YES TOKEN")
-  // }
 
-  return (
+
+
+ return (
     <>
       <div className='h-100 d-flex justify-content-center align-items-center  row mx-auto' >
     <Box
@@ -138,6 +137,7 @@ if(res){
           label="Movie Name"
           name="moviename"
           id="moviename"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           defaultValue={formik.values.moviename} 
             />
@@ -155,6 +155,7 @@ if(res){
           label="Movie Poster"
           name="movieposter"
           id="movieposter"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           defaultValue={formik.values.movieposter}
         />
@@ -171,6 +172,7 @@ if(res){
           label="Rating"
           name="rating"
           id="rating"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           defaultValue={formik.values.rating}
         />
@@ -185,7 +187,10 @@ if(res){
           fullWidth
           required
           label="Category"
-          name="category" id="category"  onChange={formik.handleChange} value={formik.values.category} /> 
+          name="category" id="category"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.category} /> 
             {formik.errors.category && formik.touched.category? (
           <div style={{color:"red"}}>{formik.errors.category}</div>
         ) : null }
@@ -197,7 +202,9 @@ if(res){
             required
             fullWidth
             label="Cast"
-            name="cast" id="cast"  onChange={formik.handleChange} value={formik.values.cast} /> 
+            name="cast" id="cast"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange} value={formik.values.cast} /> 
               {formik.errors.cast && formik.touched.cast? (
           <div style={{color:"red"}}>{formik.errors.cast}</div>
         ) : null }
@@ -209,7 +216,9 @@ if(res){
           fullWidth
           required
           label="Publish Year"
-          name="publishYear" id="publishYear"  onChange={formik.handleChange} value={formik.values.publishYear}/>
+          name="publishYear" id="publishYear"  
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange} value={formik.values.publishYear}/>
           {formik.errors.publishYear && formik.touched.publishYear? (
           <div style={{color:"red"}}>{formik.errors.publishYear}</div>
         ) : null }
@@ -221,7 +230,9 @@ if(res){
           fullWidth
           required
           label="Like Number"
-          name="likeNum" id="likeNum" onChange={formik.handleChange} value={formik.values.likeNum} />
+          name="likeNum" id="likeNum"           
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange} value={formik.values.likeNum} />
           {formik.errors.likeNum && formik.touched.likeNum? (
           <div style={{color:"red"}}>{formik.errors.likeNum}</div>
         ) : null }
@@ -233,6 +244,7 @@ if(res){
           fullWidth
           required
           label="Dislike Number"
+          onBlur={formik.handleBlur}
           name="disLikeNum" id="disLikeNum"  onChange={formik.handleChange} value={formik.values.disLikeNum} />
           {formik.errors.disLikeNum && formik.touched.disLikeNum? (
           <div style={{color:"red"}}>{formik.errors.disLikeNum}</div>
@@ -245,19 +257,23 @@ if(res){
           fullWidth
           required
           label="Price"
-          name='amount' id="amount"  onChange={formik.handleChange} value={formik.values.amount} /> 
+          name='amount' id="amount"  
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange} value={formik.values.amount} /> 
           {formik.errors.amount && formik.touched.amount? (
           <div style={{color:"red"}}>{formik.errors.amount}</div>
         ) : null }
           </Grid>
 
            {/* MOVIE TRAILER */}
-           <Grid xs={12} sm={12} md={4} item >
+           <Grid xs={12}  item >
            <TextField
            fullWidth
           required
           label="Trailer"
-          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer}  /> 
+          name="trailer" id="trailer" 
+         onBlur={formik.handleBlur}
+         onChange={formik.handleChange} value={formik.values.trailer}  /> 
             {formik.errors.trailer && formik.touched.trailer? (
           <div style={{color:"red"}}>{formik.errors.trailer}</div>
         ) : null }
@@ -266,7 +282,10 @@ if(res){
          {/* Summary */}
          <Grid xs={12}  item >
         <TextField fullWidth required id="summary" 
-          label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
+          label="Summary" name="summary"  
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange} 
+          value={formik.values.summary} /> 
           {formik.errors.summary && formik.touched.summary? (
           <div style={{color:"red"}}>{formik.errors.summary}</div>
         ) : null }

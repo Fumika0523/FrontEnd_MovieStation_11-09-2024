@@ -19,7 +19,8 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
   }
   const token = sessionStorage.getItem('token')
   // console.log('token',token)
-    const getEnquiryData = async () =>{
+
+  const getEnquiryData = async () =>{
     console.log("EnquiryData is called..")
     let res = await axios.get(`${url}/allenquiry`)
     console.log("res.data.allEnquiry",res.data.allEnquiry)
@@ -41,14 +42,14 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
   }, [])
   //without sessionStorage 
 
-  const formSchema = Yup.object().shape({
-    // firstname: Yup.string().required(),
-    // lastname: Yup.string().required(),
-    // email: Yup.string().required(),
-    // phone_number: Yup.number().required(),
-    subject: Yup.string().required("Mandatory Field!"),
-    description: Yup.string().required("Mandatory Field!"),
-  })
+const formSchema=Yup.object().shape({
+  firstname:Yup.string().required("First Name is required").min(3, "First name must be at least 3 characters").max(20, "First name must be under 20 characters"),
+  lastname:Yup.string().required("Last Name is required").min(3, "Last name must be at least 3 characters").max(20, "Last name must be under 20 characters"),
+  email:Yup.string().required("Email is required").email("Enter a valid email address"),
+  phone_number:Yup.string().required("Phone No. is required").matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+  subject:Yup.string().required("Subject is required").min(3, "Subject must be at least 3 characters"),
+  description:Yup.string().required("Description is required").min(10, "Description must be at least 10 characters")
+})
 
   const formik = useFormik({
     initialValues: {
@@ -60,7 +61,7 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
       description: singleEnquiry.description,
     },
     enableReinitialize: true,
-    //validationSchema: formSchema,
+    validationSchema: formSchema,
     onSubmit: (values) => {
     updateEnquiry(values)
  
@@ -72,6 +73,7 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
       Authorization: `Bearer ${token}`
     }
   }
+  
 //update
   const updateEnquiry = async (updatedEnquiry) => {
     console.log("Enquiry is posted to the DB")
@@ -79,7 +81,7 @@ function EditEnquiryForm({ showEditModal, setShowEditModal, singleEnquiry, setEn
       let res = await axios.put(`${url}/updateenquiry/${singleEnquiry._id}`,updatedEnquiry,config)
       console.log("res",res)
       if(res){
-        let res = await axios.get(`${url}/movie`)
+        let res = await axios.get(`${url}/allenquiry`)
         // console.log("res",updateEnquiry)
         setEnquiryData(res.data.enquiryData)
         handleClose()

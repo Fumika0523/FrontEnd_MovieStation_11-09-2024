@@ -105,6 +105,11 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
         <span className="d-lg-block d-none">My Wish List</span>
       </Button>
 
+               
+      {
+          token &&
+       <>
+       {/* MY MOVIE */}
       <Button
         variant="none"
         onClick={() => navigate('/my-movie')}
@@ -118,8 +123,8 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
         <FaBookmark className="fs-5 me-md-1 myMovieIcon" />
         <span className="d-lg-block d-none">My Movies</span>
       </Button>
-
-      {/* My Purchase */}
+        
+     {/* My Purchase */}
       <Button
         variant="none"
         onClick={() => navigate('/my-purchase')}
@@ -131,7 +136,9 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
         <BiSolidMoviePlay className="fs-4 me-md-1" style={{ color: " rgb(63, 158, 79) " }} />
         <span className="d-lg-block d-none">My Purchase</span>
       </Button>
-
+      </>
+}
+      {/* BACK */}
       {location.pathname !== '/allmovies' &&
         <Button variant="none"
           style={{
@@ -143,7 +150,8 @@ const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
              color: mode === "light" ? "black" : "white",
           }} 
           onClick={() => navigate('/allmovies')} />
-          <span className="d-lg-block  d-none">Back</span></Button>
+          <span className="d-lg-block  d-none">Back</span>
+        </Button>
       }
 
     </div>

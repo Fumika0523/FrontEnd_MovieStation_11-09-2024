@@ -1,4 +1,3 @@
-import React from "react"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useFormik} from 'formik';
@@ -7,16 +6,20 @@ import {url} from '../../utils/constant'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
+import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SignIn({setIsAuthenticated}) {
   const navigate = useNavigate()
-
+  const [isError,isSetError] = useState('')
   const validationSchema=Yup.object().shape({
     password:Yup.string().required("Password is required!"),
-    email:Yup.string().required("Email is required !"),
+    email: Yup.string().email("Invalid email format").required("Email is required").email("Enter a valid email address"),
     phone_number:Yup.number().required("Phone No. is required!")
 })
+
 
   const formik=useFormik({
     initialValues:{
@@ -31,6 +34,54 @@ function SignIn({setIsAuthenticated}) {
      postSignInUser(values)
     }
   })
+
+ const errorNotify = (message) => toast.error(message, {
+position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+});
+
+// const errorNotify = (message) => toast.error(message, {
+//    autoClose: 2000,
+//    });
+
+
+  const errorPWNotify = (message) => toast.error(message, {
+  position: "top-right",
+  autoClose: 1000, // closes after 3 seconds
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+});
+
+  const successNotify = () => toast.success("Successfully signed in", {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    // transition: Bounce,
+  });
+
+// useEffect(() => {
+//   if (isError === "User Email Address Not Found") {
+//    errorNotify()
+//   } else if (isError === "User Password is incorrect") {
+//    errorPWNotify()
+//   }
+// }, [isError]);
+// console.log(isError)
+
 
   // const postSignInUser=async(loginuser)=>{
   //   console.log(loginuser)
@@ -55,7 +106,7 @@ console.log(location)
 const fromPath = location.state?.from || '/';
 
 const postSignInUser = async (loginuser) => {
-  try {
+   try {
     const res = await axios.post(`${url}/signin`, loginuser);
 
     if (res.data.token) {
@@ -64,11 +115,27 @@ const postSignInUser = async (loginuser) => {
       sessionStorage.setItem('name', res.data.user.name);
       setIsAuthenticated(true);
       navigate(fromPath);
+       successNotify()
     }
   } catch (error) {
-    console.error("Login failed", error);
+  const message = error?.response?.data?.message || "An error occurred";
+  isSetError(message);
+  if (message === "User Email Address Not Found") {
+    errorNotify(message);
+    // alert("User Email Address is incorrect");
+  } else if (message === "User Password is incorrect") {
+    errorPWNotify(message)
+   // alert("User Password is incorrect");
+  } else if (message === "Your login credentials are incorrect, kindly check and re-enter!") {
+    //alert("Your login credentials are incorrect, kindly check and re-enter!");
+  } else {
+    alert(message);
   }
+console.log(message)
+}
 };
+
+// console.log(isError)
 
   return (
     <>
@@ -82,10 +149,11 @@ const postSignInUser = async (loginuser) => {
        <Form.Label className="m-0">Email address</Form.Label>
         <Form.Control  type="email" placeholder=""
          name="email"
+           onBlur={formik.handleBlur} 
          value={formik.values.email}
          onChange={formik.handleChange} />
         {formik.errors.email && formik.touched.email? (
-        <div style={{color:"red"}}>{formik.errors.email}</div>
+        <div style={{color:"red"}}>{formik.errors.email} </div>
         ) : null }
       </Form.Group>
       
@@ -94,6 +162,7 @@ const postSignInUser = async (loginuser) => {
         <Form.Label className="m-0">Phone No.</Form.Label>
         <Form.Control type="phone_number" placeholder=""
         name="phone_number"
+          onBlur={formik.handleBlur} 
         value={formik.values.phone_number}
         onChange={formik.handleChange}  />
         {formik.errors.phone_number && formik.touched.phone_number? (
@@ -106,6 +175,7 @@ const postSignInUser = async (loginuser) => {
         <Form.Label className="m-0">Password</Form.Label>
         <Form.Control type="password" placeholder=""
          name="password"
+           onBlur={formik.handleBlur} 
          value={formik.values.password}
          onChange={formik.handleChange} /> 
          {formik.errors.password && formik.touched.password? (
@@ -127,7 +197,21 @@ const postSignInUser = async (loginuser) => {
       </div>
     </Form>
     </div>
+{/* 
+   {
+  (isError === "User Email Address Not Found" || isError === "User Password is incorrect") && (
+    <p className="">
+      {isError === "User Email Address Not Found"
+        ? "Email Not Found"
+        : "Password is incorrect"}
+    </p>
+  )
+} */}
+
+
+<ToastContainer />
     </>
+    
   );
 }
 

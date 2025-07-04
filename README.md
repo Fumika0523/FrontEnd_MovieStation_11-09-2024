@@ -134,27 +134,26 @@ MovieDisplay_Debounce:
 - item => item._id === element._id → Checks if any item in wishlist has the same _id as element._id.
 
 ----------------------
-1.design for delete & movin to wishlist button ----->> DONE
-2.moving to wishlist function in  --> DONE
-3.moving to the cart in wishlist page ---> DONE
-4.moviection button in cartpage --> DONE
+1.design for delete & movin to wishlist button                ----->> DONE
+2.moving to wishlist function in                              --> DONE
+3.moving to the cart in wishlist page                        ---> DONE
+4.moviection button in cartpage                               --> DONE
 5.sorting part
-6.when cart item is empty, the empty banner should show ---> DONE
+6.when cart item is empty, the empty banner should show       ---> DONE
 7.pdf order invoice , add stroke on each item 
-8. price is static or not, change the price in DB and see  ---> DONE
+8. price is static or not, change the price in DB and see      ---> DONE
 9. Download Invoice
-10. Refresh cartpage --> DONE
+10. Refresh cartpage                                            --> DONE
 11. Without Login
 12. check my movies <WOrk> >> Trailer, when you click the button just instantly 
 13.Duplicated order
 14. My Purchase & My movie (lists that you added)  <WOrk>
 15. Check signup validation
 
-
 ------------
 README FILE:
 AUTHENTICATION:
-SIGININ /SIGNUP /LOGOUT FUNCTIONLITY                    -DONE
+SIGININ /SIGNUP /LOGOUT FUNCTIONLITY                    ->>> NOt correct siginin details
 ValidationSchema + Errors -FORM                         -PENDING(ERRORS) (COMMON SCHEMA) >> DONE
 
 WITHOUT AUTHENTICATION
@@ -166,7 +165,7 @@ ALL NAVIGATION                                           -DONE
 
 CONTACT FORM SUBMISSION + TABLE (ADDED+VIEW)             -PENDING(ERRORS) ->> DONE
 CARTPAGE ACCESSIBLITY(TOKEN)                             -PENDING(ERRORS) ->> DONE
-MYMOVIES/MYPURCHASE   PAGE+ICON ACCESSIBLITY + DONT SHOW -PENDING(NOT DONE)-FUMIKA ->> DONE
+MYMOVIES/MYPURCHASE   PAGE+ICON ACCESSIBLITY + DONT SHOW -PENDING(NOT DONE)-FUMIKA <WORK>
 CART/WISHLIST FUNCTIONLITY                               -PENDING(NOT DONE)-POONAM-MONDAY
 
 WITH AUTHENTICATION
@@ -175,12 +174,12 @@ NO EDIT/DELETE/UPDATE ACCESS                            -DONE
 SEARCH FUNCTIONALITY                                    -DONE
 SEE ALL ENQUIRES                                        -DONE
 ALL NAVIGATION                                          -DONE
-ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD)
-EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD)
-UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD)
-DELETE MOVIE                                            -DONE(ADD AMOUNT AS FEILD)
+ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD) //Add amount
+EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD) //Add amount
+UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD) //Add amount
+DELETE MOVIE                                            -DONE
 ADD|REMOVE -WISHCART                                    -DONE
-ADD - CART                                              -DONE
+ADD - CART                                              -DONE // trailer page
 WISHLIST NAVIGATION                                     -DONE
 
 

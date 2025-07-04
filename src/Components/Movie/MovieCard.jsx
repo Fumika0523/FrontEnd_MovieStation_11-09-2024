@@ -28,8 +28,6 @@ import { useDispatch, useSelector } from "react-redux"
 
 export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn, reduxAddcartBtn }) {
   const [specificMovieData, setSpecificMovieData] = useState([])
-
-
   const [isCliked, setIsClicked] = useState(false);
   const theme = createTheme({
     palette: {
@@ -67,7 +65,6 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
 
   //three dot shouldnt show
   const userId = sessionStorage.getItem('userId')
-
   //loginUser Id === movie owner(userId)  >> Edit || Delete
   //Comparison operator
   //movieData is all movie datas that were added in the website
@@ -75,15 +72,15 @@ export default function MovieCard({ mode, movieposter, moviename, rating, summar
   //console.log("isOwner",isMovieOwner)
   //console.log("element?.owner",element?.owner)//66fbe656eaefd381ff4840e4 >> Spirit Away
   // SPECIFIC
-  const getSpecificMovieData = async () => {
-    // console.log("Specific Movie Data is called....")
-    let res = await axios.get(`${url}/specificmovie`, config)
-    // console.log(res.data.movieData)
-    setSpecificMovieData(res.data.movieData)
-  }
-  useEffect(() => {
-    getSpecificMovieData()
-  }, [])
+  // const getSpecificMovieData = async () => {
+  //   // console.log("Specific Movie Data is called....")
+  //   let res = await axios.get(`${url}/specificmovie`, config)
+  //   // console.log(res.data.movieData)
+  //   setSpecificMovieData(res.data.movieData)
+  // }
+  // useEffect(() => {
+  //   getSpecificMovieData()
+  // }, [])
   // console.log("Specific Movie Data",specificMovieData)
   // console.log(searchUserAddedMovie)
   // console.log(findUserAddedMovie) //find a value
@@ -135,7 +132,7 @@ const dispatch= useDispatch()
              aria-label="movietitle">
              {moviename.substring(0, 1)}
               </Avatar>
-            }
+      }
     action={
     token ? (
     <span
@@ -183,23 +180,23 @@ const dispatch= useDispatch()
         />
       </Tooltip>
     </span>
-  ) :   
+    ) :   
   <>
   </>
-  }
+    }
        titleTypographyProps={{ fontSize: "20x", paddingBottom: "0px", marginBottom: "0px" }}
             title={moviename.length >= 25 ? moviename.substring(0, 25) + "..." : moviename}
             subheaderTypographyProps={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", gap: "5px", fontSize: "13px" }}
             subheader={
               <>
                 {rating} /10
-                <Rating size="small" readOnly name="half-rating" defaultValue={starNum.toFixed(1)} precision={0.5} style={{
+                <Rating size="small" readOnly name="half-rating" value={starNum.toFixed(1)} precision={0.5} style={{
                   paddingBottom: "5px",
                   color: "rgb(242, 154, 3)"
                 }} />
               </>
-            }
-          />
+           }
+        />
 
           {/* IMAGE */}
           <CardMedia

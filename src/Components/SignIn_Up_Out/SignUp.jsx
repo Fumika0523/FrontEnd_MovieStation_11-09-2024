@@ -8,15 +8,14 @@ import Button from 'react-bootstrap/Button';
 
 
 function SignUp() {
-const navigate = useNavigate()
-
+  const navigate = useNavigate()
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  lastname: Yup.string().required("Last name is required"),
+  name: Yup.string().required("First Name is required").min(3, "First name must be at least 3 characters").max(20, "Fist name must be under 20 characters"),
+  lastname:Yup.string().required("Last Name is required").min(3, "Last name must be at least 3 characters").max(20, "Last name must be under 20 characters"),
   gender: Yup.string().required("Gender is required"),
-  phone_number: Yup.string().required("Phone number is required"),
-  email: Yup.string().email("Invalid email format").required("Email is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  phone_number: Yup.string().required("Phone number is required").matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+  email: Yup.string().email("Invalid email format").required("Email is required").email("Enter a valid email address"),
+  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required").min(8, "Must be at least 8 characters").matches(/[a-z]/, "Must contain at least one lowercase letter").matches(/[A-Z]/, "Must contain at least one uppercase letter").matches(/\d/, "Must contain at least one number").matches(/[@$!%*?&]/, "Must contain at least one special character"),
 });
 
 const formik = useFormik({
@@ -61,7 +60,8 @@ const postSignUpUser=async(newUser)=>{
             id="name"
             name="name"
             value={formik.values.name}
-            onChange={formik.handleChange}  
+            onChange={formik.handleChange} 
+            onBlur={formik.handleBlur} 
             />
             {formik.errors.name && formik.touched.name? (
         <div style={{color:"red"}}>{formik.errors.name}</div>
@@ -75,6 +75,7 @@ const postSignUpUser=async(newUser)=>{
             type="text" 
             id="lastname"
             name="lastname"
+              onBlur={formik.handleBlur} 
             value={formik.values.lastname}
             onChange={formik.handleChange}  
             />
@@ -94,6 +95,7 @@ const postSignUpUser=async(newUser)=>{
           onChange={formik.handleChange}/> 
         <Form.Check type="radio" name="gender" label={`Female`}
           value="female"
+            onBlur={formik.handleBlur} 
           onChange={formik.handleChange}/>
         </div>
         {formik.errors.gender && formik.touched.gender? (
@@ -107,11 +109,12 @@ const postSignUpUser=async(newUser)=>{
         <Form.Control type="text" className="form-control" 
          id="phone_number"
          name="phone_number"
+           onBlur={formik.handleBlur} 
          value={formik.values.phone_number}
          onChange={formik.handleChange} 
           />
       {formik.errors.phone_number && formik.touched.phone_number? (
-        <div style={{color:"red"}}>{formik.errors.email}</div>
+        <div style={{color:"red"}}>{formik.errors.phone_number}</div>
         ) : null }
           </Form.Group>
         </div>
@@ -124,6 +127,7 @@ const postSignUpUser=async(newUser)=>{
              id="email"
              name="email"
              value={formik.values.email}
+               onBlur={formik.handleBlur} 
              onChange={formik.handleChange}   />
             {formik.errors.email && formik.touched.email? (
           <div style={{color:"red"}}>{formik.errors.email}</div>
@@ -136,6 +140,7 @@ const postSignUpUser=async(newUser)=>{
             <Form.Control type="password" className="form-control" 
              id="password"
              name="password"
+               onBlur={formik.handleBlur} 
              value={formik.values.password}
              onChange={formik.handleChange} 
             />

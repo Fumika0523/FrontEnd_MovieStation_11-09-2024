@@ -1,5 +1,5 @@
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import Tooltip from '@mui/material/Tooltip';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import { useEffect, useState } from "react";
@@ -9,16 +9,18 @@ import Button from 'react-bootstrap/Button';
 import { url } from '../../utils/constant';
 import axios from 'axios';
 import { FaStar } from "react-icons/fa";
-import { IoChevronBackOutline } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
 import MovieActionButtons from './MovieActionButtons';
 import Modal from 'react-bootstrap/Modal';
 import { useSelector } from 'react-redux';
-useSelector
+import { ToastContainer } from 'react-toastify';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Bounce } from 'react-toastify';
+
+
 
 function MovieTrailer({mode}) {
-
-
-  const { id } = useParams();
+ const { id } = useParams();
     console.log(id)
   const [movieInfo, setMovieInfo] = useState();
 const [show, setShow] = useState(false);
@@ -161,18 +163,80 @@ const [show, setShow] = useState(false);
                   borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}} > 
                   <i className="fa-solid fa-thumbs-up fs-5 me-2"></i><div>{movieInfo.likeNum}</div></Button>
                   </Col>
-                  <Col className='col-md-6 col-sm-6 col-lg-12'>
-                  {/* DisLike */}
+             {/* DisLike */}
+            <Col className='col-md-6 col-sm-6 col-lg-12'>
+           
                   <Button variant="outline-none" className="px-2 py-3 trailerBtn w-100 d-flex mb-3" 
                   style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
                     color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
-                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div></Button>
+                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}> <i className="fa-solid fa-thumbs-down fs-5 me-2"></i><div>{movieInfo.disLikeNum}</div>
+                  </Button>
               </Col>
-              </Row>
-              </Col>
-              </Row>
-        </div>
-      }
+               {/* Cart */}
+                 <Col className='col-md-6 col-sm-6 col-lg-12'>           
+                <Tooltip title="Add to Cart">
+                  <Button className="py-3 text-nowrap trailerBtn w-100 d-flex mb-3"
+                  style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                  color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                  borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}} 
+                  variant="" onClick={()=>handleAddCartItem(element)} >
+                   {
+                   cart?.some(cartItem => cartItem._id === element._id) ?
+                 (
+                 <MdRemoveShoppingCart className="fs-3 text-warning "/>
+                  )
+                    :
+                  (
+                <ShoppingCartIcon 
+                 className=" text-warning fs-3" />
+                  )
+                }
+                  </Button>
+                </Tooltip>
+            </Col>
+               {/* Cart */}
+                 <Col className='col-md-6 col-sm-6 col-lg-12'>   
+         {/* Wish */}
+          <Tooltip title="Add to Wish List">
+            <Button
+            className="py-3 text-nowrap trailerBtn w-100 d-flex mb-3"
+            style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
+                  color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
+                  borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}} 
+                   variant="" 
+                 
+             onClick={() => handleAddWishItem(element)}>
+             {/* searches for element._id in the wishlist array. >> True/false item._id > wishlist, element._id > movie._id*/}
+              {wishlist?.some(item => item._id === element._id) ? (
+               <FavoriteIcon
+                className="text-danger fs-3 border-primary"
+               />
+              ) : (
+              <FaRegHeart
+               className="text-danger fs-3 border-warning"
+             />
+          )}
+          </Button>
+        </Tooltip>
+             <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick={false}
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              transition={Bounce} />
+    
+           </Col>
+          </Row>
+        </Col>
+       </Row>
+      </div>
+     }
 
       <Carousel  className='border-4   d-none d-md-block row -4 mx-auto border-warning my-5'>
         <Carousel.Item variant="warning"  className=' '>

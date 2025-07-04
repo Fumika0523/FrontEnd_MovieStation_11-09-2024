@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import * as Yup from "yup";
@@ -10,16 +10,17 @@ import { Button,Stack, Container, Grid, Typography } from '@mui/material';
 import { grey,amber} from '@mui/material/colors';
 import { IoChevronBackOutline } from "react-icons/io5";
 
-function EditUpdateMovieForm({ mode,singleMovie, id,setMovieData }) {
+function EditUpdateMovieForm({ mode,singleMovie, id }) {
   const navigate = useNavigate();
+  const [ movieData, setMovieData] = useState([]);
   const amberColor = amber[500];
 const formSchema = Yup.object().shape({
-  moviename: Yup.string().required("Movie name is required"),
+  moviename: Yup.string().required("Movie name is required").min(3,"Movie name must be at least 3 characters"),
   movieposter: Yup.string().required("Movie poster URL is required").min(5, "URL too short"),
   rating: Yup.number().required("Rating is required").positive("Rating must be positive"),
-  category: Yup.string().required("Category is required"),
-  cast: Yup.string().required("Cast information is required"),
-  publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number"),
+  category: Yup.string().required("Category is required").min(3,"Category must be at least 3 characters"),
+  cast: Yup.string().required("Cast information is required").min(10,"Category must be at least 10 characters"),
+  publishYear: Yup.number().required("Publish year is required").integer("Must be a whole number").min(4,"Category must be at least 4 characters"),
   likeNum: Yup.number().required("Likes count is required").integer("Must be a whole number"),
   disLikeNum: Yup.number().required("Dislikes count is required").integer("Must be a whole number"),
   amount: Yup.number().required("Price is required"),
@@ -45,6 +46,7 @@ const formSchema = Yup.object().shape({
     onSubmit: (values) => {
   //    console.log(values)
       updateMovies(values)
+      // refreshing
       getMovieData()
       navigate('/allmovies')
     }
@@ -57,21 +59,31 @@ const formSchema = Yup.object().shape({
     }
   }
 
-  const updateMovies = async (updatedMovie) => {
-    console.log("Update Movie:", updatedMovie)
-
-    let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
-   // console.log(res)
-    setMovieData(res);
-  }
-
-  //updating a data 
+  // GET MOVIE DATA API
   const getMovieData = async () => {
     console.log("Movie data is called.....")
-    let res = await fetch(`${url}/movie`, config) //API call to get all movie data
-    let data = await res.json()
-    // console.log(data)
+    let res = await axios.get(`${url}/movie`)
+    console.log(res.data.movieData) //API call to get all movie data
   }
+  
+  // UPDATE FUNCTION
+  const updateMovies = async (updatedMovie) => {
+    console.log("Update Movie:", updatedMovie)
+    try{
+    let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
+    console.log(res)
+    if(res.status === 200){
+     let res = await axios.get(`${url}/movie`)
+        setMovieData(res);
+    }else{
+      alert("Movie could not update, please check again")
+    }
+      }catch(e){
+        console.error("Error Editing Movie:",e)
+      }
+  }
+
+
 
   return (
     <>
@@ -127,8 +139,9 @@ const formSchema = Yup.object().shape({
           label="Movie Name"
           name="moviename"
           id="moviename"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          defaultValue={formik.values.moviename} 
+          value={formik.values.moviename} 
             />
         {formik.errors.moviename && formik.touched.moviename? (
           <div style={{color:"red"}}>{formik.errors.moviename}</div>
@@ -144,8 +157,9 @@ const formSchema = Yup.object().shape({
           label="Movie Poster"
           name="movieposter"
           id="movieposter"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          defaultValue={formik.values.movieposter}
+          value={formik.values.movieposter}
         />
         {formik.errors.movieposter && formik.touched.movieposter? (
           <div style={{color:"red"}}>{formik.errors.movieposter}</div>
@@ -160,8 +174,9 @@ const formSchema = Yup.object().shape({
           label="Rating"
           name="rating"
           id="rating"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          defaultValue={formik.values.rating}
+          value={formik.values.rating}
         />
         {formik.errors.rating && formik.touched.rating? (
           <div style={{color:"red"}}>{formik.errors.rating}</div>
@@ -174,8 +189,10 @@ const formSchema = Yup.object().shape({
           fullWidth
           required
           label="Category"
-          name="category" id="category"  onChange={formik.handleChange} value={formik.values.category} /> 
-            {formik.errors.category && formik.touched.category? (
+          name="category" id="category"  
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange} value={formik.values.category} /> 
+          {formik.errors.category && formik.touched.category? (
           <div style={{color:"red"}}>{formik.errors.category}</div>
         ) : null }
           </Grid>
@@ -186,7 +203,9 @@ const formSchema = Yup.object().shape({
             required
             fullWidth
             label="Cast"
-            name="cast" id="cast"  onChange={formik.handleChange} value={formik.values.cast} /> 
+            name="cast" id="cast"  
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange} value={formik.values.cast} /> 
               {formik.errors.cast && formik.touched.cast? (
           <div style={{color:"red"}}>{formik.errors.cast}</div>
         ) : null }
@@ -198,7 +217,8 @@ const formSchema = Yup.object().shape({
           fullWidth
           required
           label="Publish Year"
-          name="publishYear" id="publishYear"  onChange={formik.handleChange} value={formik.values.publishYear}/>
+          name="publishYear" id="publishYear"   onBlur={formik.handleBlur}
+           onChange={formik.handleChange} value={formik.values.publishYear}/>
           {formik.errors.publishYear && formik.touched.publishYear? (
           <div style={{color:"red"}}>{formik.errors.publishYear}</div>
         ) : null }
@@ -210,7 +230,8 @@ const formSchema = Yup.object().shape({
           fullWidth
           required
           label="Like Number"
-          name="likeNum" id="likeNum" onChange={formik.handleChange} value={formik.values.likeNum} />
+          name="likeNum" id="likeNum"   onBlur={formik.handleBlur}
+           onChange={formik.handleChange} value={formik.values.likeNum} />
           {formik.errors.likeNum && formik.touched.likeNum? (
           <div style={{color:"red"}}>{formik.errors.likeNum}</div>
         ) : null }
@@ -222,7 +243,9 @@ const formSchema = Yup.object().shape({
           fullWidth
           required
           label="Dislike Number"
-          name="disLikeNum" id="disLikeNum"  onChange={formik.handleChange} value={formik.values.disLikeNum} />
+          name="disLikeNum" id="disLikeNum"
+            onBlur={formik.handleBlur}
+              onChange={formik.handleChange} value={formik.values.disLikeNum} />
           {formik.errors.disLikeNum && formik.touched.disLikeNum? (
           <div style={{color:"red"}}>{formik.errors.disLikeNum}</div>
         ) : null }
@@ -234,7 +257,9 @@ const formSchema = Yup.object().shape({
           fullWidth
           required
           label="Price"
-          name='amount' id="amount"  onChange={formik.handleChange} value={formik.values.amount} /> 
+          name='amount' id="amount"
+            onBlur={formik.handleBlur}
+              onChange={formik.handleChange} value={formik.values.amount} /> 
           {formik.errors.amount && formik.touched.amount? (
           <div style={{color:"red"}}>{formik.errors.amount}</div>
         ) : null }
@@ -246,7 +271,9 @@ const formSchema = Yup.object().shape({
            fullWidth
           required
           label="Trailer"
-          name="trailer" id="trailer"  onChange={formik.handleChange} value={formik.values.trailer}  /> 
+          name="trailer" id="trailer"
+            onBlur={formik.handleBlur}
+              onChange={formik.handleChange} value={formik.values.trailer}  /> 
             {formik.errors.trailer && formik.touched.trailer? (
           <div style={{color:"red"}}>{formik.errors.trailer}</div>
         ) : null }
@@ -255,7 +282,9 @@ const formSchema = Yup.object().shape({
          {/* Summary */}
          <Grid xs={12}  item >
         <TextField fullWidth required id="summary" 
-          label="Summary" name="summary"  onChange={formik.handleChange} value={formik.values.summary} /> 
+          label="Summary" name="summary"
+            onBlur={formik.handleBlur}
+              onChange={formik.handleChange} value={formik.values.summary} /> 
           {formik.errors.summary && formik.touched.summary? (
           <div style={{color:"red"}}>{formik.errors.summary}</div>
         ) : null }

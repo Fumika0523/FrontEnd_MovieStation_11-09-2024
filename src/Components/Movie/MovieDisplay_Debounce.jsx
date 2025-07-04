@@ -28,12 +28,12 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const [filterMovieData, setFilterMovieData] = useState([]);
   const wishlist = useSelector(store => store.wishlist.wishItems);
   const cart = useSelector(store =>store.cart.cartItems)
-  console.log("cart",cart)
-  console.log(cart?.length)
+  //console.log("cart",cart)
+  //console.log(cart?.length)
   const [orderData, setOrderData] = useState([])
   const [sortedData, setSortedData] =useState("createdAt:desc") //default
-  console.log("sortedData",sortedData)
-  console.log("orderData",orderData)
+  //console.log("sortedData",sortedData)
+  //console.log("orderData",orderData)
   /// when you not login, wish goes to store >> when you login from store to db
   //when you login >> Db >> Store <<<< If you store to store first, the data will be gone after the refreshing
  // useState > within 1 component, need to be passed to use in other components
@@ -166,10 +166,11 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const deleteMovie = async (_id) => {
     await axios.delete(`${url}/deletemovie/${_id}`, config);
-    getMovieData();
     navigate(`/allmovies`);
+    alert("Movie is Deleted")
+    getMovieData();
+     
   };
-
       useEffect(()=>{
     const getCartData=async()=>{
       try{
@@ -269,7 +270,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
                     />
                   </Tooltip>
                 }
-                
+          // Cart Btn
           reduxAddcartBtn={
           <Tooltip title="Add to Cart">
             <span onClick={()=>handleAddCartItem(element)} >
@@ -286,7 +287,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
             }
             </span>
             </Tooltip>
-                }
+          }
+                // Wishlist Btn
                 WishBtn={
                   <>
                     <Tooltip title="Add to Wish List">

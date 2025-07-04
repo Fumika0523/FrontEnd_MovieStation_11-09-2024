@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 
-function ContactUs_Section (){
+function ContactUs_Section ({mode}){
 const navigate = useNavigate()
 const [enquiryData,  setEnquiryData] = useState([])
 const token = sessionStorage.getItem('token')
@@ -17,12 +17,12 @@ const [userData,setUserData]=useState([])
 //without sessionStorage 
 
 const formSchema=Yup.object().shape({
-  firstname:Yup.string().required("First Name is required"),
-  lastname:Yup.string().required("Last Name is required"),
-  email:Yup.string().required("Email is required"),
-  phone_number:Yup.number().required("Phone No. is required"),
-  subject:Yup.string().required("Subject is required"),
-  description:Yup.string().required("Description is required"),
+  firstname:Yup.string().required("First Name is required").min(3, "First name must be at least 3 characters").max(20, "First name must be under 20 characters"),
+  lastname:Yup.string().required("Last Name is required").min(3, "Last name must be at least 3 characters").max(20, "Last name must be under 20 characters"),
+  email:Yup.string().required("Email is required").email("Enter a valid email address"),
+  phone_number:Yup.string().required("Phone No. is required").matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
+  subject:Yup.string().required("Subject is required").min(3, "Subject must be at least 3 characters"),
+  description:Yup.string().required("Description is required").min(10, "Description must be at least 10 characters")
 })
 
 const formik = useFormik({
@@ -33,15 +33,15 @@ const formik = useFormik({
     phone_number:(token) ? userData.phone_number : "",
     subject:"",
     description:"",
-    owner:(token)? userData._id : "",
+    owner:(token) && userData._id ,
   },
   enableReinitialize:true,
   //if there is any updates in my initial Value, please make it update (re-initialize value) >> enable:true
 
   validationSchema:formSchema,
   onSubmit:(values)=>{
-    console.log("postEnquiryDetail",values)
-    postEnquiryDetail(values)
+  console.log("postEnquiryDetail",values)
+  postEnquiryDetail(values)
   }
 })
 
@@ -65,8 +65,8 @@ getUserData()
 const postEnquiryDetail=async(newEnquiry)=>{
    console.log("NEW Enquiry",newEnquiry)
     let res = await axios.post(`${url}/contact`,newEnquiry) 
-   console.log(res.data.enquiryDetail)
-   setEnquiryData(res.data.enquiryDetail)
+   console.log(res)
+  //  setEnquiryData(res.data.enquiryDetail)
   if(res.status == 200){
     navigate('/allenquiries') 
    }
@@ -93,7 +93,11 @@ const postEnquiryDetail=async(newEnquiry)=>{
 </div>
   {/* ALL ENQUIRIES BUTTON */}
 <div className=" my-4 col-sm-10 col-lg-8 ms-auto" >
-  <Button variant="secondary" className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
+
+  <Button variant=""   style={{
+              backgroundColor: mode === "light" ? "white" : "rgb(1, 88, 19)",
+              color: mode === "light" ? "black" : "rgb(209, 209, 213)",
+            }} className="d-flex px-3 ms-auto flex-row align-items-center gap-1 justify-content-center text-nowrap" 
       onClick={()=>navigate('/allenquiries')} ><div>See All Enquiries </div><i className="fa-solid fa-circle-question"></i></Button> 
 </div>
        <div className="row  text-secondary justify-content-center">
@@ -104,8 +108,10 @@ const postEnquiryDetail=async(newEnquiry)=>{
         type="text"
          id="firstname"
          name="firstname"
+        onBlur={formik.handleBlur}
          value={formik.values.firstname}
          onChange={formik.handleChange}
+   
          />
           {formik.errors.firstname && formik.touched.firstname? (
         <div style={{color:"red"}}>{formik.errors.firstname}</div>
@@ -118,6 +124,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
         <Form.Control type="text" 
          id="lastname"
          name="lastname"
+         onBlur={formik.handleBlur}
          value={formik.values.lastname}
          onChange={formik.handleChange}
          />
@@ -133,6 +140,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
          <Form.Label htmlFor="email" className=" m-0">Email</Form.Label>
         <Form.Control type="email" className="form-control" id="email"
           name="email"
+          onBlur={formik.handleBlur}
           value={formik.values.email}
           onChange={formik.handleChange}
           />
@@ -145,6 +153,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
         <Form.Label htmlFor="phone_number" className=" m-0">Mobile Phone No.</Form.Label>
         <Form.Control type="text"  id="phone_number"
           name="phone_number"
+          onBlur={formik.handleBlur}
           value={formik.values.phone_number}
           onChange={formik.handleChange}
           />
@@ -159,6 +168,7 @@ const postEnquiryDetail=async(newEnquiry)=>{
          <Form.Label htmlFor="subject" className="m-0">Subject</Form.Label>
         <Form.Control type="text" id="subject"
           name="subject"
+          onBlur={formik.handleBlur}
          value={formik.values.subject}
           onChange={formik.handleChange}
      />
@@ -170,9 +180,11 @@ const postEnquiryDetail=async(newEnquiry)=>{
     <Form.Label htmlFor="description" className="m-0">Description</Form.Label>
     <textarea className="form-control" id="description" rows="3"
      name="description"
+     onBlur={formik.handleBlur}
      value={formik.values.description}
      onChange={formik.handleChange}
      ></textarea>
+     
       {formik.errors.description && formik.touched.description? (
         <div style={{color:"red"}}>{formik.errors.description}</div>
         ) : null }
@@ -181,8 +193,9 @@ const postEnquiryDetail=async(newEnquiry)=>{
     A member of our support staff will respond as soon as possible.</p>
   </Form.Group>
 
-  <div className="col-12 d-flex justify-content-start">
+  <div className="col-12 d-flex justify-content-start gap-4">
     <Button type="submit" variant="warning" className="px-4 mt-4">Submit</Button>
+    <Button type="button" variant="secondary" className="px-4 mt-4" onClick={() => formik.resetForm()}>Reset</Button>
   </div>
         </div>
     </Form>
