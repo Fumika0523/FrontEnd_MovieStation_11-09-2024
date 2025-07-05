@@ -138,7 +138,7 @@ MovieDisplay_Debounce:
 2.moving to wishlist function in                              --> DONE
 3.moving to the cart in wishlist page                        ---> DONE
 4.moviection button in cartpage                               --> DONE
-5.sorting part
+5.sorting part                                                 --> DONE
 6.when cart item is empty, the empty banner should show       ---> DONE
 7.pdf order invoice , add stroke on each item 
 8. price is static or not, change the price in DB and see      ---> DONE
@@ -146,8 +146,8 @@ MovieDisplay_Debounce:
 10. Refresh cartpage                                            --> DONE
 11. Without Login
 12. check my movies <WOrk> >> Trailer, when you click the button just instantly 
-13.Duplicated order
-14. My Purchase & My movie (lists that you added)  <WOrk>
+13.Duplicated order     --> DONE
+14. My Purchase & My movie (lists that you added)   --> DONE
 15. Check signup validation
 
 ------------
@@ -174,9 +174,9 @@ NO EDIT/DELETE/UPDATE ACCESS                            -DONE
 SEARCH FUNCTIONALITY                                    -DONE
 SEE ALL ENQUIRES                                        -DONE
 ALL NAVIGATION                                          -DONE
-ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD) //Add amount
-EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD) //Add amount
-UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD) //Add amount
+ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD) //Add amount  >>DONE
+EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD) //Add amount  >> DONE
+UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD) //Add amount   >> DONE
 DELETE MOVIE                                            -DONE
 ADD|REMOVE -WISHCART                                    -DONE
 ADD - CART                                              -DONE // trailer page

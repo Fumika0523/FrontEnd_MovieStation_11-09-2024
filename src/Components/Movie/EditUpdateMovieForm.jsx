@@ -267,7 +267,7 @@ const formSchema = Yup.object().shape({
           </Grid>
 
            {/* MOVIE TRAILER */}
-           <Grid xs={12} sm={12} md={4} item >
+           <Grid xs={12} sm={12} md={12} item >
            <TextField
            fullWidth
           required

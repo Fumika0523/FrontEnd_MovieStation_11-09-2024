@@ -26,7 +26,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux"
 
 
-export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn, reduxAddcartBtn }) {
+export default function MovieCard({ mode, movieposter, moviename, rating, summary, cast, _id, element, disLikeNum, likeNum, deleteBtn, WishBtn,amount, reduxAddcartBtn }) {
   const [specificMovieData, setSpecificMovieData] = useState([])
   const [isCliked, setIsClicked] = useState(false);
   const theme = createTheme({
@@ -205,10 +205,16 @@ const dispatch= useDispatch()
             width="100%" image={movieposter} style={{ objectFit: "cover", display: "block", height: "210px" }} alt="movieposter" />
           <div className='content'></div>
 
+          <div className='' style={{ right: "40px", top: '63px', position: "absolute" }}>
+            ${amount}
+          </div>
+
           {/* My CART ICON*/}
           <div className='' style={{ right: "5px", top: '63px', position: "absolute" }}>
             {reduxAddcartBtn}
           </div>
+
+         
 
           {/* Bottom Card ICONS */}
           <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{ bottom: "45px", left: "0px" }}>
