@@ -14,6 +14,13 @@ function EditUpdateMovieForm({ mode,singleMovie, id }) {
   const navigate = useNavigate();
   const [ movieData, setMovieData] = useState([]);
   const amberColor = amber[500];
+    const token = sessionStorage.getItem('token')
+  let config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
 const formSchema = Yup.object().shape({
   moviename: Yup.string().required("Movie name is required").min(3,"Movie name must be at least 3 characters"),
   movieposter: Yup.string().required("Movie poster URL is required").min(5, "URL too short"),
@@ -52,12 +59,6 @@ const formSchema = Yup.object().shape({
     }
   })
 
-  const token = sessionStorage.getItem('token')
-  let config = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
 
   // GET MOVIE DATA API
   const getMovieData = async () => {

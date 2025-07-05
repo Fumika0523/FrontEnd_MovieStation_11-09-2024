@@ -5,11 +5,13 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { BiSolidMoviePlay } from "react-icons/bi";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { useLocation } from 'react-router-dom';
+import { useNavigate} from "react-router-dom";
 
-
-const MovieActionButtons = ({ mode, navigate, wishlistCount, cartCount }) => {
+const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
   const token = sessionStorage.getItem('token');
   //  console.log("wishlistCount",wishlistCount)
+  const navigate = useNavigate()
+  
   const location = useLocation();
 
   return (
