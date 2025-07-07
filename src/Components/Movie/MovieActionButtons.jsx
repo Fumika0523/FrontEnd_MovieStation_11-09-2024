@@ -50,7 +50,8 @@ const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
         >
           {cartCount == 0 ? (
             <ShoppingCartIcon className="fs-4 me-md-1 "
-              style={{ color: "rgba(209, 209, 213, 0.63)" }} />
+              style={{ color: mode === "light" ? "rgb(251, 149, 7)" : "rgba(255,204,0)",
+        }} />
           )
             :
             (
@@ -146,6 +147,7 @@ const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
           style={{
             backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
             color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
+              border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
           }} className="text-nowrap d-flex align-center" onClick={() => navigate('/allmovies')}>
           <IoChevronBackOutline className="fs-4 me-1"
           style={{

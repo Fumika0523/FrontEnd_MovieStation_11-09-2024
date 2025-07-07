@@ -73,8 +73,8 @@ const WishlistDisplay = ({ mode }) => {
     <>
       <Container fluid>
         <Row className="my-3 mx-auto mx-md-2 justify-content-between align-items-center">
-          <Col lg={3} className="text-start ps-md-5 pt-3 d-flex align-items-center fs-4 ">
-            <FaHeart className="me-2 text-danger fs-2" /> My Wishlist
+          <Col lg={3} className="text-start ps-sm-4 pt-3 d-flex align-items-center fs-4 ">
+            <FaHeart className="me-1 text-danger fs-2" /> My Wishlist
           </Col>
           <Col lg={9} className='sticky-top'>
             <MovieActionButtons

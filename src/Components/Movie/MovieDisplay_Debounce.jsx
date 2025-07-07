@@ -31,6 +31,21 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   //console.log("cart",cart)
   //console.log(cart?.length)
   const [orderData, setOrderData] = useState([])
+  
+
+const getOrderData = async () => {
+  try {
+    const res = await axios.get(`${url}/order`, config);
+    setOrderData(res.data.orderData || []);
+    console.log("Fetched orderData:", res.data.orderData);
+  } catch (e) {
+    console.error("Failed to fetch order data:", e);
+  }
+};
+
+useEffect(() => {
+  getOrderData();
+}, []);
   const [sortedData, setSortedData] =useState("createdAt:desc") //default
   //console.log("sortedData",sortedData)
   //console.log("orderData",orderData)
@@ -47,6 +62,7 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
   const successNotify = () => toast.success('Added to the cart!', { autoClose: 3000 });
   const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 3000 });
+  const movieDeleteNotify = () => toast.error('Movie is Deleted !', { autoClose: 2000 });
   const addWishNotify = () => { toast.success('Added to Wishlist!', { 
     position: "top-right",
     autoClose: 1000,
@@ -103,19 +119,49 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   };
 
   //CART Server
-  const handleAddCartItem = useCallback(async(element)=>{
-    console.log("1234567",element)
+  // const handleAddCartItem = useCallback(async(element)=>{
+  //   console.log("1234567",element)
+  //   const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
+  //   if(isInCartlist){
+  //     console.log("ErrorNotify")
+  //     errorNotify()
+  //   }else{
+  //     dispatch(cartAddItem(element))
+  //     successNotify()
+  //     await addCartItemToServer(element)
+  //   }
+  //   await getCartData()
+  // },[dispatch, cart])
+
+const handleAddCartItem = useCallback(
+  async (element) => {
     const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
-    if(isInCartlist){
-      console.log("ErrorNotify")
-      errorNotify()
-    }else{
-      dispatch(cartAddItem(element))
-      successNotify()
-      await addCartItemToServer(element)
+
+    // Check if the item exists in orderData
+    const isAlreadyPurchased = orderData?.some(order =>
+      order.movies?.some(movie => movie._id === element._id)
+    );
+
+    if (isAlreadyPurchased) {
+      console.log("This movie was already purchased");
+      toast.error("You've already purchased this movie. Please check My Purchase page");
+      return;
     }
-    await getCartData()
-  },[dispatch, cart])
+
+    if (isInCartlist) {
+      console.log("Already in cart");
+      toast.error("Movie already in cart.");
+    } else {
+      dispatch(cartAddItem(element));
+       toast.success("Movie added to cart.");
+      await addCartItemToServer(element);
+    }
+
+    await getCartData();
+  },
+  [cart, orderData, dispatch]
+);
+
 
   //Wish Server
   const handleAddWishItem = useCallback(async (element) => {
@@ -167,43 +213,47 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   const deleteMovie = async (_id) => {
     await axios.delete(`${url}/deletemovie/${_id}`, config);
     navigate(`/allmovies`);
-    alert("Movie is Deleted")
+    // alert("Movie is Deleted")
+    movieDeleteNotify()
     getMovieData();
      
   };
-      useEffect(()=>{
-    const getCartData=async()=>{
-      try{
-        let response = await axios.get(`${url}/cart`,{
-        headers:{Authorization:`Bearer ${token}`}
-        })
-        console.log(response.data.cartData)
-        if(response.data.cartData){
-          dispatch(setCart(response.data.cartData))
-          console.log("cart",response.data)
-        } else{
-          dispatch(setCart([]))
-        }
-      }catch(error){
-        console.error("Failed to load Cart",error);
-        dispatch(setCart([]))
-      }
-    }
 
-    if(token){
-      getCartData()
-    }
-  },[dispatch,token])
 
-  const getOrderData = async()=>{
-        // /order?sortBy=createdAt:asc
-        const res = await axios.get(`${url}/order`,config)
-        console.log(`res`,res)
-        // setOrderData(res.data.orderData)
-        // console.log("orderData from my movie",res.data.orderData)
-      useEffect(() => {
-      getOrderData();
-      }, [])};
+
+  //     useEffect(()=>{
+  //   const getCartData=async()=>{
+  //     try{
+  //       let response = await axios.get(`${url}/cart`,{
+  //       headers:{Authorization:`Bearer ${token}`}
+  //       })
+  //       console.log(response.data.cartData)
+  //       if(response.data.cartData){
+  //         dispatch(setCart(response.data.cartData))
+  //         console.log("cart",response.data)
+  //       } else{
+  //         dispatch(setCart([]))
+  //       }
+  //     }catch(error){
+  //       console.error("Failed to load Cart",error);
+  //       dispatch(setCart([]))
+  //     }
+  //   }
+
+  //   if(token){
+  //     getCartData()
+  //   }
+  // },[dispatch,token])
+
+  // const getOrderData = async()=>{
+  //       // /order?sortBy=createdAt:asc
+  //       const res = await axios.get(`${url}/order`,config)
+  //       console.log(`res`,res)
+  //       // setOrderData(res.data.orderData)
+  //       // console.log("orderData from my movie",res.data.orderData)
+  //     useEffect(() => {
+  //     getOrderData();
+  //     }, [])};
         
   return (
     <>
@@ -275,7 +325,8 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
           <Tooltip title="Add to Cart">
             <span onClick={()=>handleAddCartItem(element)} >
             {
-              cart?.some(cartItem => cartItem._id === element._id) ?
+              cart?.some(cartItem => cartItem._id === element._id) || orderData?.some(order =>
+              order.movies?.some(movie => movie._id === element._id)) ?
               (
                 <MdRemoveShoppingCart className="fs-3 reduxIcon"/>
               )

@@ -103,7 +103,12 @@ function Cartpage({mode}) {
 
     return (
         <>
-          <div className="row mx-auto px-4 border-primary  border-3 pt-4">
+
+          <div className="row mx-auto  px-4 border-primary  border-3 pt-4">
+                    <div className="justify-content-start  ms-3 fs-2  d-flex flex-row ">
+                    <FaShoppingCart className="text-warning fs-1 me-1"/>
+                    <div className="fs-3">Your Shopping Cart</div>
+                </div>
                 <MovieActionButtons
                     mode={mode}
                     navigate={navigate}
@@ -111,13 +116,9 @@ function Cartpage({mode}) {
                     cartCount={cart?.length }
                     />
     
-                <div className="col-lg-7 border col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
+                <div className="col-lg-7  col-md-8 col-sm-10 col-11 mx-auto my-3 rounded" 
                 >
-                <div className="justify-content-start my-3  mx-auto fs-2  d-flex flex-row ">
-                    <FaShoppingCart className="text-warning fs-1 me-1"/>
-                    <div className="fs-3">Your Shopping Cart</div>
-                </div>
-        
+                    
                 {/* Back */}
                 {
                     cart?.length === 0 ?
@@ -147,7 +148,7 @@ function Cartpage({mode}) {
                 {
                     cart?.length === 0 ? (
                                <>
-                <div className="fs-1 fw-bold text-center">Your Cart is Empty !!</div>
+                <div className="fs-1 fw-bold text-center mt-3">Your Cart is Empty !!</div>
                 <Image className="mx-auto"
                 src={"https://images-prod.dazeddigital.com/1280/azure/dazed-prod/1100/3/1103540.jpg"} 
                 style={{objectFit:"cover",width:"100%", height:"auto"}} />

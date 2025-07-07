@@ -239,17 +239,17 @@ const successNotify = () => toast.success('Added to the cart!', { autoClose: 300
             </Modal>
             
             {/* Middle */}
-            <Row className='mb-4  mx-auto mx-md-5 '>
+            <Row className='mb-4   mx-auto mx-md-5 '>
               {/* LEFT */}
-              <Col className='col-lg-4 col-12 mx-auto  d-flex justify-content-center align-items-center mb-md-1  mb-2'>
+              <Col className='col-lg-6 col-12 mx-auto  d-flex justify-content-center align-items-center mb-md-1  mb-2'>
                 {/* Image */}
-                <Image className='rounded w-100' style={{height:"100%"}} src={movieInfo?.movieposter} />
+                <Image className='rounded ' style={{width:"100%",height:"350px"}}  src={movieInfo?.movieposter} />
               </Col>
 
               {/* RIGHT */}
               <Col           
-              className='col-lg-6 d-flex flex-column ps-3 pt-2 justify-content-center  col-sm-10  col-12 mx-auto mb-md-1 rounded align-items-center mb-2'
-              style={{ backgroundColor: mode === "light" ? "white": "rgb(8, 11, 13)" }}>
+              className='col-lg-4 d-flex flex-column  justify-content-center col-12 mx-auto mb-md-1 rounded align-items-center px-4 py-2 mb-2'
+              style={{ backgroundColor: mode === "light" ? "white": "rgb(20, 22, 23)" }}>
                 <div className='mb-3 '>{movieInfo.summary}</div>
                 <div className='mb-2 d-flex w-100 flex-column '> <span className='mb-1 fw-bold'>CAST</span>{movieInfo.cast}</div>
                 <div className='mb-2 d-flex w-100 flex-column '><span className='mb-1 fw-bold'>GENRES</span>{movieInfo.genres}</div>
@@ -257,15 +257,11 @@ const successNotify = () => toast.success('Added to the cart!', { autoClose: 300
               </Col>
 
               {/* BUTTONS */}
-              <Col className='col-lg-2 col-md-10 col-12 col-sm-10 mx-auto mt-1'>
+              <Col className='col-lg-2 col-12  mx-auto mt-1'>
               <Row className='align-items-center mx-auto d-flex justify-content-evenly '>
               {/* List */}
               <Col className="col-md-6 col-6 col-sm-6 col-lg-12">
-                {/* <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
-                  style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
-                    color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
-                    borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
-                  > <i className="fa-solid fa-bookmark fs-5 me-2"></i> <div>List</div></Button> */}
+
            <Button variant="outline-none" className="py-3 d-flex w-100 trailerBtn mb-3"
                   style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
                     color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
@@ -285,7 +281,7 @@ const successNotify = () => toast.success('Added to the cart!', { autoClose: 300
                    style={{ backgroundColor: mode === "light" ? "white" :"rgb(34, 44, 56)",
                     color:mode === "light" ? "rgb(79, 83, 91)":"rgb(197, 199, 203)",
                     borderColor:mode === "light" ? "rgb(179, 181, 183)":"rgb(34, 44, 56)"}}
-                    > <i className="fa-solid fa-check fs-5 me-2"></i><div>Seen all</div></Button>
+                    >$<div>{movieInfo.amount}</div></Button>
               </Col>
               <Col className='col-md-6 col-sm-6 col-lg-12' >
                   {/*Like*/}

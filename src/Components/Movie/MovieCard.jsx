@@ -214,8 +214,6 @@ const dispatch= useDispatch()
             {reduxAddcartBtn}
           </div>
 
-         
-
           {/* Bottom Card ICONS */}
           <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{ bottom: "45px", left: "0px" }}>
 
