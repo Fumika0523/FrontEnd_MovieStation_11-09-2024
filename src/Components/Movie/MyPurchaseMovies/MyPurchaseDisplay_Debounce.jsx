@@ -8,6 +8,7 @@ import MovieActionButtons from "../MovieActionButtons"
 import { useDispatch, useSelector } from "react-redux"
 import MyMovieCard from "./MyPurchaseCard"
 import MyPurchaseCard from "./MyPurchaseCard";
+import { BiSolidMoviePlay } from "react-icons/bi";
 
 const MyPurchaseDisplay_Debounce = ({mode}) => {
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
@@ -107,7 +108,10 @@ useEffect(()=>{
 
         </div>
         {/* VIDEO PLAYER */}
-         <h2 className="ms-5">My Purchase</h2>
+         <h3 className="ms-5 d-flex align-items-center gap-1">
+          <BiSolidMoviePlay className="fs-1 text-success" />
+          My Purchase
+          </h3>
         <div className="d-flex flex-row justify-content-center flex-wrap mt-4 gap-5">
 
             
