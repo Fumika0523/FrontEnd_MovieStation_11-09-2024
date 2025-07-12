@@ -116,45 +116,10 @@ async function sendData() {
 
 
 
-----
-in wish cart silice, also checking if item is already in wishlist,
-wishCartSlice: 
- wishAddItem: (state, action) => {
-      const exists = state.wishItems.find(item => item._id === action.payload._id); }
-> - This check prevents duplicate items from being added inside the Redux reducer.
-> - It ensures the wishlist remains clean at the state level.
-
-
-MovieDisplay_Debounce:
- const isInWishlist = wishlist?.some(item => item._id === element._id);"   ?
->- This is checking before dispatching actions, determining whether the item should be removed or added.
->his check happens outside Redux and helps decide whether to dispatch wishRemoveItem or wishAddItem.
-
-- wishlist?.some(...) → Looks through the wishlist array.
-- item => item._id === element._id → Checks if any item in wishlist has the same _id as element._id.
-
-----------------------
-1.design for delete & movin to wishlist button                ----->> DONE
-2.moving to wishlist function in                              --> DONE
-3.moving to the cart in wishlist page                        ---> DONE
-4.moviection button in cartpage                               --> DONE
-5.sorting part                                                 --> DONE
-6.when cart item is empty, the empty banner should show       ---> DONE
-7.pdf order invoice , add stroke on each item 
-8. price is static or not, change the price in DB and see      ---> DONE
-9. Download Invoice
-10. Refresh cartpage                                            --> DONE
-11. Without Login
-12. check my movies <WOrk> >> Trailer, when you click the button just instantly 
-13.Duplicated order     --> DONE
-14. My Purchase & My movie (lists that you added)   --> DONE
-15. Check signup validation
-
-------------
 README FILE:
 AUTHENTICATION:
-SIGININ /SIGNUP /LOGOUT FUNCTIONLITY                    ->>> NOt correct siginin details
-ValidationSchema + Errors -FORM                         -PENDING(ERRORS) (COMMON SCHEMA) >> DONE
+SIGININ /SIGNUP /LOGOUT FUNCTIONLITY                    -DONE
+ValidationSchema + Errors -FORM                         -DONE (COMMON SCHEMA)(MENTION SAMPLE SIGNUP/SIGNIN USER IN README)
 
 WITHOUT AUTHENTICATION
 ALL MOVIES -GET REQUEST                                  -DONE
@@ -163,9 +128,9 @@ SEARCH FUNCTIONALITY                                     -DONE
 SEE ALL ENQUIRES                                         -DONE
 ALL NAVIGATION                                           -DONE
 
-CONTACT FORM SUBMISSION + TABLE (ADDED+VIEW)             -PENDING(ERRORS) ->> DONE
-CARTPAGE ACCESSIBLITY(TOKEN)                             -PENDING(ERRORS) ->> DONE
-MYMOVIES/MYPURCHASE   PAGE+ICON ACCESSIBLITY + DONT SHOW -PENDING(NOT DONE)-FUMIKA <WORK>
+CONTACT FORM SUBMISSION + TABLE (ADDED+VIEW)             -DONE 
+CARTPAGE ACCESSIBLITY(TOKEN)                             -DONE
+MYMOVIES/MYPURCHASE   PAGE+ICON ACCESSIBLITY + DONT SHOW -DONE 
 CART/WISHLIST FUNCTIONLITY                               -PENDING(NOT DONE)-POONAM-MONDAY
 
 WITH AUTHENTICATION
@@ -174,21 +139,78 @@ NO EDIT/DELETE/UPDATE ACCESS                            -DONE
 SEARCH FUNCTIONALITY                                    -DONE
 SEE ALL ENQUIRES                                        -DONE
 ALL NAVIGATION                                          -DONE
-ADD MOVIE                                               -DONE(ADD AMOUNT AS FEILD) //Add amount  >>DONE
-EDIT MOVIE                                              -DONE(ADD AMOUNT AS FEILD) //Add amount  >> DONE
-UPDATE MOVIE                                            -DONE(ADD AMOUNT AS FEILD) //Add amount   >> DONE
+ADD MOVIE                                               -DONE
+EDIT MOVIE                                              -DONE
+UPDATE MOVIE                                            -DONE
 DELETE MOVIE                                            -DONE
 ADD|REMOVE -WISHCART                                    -DONE
-ADD - CART                                              -DONE // trailer page
+ADD - CART                                              -DONE
 WISHLIST NAVIGATION                                     -DONE
 
+WISHLIST
+  >>ADD TO WISHLIST
+  >>REMOVE TO WISHLIST
+  >>DISPLAY IN ACTION BUTTONS
+  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -PENDING
+  >>REMOVE ITEM FORM WISHLIST DISPLAY   PAGE                -PENDING
+  >>MOVE TO CART TO WISHLIST DISPLAY    PAGE                -PENDING
 
-WISHLIST DISPLAY
-CART DISPLAY
-REFRESH
-ORDERPAGE
+CART
+  >>ADD TO CART
+  >>DISPLAY IN ACTION BUTTONS
+  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -PENDING
+  >>REMOVE ITEM FORM CART  PAGE                             -PENDING
+  >>MOVE TO ITEMS TO WISHLIST FROM CART PAGE                -PENDING
+
+
+
 ORDER SUMMARY
-PDF DOWNLOAD
-DB AT EVERY INSTANCE
-SORTING ORDERS
-REDUCE THE COMPONENT LENGTH  >> CUSTOM HOOKS
+  >>DISPLAY ORDERS
+  >>SORTING ORDERS
+  >>DELIVERED || PROCESSING STAGE 
+  >>TOTAL PRICE CALCULATED CORRECTLY
+  >>DOWNLOAD INVOICE 
+  >>INVOICE TOTAL PRICE MISMATCH                
+  >>UI DESIGN FOR INVOICE                           -ERROR 
+  >>RETURN TO TOP/ BACK BUTTON                      -PENDING
+  >>ADD PAGINATION TO ORDER SUMMARY (3)             -PENDING   
+
+ENQUIRIES
+  >>ADD PAGINATION TO TABLE                       -PENDING   
+
+
+>> PAYMENT GATEWAY
+>> GOOGLE/FACEBOOK LOGIN
+>> ADMIN PANEL 
+
+STUDENT MANAGEMENT >> USER PROFILE >> EDIT >> GOOGLE -GMAIL
+
+
+
+BLOG APPLICATION  -CRUD
+NEWS APPLICATIONS -API FETCHING FROM RANDOM RESOURCES >>> CRUD
+RECIPE SEARCH     - CRUD +SEARCH
+ECOMM -CRUD + ADD TO CART > REMOVE FROM CART
+AUTHENTICATION SYSTEM >> SIGIN-SIGNOUT
+CONTACT MANAGER 
+FORM VALIDATOR >>BEFORE AND AFTER SUBMIT 
+
+
+REFRESH
+
+
+
+Validation Before Submit:
+validationSchema works for you
+
+Validation After Submit:>> Backend works
+Sigin
+1-ID ,Phone Number & Password >> Successful Login >> Authentication
+2-ID ,Phone Number & Password  >> Missing >>Throw Error (Worst case >> Not aware /lack of tech)
+technology Wise:
+3-ID -isincorrect
+4-Phone Number -incorrect
+5-Password -incorrect
+>> Valid Error >> Axios call fail >> Message >>
+
+All the forms
