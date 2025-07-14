@@ -192,3 +192,11 @@ PDF DOWNLOAD
 DB AT EVERY INSTANCE
 SORTING ORDERS
 REDUCE THE COMPONENT LENGTH  >> CUSTOM HOOKS
+
+return to top & back button, and pagination 3 movies in 1 page in Order page
+
+>>UI DESIGN FOR INVOICE                           -ERROR 
+  >>RETURN TO TOP/ BACK BUTTON                      -PENDING
+  >>ADD PAGINATION TO ORDER SUMMARY (3)             -PENDING
+
+  router.post << need to fix code>>

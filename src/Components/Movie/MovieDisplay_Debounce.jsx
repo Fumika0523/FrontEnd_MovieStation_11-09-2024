@@ -259,7 +259,6 @@ const handleAddCartItem = useCallback(
     <>
       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" margin={2}>
         <div className="mx-auto  row mb-3 d-flex justify-content-end w-100 flex-row align-items-center">
-          {/* <div className="border  border-4 border-danger"> */}
             <MovieActionButtons
               mode={mode}
               navigate={navigate}
@@ -268,7 +267,6 @@ const handleAddCartItem = useCallback(
               cartCount={cart?.length || 0}
               cart={cart}
             />
-              {/* </div> */}
               {/* Search */}
               <div className="flex-wrap justify-content-end  d-flex pt-3 flex-row  border-4 border-danger">
                <input 

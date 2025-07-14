@@ -88,15 +88,15 @@ const [userData,setUserData]=useState([])
     { 
     token &&
        <>
-       <Route path='/addmovie'  mode={mode}  element={<AddMovie setMovieData={setMovieData}/>}/>
-       <Route path="/editmovie/:id" element={<EditMovie movieData={movieData} />}/>
-       <Route path="/editenquiry/:id" element={<EditEnquiry />} mode={mode} />
-       <Route path="/ordersummary" mode={mode} element={<OrderSummary/>}/>
+       <Route path='/addmovie'   element={<AddMovie setMovieData={setMovieData} mode={mode} />}/>
+       <Route path="/editmovie/:id"   element={<EditMovie movieData={movieData} mode={mode} />}/>
+       <Route path="/editenquiry/:id"  element={<EditEnquiry mode={mode} />} />
+       <Route path="/ordersummary"  element={<OrderSummary mode={mode} />}/>
        <Route path="/mywishlist"  element={<WishlistDisplay mode={mode}/>}/>
-       <Route path="/cartpage" mode={mode} element={<Cartpage/>}/>
-       <Route path="/profile" mode={mode} element={<ProfileEdit/>}/>
-        <Route path="/my-purchase" mode={mode} element={<MyPurchaseDisplay_Debounce/>}/>
-         <Route path="/my-movie" mode={mode} element={<MyMoviesDisplay/>}/>
+       <Route path="/cartpage" element={<Cartpage mode={mode} />}/>
+       <Route path="/profile" element={<ProfileEdit mode={mode} />}/>
+        <Route path="/my-purchase"  element={<MyPurchaseDisplay_Debounce mode={mode} />}/>
+         <Route path="/my-movie" element={<MyMoviesDisplay mode={mode} />}/>
        </>
     }
     {/* whenever you access to the page which need token, then signin component shows */}

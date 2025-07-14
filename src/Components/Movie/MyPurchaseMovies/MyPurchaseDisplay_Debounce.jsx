@@ -98,7 +98,7 @@ useEffect(()=>{
 
     return (
     <>
-        <div>
+            <div className="me-4">
             <MovieActionButtons 
             mode={mode}
             navigate={navigate}
@@ -112,8 +112,7 @@ useEffect(()=>{
           <BiSolidMoviePlay className="fs-1 text-success" />
           My Purchase
           </h3>
-        <div className="d-flex flex-row justify-content-center flex-wrap mt-4 gap-5">
-
+        <div className="d-flex flex-row justify-content-center flex-wrap mt-4 gap-5 mx-lg-0 mx-md-0 mx-3">
             
             {
             orderData?.map((element,)=>(

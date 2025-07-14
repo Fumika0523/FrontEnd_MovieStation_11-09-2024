@@ -7,12 +7,14 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { MdDownloading } from "react-icons/md";
 import { BiSort } from "react-icons/bi";
-import Button from "react-bootstrap/Button";
+import { Button, Fade } from 'react-bootstrap';
 import MovieActionButtons from "../Movie/MovieActionButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setWishlist } from "../../utils/WishCartSlice";
 import { setCart } from "../../utils/cartSlice";
+import { IoMdArrowRoundUp } from "react-icons/io";
+
 
 function OrderSummary({ mode }) {
   const cart = useSelector((store) => store.cart.cartItems || []);
@@ -63,7 +65,11 @@ function OrderSummary({ mode }) {
 
   const handleDownload = async ({ element }) => {
     const orderdate = formatDate(element.updatedAt);
-    const totalprice = element.movies.length * 250;
+    // const totalprice = element.movies.length * 250;
+    const totalprice = element.movies.map((p) => p.amount).reduce((acc, cv) => acc + cv, 0)
+    // console.log(newTotalPrice)
+    // console.log(element)
+
     const movies = element.movies;
 
     const downloadUrl = `${url}/getinvoice?orderid=${element._id}&orderdate=${orderdate}&totalprice=${totalprice}`;
@@ -107,15 +113,35 @@ function OrderSummary({ mode }) {
     </Tooltip>
   );
 
+    const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShow(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  
   return (
     <>
-      <div className="row mx-auto">
+      <div className="row mx-auto ">
+        {/* <div className="row mx-auto "> */}
         <MovieActionButtons
           mode={mode}
           navigate={navigate}
           wishlistCount={wishlist?.length || 0}
+          wishlist={wishlist}
           cartCount={cart?.length || 0}
-        />
+          cart={cart}
+            />
+        {/* </div> */}
+      
         <div className="mx-auto col-lg-8 col-md-11 col-11 border rounded border-secondary-50 my-4 px-sm-5 py-3">
           <div className="fs-2 justify-content-between mx-2 align-items-center pb-3 d-flex flex-row">
             <div className="d-flex flex-row">
@@ -124,11 +150,10 @@ function OrderSummary({ mode }) {
               </div>
               <div>My Orders</div>
             </div>
-            <Button variant=""
+            <Button variant="outline-secondary"
                  onClick={toggleSortOrder}>
               <BiSort
-                className="fs-4 text-success"
-           
+                className="fs-4 "
               />
             </Button>
           </div>
@@ -171,6 +196,20 @@ function OrderSummary({ mode }) {
               <hr />
             </div>
           ))}
+
+    <Fade in={show}>
+      <div className="position-fixed bottom-0 end-0 m-4">
+        <Button
+          variant="success"  
+          onClick={scrollToTop}
+          className="rounded-circle d-flex align-items-center justify-content-center"
+          style={{ width: '50px', height: '50px' }}
+        >
+           <IoMdArrowRoundUp  className="text-white fs-1"/>
+        </Button>
+      </div>
+    </Fade>
+
         </div>
       </div>
     </>

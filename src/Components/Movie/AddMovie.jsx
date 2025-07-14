@@ -109,13 +109,13 @@ const postMovies=async(newMovie)=>{
       {/* Buttons */}
         <Grid container className=" d-flex justify-content-between " marginBottom={3} >
         <Button
-          variant="success"
+          variant=""
           onClick={() => navigate('/allmovies')}
           className="text-nowrap d-flex align-items-center me-3"
           style={{
-          backgroundColor: mode === "light" ? "white" : "rgba(114, 114, 116, 0.52)",
-          border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
-          color: mode === "light" ? "black" : "white",
+          backgroundColor: mode === "light" ? "rgb(148, 148, 152)" : "rgb(84, 84, 86)",
+          border: mode === "light" ? "1px solid rgb(162, 162, 166)" : "none",
+          color:"white",
         }}
         >
           <IoChevronBackOutline className="fs-4 me-1" />
@@ -125,7 +125,7 @@ const postMovies=async(newMovie)=>{
             {/* UPDATE MOVIE */}
           <Button variant="success" type="submit" className="d-flex text-nowrap align-items-center border-0 border "><i class="fa-solid fs-5 fa-circle-plus me-1" 
           style={{
-          color: mode === "light" ? "black" : amberColor,
+          color:  amberColor 
         }}></i>Add Movie</Button>   
       </Grid>
       <Grid container spacing={3} >
