@@ -343,7 +343,18 @@ const handleAddCartItem = useCallback(
                     <Tooltip title="Add to Wish List">
                       <span className="d-flex align-items-center" onClick={() => handleAddWishItem(element)}>
                       {/* searches for element._id in the wishlist array. >> True/false item._id > wishlist, element._id > movie._id*/}
-                        {wishlist?.some(item => item._id === element._id) ? (
+                      { orderData?.some(order =>
+              order.movies?.some(movie => movie._id === element._id)) 
+              ?
+                  (
+                        <>
+                        </>
+                      )
+                      :
+              (
+                <>              
+                        {wishlist?.some(item => item._id === element._id) ? 
+                        (
                         <FavoriteIcon
                         className="text-danger border-primary"
                         style={{ fontSize: "25px", margin: "1.5px" }}
@@ -354,6 +365,11 @@ const handleAddCartItem = useCallback(
                         style={{ fontSize: "25px" }}
                         />
                         )}
+                          </>
+                      )
+                      
+                  
+                      }
                       </span>
                     </Tooltip>
                     <ToastContainer

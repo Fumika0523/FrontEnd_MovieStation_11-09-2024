@@ -6,8 +6,14 @@ const cartSlice=createSlice({
         cartItems:[],
     },
     reducers:{
+    // cartAddItem:(state,action)=>{
+    //     const exists = state.cartItems.find(cartItems => cartItems._id === action.payload._id); 
+    //     if(!exists){
+    //         state.cartItems.push(action.payload)
+    //     }
+    // },
     cartAddItem:(state,action)=>{
-        const exists = state.cartItems.find(cartItems => cartItems._id === action.payload._id); 
+        const exists = state.cartItems.find(item => item._id === action.payload._id)
         if(!exists){
             state.cartItems.push(action.payload)
         }

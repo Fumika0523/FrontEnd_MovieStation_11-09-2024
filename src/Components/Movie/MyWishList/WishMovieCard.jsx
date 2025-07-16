@@ -48,7 +48,8 @@ console.log(movieposter, moviename,rating,_id,element)
 // ADD TO CART
   const addCartItemToServer = async (element)=>{
     try{
-      await axios.post(`${url}/addcart`, element, config);
+      let res = await axios.post(`${url}/addcart`, element, config);
+      console.log("addcartitem",res)
     }catch(error){
       console.error('Error adding to wishlist:', error);
     }
@@ -66,7 +67,7 @@ console.log(movieposter, moviename,rating,_id,element)
     if(element){
       dispatch(cartAddItem(element))
       await addCartItemToServer(element)
-        dispatch(wishRemoveItem(element))
+        // dispatch(wishRemoveItem(element))
         await removeWishItemFromServer(element)
         await getWishData()
     }else
@@ -115,7 +116,7 @@ console.log(movieposter, moviename,rating,_id,element)
             className="fs-3" />
             </Button>               
 
-            {/* Add Cart */}
+            {/* Move to Cart */}
             <Button variant="none"    
             onClick={()=>handleAddCart(element)}>
              <ShoppingCartIcon className="fs-3"

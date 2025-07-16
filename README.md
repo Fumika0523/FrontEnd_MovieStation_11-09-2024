@@ -200,3 +200,8 @@ return to top & back button, and pagination 3 movies in 1 page in Order page
   >>ADD PAGINATION TO ORDER SUMMARY (3)             -PENDING
 
   router.post << need to fix code>>
+
+  >>MOVE TO CART TO WISHLIST DISPLAY    PAGE                -PENDING
+  >>MOVIE PURCHASED THEN DONT DISPLAY THE WISHLIST ICON     -PENDING
+ENQUIRIES
+  >>ADD PAGINATION TO TABLE                       -PENDING
