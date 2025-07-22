@@ -139,7 +139,7 @@ function OrderSummary({ mode }) {
           wishlist={wishlist}
           cartCount={cart?.length || 0}
           cart={cart}
-            />a
+            />
         {/* </div> */}
       
         <div className="mx-auto col-lg-8 col-md-11 col-11 border rounded border-secondary-50 my-4 px-sm-5 py-3">

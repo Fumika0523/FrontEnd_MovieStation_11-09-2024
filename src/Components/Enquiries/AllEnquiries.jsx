@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "react-bootstrap";
 import CustomizedTables from "./CustomizedTables"
 import MovieActionButtons from "../Movie/MovieActionButtons"
+import Pagination from 'react-bootstrap/Pagination';
 
 
 function AllEnquiries({mode}) {
@@ -30,6 +31,15 @@ let config = {
     useEffect(()=>{
     getEnquiryData()
     },[])
+      const [currentPage, setCurrentPage] = useState(1);
+const itemsPerPage = 5; // You can adjust as needed
+
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentEnquiries = enquiryData.slice(indexOfFirstItem, indexOfLastItem);
+const totalPages = Math.ceil(enquiryData.length / itemsPerPage);
+const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
          // API call has to be made inside UseEffect () only
 
     return (
@@ -51,8 +61,44 @@ let config = {
             </>
             :
             <>
-            <CustomizedTables enquiryData = {enquiryData} setEnquiryData={setEnquiryData} mode={mode}/>
-         
+            <CustomizedTables  enquiryData={currentEnquiries} setEnquiryData={setEnquiryData} mode={mode}/>
+
+
+<Pagination className="justify-content-center mt-3">
+    <Pagination.First onClick={() => handlePageChange(1)} disabled={currentPage === 1} />
+    <Pagination.Prev onClick={() => handlePageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1} />
+
+    {currentPage > 2 && (
+        <>
+            <Pagination.Item onClick={() => handlePageChange(1)}>1</Pagination.Item>
+            {currentPage > 3 && <Pagination.Ellipsis />}
+        </>
+    )}
+
+    {Array.from({ length: totalPages }, (_, index) => index + 1)
+        .filter(page => Math.abs(page - currentPage) <= 1)
+        .map(page => (
+            <Pagination.Item
+                key={page}
+                active={page === currentPage}
+                onClick={() => handlePageChange(page)}
+            >
+                {page}
+            </Pagination.Item>
+        ))
+    }
+
+    {currentPage < totalPages - 1 && (
+        <>
+            {currentPage < totalPages - 2 && <Pagination.Ellipsis />}
+            <Pagination.Item onClick={() => handlePageChange(totalPages)}>{totalPages}</Pagination.Item>
+        </>
+    )}
+
+    <Pagination.Next onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))} disabled={currentPage === totalPages} />
+    <Pagination.Last onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} />
+</Pagination>
+
              </>
         } 
          </div>

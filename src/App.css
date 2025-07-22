@@ -433,4 +433,28 @@ text-shadow: none;
     height: 350px;
   }
 
-  
+  /* .custom-pagination {
+  background-color: #ffcc00;
+  color: #000;
+  border-radius: 8px;
+  margin: 0 5px;
+}
+.custom-pagination.active {
+  background-color: #ffaa00;
+  color: white;
+} */
+
+/* .custom-pagination {
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
+    margin: 2px;
+}
+
+@media (max-width: 576px) {
+    .custom-pagination {
+        min-width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+} */

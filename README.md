@@ -151,16 +151,16 @@ WISHLIST
   >>ADD TO WISHLIST
   >>REMOVE TO WISHLIST
   >>DISPLAY IN ACTION BUTTONS
-  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -PENDING
-  >>REMOVE ITEM FORM WISHLIST DISPLAY   PAGE                -PENDING
-  >>MOVE TO CART TO WISHLIST DISPLAY    PAGE                -PENDING
+  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -Done 
+  >>REMOVE ITEM FORM WISHLIST DISPLAY   PAGE                -Done 
+  >>MOVE TO CART TO WISHLIST DISPLAY    PAGE                -Done
 
 CART
   >>ADD TO CART
   >>DISPLAY IN ACTION BUTTONS
-  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -PENDING
-  >>REMOVE ITEM FORM CART  PAGE                             -PENDING
-  >>MOVE TO ITEMS TO WISHLIST FROM CART PAGE                -PENDING
+  >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -Done
+  >>REMOVE ITEM FORM CART  PAGE                             -Done
+  >>MOVE TO ITEMS TO WISHLIST FROM CART PAGE                -Done
 
 
 
@@ -172,11 +172,12 @@ ORDER SUMMARY
   >>DOWNLOAD INVOICE 
   >>INVOICE TOTAL PRICE MISMATCH                
   >>UI DESIGN FOR INVOICE                           -ERROR 
-  >>RETURN TO TOP/ BACK BUTTON                      -PENDING
+  >>RETURN TO TOP/ BACK BUTTON                      -DONE
   >>ADD PAGINATION TO ORDER SUMMARY (3)             -PENDING   
 
 ENQUIRIES
-  >>ADD PAGINATION TO TABLE                       -PENDING   
+  >>ADD PAGINATION TO TABLE                       -PENDING   >> No button, add previous and next.
+  >> order page , pagination for 2 order
 
 
 >> PAYMENT GATEWAY
