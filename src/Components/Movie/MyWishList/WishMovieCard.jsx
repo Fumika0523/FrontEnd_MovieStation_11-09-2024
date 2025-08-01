@@ -88,11 +88,11 @@ console.log(movieposter, moviename,rating,_id,element)
 
    return (
     <>
-      <div className="d-flex  px-md-3 row mx-5 align-items-center justify-content-center pt-4 pb-2  ">
-          <div className="row  mx-auto  d-flex align-items-center justify-content-center">
+      {/* <div className="d-flex border  px-md-3 row mx-5 align-items-center justify-content-center pt-4 pb-2  "> */}
+          <div className="row  mx-md-5 px-md-5 d-flex align-items-center justify-content-center mb-2">
                 {/* Movie Poster */}
-            <div className="col-12  col-lg-3 col-md-3 col-sm-10 mx-auto ps-md-4 mb-sm-3">
-                <img src={movieposter} className="mx-auto w-100 text-center d-flex justify-content-center rounded" style={{objectFit:"cover"}} alt=""  />
+            <div className="col-12  col-lg-3 col-md-3 col-sm-10 mx-auto ps-md-4 mb-sm-3 d-flex justify-content-center align-items-center">
+                <img src={movieposter} className="mx-auto w-100  rounded" style={{objectFit:"cover"}} alt=""  />
             </div>
 
                 {/* TITLE */}
@@ -124,7 +124,7 @@ console.log(movieposter, moviename,rating,_id,element)
                 </Button>               
             </div>            
           </div>
-      </div>
+      {/* </div> */}
     </>
     )
 }
