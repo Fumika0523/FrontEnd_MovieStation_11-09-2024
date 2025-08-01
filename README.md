@@ -48,8 +48,8 @@ phone no: 100100
 8. unable to get all enquiry in front-end (able to get in postman)
 
 ---
-9. filter by order
-10. Download button in pdf
+9. filter by order <<DONE>>
+10. Download button in pdf <<DONE>>
 11. create a html base normal website
 
 
@@ -148,9 +148,9 @@ ADD - CART                                              -DONE
 WISHLIST NAVIGATION                                     -DONE
 
 WISHLIST
-  >>ADD TO WISHLIST
-  >>REMOVE TO WISHLIST
-  >>DISPLAY IN ACTION BUTTONS
+  >>ADD TO WISHLIST                                         -Done 
+  >>REMOVE TO WISHLIST                                      -Done 
+  >>DISPLAY IN ACTION BUTTONS                               -Done 
   >>VISIBLE DISPLAY IN WISHLIST DISPLAY PAGE                -Done 
   >>REMOVE ITEM FORM WISHLIST DISPLAY   PAGE                -Done 
   >>MOVE TO CART TO WISHLIST DISPLAY    PAGE                -Done
@@ -165,12 +165,12 @@ CART
 
 
 ORDER SUMMARY
-  >>DISPLAY ORDERS
-  >>SORTING ORDERS
+  >>DISPLAY ORDERS                          -Done 
+  >>SORTING ORDERS                                  -Done 
   >>DELIVERED || PROCESSING STAGE 
-  >>TOTAL PRICE CALCULATED CORRECTLY
-  >>DOWNLOAD INVOICE 
-  >>INVOICE TOTAL PRICE MISMATCH                
+  >>TOTAL PRICE CALCULATED CORRECTLY              -Done 
+  >>DOWNLOAD INVOICE                                -Done 
+  >>INVOICE TOTAL PRICE MISMATCH                  -Done 
   >>UI DESIGN FOR INVOICE                           -ERROR 
   >>RETURN TO TOP/ BACK BUTTON                      -DONE
   >>ADD PAGINATION TO ORDER SUMMARY (3)             -PENDING   

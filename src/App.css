@@ -429,3 +429,33 @@ text-shadow: none;
    font-weight:bold;
    margin-bottom:2px
  }
+
+
+ /* Pagination item background and text color */
+.pagination .page-item .page-link {
+  background-color: #f0f0f0ff;  /* Light grey background */
+  color: #333;                 /* Dark text */
+  border-color: transparent;
+}
+
+/* Hover state */
+.pagination .page-item .page-link:hover {
+  background-color: #e3b250ff;  /* Your custom hover color */
+  color: white;
+  border-color: transparent;
+}
+
+/* Active page */
+.pagination .page-item.active .page-link {
+  background-color: #E4A11B;  /* Your custom active color */
+  border-color: transparent;
+  color: white;
+}
+
+/* Disabled buttons */
+.pagination .page-item.disabled .page-link {
+  color: #999;
+  pointer-events: none;
+  background-color: #eee;
+ border-color: transparent;
+}
