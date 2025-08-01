@@ -88,7 +88,6 @@ console.log(movieposter, moviename,rating,_id,element)
 
    return (
     <>
-      {/* <div className="d-flex border  px-md-3 row mx-5 align-items-center justify-content-center pt-4 pb-2  "> */}
           <div className="row  mx-md-5 px-md-5 d-flex align-items-center justify-content-center mb-2">
                 {/* Movie Poster */}
             <div className="col-12  col-lg-3 col-md-3 col-sm-10 mx-auto ps-md-4 mb-sm-3 d-flex justify-content-center align-items-center">
