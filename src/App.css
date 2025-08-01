@@ -35,24 +35,11 @@
 }
 
 .bgFade{
-  /* background-image: linear-gradient(180deg, transparent 0, #000000); */
   top:0px;
   object-fit: cover;
-  /* border:5px solid red; */
   width: 100%; 
   height: 450px;
-   /* Black see-through
-  color: #f1f1f1;
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;  */
-  /* margin-top: -700px; */
   position: absolute;
-  /* border:"4px solid red"; */
   display: flex;
   justify-content: center;
   text-align: center;
@@ -62,17 +49,13 @@
   position: relative;
   background-position: top;
   background-size: cover;
-  /* height: 40vh; */
   width: 100%; 
   max-height: 360px;
-  /* /* overflow: hidden;
-  margin: -40px 0px 0px -120px;   */
   object-fit: cover; 
   object-position: -20% 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* box-shadow: 0 0 15px fade(var(--color-black),10%) */
 }
 
 .phoneImg{
@@ -132,21 +115,14 @@ transition: all 0.6s;
 .posterImage{
   /* border: 1px solid blue; */
   box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
-  /* border-top-left-radius: 5%;
-  border-top-right-radius: 5%; */
-  /* border-radius: 5%; */
-  /* margin-bottom:5%; */
   width: 280px;
   position:relative
-  /* padding-bottom: 4%; */
 }
 
 .cardDesign {
   background-color: black; 
-  /* height: 255px; */
   margin-bottom: 1%;
   cursor: pointer;
-  /* border:1px solid yellow;  */
   width:280px ;
 
 } 
@@ -154,7 +130,6 @@ transition: all 0.6s;
 .cardDesign:hover .movieContent{ 
   display: block;
   z-index: 1000;
-   /* border:1px solid green;  */
 }   
 
 .cardDesign:hover{
@@ -223,13 +198,31 @@ text-transform: "uppercase";
 font-size: "16px";
 }
 
-.trailerBtn{
-  /* background-color: #3b3b3b ! important; */
+
+/* Normal state */
+.trailerBtn {
+  background-color: rgba(21, 29, 38, 1);
+  color: rgb(197, 199, 203);
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: row
 }
+
+/* Light mode version */
+.light-mode .trailerBtn {
+  background-color: white;
+  color: rgb(79, 83, 91);
+}
+
+/* Hover effect for both modes */
+.trailerBtn:hover {
+  background-color: rgba(35, 47, 62, 1) ! important;;
+  color: rgba(158, 165, 179, 1) ! important;;
+}
+
 
 .downloadText{
   display: none; 
@@ -255,8 +248,6 @@ font-size: "16px";
 
 .hover-edit:hover{
   cursor: pointer;
-  /* border: 2px solid rgb(119, 221, 119); */
-  /* background-color: green; */
   transform: scale(1.09);
 }
 
@@ -267,7 +258,6 @@ font-size: "16px";
 .overlay:hover {
   height: 25%;
   padding:1.5%;
-  /* background-color: #161718; */
 }
 
 .movieCast{
@@ -370,12 +360,6 @@ text-shadow: none;
   filter: invert(1); /* dark mode */
 }
 
-
-
-/* .movieDisplayBtn:hover .iconHeart{
-  color: rgb(158, 3, 3) !important;
-} */
-
 .movieDisplayBtn:hover .movieIcon {
    color: rgb(3, 156, 158) !important;
 }
@@ -433,28 +417,15 @@ text-shadow: none;
     height: 350px;
   }
 
-  /* .custom-pagination {
-  background-color: #ffcc00;
-  color: #000;
-  border-radius: 8px;
-  margin: 0 5px;
-}
-.custom-pagination.active {
-  background-color: #ffaa00;
-  color: white;
-} */
+ .trailer-text{
+     color: #565f67ff;
+     display:flex;
+     width:100%;
+     margin-bottom:10px;
+     /* border:1px solid red */
+ }
 
-/* .custom-pagination {
-    min-width: 40px;
-    height: 40px;
-    text-align: center;
-    margin: 2px;
-}
-
-@media (max-width: 576px) {
-    .custom-pagination {
-        min-width: 32px;
-        height: 32px;
-        font-size: 14px;
-    }
-} */
+ .trailer-subTitle{
+   font-weight:bold;
+   margin-bottom:2px
+ }

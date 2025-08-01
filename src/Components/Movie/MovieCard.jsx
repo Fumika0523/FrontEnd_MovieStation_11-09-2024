@@ -136,22 +136,21 @@ const dispatch= useDispatch()
     action={
     token ? (
     <span
-      className="d-flex flex-row justify-content-center align-items-center "
+      className="d-flex flex-row align-items-center justify-content-center"
       style={{
-        // border:"2px solid red",
         position: "absolute",
         right: "0px",
         top: "25px",
-        height: "28px",
-        width: isMovieOwner ? "140px" : "70px",
+        // width: isMovieOwner ? "140px" : "60px",
       }}
     >
       {isMovieOwner && (
         <>
+        {/* EDIT ICON */}
           <Tooltip title="Edit">
             <ModeIcon
               onClick={() => navigate(`/editmovie/${_id}`)}
-              className="editBtn border-danger fs-3"
+              className="editBtn fs-4 me-1"
             />
           </Tooltip>
           {deleteBtn}
@@ -172,11 +171,12 @@ const dispatch= useDispatch()
         pauseOnHover
         theme="light"
         transition={Bounce} /> */}
+
       {/* See More */}
       <Tooltip title="See More">
         <MoreVertIcon
           onClick={() => navigate(`/movietrailer/${_id}`)}
-          className="seeMoreIcon border-danger fs-2"
+          className="seeMoreIcon fs-3"
         />
       </Tooltip>
     </span>
@@ -186,7 +186,7 @@ const dispatch= useDispatch()
     }
        titleTypographyProps={{ fontSize: "20x", paddingBottom: "0px", marginBottom: "0px" }}
             title={moviename.length >= 25 ? moviename.substring(0, 25) + "..." : moviename}
-            subheaderTypographyProps={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", gap: "5px", fontSize: "13px" }}
+            subheaderTypographyProps={{ display: "flex", flexDirection: "row", justifyContent: "start", alignItems: "center", gap: "5px", fontSize: "13px", color:"gray" }}
             subheader={
               <>
                 {rating} /10
@@ -215,7 +215,7 @@ const dispatch= useDispatch()
           </div>
 
           {/* Bottom Card ICONS */}
-          <CardActions disableSpacing className='border-primary border-4 w-100 d-flex flex-row  d-block position-absolute ' style={{ bottom: "45px", left: "0px" }}>
+          <CardActions disableSpacing className=' w-100 d-flex flex-row  d-block align-item position-absolute ' style={{ bottom: "45px", left: "0px" }}>
 
           <LikeCard likeNum={likeNum} disLikeNum={disLikeNum} mode={mode} />
           </CardActions>
