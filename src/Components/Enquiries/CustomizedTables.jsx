@@ -25,6 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
     fontSize: 16,
     padding: '10px 5px',
+   
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -37,6 +38,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover.grey,
     height: "55px",
+    
   },
   // hide last border
   // '&:last-child td, &:last-child th': {
@@ -82,18 +84,28 @@ let config = {
 useEffect(()=>{
   getSpecificEnquiryData()
 },[])
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+ 
 
  return (
   <>
     <TableContainer component={Paper}  >
-      <Table aria-label="customized table">
+      <Table aria-label="customized table"
+  style={{ border: '1px solid #4a4a49ff'}}>
         <TableHead>
           <TableRow >
             <StyledTableCell align="center" style={{width:"3%"}}>No.</StyledTableCell>
             <StyledTableCell  align="center" style={{width:"10%"}}>First Name</StyledTableCell>
             <StyledTableCell  align="center" style={{width:"10%"}}>Last Name</StyledTableCell>
-            <StyledTableCell  align="center" style={{width:"15%"}}>Email</StyledTableCell>
-            <StyledTableCell  align="center" style={{width:"10%"}}>Phone No.</StyledTableCell>
+            {/* <StyledTableCell  align="center" style={{width:"15%"}}>Email</StyledTableCell> */}
+            {/* <StyledTableCell  align="center" style={{width:"10%"}}>Phone No.</StyledTableCell> */}
             <StyledTableCell style={{width:"12%"}}  align="center">Subject</StyledTableCell>
             <StyledTableCell style={{width:"40%"}}  align="center">Description</StyledTableCell>
           </TableRow>
@@ -110,57 +122,57 @@ useEffect(()=>{
               {element.firstname}
               </StyledTableCell>
               <StyledTableCell align="center" style={{width:"10%"}}>{element.lastname}</StyledTableCell>
-               <StyledTableCell align="center" style={{width:"15%"}}>{element.email}</StyledTableCell>
-               <StyledTableCell align="center" style={{width:"10%"}}>{element.phone_number}</StyledTableCell>
+               {/* <StyledTableCell align="center" style={{width:"15%"}}>{element.email}</StyledTableCell> */}
+               {/* <StyledTableCell align="center" style={{width:"10%"}}>{element.phone_number}</StyledTableCell> */}
                <StyledTableCell style={{width:"12%"}} align="center">{element.subject}</StyledTableCell>
               
-              <StyledTableCell className="position-relative" 
-              style={{
-          padding:"5px 35px 5px 15px"
-            }} 
-              align="center">
-              <>
-              <div className=' d-flex flex-row align-items-start' style={{textAlign:"justify"}}>
-                {/* Description */}
-                    {
-                    (element.description.length) >=200 ?
-                        <>
-                        { element.description.substring(0,195)+"..."}
-                        </>
-                        :
-                        <>
-                         {element.description}
-                         
-                        </>
-                      }
-               {/* EDIT Btn*/}
-                      {
-                      element?.owner === userId  && token   ?
-                     <div className='position-absolute translate-middle' style={{right:"-10px",marginTop:'2.5%'}} >
-                     <button className=' hover-edit rounded-circle btn btn-success d-flex justify-content-center p-0 align-items-center'
-                     style={{height:"24px",width:"24px",right:"60px"}}
-                     onClick={() => handleEditClick(element)}>
-                     <MdOutlineModeEdit className='fs-6' /> 
-                     </button>
-                     </div>
-                     :
-                     null
-                }
-                   {/* </div>            */}
-                   {/* READMORE */}
-                   {
-                   (element.description.length) >= 200 ?
-                   <div className='text-end' style={{position:"absolute",right:"110px",bottom:"5px"}} >
-                   <Button className='py-0 px-1'
-                   onClick={()=>handleDescriptionClick(element)}
-                 variant="contained" style={{fontSize:"9px",textWrap:"noWrap",backgroundColor:"#E4A11B"}}>Read more</Button>
-                   </div>
-                   :
-                   null
-                  }
-                  </div> 
-                   </>
-                 </ StyledTableCell >
+               <StyledTableCell
+      className="position-relative"
+      style={{ padding: "5px 35px 5px 15px" }}
+      align="center"
+    >
+      <div  className=" "
+        style={{ textAlign: "justify" }}
+      >
+  {/* Description */}
+    {element.description.length > (isSmallScreen ? 50 : 195) ? (
+      <>
+        {element.description.substring(0, isSmallScreen ? 50 : 195) + "... "}
+        <Button
+          className="py-0 px-1"
+          onClick={() => handleDescriptionClick(element)}
+          variant="contained"
+          style={{
+            fontSize: "9px",
+            textWrap: "nowrap",
+            backgroundColor: "#E4A11B",
+            marginLeft: "4px"
+          }}
+        >
+          Read more
+        </Button>
+      </>
+    ) : (
+      element.description
+    )}
+
+        {/* EDIT Btn */}
+        {element?.owner === userId && token && (
+          <div
+            className="position-absolute translate-middle"
+            style={{ right: "-10px", top:"15px" }}
+          >
+            <button
+              className="hover-edit rounded-circle btn btn-success d-flex justify-content-center p-0 align-items-center"
+              style={{ height: "24px", width: "24px", }}
+              onClick={() => handleEditClick(element)}
+            >
+              <MdOutlineModeEdit className="fs-6" />
+            </button>
+          </div>
+        )}
+      </div>
+    </StyledTableCell>
               </StyledTableRow >
           ))}
         </TableBody>

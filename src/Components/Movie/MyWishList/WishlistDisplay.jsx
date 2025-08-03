@@ -71,8 +71,8 @@ const WishlistDisplay = ({ mode }) => {
 
   return (
     <>
-      <Container fluid>
-        <Row className="my-3 mx-auto mx-md-2 justify-content-between align-items-center">
+      <Container fluid className=''>
+        <Row className="my-3  mx-auto mx-md-2 justify-content-between align-items-center">
           <Col lg={3} className="text-start ps-sm-4 pt-3 d-flex align-items-center fs-4 ">
             <FaHeart className="me-1 text-danger fs-2" /> My Wishlist
           </Col>
@@ -85,9 +85,9 @@ const WishlistDisplay = ({ mode }) => {
             />
           </Col>
         </Row>
-
+      <div className='mt-5'>
         {wishlist?.length === 0 ? (
-          <div className="position-relative mt-2" style={{ width: "100%" }}>
+          <div className="position-relative mt-2 " style={{ width: "100%" }}>
             <img
               src="https://img.freepik.com/premium-photo/black-clapperboard-clap-board-movie-slate-use-video-production-film-cinema-industry-black-background_335640-1294.jpg"
               className="w-100"
@@ -98,7 +98,8 @@ const WishlistDisplay = ({ mode }) => {
               <span className="text-warning">Your Wishlist is Empty</span>
             </h4>
           </div>
-        ) : (
+        ) :
+         (
           wishlist?.map((element, index) => (
             <WishMovieCard 
             {...element} //display data
@@ -106,8 +107,10 @@ const WishlistDisplay = ({ mode }) => {
             element={element} //1 element
             mode={mode}
             isWished={true} />
+          
           ))
         )}
+        </div>
       </Container>
     <ToastContainer position="top-right" autoClose={3000} />
     </>
