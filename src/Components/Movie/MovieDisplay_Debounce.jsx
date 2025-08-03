@@ -165,21 +165,37 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
   );
 
 
-  //Wish Server
-  const handleAddWishItem = useCallback(async (element) => {
-    const isInWishlist = wishlist?.some(item => item._id === element._id);
-    if (isInWishlist) {
-      dispatch(wishRemoveItem(element)); // Remove from Redux store - Dispatches an action to remove the item from Redux.
+const handleAddWishItem = useCallback(async (element) => {
+  if (!token) {
+    // Handle localStorage wishlist
+    let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const exists = localWishlist.some(item => item._id === element._id);
+
+    if (exists) {
+      localWishlist = localWishlist.filter(item => item._id !== element._id);
       removeWishNotify();
-      await removeWishItemFromServer(element); // Remove from server
     } else {
-      dispatch(wishAddItem(element));
+      localWishlist.push(element);
       addWishNotify();
-      console.log("addwishnotify")
-      await addWishItemToServer(element);
     }
-    //await getWishData(); // Refresh to sync
-  }, [dispatch, wishlist]);
+    localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+    dispatch(setWishlist(localWishlist)); // Update Redux too
+    return;
+  }
+
+  // Existing server logic
+  const isInWishlist = wishlist?.some(item => item._id === element._id);
+  if (isInWishlist) {
+    dispatch(wishRemoveItem(element));
+    removeWishNotify();
+    await removeWishItemFromServer(element);
+  } else {
+    dispatch(wishAddItem(element));
+    addWishNotify();
+    await addWishItemToServer(element);
+  }
+}, [dispatch, wishlist, token]);
+
 
   const fetchData = (term) => {
     return movieData.filter(movie =>
@@ -208,9 +224,14 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   }, [movieData]);
 
-  useEffect(() => {
-    if (token) getWishData();
-  }, [token]);
+useEffect(() => {
+  if (!token) {
+    const localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    dispatch(setWishlist(localWishlist));
+  } else {
+    getWishData();
+  }
+}, [token]);
 
   const deleteMovie = async (_id) => {
     await axios.delete(`${url}/deletemovie/${_id}`, config);
