@@ -81,11 +81,42 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
   };
 
+  const removeCartItemFromServer = async (movieId) => {
+  try {
+    await axios.delete(`${url}/cart/remove/${movieId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    console.error("Error removing cart item:", error);
+  }
+};
+
   // Handle Add to Cart
-  const handleAddCartItem = useCallback(async (element) => {
-    const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
-    const isAlreadyPurchased = orderData?.some(order =>
-      order.movies?.some(movie => movie._id === element._id)
+  const handleAddCartItem = useCallback(
+  async (element) => {
+    // GUEST MODE: localStorage
+    if (!token) {
+      let localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      const exists = localCart.some((item) => item._id === element._id);
+
+      if (exists) {
+        // Remove from guest cart
+        localCart = localCart.filter((item) => item._id !== element._id);
+        toast.error("Removed from Cart!");
+      } else {
+        // Add to guest cart
+        localCart.push(element);
+        toast.success("Added to Cart!");
+      }
+      localStorage.setItem("cart", JSON.stringify(localCart));
+      dispatch(setCart(localCart));
+      return;
+    }
+
+    // LOGGED-IN MODE
+    const isInCartlist = cart?.some((cartItem) => cartItem._id === element._id);
+    const isAlreadyPurchased = orderData?.some((order) =>
+      order.movies?.some((movie) => movie._id === element._id)
     );
 
     if (isAlreadyPurchased) {
@@ -94,14 +125,21 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
     }
 
     if (isInCartlist) {
-      errorNotify();
+      // REMOVE from cart
+      await removeCartItemFromServer(element._id);
+      dispatch(setCart(cart.filter((item) => item._id !== element._id)));
+      toast.error("Removed from Cart!");
     } else {
+      // ADD to cart
       dispatch(cartAddItem(element));
-      successNotify();
+      toast.success("Added to Cart!");
       await addCartItemToServer(element);
     }
     await getCartData();
-  }, [cart, orderData, dispatch]);
+  },
+  [cart, orderData, dispatch, token]
+);
+
 
   // Handle Add to Wishlist
   const handleAddWishItem = useCallback(async (element) => {
@@ -191,6 +229,24 @@ function MovieDisplay_Debounce({ mode, movieData, setMovieData }) {
 
     syncWishlistAfterLogin();
   }, [token]);
+
+  useEffect(() => {
+  const syncCartAfterLogin = async () => {
+    if (!token) {
+      const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      dispatch(setCart(localCart));
+    } else {
+      const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      for (const item of localCart) {
+        await addCartItemToServer(item);
+      }
+      await getCartData();
+      localStorage.removeItem("cart");
+    }
+  };
+  syncCartAfterLogin();
+}, [token]);
+
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" margin={2}>
