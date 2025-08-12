@@ -21,19 +21,17 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FaPlay } from "react-icons/fa";
+import { IoMdHeartDislike } from "react-icons/io";
 
 
 function MovieTrailer({ mode }) {
-  const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(id)
   const [movieInfo, setMovieInfo] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate()
-  const token = sessionStorage.getItem('token')
-  // console.log(token)
+
 
   const getTrailerData = async () => {
     console.log("Trailer data is called....")
@@ -46,41 +44,179 @@ function MovieTrailer({ mode }) {
     getTrailerData()
   }, []) //API Call
 
-  console.log("movieInfo", movieInfo)
-  // watchlater from Trailer should remove
-  // watchlater from Trailer should remove
-  const wishlist = useSelector(store => store.wishlist.wishItems);
-  const cart = useSelector(store => store.cart.cartItems)
-  console.log("wishlist", wishlist)
-  console.log("length", wishlist[0]?.length)
+  // console.log("movieInfo", movieInfo)
+  // // watchlater from Trailer should remove
+  // // watchlater from Trailer should remove
+  // const wishlist = useSelector(store => store.wishlist.wishItems);
+  // const cart = useSelector(store => store.cart.cartItems)
+  // console.log("wishlist", wishlist)
+  // console.log("length", wishlist[0]?.length)
 
-  const successNotify = () => toast.success('Added to the cart!', { autoClose: 300 });
-  const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 300 });
-  const addWishNotify = () => {
-    toast.success('Added to Wishlist!', {
-      position: "top-right",
-      autoClose: 300,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    })
-  };
-  const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 300 });
+  // const successNotify = () => toast.success('Added to the cart!', { autoClose: 300 });
+  // const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 300 });
+  // const addWishNotify = () => {
+  //   toast.success('Added to Wishlist!', {
+  //     position: "top-right",
+  //     autoClose: 300,
+  //     hideProgressBar: false,
+  //     closeOnClick: false,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   })
+  // };
+  // const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 300 });
+  // const getCartData = async () => {
+  //   const res = await axios.get(`${url}/cart`, config);
+  //   console.log("cartData", res.data.cartData)
+  //   dispatch(setCart(res.data.cartData))
+  // };
+
+  // const getWishData = async () => {
+  //   const res = await axios.get(`${url}/wish-list`, config);
+  //   dispatch(setWishlist(res.data.wishData)) //
+  // };
+
+  // // ADD TO Wish
+  // const addWishItemToServer = async (element) => {
+  //   try {
+  //     await axios.post(`${url}/add-wish-list`, element, config);
+  //   } catch (error) {
+  //     console.error('Error adding to wishlist:', error);
+  //   }
+  // };
+
+  // // ADD TO CART
+  // const addCartItemToServer = async (element) => {
+  //   try {
+  //     await axios.post(`${url}/addcart`, element, config);
+  //   } catch (error) {
+  //     console.error('Error adding to wishlist:', error);
+  //   }
+  // }
+
+  // // WISH LIST 
+  // const removeWishItemFromServer = async (element) => {
+  //   try {
+  //     await axios.delete(`${url}/delete-wish-item/${element._id}`, config);
+  //   } catch (error) {
+  //     console.error('Error removing from wishlist:', error);
+  //   }
+  // };
+
+  // //CART Server
+  // const handleAddCartItem = useCallback(async (element) => {
+  //   console.log("1234567", element)
+  //const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
+  //   if (isInCartlist) {
+  //     console.log("ErrorNotify")
+  //     errorNotify()
+  //   } else {
+  //     dispatch(cartAddItem(element))
+  //     successNotify()
+  //     await addCartItemToServer(element)
+  //   }
+  //   await getCartData()
+  // }, [dispatch, cart])
+
+  // //Wish Server
+  // const handleAddWishItem = useCallback(async (element) => {
+  //   const isInWishlist = wishlist?.some(item => item._id === element._id);
+  //   if (isInWishlist) {
+  //     dispatch(wishRemoveItem(element)); // Remove from Redux store - Dispatches an action to remove the item from Redux.
+  //     removeWishNotify();
+  //     await removeWishItemFromServer(element); // Remove from server
+  //   } else {
+  //     dispatch(wishAddItem(element));
+  //     addWishNotify();
+  //     console.log("addwishnotify")
+  //     await addWishItemToServer(element);
+  //   }
+  //   //await getWishData(); // Refresh to sync
+  // }, [dispatch, wishlist]);
+
+  // useEffect(() => {
+  //   if (token) getWishData();
+  // }, [token]);
+
+
+  // useEffect(() => {
+  //   const getCartData = async () => {
+  //     try {
+  //       let response = await axios.get(`${url}/cart`, {
+  //         headers: { Authorization: `Bearer ${token}` }
+  //       })
+  //       console.log(response.data.cartData)
+  //       if (response.data.cartData) {
+  //         dispatch(setCart(response.data.cartData))
+  //         console.log("cart", response.data)
+  //       } else {
+  //         dispatch(setCart([]))
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to load Cart", error);
+  //       dispatch(setCart([]))
+  //     }
+  //   }
+
+  //   if (token) {
+  //     getCartData()
+  //   }
+  // }, [dispatch, token])
+
+  // const getOrderData = async () => {
+  //   // /order?sortBy=createdAt:asc
+  //   const res = await axios.get(`${url}/order`, config)
+  //   console.log(`res`, res)
+  //   // setOrderData(res.data.orderData)
+  //   // console.log("orderData from my movie",res.data.orderData)
+  //   useEffect(() => {
+  //     getOrderData();
+  //   }, [])
+  // };
+
+const dispatch = useDispatch();
+  const wishlist = useSelector(store => store.wishlist.wishItems);
+  const cart = useSelector(store => store.cart.cartItems);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterMovieData, setFilterMovieData] = useState([]);
+  const [orderData, setOrderData] = useState([]);
+
+  const token = sessionStorage.getItem('token');
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+
+  // Notifications
+  const addWishNotify = () => toast.success('Added to Wishlist!', { autoClose: 1000, theme: "light" });
+  const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 1000 });
+  const successNotify = () => toast.success('Added to the cart!', { autoClose: 1000 });
+  const errorNotify = () => toast.error('Removed from the cart!', { autoClose: 1000 });
+
+  // API Calls
+  // const getMovieData = async () => {
+  //   const res = await axios.get(`${url}/movie`);
+  //   setMovieData(res.data.movieData);
+  // };
+
   const getCartData = async () => {
     const res = await axios.get(`${url}/cart`, config);
-    console.log("cartData", res.data.cartData)
-    dispatch(setCart(res.data.cartData))
+    dispatch(setCart(res.data.cartData));
   };
 
   const getWishData = async () => {
     const res = await axios.get(`${url}/wish-list`, config);
-    dispatch(setWishlist(res.data.wishData)) //
+    dispatch(setWishlist(res.data.wishData));
   };
 
-  // ADD TO Wish
+  const getOrderData = async () => {
+    try {
+      const res = await axios.get(`${url}/order`, config);
+      setOrderData(res.data.orderData || []);
+    } catch (e) {
+      console.error("Failed to fetch order data:", e);
+    }
+  };
+
   const addWishItemToServer = async (element) => {
     try {
       await axios.post(`${url}/add-wish-list`, element, config);
@@ -89,16 +225,6 @@ function MovieTrailer({ mode }) {
     }
   };
 
-  // ADD TO CART
-  const addCartItemToServer = async (element) => {
-    try {
-      await axios.post(`${url}/addcart`, element, config);
-    } catch (error) {
-      console.error('Error adding to wishlist:', error);
-    }
-  }
-
-  // WISH LIST 
   const removeWishItemFromServer = async (element) => {
     try {
       await axios.delete(`${url}/delete-wish-item/${element._id}`, config);
@@ -107,82 +233,179 @@ function MovieTrailer({ mode }) {
     }
   };
 
-  //CART Server
-  const handleAddCartItem = useCallback(async (element) => {
-    console.log("1234567", element)
-    const isInCartlist = cart?.some(cartItem => cartItem._id === element._id);
-    if (isInCartlist) {
-      console.log("ErrorNotify")
-      errorNotify()
-    } else {
-      dispatch(cartAddItem(element))
-      successNotify()
-      await addCartItemToServer(element)
+  const addCartItemToServer = async (element) => {
+    try {
+      await axios.post(`${url}/addcart`, element, config);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
     }
-    await getCartData()
-  }, [dispatch, cart])
+  };
 
-  //Wish Server
+  const removeCartItemFromServer = async (movieId) => {
+  try {
+    await axios.delete(`${url}/cart/remove/${movieId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    console.error("Error removing cart item:", error);
+  }
+};
+
+  // Handle Add to Cart
+  const handleAddCartItem = useCallback(
+  async (element) => {
+    // GUEST MODE: localStorage
+    if (!token) {
+      let localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      const exists = localCart.some((item) => item._id === element._id);
+
+      if (exists) {
+        // Remove from guest cart
+        localCart = localCart.filter((item) => item._id !== element._id);
+        errorNotify()
+      } else {
+        // Add to guest cart
+        localCart.push(element);
+        successNotify()
+      }
+      localStorage.setItem("cart", JSON.stringify(localCart));
+      dispatch(setCart(localCart));
+      return;
+    }
+
+    // LOGGED-IN MODE
+    const isInCartlist = cart?.some((cartItem) => cartItem._id === element._id);
+    const isAlreadyPurchased = orderData?.some((order) =>
+      order.movies?.some((movie) => movie._id === element._id)
+    );
+
+    if (isAlreadyPurchased) {
+      toast.error("You've already purchased this movie.", { autoClose: 1000 });
+
+      return;
+    }
+
+    if (isInCartlist) {
+      // REMOVE from cart
+      await removeCartItemFromServer(element._id);
+      dispatch(setCart(cart.filter((item) => item._id !== element._id)));
+      toast.error("Removed from Cart!");
+    } else {
+      // ADD to cart
+      dispatch(cartAddItem(element));
+      successNotify()
+      await addCartItemToServer(element);
+    }
+    await getCartData();
+  },
+  [cart, orderData, dispatch, token]
+);
+
+  // Handle Add to Wishlist
   const handleAddWishItem = useCallback(async (element) => {
+    if (!token) {
+      // Guest user - localStorage
+      let localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      const exists = localWishlist.some(item => item._id === element._id);
+
+      if (exists) {
+        localWishlist = localWishlist.filter(item => item._id !== element._id);
+        removeWishNotify();
+      } else {
+        localWishlist.push(element);
+        addWishNotify();
+      }
+      localStorage.setItem("wishlist", JSON.stringify(localWishlist));
+      dispatch(setWishlist(localWishlist));
+      return;
+    }
+
+    // Logged-in user - server
     const isInWishlist = wishlist?.some(item => item._id === element._id);
     if (isInWishlist) {
-      dispatch(wishRemoveItem(element)); // Remove from Redux store - Dispatches an action to remove the item from Redux.
+      dispatch(wishRemoveItem(element));
       removeWishNotify();
-      await removeWishItemFromServer(element); // Remove from server
+      await removeWishItemFromServer(element);
     } else {
       dispatch(wishAddItem(element));
       addWishNotify();
-      console.log("addwishnotify")
       await addWishItemToServer(element);
     }
-    //await getWishData(); // Refresh to sync
-  }, [dispatch, wishlist]);
+    await getWishData();
+  }, [dispatch, wishlist, token]);
 
-  useEffect(() => {
-    if (token) getWishData();
-  }, [token]);
-
-  const deleteMovie = async (_id) => {
-    await axios.delete(`${url}/deletemovie/${_id}`, config);
-    navigate(`/allmovies`);
-    alert("Movie is Deleted")
-    getMovieData();
-
+  // Search filtering with debounce
+  const fetchData = (term) => {
+    return movieData.filter(movie =>
+      movie.moviename.toLowerCase().includes(term.toLowerCase())
+    );
   };
+
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     if (searchTerm.trim() !== "") {
+  //       const results = fetchData(searchTerm);
+  //       setFilterMovieData(results);
+  //     } else {
+  //       setFilterMovieData(movieData);
+  //     }
+  //   }, 800);
+  //   return () => clearTimeout(timeoutId);
+  // }, [searchTerm, movieData]);
+
+  // useEffect(() => {
+  //   if (movieData) {
+  //     setFilterMovieData(movieData);
+  //   }
+  // }, [movieData]);
+
+  //Initial data fetch
   useEffect(() => {
-    const getCartData = async () => {
-      try {
-        let response = await axios.get(`${url}/cart`, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        console.log(response.data.cartData)
-        if (response.data.cartData) {
-          dispatch(setCart(response.data.cartData))
-          console.log("cart", response.data)
-        } else {
-          dispatch(setCart([]))
+   // getMovieData();
+    getOrderData();
+  }, []);
+
+  // Sync wishlist when token changes
+  useEffect(() => {
+    const syncWishlistAfterLogin = async () => {
+      if (!token) {
+        const localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        dispatch(setWishlist(localWishlist));
+      } else {
+        const localWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        // Push local wishlist to server
+        for (const item of localWishlist) {
+          await addWishItemToServer(item);
         }
-      } catch (error) {
-        console.error("Failed to load Cart", error);
-        dispatch(setCart([]))
+
+        // Fetch updated wishlist from server
+        await getWishData();
+
+        // Clear localStorage wishlist after sync
+        localStorage.removeItem("wishlist");
       }
-    }
+    };
 
-    if (token) {
-      getCartData()
+    syncWishlistAfterLogin();
+  }, [token]);
+//while localStorage is partitioned by origin only, sessionStorage is partitioned by both origin and browser tabs (top-level browsing contexts). The data in sessionStorage is only kept for the duration of the page session.
+  useEffect(() => {
+  const syncCartAfterLogin = async () => {
+    if (!token) {
+      const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      dispatch(setCart(localCart));
+    } else {
+      const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+      for (const item of localCart) {
+        await addCartItemToServer(item);
+      }
+      await getCartData();
+      localStorage.removeItem("cart");
     }
-  }, [dispatch, token])
-
-  const getOrderData = async () => {
-    // /order?sortBy=createdAt:asc
-    const res = await axios.get(`${url}/order`, config)
-    console.log(`res`, res)
-    // setOrderData(res.data.orderData)
-    // console.log("orderData from my movie",res.data.orderData)
-    useEffect(() => {
-      getOrderData();
-    }, [])
   };
+  syncCartAfterLogin();
+}, [token]);
 
 
   return (
@@ -332,22 +555,19 @@ function MovieTrailer({ mode }) {
                         color: mode === "light" ? "rgb(79, 83, 91)" : "rgb(197, 199, 203)",
                       }}
                       variant="" onClick={() => handleAddCartItem(movieInfo)} >
-                      {
-                        cart?.some(cartItem => cartItem._id === movieInfo._id) ?
-                          (
-                            <MdRemoveShoppingCart className="fs-3 text-warning " />
-                          )
-                          :
-                          (
-                            <ShoppingCartIcon
-                              className=" text-warning fs-3" />
-                          )
-                      }
+                   {cart?.some(cartItem => cartItem._id === movieInfo._id) ||
+                      orderData?.some(order =>
+                        order.movies?.some(movie => movie._id === movieInfo._id)) ?
+                      <MdRemoveShoppingCart className="fs-4 text-warning" /> :
+                      <ShoppingCartIcon className="fs-4 text-warning" />
+                    }
                     </Button>
                   </Tooltip>
+                           
                 </Col>
 
                 {/* Wish */}
+  
                 <Col className="col-6  col-lg-12">
                   <Tooltip title="Add to Wish List">
                     <Button
@@ -359,15 +579,13 @@ function MovieTrailer({ mode }) {
                       variant=""
                       onClick={() => handleAddWishItem(movieInfo)}>
                       {/* searches for element._id in the wishlist array. >> True/false item._id > wishlist, element._id > movie._id*/}
-                      {wishlist?.some(item => item._id === movieInfo._id) ? (
-                        <FavoriteIcon
-                          className="text-danger fs-3 border-primary"
-                        />
-                      ) : (
-                        <FaRegHeart
-                          className="text-danger fs-3 border-warning"
-                        />
-                      )}
+                       {orderData?.some(order =>
+                          order.movies?.some(movie => movie._id === movieInfo._id)) ? <IoMdHeartDislike className="text-danger fs-4 ms-1"/> :
+                           wishlist?.some(item => item._id === movieInfo._id) ?
+                                          <FavoriteIcon className="text-danger fs-4 ms-1" /> 
+                                          :
+                                          <FaRegHeart className="text-danger fs-4 ms-1" />
+                                      }
                     </Button>
                   </Tooltip>
                   <ToastContainer
