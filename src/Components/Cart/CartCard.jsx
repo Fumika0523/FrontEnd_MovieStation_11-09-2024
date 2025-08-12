@@ -3,11 +3,9 @@ import {cartRemoveItem, setCart} from "../../utils/cartSlice"
 import {url} from "../../utils/constant"
 import axios from "axios";
 import DeleteIcon from '@mui/icons-material/Delete';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from "react-bootstrap";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useCallback } from "react";
 import {wishAddItem} from "../../utils/WishCartSlice"
 
 function CartCard({ movieposter, moviename, amount,element }) {

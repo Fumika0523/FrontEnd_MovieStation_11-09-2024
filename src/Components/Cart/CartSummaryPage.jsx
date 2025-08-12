@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 function CartSummaryPage() {
   const infoNotify = () => toast.success('Signin page is loading', {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 300,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: true,

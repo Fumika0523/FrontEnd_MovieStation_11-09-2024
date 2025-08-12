@@ -189,56 +189,6 @@ function NavBar({ mode, setMode }) {
                    >Contact</span>  
                 </Button>
               </Nav.Link>
-
-              {/* Redux  -->> Badge*/}
-              {/* <Nav.Link href="#" className=" p-0">
-                <Button  className="d-flex border  justify-content-center align-items-end"
-                  variant="none"
-                  onClick={() => navigate('/cartpage')}>
-                  <Badge variant="text"
-                    sx={{
-                      "& .MuiBadge-badge": {
-                        fontSize: "0.7rem", // Reduce font size
-                        minWidth: "10px",   // Adjust width to fit smaller content
-                        height: "16px",     // Adjust height
-                        right: 3,
-                        top: -2,
-                      },
-                    }}
-                    color="primary" badgeContent={cartItems.length}
-                    // style={{ color: mode == "light" ? greyColor : amberColor, }}
-                    >
-                  <ShoppingCartIcon className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
-                  </Badge>
-                  {/* <span className="fs-5"
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
-                {/* </Button>
-              </Nav.Link> */} 
-
-             {/* Wish list
-                <Nav.Link href="#" className=" p-0">
-                <Button  className="d-flex border  justify-content-center align-items-end"
-                  variant="none"
-                  onClick={() => navigate('/mywishlist')}>
-                  <Badge variant="text"
-                    sx={{
-                      "& .MuiBadge-badge": {
-                        fontSize: "0.7rem", // Reduce font size
-                        minWidth: "10px",   // Adjust width to fit smaller content
-                        height: "16px",     // Adjust height
-                        right: 3,
-                        top: -2,
-                      },
-                    }}
-                    color="primary" badgeContent={cartItems.length}
-                    // style={{ color: mode == "light" ? greyColor : amberColor, }}
-                    >
-                  <FaHeart className="fs-3 me-1" style={{ color: mode == "light" ? amberColor1 : amberColor }} />
-                  </Badge>
-                  {/* <span className="fs-5"
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}>My Cart</span> */}
-                {/* </Button>
-              </Nav.Link> */} 
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -54,12 +54,12 @@ function MovieTrailer({ mode }) {
   console.log("wishlist", wishlist)
   console.log("length", wishlist[0]?.length)
 
-  const successNotify = () => toast.success('Added to the cart!', { autoClose: 3000 });
-  const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 3000 });
+  const successNotify = () => toast.success('Added to the cart!', { autoClose: 300 });
+  const errorNotify = () => toast.error('Already added to cart, check your carrt!', { autoClose: 300 });
   const addWishNotify = () => {
     toast.success('Added to Wishlist!', {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 300,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: true,
@@ -68,7 +68,7 @@ function MovieTrailer({ mode }) {
       theme: "light",
     })
   };
-  const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 2000 });
+  const removeWishNotify = () => toast.error('Removed from Wishlist!', { autoClose: 300 });
   const getCartData = async () => {
     const res = await axios.get(`${url}/cart`, config);
     console.log("cartData", res.data.cartData)
@@ -372,7 +372,7 @@ function MovieTrailer({ mode }) {
                   </Tooltip>
                   <ToastContainer
                     position="top-right"
-                    autoClose={2000}
+                    autoClose={300}
                     hideProgressBar={false}
                     newestOnTop={false}
                     closeOnClick={false}

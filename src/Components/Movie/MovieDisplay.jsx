@@ -23,7 +23,7 @@ function MovieDisplay({mode})
 //conditionally done.
 const successNotify = () => toast.success('Added to the cart!', {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 300,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: true,
@@ -35,7 +35,7 @@ const successNotify = () => toast.success('Added to the cart!', {
 
 const errorNotify = () => toast.error('This movie is already purchased, please check the order history', {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 300,
         hideProgressBar: false,
         closeOnClick: false,
         pauseOnHover: true,
@@ -194,11 +194,11 @@ return (
     reduxAddcartBtn={
   <>
       <IconButton className="reduxIcon" onClick={()=>{handleAdditem(element)}}  >
-        <ShoppingCartIcon />
+        <ShoppingCartIcon className="text-warning" />
       </IconButton>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={300}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
@@ -239,7 +239,7 @@ return (
       ><i className="fa-solid fs-5 fa-cart-shopping text-warning "></i></Button>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={300}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}

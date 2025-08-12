@@ -50,12 +50,10 @@ const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
         >
           {cartCount == 0 ? (
             <ShoppingCartIcon className="fs-4 me-md-1 "
-              style={{ color: mode === "light" ? "rgb(251, 149, 7)" : "rgba(255,204,0)",
-        }} />
-          )
+              style={{ color: "rgba(209, 209, 213, 0.63)" }} />)
             :
             (
-              <ShoppingCartIcon className="fs-4 me-md-1 myCartIcon" />
+              <ShoppingCartIcon className="fs-4 me-md-1 text-warning" />
             )
           }
 
