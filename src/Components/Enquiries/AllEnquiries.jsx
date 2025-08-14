@@ -3,10 +3,10 @@ import { url } from "../../utils/constant"
 import { useEffect, useState } from "react"
 import AboutUs_ImageBanner from "../AboutUs_page/AboutUs_ImageBanner"
 import { useNavigate } from "react-router-dom"
-import { Button } from "react-bootstrap";
 import CustomizedTables from "./CustomizedTables"
 import MovieActionButtons from "../Movie/MovieActionButtons"
 import Pagination from 'react-bootstrap/Pagination';
+import { useSelector } from "react-redux";
 
 
 function AllEnquiries({ mode }) {
@@ -31,7 +31,10 @@ function AllEnquiries({ mode }) {
     }, [])
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // You can adjust as needed
-
+     
+    const navigate = useNavigate()
+     const wishlist = useSelector(store => store.wishlist.wishItems);
+     const cart = useSelector(store => store.cart.cartItems)
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentEnquiries = enquiryData.slice(indexOfFirstItem, indexOfLastItem);
@@ -42,10 +45,18 @@ function AllEnquiries({ mode }) {
 
     return (
         <>
-            <div className="my-3 row mx-auto border-4  border-warning " >
-                <span className="mb-3 me-5  row"> <MovieActionButtons /></span>
+            <div className="my-3   mx-auto border-4  border-warning " >
+                <div className="mb-5 mx-sm-4  "> 
+                    <MovieActionButtons
+                        mode={mode}
+                        navigate={navigate}
+                        wishlistCount={wishlist?.length || 0}
+                        wishlist={wishlist}
+                        cartCount={cart?.length || 0}
+                        cart={cart}
+                        />
+                </div>
 
-                {/* Back */}
                 <div className="border-4 d-flex  flex-column col-11  mx-auto">
 
 
@@ -62,7 +73,7 @@ function AllEnquiries({ mode }) {
                                 <CustomizedTables enquiryData={currentEnquiries} setEnquiryData={setEnquiryData} mode={mode} />
 
 
-                                <Pagination className="justify-content-center mt-3">
+                                <Pagination className="justify-content-center mt-5">
                                     <Pagination.First onClick={() => handlePageChange(1)} disabled={currentPage === 1} />
                                     <Pagination.Prev onClick={() => handlePageChange(Math.max(currentPage - 1, 1))} disabled={currentPage === 1} />
 

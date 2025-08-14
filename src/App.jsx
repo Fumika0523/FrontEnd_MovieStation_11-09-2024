@@ -24,7 +24,7 @@ import OrderSummary from './Components/Order/OrderSummary'
 import {url} from './utils/constant'
 import PageNotFound from './Components/HomeSreen/PageNotFound';
 import EditEnquiry from './Components/Enquiries/EditEnquiry';
-import ProfileEdit from './Components/Profile/ProfileEdit';
+import ProfileEdit from './Components/SignIn_Up_Out/Profile/ProfileEdit';
 import MovieDisplay_Debounce from './Components/Movie/MovieDisplay_Debounce'
 import WishlistDisplay from './Components/Movie/MyWishList/WishlistDisplay';
 import MyMoviesDisplay from './Components/Movie/MyMovie/MyMovieDisplay';

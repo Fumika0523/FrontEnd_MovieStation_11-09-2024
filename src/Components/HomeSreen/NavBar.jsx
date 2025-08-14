@@ -20,12 +20,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { FaCartShopping } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa";
 import { PiFilmSlateFill } from "react-icons/pi";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import { TbLetterMSmall } from "react-icons/tb";
 import { TbLetterS } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+
 
 
 function NavBar({ mode, setMode }) {
@@ -76,9 +74,9 @@ function NavBar({ mode, setMode }) {
           <Navbar.Brand
           style={{cursor:"pointer"}}
           onClick={() => navigate('/')}
-           className="d-flex  fw-bold align-items-center justify-content-start flex-row text-nowrap">
+           className="d-flex fw-bold align-items-center justify-content-start flex-row text-nowrap">
             <span className="p-0 m-0 d-block d-sm-block d-md-block d-flex fs-4 align-items-center justify-content-center"
-            style={{ color: mode == "light" ? "black" : amberColor}}><TbLetterMSmall className=" fs-1 p-0 m-0 border-end " /><TbLetterS className=" fs-1  p-0 m-0" /></span>
+            style={{ color: mode == "light" ?" rgba(224, 136, 4, 1) ": amberColor}}><TbLetterMSmall className=" fs-1 p-0 m-0 border-end " /><TbLetterS className=" fs-1  p-0 m-0" /></span>
           </Navbar.Brand>
         
            {/* </div> */}
@@ -134,29 +132,25 @@ function NavBar({ mode, setMode }) {
                   className="dropdownMenu px-2 " 
                   style={{ backgroundColor: mode == "light" ? "white" : "#121212" }}>
                    <Dropdown.Item href="#" 
-                      className="border-bottom d-flex justify-content-start align-items-center flex-row"
+                      className="border-bottom "
                       onClick={() => navigate('/allmovies')}     
                       style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)"}}
                       >
                     <GiFilmProjector
                     className="fs-3 me-1"
                     style={{ color: mode == "light" ? amberColor1 : amberColor }} />
-                     <span className=""
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}
-                    >All Movie</span>  
+                  All Movie 
                   </Dropdown.Item>
                   {
                 token &&
                     <Dropdown.Item href="#" 
                     onClick={() => navigate('/addmovie')}
-                    className=" d-flex justify-content-center align-items-center flex-row"
+                    className=""
                     style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
                     >               
                     < MdAddPhotoAlternate className="fs-3 me-1"
                       style={{ color: mode == "light" ? amberColor1 : amberColor }} />
-                    <span className=""
-                    style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" }}
-                   >Add Movie</span>                
+                 Add Movie               
                   </Dropdown.Item>
                  }
                   </Dropdown.Menu>
@@ -207,21 +201,19 @@ function NavBar({ mode, setMode }) {
           className="border-0 border
            mx-auto d-flex text-nowrap px-1 justify-content-center align-items-center"
           style={{ color: mode == "light" ? "black" : "white" }}>
-          <span style={{ color: "rgb(246, 217, 98)",backgroundColor:"rgb(148, 72, 2)",width:"36px",height:"34px"}} className="fw-bold d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 " >{name[0].toUpperCase()}</span>
+          <span style={{ color: "rgba(247, 211, 68, 1)",backgroundColor:"rgba(118, 58, 1, 0.84)",width:"36px",height:"34px"}} className="fw-bold d-flex align-items-center justify-content-center rounded-circle fw-bold rounded fs-4 " >{name[0].toUpperCase()}</span>
           </Dropdown.Toggle>
           <Dropdown.Menu 
           className="dropdownMenu  px-2" style={{ backgroundColor: mode == "light" ? "white" : "#121212",border:"1px solid gray", }}>
           
           {/* MY ACCOUNT */}
-          <Dropdown.Item className="d-flex justify-content-start align-items-center border-bottom" href="/profile" >
-          <FaUser className="me-1 fs-4 text-warning" />
-          <span className="fs-6" style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>
-          My Account</span></Dropdown.Item>
+          <Dropdown.Item className=" border-bottom" href="/profile" style={{ color: mode == "light" ? "white" : "#a2a29eff"}}>
+          <FaUser className="me-2 fs-4 text-warning" />
+          My Account</Dropdown.Item>
 
           {/* MY ORDER */}
-          <Dropdown.Item className="d-flex  justify-content-start align-items-center" href="/ordersummary">
-          <FaCartShopping className="me-1 fs-4 text-warning"/><span className="fs-6" 
-          style={{ color: mode == "light" ? "black" : "rgb(160, 161, 161)" ,}}>My Order</span>
+          <Dropdown.Item className="" href="/ordersummary" style={{ color: mode == "light" ? "white" : "#a2a29eff"}}>
+          <FaCartShopping className="me-2 fs-4 text-warning"/>My Order
           </Dropdown.Item>
         </Dropdown.Menu>
           </Dropdown>

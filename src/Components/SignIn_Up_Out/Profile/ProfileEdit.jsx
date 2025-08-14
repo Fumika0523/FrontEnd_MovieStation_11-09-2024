@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { url } from "../../utils/constant"
+import { url } from "../../../utils/constant"
 import { useNavigate } from "react-router-dom"
 import { FaPencilAlt } from "react-icons/fa";import { Button } from "react-bootstrap"
 import ModalProfEdit from "./ModalProfEdit";

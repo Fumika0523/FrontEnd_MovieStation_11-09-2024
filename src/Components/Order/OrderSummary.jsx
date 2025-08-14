@@ -185,7 +185,8 @@ function OrderSummary({ mode }) {
             </Button>
           </div>
 
-  {orderData?.map((element) => (
+{/* Instead of rendering all orders here: */}
+  {/* {orderData?.map((element) => (
             <div key={element._id} className="mb-4">
               <div className="d-flex mx-3 flex-row justify-content-between align-items-center my-2">
                 <div className="fs-6 fw-bold">Order ID : {element._id}</div>
@@ -228,8 +229,52 @@ function OrderSummary({ mode }) {
           <div key={item._id} className="mb-4">
           {item.title}
         </div>
+      ))} */}
+
+
+
+ {/* Use paginated slice: */}
+{orderData
+  ?.slice((page - 1) * postPerPage, page * postPerPage)
+  .map((element) => (
+    <div key={element._id} className="mb-4">
+      <div className="d-flex mx-3 flex-row justify-content-between align-items-center my-2">
+        <div className="fs-6 fw-bold">Order ID : {element._id}</div>
+        <OverlayTrigger
+          placement="right"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderTooltip}>
+          <Button
+            variant="none"
+            onClick={() => handleDownload({ element })}>
+            <MdDownloading
+              className="fs-2"
+              style={{ color: "rgb(251, 181, 4)" }}
+            />
+          </Button>
+        </OverlayTrigger>
+      </div>
+
+      {element.movies.map((movie) => (
+        <OrderSummaryCard
+          key={movie._id}
+          {...movie}
+          updatedAt={element.updatedAt}
+        />
       ))}
 
+      <div className="text-end fw-bold fs-4 mx-2">
+        Total Price :
+        <span className="fw-bold ms-1 fs-4">
+          $
+          {element.movies
+            .map((p) => p.amount)
+            .reduce((acc, cv) => acc + cv, 0)}
+        </span>
+      </div>
+      <hr />
+    </div>
+))}
 
     <Pagination
         page={page}

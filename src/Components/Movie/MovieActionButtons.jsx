@@ -30,7 +30,7 @@ const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
         className="movieDisplayBtn"
         style={{
           backgroundColor: mode === "light" ? "white" : "rgba(45, 45, 47, 0.52)",
-          border: mode === "light" ? "1px solid rgba(199, 199, 203, 0.52)" : "none",
+          border: mode === "light" ? "2px solid rgba(199, 199, 203, 0.52)" : "none",
           color: mode === "light" ? "black" : "rgba(209, 209, 213, 0.63)",
         }}
       >
@@ -50,7 +50,8 @@ const MovieActionButtons = ({ mode,  wishlistCount, cartCount }) => {
         >
           {cartCount == 0 ? (
             <ShoppingCartIcon className="fs-4 me-md-1 "
-              style={{ color: "rgba(209, 209, 213, 0.63)" }} />)
+              style={{ color: mode === "light" ? "rgba(97, 97, 99, 1)" : "rgba(209, 209, 213, 0.63)",
+          }} />)
             :
             (
               <ShoppingCartIcon className="fs-4 me-md-1 text-warning" />
