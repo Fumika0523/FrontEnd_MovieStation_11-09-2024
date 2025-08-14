@@ -277,6 +277,7 @@ function OrderSummary({ mode }) {
 ))}
 
     <Pagination
+    className="text-center justify-content-center d-flex "
         page={page}
         onChange={(e, value) => setPage(value)} // 1 , 2, 3.....
         count={Math.ceil(orderData.length / postPerPage)}
