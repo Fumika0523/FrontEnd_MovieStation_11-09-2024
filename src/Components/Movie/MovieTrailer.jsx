@@ -34,10 +34,10 @@ function MovieTrailer({ mode }) {
 
 
   const getTrailerData = async () => {
-    console.log("Trailer data is called....")
+    //console.log("Trailer data is called....")
     let res = await axios.get(`${url}/movie/${id}`)
     // console.log("movieTrailer",res.data)
-    console.log("res", res)
+    //console.log("res", res)
     setMovieInfo(res.data)
   }
   useEffect(() => {

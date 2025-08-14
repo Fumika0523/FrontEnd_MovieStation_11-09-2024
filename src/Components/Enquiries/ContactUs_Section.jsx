@@ -11,7 +11,7 @@ function ContactUs_Section ({mode}){
 const navigate = useNavigate()
 const [enquiryData,  setEnquiryData] = useState([])
 const token = sessionStorage.getItem('token')
-console.log('token',token)
+//console.log('token',token)
 
 const [userData,setUserData]=useState([])
 //without sessionStorage 
@@ -40,7 +40,7 @@ const formik = useFormik({
 
   validationSchema:formSchema,
   onSubmit:(values)=>{
-  console.log("postEnquiryDetail",values)
+  //console.log("postEnquiryDetail",values)
   postEnquiryDetail(values)
   }
 })
@@ -52,20 +52,20 @@ headers:{
 }
 
 const getUserData = async()=>{
-console.log("User data is called........")
+//console.log("User data is called........")
 let res = await axios.get(`${url}/user`,config)
-console.log("getUserData",res.data.userDetail)
+//console.log("getUserData",res.data.userDetail)
 setUserData(res.data.userDetail)
 }
-console.log("userData",userData)
+//console.log("userData",userData)
 useEffect(()=>{
 getUserData()
 },[])
 
 const postEnquiryDetail=async(newEnquiry)=>{
-   console.log("NEW Enquiry",newEnquiry)
+  // console.log("NEW Enquiry",newEnquiry)
     let res = await axios.post(`${url}/contact`,newEnquiry) 
-   console.log(res)
+   //console.log(res)
   //  setEnquiryData(res.data.enquiryDetail)
   if(res.status == 200){
     navigate('/allenquiries') 
@@ -73,10 +73,10 @@ const postEnquiryDetail=async(newEnquiry)=>{
  }
 
    const getEnquiryData = async () =>{
-    console.log("ContactUsSection")
+    //console.log("ContactUsSection")
     let res = await fetch(`${url}/allenquiry`)
     let data = await res.json()
-    console.log(data)
+    //console.log(data)
     getEnquiryData()
    }
 

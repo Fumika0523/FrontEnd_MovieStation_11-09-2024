@@ -16,10 +16,10 @@ const WishlistDisplay = ({ mode }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector(store => store.wishlist.wishItems);
   const cart = useSelector(store =>store.cart.cartItems)
-  console.log(cart,"wishdisplay")
+  //console.log(cart,"wishdisplay")
   const navigate = useNavigate();
   const token = sessionStorage.getItem('token');
-  console.log("1213",wishlist)
+  //console.log("1213",wishlist)
   
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -27,15 +27,15 @@ const WishlistDisplay = ({ mode }) => {
         const response = await axios.get(`${url}/wish-list`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(response.data.wishData)
+        // console.log(response.data.wishData)
         if (response.data.wishData) {
           dispatch(setWishlist(response.data.wishData)); 
-          console.log("Wishlist:", response.data);
+          // console.log("Wishlist:", response.data);
         } else {
           dispatch(setWishlist([])); // wrap empty
         }
       } catch (error) {
-        console.error("Failed to load wishlist", error);
+        // console.error("Failed to load wishlist", error);
         dispatch(setWishlist([]));
       }
     };
@@ -51,15 +51,15 @@ const WishlistDisplay = ({ mode }) => {
         let response = await axios.get(`${url}/cart`,{
         headers:{Authorization:`Bearer ${token}`}
         })
-        console.log(response.data.cartData)
+        // console.log(response.data.cartData)
         if(response.data.cartData){
           dispatch(setCart(response.data.cartData))
-          console.log("cart",response.data)
+          // console.log("cart",response.data)
         } else{
           dispatch(setCart([]))
         }
       }catch(error){
-        console.error("Failed to load Cart",error);
+        // console.error("Failed to load Cart",error);
         dispatch(setCart([]))
       }
     }

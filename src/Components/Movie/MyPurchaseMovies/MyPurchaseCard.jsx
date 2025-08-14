@@ -6,7 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 
 const MyPurchaseCard = ({movieposter,moviename,amount,updatedAt,trailer,element,rating,mode}) => {
-  console.log("moviecard",movieposter)
+  //console.log("moviecard",movieposter)
 const [playing, setPlaying] = useState(false);
   const wrapperRef = useRef(null);
 

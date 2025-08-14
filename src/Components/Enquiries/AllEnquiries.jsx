@@ -21,9 +21,9 @@ function AllEnquiries({ mode }) {
 
     // ALL
     const getEnquiryData = async () => {
-        console.log("EnquiryData is called..")
+        //console.log("EnquiryData is called..")
         let res = await axios.get(`${url}/allenquiry`)
-        console.log("res.data.allEnquiry", res.data.allEnquiry)
+        //console.log("res.data.allEnquiry", res.data.allEnquiry)
         setEnquiryData(res.data.allEnquiry)
     }
     useEffect(() => {

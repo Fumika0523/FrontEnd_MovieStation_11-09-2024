@@ -36,15 +36,15 @@ function OrderSummary({ mode }) {
         const response = await axios.get(`${url}/wish-list`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(response.data.wishData)
+        // console.log(response.data.wishData)
         if (response.data.wishData) {
           dispatch(setWishlist(response.data.wishData)); 
-          console.log("Wishlist:", response.data);
+          // console.log("Wishlist:", response.data);
         } else {
           dispatch(setWishlist([])); // wrap empty
         }
       } catch (error) {
-        console.error("Failed to load wishlist", error);
+        // console.error("Failed to load wishlist", error);
         dispatch(setWishlist([]));
       }
     };
@@ -58,9 +58,9 @@ function OrderSummary({ mode }) {
     try {
       const res = await axios.get(`${url}/sorted-order?sortBy=${sortBy}`, config);
       setOrderData(res.data.OrderData);
-      console.log(res.data.OrderData)
+      // console.log(res.data.OrderData)
     } catch (error) {
-      console.log("Error fetching orders:", error);
+      // console.log("Error fetching orders:", error);
     }
   };
 

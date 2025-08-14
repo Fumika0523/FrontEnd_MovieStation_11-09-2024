@@ -25,12 +25,12 @@ function CartSummaryPage() {
     const dispatch = useDispatch()
     const [sum,setSum]=useState(0)
     const cart = useSelector(store=>store.cart.cartItems)
-    console.log(cart)
+   // console.log(cart)
     
     useEffect(()=>{
         if(cart){
           const total=cart.reduce((acc,cv)=>acc+cv.amount,0)
-          console.log(total)
+        //  console.log(total)
           setSum(total)
         }
       },[])
@@ -49,19 +49,19 @@ function CartSummaryPage() {
           navigate("/signin"); // Redirect to signin if no token
           return;
         }
-        console.log("OrderPage");
-        console.log(cart);
+       // console.log("OrderPage");
+        //console.log(cart);
 
         try {
           let res = await axios.post(`${url}/addorder`, { movies: cart }, config);
-          console.log(res);
+          //console.log(res);
           if (res.status === 200) { // Success response
             await axios.delete(`${url}/clearcart`, config); // Clear cart in DB
             dispatch(removeAllItems()); // Clear Redux store
             navigate(`/ordersummary`);
           }
         } catch (error) {
-          console.error("Error processing order:", error);
+          //console.error("Error processing order:", error);
         }
       };
         

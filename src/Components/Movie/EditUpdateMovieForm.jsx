@@ -62,17 +62,17 @@ const formSchema = Yup.object().shape({
 
   // GET MOVIE DATA API
   const getMovieData = async () => {
-    console.log("Movie data is called.....")
+    //console.log("Movie data is called.....")
     let res = await axios.get(`${url}/movie`)
-    console.log(res.data.movieData) //API call to get all movie data
+    //console.log(res.data.movieData) //API call to get all movie data
   }
   
   // UPDATE FUNCTION
   const updateMovies = async (updatedMovie) => {
-    console.log("Update Movie:", updatedMovie)
+    //console.log("Update Movie:", updatedMovie)
     try{
     let res = await axios.put(`${url}/updatemovie/${id}`, updatedMovie, config)
-    console.log(res)
+    //console.log(res)
     if(res.status === 200){
      let res = await axios.get(`${url}/movie`)
         setMovieData(res);
@@ -80,7 +80,7 @@ const formSchema = Yup.object().shape({
       alert("Movie could not update, please check again")
     }
       }catch(e){
-        console.error("Error Editing Movie:",e)
+      //  console.error("Error Editing Movie:",e)
       }
   }
 

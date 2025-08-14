@@ -14,8 +14,8 @@ const MyPurchaseDisplay_Debounce = ({mode}) => {
 const [filterMovieData, setFilterMovieData] = useState([]) //filtered movie value
 const [orderData, setOrderData] = useState([])
 const [sortedData, setSortedData] =useState("createdAt:desc") //default
-console.log("sortedData",sortedData)
-console.log("orderData",orderData)
+//console.log("sortedData",sortedData)
+//console.log("orderData",orderData)
 const [loading,setLoading] = useState(false)
 const [searchTerm, setSearchTearm] = useState("")
 const [userMovieData,setUserMovieData] = useState([])
@@ -36,15 +36,15 @@ let config = {
         const response = await axios.get(`${url}/wish-list`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        console.log(response.data.wishData)
+       // console.log(response.data.wishData)
         if (response.data.wishData) {
           dispatch(setWishlist(response.data.wishData)); 
-          console.log("Wishlist:", response.data);
+         // console.log("Wishlist:", response.data);
         } else {
           dispatch(setWishlist([])); // wrap empty
         }
       } catch (error) {
-        console.error("Failed to load wishlist", error);
+        //console.error("Failed to load wishlist", error);
         dispatch(setWishlist([]));
       }
     };
@@ -60,15 +60,15 @@ let config = {
         let response = await axios.get(`${url}/cart`,{
         headers:{Authorization:`Bearer ${token}`}
         })
-        console.log(response.data.cartData)
+        //console.log(response.data.cartData)
         if(response.data.cartData){
           dispatch(setCart(response.data.cartData))
-          console.log("cart",response.data)
+         // console.log("cart",response.data)
         } else{
           dispatch(setCart([]))
         }
       }catch(error){
-        console.error("Failed to load Cart",error);
+        //console.error("Failed to load Cart",error);
         dispatch(setCart([]))
       }
     }
@@ -82,12 +82,12 @@ let config = {
     try{
         // /order?sortBy=createdAt:asc
         const res = await axios.get(`${url}/order?sortBy=${sortBy}`,config)
-        console.log(`${url}/order?sortBy=${sortBy}`)
+       // console.log(`${url}/order?sortBy=${sortBy}`)
         setOrderData(res.data.orderData)
-        console.log("orderData from my movie",res.data.orderData)
+        //console.log("orderData from my movie",res.data.orderData)
     }
     catch(error){
-        console.log("Error fetching orders:",error);
+        //console.log("Error fetching orders:",error);
     }
     setLoading(false)
 }

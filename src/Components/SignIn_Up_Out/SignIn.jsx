@@ -117,7 +117,7 @@ function SignIn({ setIsAuthenticated }) {
       } else {
         alert(message);
       }
-      console.log(message);
+      // console.log(message);
     }
   };
 

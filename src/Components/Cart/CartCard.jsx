@@ -50,12 +50,12 @@ function CartCard({ movieposter, moviename, amount,element }) {
     try {
       await axios.post(`${url}/add-wish-list`, element, config);
     } catch (error) {
-      console.error('Error adding to wishlist:', error);
+     // console.error('Error adding to wishlist:', error);
     }
   };
 
   const handleAddWishItem = async(element)=>{
-  console.log("handleAddWishItem",element)
+  //console.log("handleAddWishItem",element)
   try{
     if(element){
       dispatch(wishAddItem(element))
@@ -64,16 +64,16 @@ function CartCard({ movieposter, moviename, amount,element }) {
         await getCartData()
     }else
     {
-      console.log("Element is undefined")
+      //console.log("Element is undefined")
     }
   }catch(error){
-    console.log("Error Moving to Cart",error)
+    //console.log("Error Moving to Cart",error)
   }
 }
 
 const getCartData = async()=>{
   const res = await axios.get(`${url}/cart`,config)
-  console.log(res.data)
+//  console.log(res.data)
   dispatch(setCart(res.data.cartData))
 }
 

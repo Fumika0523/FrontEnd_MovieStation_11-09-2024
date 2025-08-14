@@ -43,7 +43,7 @@ let config = {
     enableReinitialize: true,
     validationSchema: formSchema,
     onSubmit: (values) => {
-      console.log("Updated Profile:", values);
+      // console.log("Updated Profile:", values);
       // TODO: Add axios API call here
       updateProfile(values);
       setShowModal(false);
@@ -63,7 +63,7 @@ let config = {
       )
       if(resizeBy.status == 200){
         const getRes = await axios.get(`${url}/profile`,config)
-        console.log("getRes",getRes.data)
+        // console.log("getRes",getRes.data)
         setProfileData(getRes.data.ProfileData);
         toast.success("Successfully updated profile!",{autoClose:1000})
       }else{
@@ -71,7 +71,7 @@ let config = {
       }
 
     }catch(e){
-      console.log("Error updating Profile:",e)
+      // console.log("Error updating Profile:",e)
       toast.error("Something went wrong while updating")
     }
   }

@@ -46,7 +46,7 @@ const MyMovieDisplay = ({ mode }) => {
   //API calls 
   const getUserMovieData = async () => {
     let res = await axios.get(`${url}/specificmovie`, config)
-    console.log("userdata",res.data.getAddedMovie)
+    //console.log("userdata",res.data.getAddedMovie)
     setUserMovieData(res.data.getAddedMovie)
   }
   // useEffect(() => {

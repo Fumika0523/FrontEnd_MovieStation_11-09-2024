@@ -54,7 +54,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function CustomizedTables({enquiryData,setEnquiryData,mode}) {
 const userId = sessionStorage.getItem('userId')
-console.log(enquiryData)
+//console.log(enquiryData)
 const [singleEnquiry,setSingleEnquiry] = useState(null)
 const [specificEnquiryData,setSpecificEnquiryData ] = useState([])
 const [show, setShow] = useState(false);
@@ -78,7 +78,7 @@ let config = {
 
   const getSpecificEnquiryData = async()=>{
   let res = await axios.get(`${url}/specific-enquiry`,config)
-  console.log("getSpecificEnquiryData",res.data)
+  //console.log("getSpecificEnquiryData",res.data)
   // setSpecificEnquiryData(res.data.getEnquiry)
 }
 useEffect(()=>{

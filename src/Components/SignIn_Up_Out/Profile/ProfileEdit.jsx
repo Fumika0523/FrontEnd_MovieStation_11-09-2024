@@ -17,7 +17,7 @@ const formatDate = (dateString) => {
 const [ProfileData,setProfileData] = useState([])
 const [showModal,setShowModal] = useState(false)
 const token = sessionStorage.getItem('token')
-console.log(token)
+// console.log(token)
 
 let config = {
     headers:{
@@ -26,15 +26,15 @@ let config = {
 }
 
 const getProfileData=async()=>{
-    console.log("User Data is called...")
+    // console.log("User Data is called...")
     let res = await axios.get(`${url}/profile`,config)
-    console.log("res.data.ProfileData",res.data.ProfileData)
+    // console.log("res.data.ProfileData",res.data.ProfileData)
     setProfileData(res.data.ProfileData)
 }
 useEffect(()=>{
     getProfileData()
 },[]) // API call has to be made inside useEffect() only
-console.log("ProfileData",ProfileData)
+// console.log("ProfileData",ProfileData)
 
 //destructuring of the object
 const {email,password,name,lastname,phone_number,gender} = ProfileData
@@ -44,7 +44,7 @@ const handleProfEditClick = (ProfileData)=>{
     setProfileData(ProfileData)
 }
 
-console.log(lastname)
+// console.log(lastname)
 
     return(
         <>  

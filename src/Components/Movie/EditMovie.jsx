@@ -9,7 +9,7 @@ const [singleMovie, setSingleMovies]=useState()
 const {id}=useParams()
 const navigate = useNavigate();
 const token = sessionStorage.getItem('token')
-console.log(token)
+//console.log(token)
 let config = {
   headers:{
     Authorization:`Bearer ${token}`
@@ -17,13 +17,13 @@ let config = {
 }
 
 const getMovieData=async()=>{
-    console.log("Movie data is called.........")
+  //  console.log("Movie data is called.........")
     let res = await fetch (`${url}/movie/${id}`,config)//API call
     let data =await res.json()//responsing in string so we cant use string so, converting to json format
-    console.log("data from EditMovie",data)
+    //console.log("data from EditMovie",data)
     setSingleMovies(data)
 }
-console.log("singleMovie",singleMovie)// Movie data is stored in singleMovie
+//console.log("singleMovie",singleMovie)// Movie data is stored in singleMovie
 useEffect(()=>{
     getMovieData()
 },[])//when your page is loaded

@@ -26,10 +26,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const ReadmoreDescription = ({show,setShow,singleEnquiry,setEnquiryData}) => {
-    console.log("singleEnquiry",singleEnquiry)
+    // console.log("singleEnquiry",singleEnquiry)
 
     const token = sessionStorage.getItem('token')
-    console.log('token',token)
+    // console.log('token',token)
     const navigate = useNavigate()
     const handleClose = () => {
             setShow(false)

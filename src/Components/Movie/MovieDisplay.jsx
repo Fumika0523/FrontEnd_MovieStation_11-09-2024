@@ -63,7 +63,7 @@ return fData
 //console.log(searchTerm)
 
 const token = sessionStorage.getItem('token')
-console.log("token",token)
+//console.log("token",token)
 let config = {
     headers: {
     Authorization: `Bearer ${token}`
@@ -71,7 +71,7 @@ let config = {
 
 // ALL
 const getMovieData = async () => {
-    console.log("Movie Data is called.");
+    //console.log("Movie Data is called.");
     let res = await axios.get(`${url}/movie`)//response in res.data >> moviedata
     // res.data. {object} 
     // console.log(res.data.movieData)
@@ -121,7 +121,7 @@ const handleAdditem=async(movieItem)=>{
             navigate(`/signin`) 
     } else {
         let res=await axios.post(`${url}/addcart`, movieItem,config)
-        console.log("res",res.data.message)
+        //console.log("res",res.data.message)
         if(res.data.message == "Cart has been added successfully!"){
             successNotify()
         } else {
@@ -160,15 +160,15 @@ return (
     className="form-control  border-secondary ps-4" type="search" aria-label="Search" name="" id="" placeholder="Search movie"
     style={{width:"180px"}}
     onChange={(e) => {
-    console.log(e.target.value)
+    //console.log(e.target.value)
     setSearchTearm(e.target.value)}}
     />
     {/* Button is for to call 1 API */}
     <Button variant="outline-secondary" className="" type="submit"
     onClick={() => {
-    console.log("Button is cliecked,searchTerm")
+    //console.log("Button is cliecked,searchTerm")
     const data = filterData(searchTerm, movieData) //passing the data
-    console.log(data)
+    //console.log(data)
     setFilterMovieData(data)
     }}>Search</Button>
 

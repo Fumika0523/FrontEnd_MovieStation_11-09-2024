@@ -39,7 +39,7 @@ const postSignUpUser=async(newUser)=>{
   // console.log(newUser)
   // http://localhost:8001/signup
   const res=await axios.post(`${url}/signup`,newUser)
-  console.log(res)  
+  // console.log(res)  
   if(res.status ==200){
     //navigate to signin page >> siginin
     navigate('/signin')

@@ -9,7 +9,7 @@ const [singleEnquiry,setSingleEnquiry] = useState()
  const {id} =useParams()
 const navigate = useNavigate()
 const token = sessionStorage.getItem('token')
-    console.log(token)
+    // console.log(token)
     
     let config = {
       headers:{
@@ -18,13 +18,13 @@ const token = sessionStorage.getItem('token')
     }
 
 const getEnquiryData = async () =>{
-    console.log("Enquiry data is called...")
+    // console.log("Enquiry data is called...")
     let res = await fetch(`${url}/enquiry/${id}`,config)
     let data = await res.json()
-    console.log("not found",data)
+    // console.log("not found",data)
     setSingleEnquiry(data)
 }
-console.log("singleEnquiry",singleEnquiry)
+// console.log("singleEnquiry",singleEnquiry)
 useEffect(()=>{
     getEnquiryData()
 },[])

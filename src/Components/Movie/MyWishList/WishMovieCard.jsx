@@ -13,7 +13,7 @@ import { IoEyeSharp } from "react-icons/io5";
 
 function WishMovieCard({ movieposter, moviename,rating,_id,element}) {
 const dispatch = useDispatch();
-console.log(movieposter, moviename,rating,_id,element)
+// console.log(movieposter, moviename,rating,_id,element)
   const token = sessionStorage.getItem('token');
   const config = {
     headers: { Authorization: `Bearer ${token}` }
@@ -41,7 +41,7 @@ console.log(movieposter, moviename,rating,_id,element)
         await removeWishItemFromServer(element)
         await getWishData()
     }catch(error){
-        console.error("Error Removing wish Item:",error)
+        // console.error("Error Removing wish Item:",error)
     }
 }
   
@@ -49,20 +49,20 @@ console.log(movieposter, moviename,rating,_id,element)
   const addCartItemToServer = async (element)=>{
     try{
       let res = await axios.post(`${url}/addcart`, element, config);
-      console.log("addcartitem",res)
+      // console.log("addcartitem",res)
     }catch(error){
-      console.error('Error adding to wishlist:', error);
+      // console.error('Error adding to wishlist:', error);
     }
   }
 
     const getCartData = async () => {
       const res = await axios.get(`${url}/cart`,config);
-      console.log("cartData from Wishmovie",res.data.cartData)
+      // console.log("cartData from Wishmovie",res.data.cartData)
        dispatch(setCart(res.data.cartData)) 
     };
     
   const handleAddCart = async(element)=>{
-  console.log("HandleAddCart",element)
+  // console.log("HandleAddCart",element)
   try{
     if(element){
       dispatch(cartAddItem(element))
@@ -72,11 +72,11 @@ console.log(movieposter, moviename,rating,_id,element)
         await getWishData()
     }else
     {
-      console.log("Element is undefined")
+      // console.log("Element is undefined")
     }
         await getCartData()
   }catch(error){
-    console.log("Error Moving to Cart",error)
+    // console.log("Error Moving to Cart",error)
   }
 }
 

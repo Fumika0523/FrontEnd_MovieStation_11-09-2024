@@ -61,9 +61,9 @@ let config = {
 }
 
 const postMovies=async(newMovie)=>{
-  console.log("NEW MOVIE:",newMovie)
+  // console.log("NEW MOVIE:",newMovie)
   let res = await axios.post(`${url}/addmovie`,newMovie,config)
-  console.log(res)
+  // console.log(res)
     if(res.status === 200){
       navigate('/allmovies')
         // setMovieData(res);
@@ -71,11 +71,11 @@ const postMovies=async(newMovie)=>{
 }
 //updating a data toer
   const getMovieData = async () => {
-    console.log("Movie data is called.....")
+    // console.log("Movie data is called.....")
     let res = await fetch(`${url}/movie`) //API call to get all movie data
-    console.log(res)
+    // console.log(res)
     let data = await res.json()
-    console.log(data)
+    // console.log(data)
   }
   useEffect(() => {
   getMovieData();
